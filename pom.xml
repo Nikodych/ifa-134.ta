@@ -13,7 +13,6 @@
         <maven.compiler.target>11</maven.compiler.target>
         <testng.version>7.4.0</testng.version>
         <selenium.java.version>3.141.59</selenium.java.version>
-        <chrome.driver.version>4.0.0-beta-4</chrome.driver.version>
     </properties>
 
     <dependencies>
@@ -24,16 +23,15 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <scope>test</scope>
-            <version>${selenium.java.version}</version>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-chrome-driver</artifactId>
-            <scope>test</scope>
-            <version>${chrome.driver.version}</version>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.java.version}</version>
         </dependency>
     </dependencies>
 </project>
