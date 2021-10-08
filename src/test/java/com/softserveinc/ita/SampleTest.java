@@ -8,5 +8,6 @@ public class SampleTest {
     @Test
     public void sampleTestMethod() {
         Assert.assertTrue("true".equals("true"));
+        var temp = 1 + 1;
     }
 }
