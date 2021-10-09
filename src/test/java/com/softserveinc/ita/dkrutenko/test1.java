@@ -46,7 +46,7 @@ public class test1 {
     public void afterMethod(ITestResult result) {
         if(!result.isSuccess()) {
             String testName = result.getName();
-            System.out.println("Congratulations, " + testName + "is finished working.");
+            System.out.println("Congratulations, " + testName + " has finished working.");
         }
     }
 
@@ -54,8 +54,8 @@ public class test1 {
     public Object[][] urls () {
         return new Object[][]{
                 {"YouTube"},
-                {"driver"},
-                {"SoftServe "}
+                {"Driver"},
+                {"GitHub"}
         };
     }
             @Test(dataProvider = "urls")
@@ -66,8 +66,10 @@ public class test1 {
             WebElement searchIcon = driver.findElement(By.name("btnK"));
             searchIcon.click();
             driver.findElement(By.partialLinkText(url)).click();
-            Assert.assertSame(url, url);
-            System.out.println("The test has finished");
+            String result = driver.findElement(By.partialLinkText(url)).getText();
+
+            Assert.assertTrue(result.contains(url));
+            System.out.println("The test is finished");
         }
     }
 
