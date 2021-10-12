@@ -15,9 +15,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 public class rozetkaSearchTest {
-    private final Long IMPLICITLY_WAIT_SECONDS = 10L;
-    private final Long EXPLICITLY_WAIT_SECONDS = 10L;
-    private final Long ONE_SECOND_DELAY = 1000L;
     private WebDriver driver;
     private WebDriverWait driverWait;
 
