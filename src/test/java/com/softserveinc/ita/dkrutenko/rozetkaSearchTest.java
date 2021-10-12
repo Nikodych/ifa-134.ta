@@ -93,9 +93,9 @@ public class rozetkaSearchTest {
         //setting up WebDriverWait plugin for element with defined expected condition and time
         driverWait = new WebDriverWait(driver, 1000);
         //use Expected Conditions for List of WebElement to catch our item from requirement
-        List<WebElement> elements =  driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"),20));
+        List<WebElement> goods =  driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"),20));
         //stream our WebElement list,getting text and searching for our required item
-        List<WebElement> phoneList = elements
+        List<WebElement> phoneList = goods
                         .stream()
                         .filter(i->i.getText()
                         .contains(item))
