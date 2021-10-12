@@ -9,7 +9,7 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-public class test1 {
+public class webSearchTest {
     private WebDriver driver;
 
     @BeforeSuite
@@ -59,7 +59,7 @@ public class test1 {
         };
     }
             @Test(dataProvider = "urls")
-        public void testYouTube (String url) {
+        public void testSearch (String url) {
             //Looking for YouTube
             driver.findElement(By.name("q")).sendKeys(url);
             //Use simple locators

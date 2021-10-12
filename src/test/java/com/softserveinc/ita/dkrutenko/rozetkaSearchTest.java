@@ -14,32 +14,33 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-public class test2 {
+public class rozetkaSearchTest {
     private final Long IMPLICITLY_WAIT_SECONDS = 10L;
     private final Long EXPLICITLY_WAIT_SECONDS = 10L;
     private final Long ONE_SECOND_DELAY = 1000L;
     private WebDriver driver;
     private WebDriverWait driverWait;
+
     @BeforeSuite
     public void beforeSuite() {
-
-        //Installing and using driver
         System.setProperty("webdriver.chrome.driver", "C://Users//Admin//Documents//GitHub//chromedriver.exe");
     }
 
-    //pageLoad time and Implicit wait
     @BeforeClass
     public void beforeClass() {
+        //setting up new Chrome driver
         driver = new ChromeDriver();
+        //page load time
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        //wait amout of time before it throws "No such Element Exception
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //Maximize chrome window
         driver.manage().window().maximize();
     }
-//quit driver(close chrome window) after test
+//implicitly wait for 2 seconds and quit the driver(close chrome window)
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.quit();
     }
 //load google.com and delete cookies before work
@@ -49,7 +50,7 @@ public class test2 {
         driver.get("https://www.google.com/");
         driver.manage().deleteAllCookies();
     }
-    //print string after test
+    //print some message after test finish
     @AfterMethod
     public void afterMethod(ITestResult result) {
         if(!result.isSuccess()) {
@@ -57,7 +58,7 @@ public class test2 {
             System.out.println("Congratulations, " + testName + " has finished working.");
         }
     }
-    //our items that should be found
+    //required items for search
     @DataProvider
     public Object[][] rozetkaItems () {
         return new Object[][]{
@@ -68,34 +69,38 @@ public class test2 {
 
         };
     }
-    //Our test with DataProvider
+    //Our test with DataProvider that have required items for search
     @Test(dataProvider = "rozetkaItems")
     public void testRozetka (String item) {   //This item - is string from DataProvider
-        //searching for rozetka
+        //searching rozetka in google
         driver.findElement(By.name("q")).sendKeys("rozetka");
-        //Use simple locators
+        //use simple locator to click on "search" button
         WebElement searchIcon = driver.findElement(By.name("btnK"));
         searchIcon.click();
+        //move on rozetka marketplace
         driver.findElement(By.partialLinkText("rozetka")).click();
-        //waiting for page
+        //wait for loading page
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+        //search samsung
         WebElement search = driver.findElement(By.name("search"));
         search.click();
         search.clear();
         search.sendKeys("samsung");
-        //waiting for page
-        driver.manage().timeouts().pageLoadTimeout(20,TimeUnit.SECONDS);
+        //wait for loading page with goods
+        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         //click on search button
         driver.findElement(By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']")).click();
-        //taking list of elements on website
-        driverWait = new WebDriverWait(driver, 100);
+        //setting up WebDriverWait plugin for element with defined expected condition and time
+        driverWait = new WebDriverWait(driver, 1000);
+        //use Expected Conditions for List of WebElement to catch our item from requirement
         List<WebElement> elements =  driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"),20));
+        //stream our WebElement list,getting text and searching for our required item
         List<WebElement> phoneList = elements
                         .stream()
                         .filter(i->i.getText()
                         .contains(item))
                         .collect(Collectors.toList());
-//transform list of WebElements to list of strings
+//add text from WebElement list to our list of Strings while using loop
         List<String> list = new ArrayList<>();
         for(int i = 0; i<phoneList.size(); i++)
             list.add(phoneList.get(i).getText());
@@ -105,6 +110,3 @@ public class test2 {
        Assert.assertTrue(list.get(0).contains(item));
         }
     }
-
-
-
