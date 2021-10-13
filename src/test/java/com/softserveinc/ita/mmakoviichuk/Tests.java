@@ -6,28 +6,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
+import org.testng.annotations.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import java.util.List;
 
-public class Test {
+public class Tests {
+
     WebDriver driver;
+    private String driverPath = "C:\\Users\\Ferrl\\IdeaProjects\\ifa-134.ta\\src\\main\\java\\com\\softserveinc\\ita\\drivers\\chromedriver.exe";
+
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver",
-                "C:\\Users\\Ferrl\\IdeaProjects\\chromedriver_win32\\chromedriver.exe");
-
+        System.setProperty("webdriver.chrome.driver", driverPath);
     }
+
     @BeforeMethod
     public void beforeMethod() {
         driver = new ChromeDriver();
         driver.get("https://www.google.com/");
     }
-    @AfterMethod
-    public void afterMethod() {
-        driver.quit();
-    }
-    @org.testng.annotations.Test
+
+    @Test
     public void test() {
         boolean check = false;
         driver.findElement(By.xpath("//input[@title=\"Пошук\"]")).sendKeys("Selenium", Keys.ENTER);
@@ -40,5 +41,10 @@ public class Test {
         }
         Assert.assertTrue(check);
         System.out.println("Test is finished");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        driver.quit();
     }
 }
