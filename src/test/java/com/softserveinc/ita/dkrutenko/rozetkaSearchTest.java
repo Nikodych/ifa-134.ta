@@ -19,7 +19,7 @@ public class rozetkaSearchTest {
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C://Users//Admin//Documents//GitHub//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C://Users//dokp//Documents//GitHub//ifa-134.ta//src//main//java//com//softserveinc//ita//resources//chromedriver.exe");
     }
     @BeforeClass
     public void beforeClass() {
@@ -32,6 +32,7 @@ public class rozetkaSearchTest {
     public void beforeMethod() {
         driver.get("https://www.google.com/");
     }
+
     @DataProvider
     public Object[][] rozetkaItems () {
         return new Object[][]{
