@@ -3,16 +3,18 @@ package com.softserveinc.ita.pkuravskyi;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+
 import java.util.concurrent.TimeUnit;
 
 public class FirstTest {
 
-    private WebDriver driver;
+    protected WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() {
         //Installing chrome driver
-        System.setProperty("webdriver.chrome.driver", "src/main/java/com/softserveinc/ita/drivers/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver",
+                "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe");
     }
 
     @BeforeClass
@@ -23,10 +25,14 @@ public class FirstTest {
         driver.manage().window().maximize();
     }
 
+    @BeforeMethod
+    public void beforeMethod() {
+        driver.get("https://www.google.com/");
+    }
+
     @Test
     public void verifyWikipedia() {
         //Search for Wikipedia and open it
-        driver.get("https://www.google.com/");
         driver.findElement(By.name("q")).sendKeys("Wikipedia");
         driver.findElement(By.xpath("//input[@name = 'btnK']")).click();
         driver.findElement(By.xpath("//a[contains(@href, 'wikipedia.org')]")).click();
