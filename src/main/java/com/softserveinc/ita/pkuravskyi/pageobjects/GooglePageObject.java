@@ -5,10 +5,9 @@ import org.openqa.selenium.*;
 public class GooglePageObject {
 
     protected WebDriver driver;
-
-    private WebElement searchBar;
-    private WebElement searchButton;
-    private WebElement searchWikipediaPage;
+    private By searchBar;
+    private By searchButton;
+    private By openWikipedia;
 
     public GooglePageObject(WebDriver driver) {
         this.driver = driver;
@@ -16,20 +15,20 @@ public class GooglePageObject {
     }
 
     private void googleSelectors() {
-        searchBar = driver.findElement(By.xpath("//*[@name = 'q']"));
-        searchButton = driver.findElement(By.xpath("//*[@name = 'btnK']"));
-        searchWikipediaPage = driver.findElement(By.xpath("//a[contains(@href, 'wikipedia.org')]"));
+        searchBar = By.name("q");
+        searchButton = By.name("btnK");
+        openWikipedia = By.xpath("//a[contains(@href, 'wikipedia.org')]");
     }
 
     public void searchBarInputText(String searchText) {
-        searchBar.sendKeys(searchText);
+        driver.findElement(searchBar).sendKeys(searchText);
     }
 
     public void searchButtonClick() {
-        searchButton.click();
+        driver.findElement(searchButton).click();
     }
 
-    public void searchWikipediaPageClick() {
-        searchWikipediaPage.click();
+    public void openWikipediaClick() {
+        driver.findElement(openWikipedia).click();
     }
 }

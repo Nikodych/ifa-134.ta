@@ -32,7 +32,7 @@ public class FirstTest {
 
     @Test
     public void verifyWikipedia() {
-        //Search for Wikipedia and open it
+        // Search Wikipedia on google search, open it and find SoftServe article in it
         driver.findElement(By.name("q")).sendKeys("Wikipedia");
         driver.findElement(By.xpath("//input[@name = 'btnK']")).click();
         driver.findElement(By.xpath("//a[contains(@href, 'wikipedia.org')]")).click();

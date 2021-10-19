@@ -5,10 +5,9 @@ import org.openqa.selenium.*;
 public class WikipediaPageObject {
 
     protected WebDriver driver;
-
-    private WebElement searchBarWikipedia;
-    private WebElement searchButtonWikipedia;
-    private WebElement selectContentWikipedia;
+    private By searchBar;
+    private By searchButton;
+    private By selectSoftServeUrl;
 
     public WikipediaPageObject(WebDriver driver) {
         this.driver = driver;
@@ -16,20 +15,20 @@ public class WikipediaPageObject {
     }
 
     private void wikipediaSelectors() {
-        searchBarWikipedia = driver.findElement(By.name("search"));
-        searchButtonWikipedia = driver.findElement(By.xpath("//input[@name = 'go']"));
-        selectContentWikipedia = driver.findElement(By.xpath("//span[@class = 'tocnumber' and text() = '2']"));
+        searchBar = By.name("search");
+        searchButton = By.xpath("//input[@name = 'go']");
+        selectSoftServeUrl = By.xpath("//a[contains(@href, 'softserveinc')]");
     }
 
-    public void searchBarWikipediaInputText(String searchText) {
-        searchBarWikipedia.sendKeys(searchText);
+    public void searchBarInputText(String searchText) {
+        driver.findElement(searchBar).sendKeys(searchText);
     }
 
-    public void searchButtonWikipediaClick() {
-        searchButtonWikipedia.click();
+    public void searchButtonClick() {
+        driver.findElement(searchButton).click();
     }
 
-    public void selectContentWikipediaClick() {
-        selectContentWikipedia.click();
+    public void selectSoftServeUrlClick() {
+        driver.findElement(selectSoftServeUrl).click();
     }
 }
