@@ -19,11 +19,8 @@ public class rozetkaSearchTest {
 
     @BeforeSuite
     public void beforeSuite() {
-<<<<<<< HEAD:src/test/java/com/softserveinc/ita/dkrutenko/oldTests/rozetkaSearchTest.java
         System.setProperty("webdriver.chrome.driver", "C://Users//IT//Documents//GitHub//ifa-134.ta//src//main//java//com//softserveinc//ita//resources//chromedriver.exe");
-=======
-        System.setProperty("webdriver.chrome.driver", "C://Users//dokp//Documents//GitHub//ifa-134.ta//src//main//java//com//softserveinc//ita//resources//chromedriver.exe");
->>>>>>> b10ec08fef0f79983b793ec7f7c281befb40ed8d:src/test/java/com/softserveinc/ita/dkrutenko/rozetkaSearchTest.java
+
     }
     @BeforeClass
     public void beforeClass() {
