@@ -1,6 +1,8 @@
 package com.softserveinc.ita.dkrutenko;
 
-import com.softserveinc.ita.pageobjects.CartMenu;
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.CartSideMenu;
+import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchField;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.openqa.selenium.WebElement;
@@ -51,11 +53,13 @@ public class rozetkaTests extends TestRunner {
         searchField.clickSearchButton();
         searchField.waitElementCondition();
         searchField.getExpectedItem(item).click();
-        CartMenu cartMenu = loadCartMenu();
+        Cart cartMenu = loadCart();
         cartMenu.clickAddToCartButton();
-        //       cartMenu.clickCartClose();
-        // HomePage homePage = loadHomePage();
-        //  homePage.clickHomePage();
+        CartSideMenu cartSideMenu = loadCartSideMenu();
+        cartSideMenu.waitElementCondition();
+        cartSideMenu.clickContinueButton();
+        HomePage homePage = loadHomePage();
+        homePage.clickHomePage();
     }
 }
 

@@ -5,30 +5,21 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CartMenu extends RozetkaPageObject {
-    private WebElement addToCartButton;
+public class CartSideMenu extends RozetkaPageObject {
     private WebElement continueButton;
     private WebElement cartClose;
     private WebElement cartMenu;
     private WebElement deleteFromCart;
 
-    public CartMenu(WebDriver driver) {
+    public CartSideMenu(WebDriver driver) {
         super(driver);
         webElements();
     }
     private void webElements() {
-        addToCartButton = driver.findElement(By.xpath("//*[@class='buy-button__label ng-star-inserted']"));
-       // continueButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.cart-footer.ng-star-inserted > a")));
-       // cartClose = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='modal__close ng-star-inserted']")));
-       // cartMenu = driver.findElement(By.xpath("//button[@class='button button--white button--small context-menu__toggle']"));
-       // deleteFromCart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")));
-    }
-    //----------------------------------------page object---------------------------------------------
-    public WebElement getAddToCartButton() {
-        return addToCartButton;
-    }
-    public void clickAddToCartButton() {
-        getAddToCartButton().click();
+         continueButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.cart-footer.ng-star-inserted > a")));
+         cartClose = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='modal__close ng-star-inserted']")));
+         cartMenu = driver.findElement(By.xpath("//button[@class='button button--white button--small context-menu__toggle']"));
+         deleteFromCart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")));
     }
     //continue shopping button
     public WebElement getContinueButton() {
@@ -58,9 +49,9 @@ public class CartMenu extends RozetkaPageObject {
     public void clickDeleteFromCart() {
         getDeleteFromCart().click();
     }
-    //functional
+    //functional voids
     public void removeFromCart() {
         clickCartMenu();
         clickDeleteFromCart();
     }
-    }
+}
