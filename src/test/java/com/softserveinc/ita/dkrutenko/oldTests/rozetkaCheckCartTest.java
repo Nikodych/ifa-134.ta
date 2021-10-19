@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko;
+package com.softserveinc.ita.dkrutenko.oldTests;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +16,7 @@ public class rozetkaCheckCartTest {
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C://Users//Admin//Documents//GitHub//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C://Users//IT//Documents//GitHub//ifa-134.ta//src//main//java//com//softserveinc//ita//resources//chromedriver.exe");
     }
     @BeforeClass
     public void beforeClass() {
@@ -33,8 +33,9 @@ public class rozetkaCheckCartTest {
     public Object[][] rozetkaCheckCartItems () {
         return new Object[][]{
                 {"samsung", "Samsung Galaxy S21"},
-                {"iphone",   "iPhone 12 Pro Max"},
-                {"samsung", "Samsung Galaxy A72"} };
+             //   {"iphone",   "iPhone 12 Pro Max"},
+            //    {"samsung", "Samsung Galaxy A72"}
+                  };
     }
     @Test(dataProvider = "rozetkaCheckCartItems")
     //searchItem = samsung or etc; item = some phone or etc.
@@ -51,9 +52,11 @@ public class rozetkaCheckCartTest {
         driverWait = new WebDriverWait(driver,20);
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(item))).click();
         //wait for next loading page and click on "Buy(Add to cart)" button
-        driver.findElement(By.xpath("//*[@class='buy-button button button_with_icon button_color_green button_size_large ng-star-inserted']")).click();
+        driver.findElement(By.xpath("//*[@class='buy-button__label ng-star-inserted']")).click();
         //close current window
-        WebElement continueButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.cart-footer.ng-star-inserted > a")));
+        WebElement continueButton = driver.findElement(By.cssSelector("div.cart-footer.ng-star-inserted > a"));
+                //driverWait.until(ExpectedConditions.visibilityOfElementLocated(
+
         continueButton.click();
         //move on the main page
         driver.findElement(By.cssSelector("div > a > picture")).click();
@@ -66,6 +69,7 @@ public class rozetkaCheckCartTest {
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']"))).click();
         //close current window
         driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='modal__close ng-star-inserted']"))).click();
+
     }
     @AfterClass(alwaysRun = true)
     public void afterClass() {
