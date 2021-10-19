@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
+    private final Long IMPLICITLY_WAIT_SECONDS = 10L;
+    private final Long ONE_SECOND_DELAY = 1000L;
     private WebDriver driver;
     private WebDriverWait driverWait;
 
@@ -35,15 +37,18 @@ public abstract class TestRunner {
         driver.get("https://rozetka.com.ua/");
     }
 
-
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
         driver.quit();
     }
 
-         protected SearchField loadSearch() {return new SearchField(driver); }
-         protected CartMenu loadCartMenu() {return new CartMenu(driver); }
-         protected HomePage loadHomePage() {return new HomePage(driver); }
+         public SearchField loadSearch() {
+        return new SearchField(driver);
+    }
+
+         public CartMenu loadCartMenu() {return new CartMenu(driver); }
+
+         public HomePage loadHomePage() {return new HomePage(driver); }
          }

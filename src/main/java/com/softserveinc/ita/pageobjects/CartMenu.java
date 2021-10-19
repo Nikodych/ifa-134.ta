@@ -24,11 +24,11 @@ public class CartMenu extends RozetkaPageObject {
         addToCartButton = driver.findElement(By.xpath("//*[@class='buy-button__label ng-star-inserted']"));
         continueButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.cart-footer.ng-star-inserted > a")));
         continueButton = driver.findElement(By.cssSelector("div.cart-footer.ng-star-inserted > a"));
-         cartClose = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='modal__close ng-star-inserted']")));
-         cartMenu = driver.findElement(By.xpath("//button[@class='button button--white button--small context-menu__toggle']"));
-         deleteFromCart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")));
+        cartClose = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='modal__close ng-star-inserted']")));
+        cartMenu = driver.findElement(By.xpath("//button[@class='button button--white button--small context-menu__toggle']"));
+        deleteFromCart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']")));
     }
-    //----------------------------------------page object constructor----------------------------------------
+    //----------------------------------------page object---------------------------------------------
     public WebElement getAddToCartButton() {
         return addToCartButton;
     }

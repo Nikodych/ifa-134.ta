@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.oldTests;
+package com.softserveinc.ita.dkrutenko;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;

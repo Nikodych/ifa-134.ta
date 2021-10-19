@@ -5,8 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public abstract class RozetkaPageObject {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
@@ -38,21 +36,5 @@ public abstract class RozetkaPageObject {
     }
     public void clickCart() {
         getCart().click();
-    }
-
-    //ExpectectCondition for elements
-    public WebDriverWait waitElementCondition() {
-        driverWait = new WebDriverWait(driver,500);
-        return driverWait;
-    }
-    //page load time
-    public WebDriverWait pageLoadTimeout() {
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        return pageLoadTimeout();
-    }
-    //implicitly timeout
-    public WebDriverWait implicitlyTimeout() {
-        driver.manage().timeouts().implicitlyWait(15,TimeUnit.SECONDS);
-        return implicitlyTimeout();
     }
     }
