@@ -51,7 +51,6 @@ public class SearchField extends RozetkaPageObject {
         expectedItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
         return expectedItem;
     }
-
     public void fillSearch(String text) {
         searchClick();
         searchClear();

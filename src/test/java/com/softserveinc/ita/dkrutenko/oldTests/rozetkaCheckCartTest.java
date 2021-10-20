@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko;
+package com.softserveinc.ita.dkrutenko.oldTests;
 
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.support.ui.ExpectedConditions;

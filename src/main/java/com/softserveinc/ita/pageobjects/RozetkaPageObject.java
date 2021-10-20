@@ -9,36 +9,25 @@ import java.util.concurrent.TimeUnit;
 public abstract class RozetkaPageObject {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
+    private final Long ONE_SECOND_DELAY = 1000L;
     private WebElement homePage;
-    private WebElement cart;
 
     public RozetkaPageObject(WebDriver driver) {
         this.driver = driver;
         webElements();
     }
-
     //rozetka webElements
     private void webElements() {
         homePage = driver.findElement(By.cssSelector("div > a > picture"));
-        cart = driver.findElement(By.xpath("//rz-cart[@class='header-actions__component']"));
     }
     //----------------------------------------page object constructor----------------------------------------
     public WebElement getHomePage() {
         return homePage;
     }
-
     public void clickHomePage() {
         getHomePage().click();
     }
 
-    //shopping cart
-    public WebElement getCart() {
-        return cart;
-    }
-
-    public void clickCart() {
-        getCart().click();
-    }
     //ExpectectCondition for elements
     public WebDriverWait waitElementCondition() {
         driverWait = new WebDriverWait(driver,500);
@@ -46,12 +35,26 @@ public abstract class RozetkaPageObject {
     }
     //page load time
     public WebDriverWait pageLoadTimeout() {
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+       driverWait = new WebDriverWait(driver, 5);
+       driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
         return pageLoadTimeout();
     }
     //implicitly timeout
     public WebDriverWait implicitlyTimeout() {
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         return implicitlyTimeout();
+    }
+    //for presentations
+    private void presentationSleep() {
+        presentationSleep(1);
+    }
+
+    public void presentationSleep(int seconds) {
+        try {
+            Thread.sleep(seconds * ONE_SECOND_DELAY); // For Presentation ONLY
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 }
