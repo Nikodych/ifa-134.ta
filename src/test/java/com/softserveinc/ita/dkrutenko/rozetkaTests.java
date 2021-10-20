@@ -54,20 +54,20 @@ public class rozetkaTests extends TestRunner {
             searchField.waitElementCondition();
             searchField.getExpectedItem(item).click();
         Cart cart = loadCart();
-            cart.clickAddToCartButton();
+                cart.clickAddToCartButton();
         CartSideMenu cartSideMenu = loadCartSideMenu();
-                     cartSideMenu.waitElementCondition();
-                     cartSideMenu.clickContinueButton();
+            cartSideMenu.waitElementCondition();
+            cartSideMenu.clickContinueButton();
         HomePage homePage = loadHomePage();
         homePage.clickHomePage();
-            cart.waitElementCondition();
-            cart.clickCart();
-            cart.waitElementCondition();
-            cart.itemString();
+                cart.waitElementCondition();
+                cart.clickCart();
+                cart.waitElementCondition();
+                cart.itemString();
         Assert.assertTrue(cart.itemString().contains(item));
-                    cartSideMenu.deleteFromCart();
-                    cartSideMenu.waitElementCondition();
-                    cartSideMenu.clickCartClose();
+            cartSideMenu.deleteFromCart();
+            cartSideMenu.waitElementCondition();
+            cartSideMenu.clickCartClose();
     }
 }
 

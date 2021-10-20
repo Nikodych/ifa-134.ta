@@ -36,7 +36,7 @@ public abstract class TestRunner {
     @BeforeMethod
     public void beforeMethod() {
         driver.get("https://rozetka.com.ua/");
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
 
@@ -46,10 +46,17 @@ public abstract class TestRunner {
         driver.manage().deleteAllCookies();
         driver.quit();
     }
+
     public SearchField loadSearch() {
         return new SearchField(driver);
     }
-    public Cart loadCart() {return new Cart(driver); }
-    public HomePage loadHomePage() {return new HomePage(driver); }
-    public CartSideMenu loadCartSideMenu() { return new CartSideMenu(driver); }
-}
+        public Cart loadCart () {
+            return new Cart(driver);
+        }
+        public HomePage loadHomePage () {
+            return new HomePage(driver);
+        }
+        public CartSideMenu loadCartSideMenu () {
+            return new CartSideMenu(driver);
+        }
+    }
