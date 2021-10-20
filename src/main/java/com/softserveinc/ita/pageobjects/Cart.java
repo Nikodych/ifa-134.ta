@@ -21,20 +21,16 @@ public class Cart extends RozetkaPageObject {
     public WebElement getAddToCartButton() {
         return addToCartButton;
     }
-
     public void clickAddToCartButton() {
         getAddToCartButton().click();
     }
-
     public WebElement getCart() {
         cart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//rz-cart[@class='header-actions__component']")));
         return cart;
     }
-
     public void clickCart() {
         getCart().click();
     }
-
     public String itemString() {
         itemString = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='cart-product__title']")));
         String expected = itemString.getText();

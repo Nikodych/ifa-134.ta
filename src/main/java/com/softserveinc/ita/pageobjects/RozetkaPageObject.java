@@ -27,7 +27,6 @@ public abstract class RozetkaPageObject {
     public void clickHomePage() {
         getHomePage().click();
     }
-
     //ExpectectCondition for elements
     public WebDriverWait waitElementCondition() {
         driverWait = new WebDriverWait(driver,500);

@@ -20,8 +20,8 @@ public class rozetkaTests extends TestRunner {
                 {"samsung",  "Samsung Galaxy S21 8/256GB Phantom Pink"},
                 {"iphone",   "iPhone 12 Pro Max"},
                 {"samsung",  "Samsung Galaxy Watch 4 Classic"},
-                {"nokia",    "Nokia G10" }  };
-    }
+                {"nokia",    "Nokia G10" }  };}
+
     @Test(dataProvider = "rozetkaItems")
     //searchItem = samsung or etc; item = some phone or etc.
     public void rozetkaSearchTest(String searchItem, String item) {
@@ -41,10 +41,9 @@ public class rozetkaTests extends TestRunner {
     public Object[][] rozetkaCheckCartItems () {
         return new Object[][]{
                 {"samsung", "Samsung Galaxy S21"},
-                //  {"iphone",   "iPhone 12 Pro Max"},
-                //    {"samsung", "Samsung Galaxy A72"}
-        };
-    }
+                  {"iphone",   "iPhone 12 Pro Max"},
+                    {"samsung", "Samsung Galaxy A72"}};}
+
     @Test(dataProvider = "rozetkaCheckCartItems")
     //searchItem = samsung or etc; item = some phone or etc.
     public void rozetkaCartFunctionalTest (String searchItem, String item) {
@@ -70,4 +69,3 @@ public class rozetkaTests extends TestRunner {
             cartSideMenu.clickCartClose();
     }
 }
-

@@ -15,10 +15,7 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
-    private final Long IMPLICITLY_WAIT_SECONDS = 10L;
-    private final Long ONE_SECOND_DELAY = 1000L;
     private WebDriver driver;
-    private WebDriverWait driverWait;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -38,7 +35,6 @@ public abstract class TestRunner {
         driver.get("https://rozetka.com.ua/");
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
-
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
