@@ -26,31 +26,39 @@ public class SearchField extends RozetkaPageObject {
     public WebElement getSearch() {
         return search;
     }
+
     public void searchClick() {
         getSearch().click();
     }
+
     public void searchClear() {
         getSearch().clear();
     }
+
     public void searchSendKeys(String text) {
         getSearch().sendKeys(text);
     }
+
     public WebElement getSearchButton() {
         return searchButton;
     }
+
     public void clickSearchButton() {
         getSearchButton().click();
     }
-    //goods
+
     public List<WebElement> getGoodsList() {
         goods = driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"),30));
+
         return goods;
     }
-    //expectedItem
+
     public WebElement getExpectedItem(String text) {
         expectedItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
+
         return expectedItem;
     }
+
     public void fillSearch(String text) {
         searchClick();
         searchClear();

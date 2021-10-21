@@ -16,31 +16,35 @@ public abstract class RozetkaPageObject {
         this.driver = driver;
         webElements();
     }
-    //rozetka webElements
+
     private void webElements() {
         homePage = driver.findElement(By.cssSelector("div > a > picture"));
     }
-    //----------------------------------------page object constructor----------------------------------------
+
     public WebElement getHomePage() {
         return homePage;
     }
+
     public void clickHomePage() {
         getHomePage().click();
     }
     //ExpectectCondition for elements
     public WebDriverWait waitElementCondition() {
         driverWait = new WebDriverWait(driver,500);
+
         return driverWait;
     }
     //page load time
     public WebDriverWait pageLoadTimeout() {
        driverWait = new WebDriverWait(driver, 5);
        driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
-        return pageLoadTimeout();
+
+       return pageLoadTimeout();
     }
     //implicitly timeout
     public WebDriverWait implicitlyTimeout() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
         return implicitlyTimeout();
     }
     }

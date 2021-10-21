@@ -11,13 +11,15 @@ public class HomePage extends RozetkaPageObject {
         super(driver);
         webElements();
     }
+
     private void webElements() {
         homePage = driver.findElement(By.cssSelector("div > a > picture"));
     }
-    //home page
+
     public WebElement getHomePage() {
         return homePage;
     }
+
     public void clickHomePage() {
         getHomePage().click();
     }

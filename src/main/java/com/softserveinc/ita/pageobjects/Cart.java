@@ -14,10 +14,11 @@ public class Cart extends RozetkaPageObject {
         super(driver);
         webElements();
     }
+
     private void webElements() {
         addToCartButton = driver.findElement(By.xpath("//*[@class='buy-button__label ng-star-inserted']"));
     }
-    //----------------------------------------page object---------------------------------------------
+
     public WebElement getAddToCartButton() {
         return addToCartButton;
     }
@@ -26,14 +27,17 @@ public class Cart extends RozetkaPageObject {
     }
     public WebElement getCart() {
         cart = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//rz-cart[@class='header-actions__component']")));
+
         return cart;
     }
+
     public void clickCart() {
         getCart().click();
     }
     public String itemString() {
         itemString = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='cart-product__title']")));
         String expected = itemString.getText();
+
         return expected;
     }
     }
