@@ -17,7 +17,7 @@ public class rozetkaTests extends TestRunner {
     @DataProvider
     public Object[][] rozetkaItems () {
         return new Object[][]{
-                {"samsung",  "Samsung Galaxy S21 8/256GB Phantom Pink"},
+                {"samsung",  "Samsung Galaxy S21"},
                 {"iphone",   "iPhone 12 Pro Max"},
                 {"samsung",  "Samsung Galaxy Watch 4 Classic"},
                 {"nokia",    "Nokia G10" }  };}

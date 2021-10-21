@@ -20,7 +20,6 @@ public class CartSideMenu extends Cart {
         return cartContinue;
     }
     public void clickContinueButton() {
-        presentationSleep(0);
         getContinueButton().click();
     }
     //cart close (X)
@@ -31,7 +30,7 @@ public class CartSideMenu extends Cart {
     public void clickCartClose() {getCartClose().click();}
     //cart context menu
     public WebElement getCartMenu() {
-        cartMenu = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--white button--small context-menu__toggle']")));
+        cartMenu = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button button--white button--small context-menu__toggle']")));
         return cartMenu;
     }
     public void clickCartMenu() {
@@ -43,13 +42,11 @@ public class CartSideMenu extends Cart {
         return deleteFromCart;
     }
     public void clickDeleteFromCart() {
-
         getDeleteFromCart().click();
     }
     //functional menu method
     public void deleteFromCart() {
         clickCartMenu();
-        presentationSleep(0);
-        clickDeleteFromCart();;
+        clickDeleteFromCart();
     }
 }
