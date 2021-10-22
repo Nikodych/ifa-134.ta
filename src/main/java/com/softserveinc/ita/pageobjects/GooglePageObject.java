@@ -1,4 +1,4 @@
-package com.softserveinc.ita.pkuravskyi.pageobjects;
+package com.softserveinc.ita.pageobjects;
 
 import org.openqa.selenium.*;
 

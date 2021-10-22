@@ -1,8 +1,8 @@
 package com.softserveinc.ita.pkuravskyi;
 
-import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePageObject;
-import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPageObject;
-import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
+import com.softserveinc.ita.pageobjects.GooglePageObject;
+import com.softserveinc.ita.pageobjects.WikipediaPageObject;
+import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.*;
 
 public class PageObjectsTest extends TestRunner {
