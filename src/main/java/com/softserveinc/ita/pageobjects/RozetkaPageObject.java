@@ -10,6 +10,7 @@ public abstract class RozetkaPageObject {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
     private WebElement homePage;
+    private WebElement languageButton;
 
     public RozetkaPageObject(WebDriver driver) {
         this.driver = driver;
@@ -18,14 +19,23 @@ public abstract class RozetkaPageObject {
 
     private void webElements() {
         homePage = driver.findElement(By.cssSelector("div > a > picture"));
+        languageButton = driver.findElement(By.xpath("//a[@class='lang__link ng-star-inserted']"));
     }
 
     public WebElement getHomePage() {
         return homePage;
     }
 
+    public WebElement getLanguageButton() {
+        return languageButton;
+    }
+
     public void clickHomePage() {
         getHomePage().click();
+    }
+
+    public void clickLanguageButton() {
+        getLanguageButton().click();
     }
     //ExpectectCondition for elements
     public WebDriverWait waitElementCondition() {

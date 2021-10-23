@@ -34,6 +34,7 @@ public class Cart extends RozetkaPageObject {
     public void clickCart() {
         getCart().click();
     }
+
     public String itemString() {
         itemString = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='cart-product__title']")));
         String expected = itemString.getText();

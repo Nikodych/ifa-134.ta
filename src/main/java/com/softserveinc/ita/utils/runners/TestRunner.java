@@ -2,6 +2,7 @@ package com.softserveinc.ita.utils.runners;
 
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.CartSideMenu;
+import com.softserveinc.ita.pageobjects.MainPage;
 import com.softserveinc.ita.pageobjects.SearchField;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -44,10 +45,16 @@ public abstract class TestRunner {
     public SearchField loadSearch() {
         return new SearchField(driver);
     }
+
         public Cart loadCart () {
             return new Cart(driver);
         }
+
         public CartSideMenu loadCartSideMenu () {
             return new CartSideMenu(driver);
+        }
+
+        public MainPage loadMainPage () {
+            return new MainPage(driver);
         }
     }
