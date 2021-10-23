@@ -1,7 +1,7 @@
 package com.softserveinc.ita.utils.runners;
 
-import com.softserveinc.ita.pageobjects.GooglePageObject;
-import com.softserveinc.ita.pageobjects.WikipediaPageObject;
+import com.softserveinc.ita.pageobjects.GooglePage;
+import com.softserveinc.ita.pageobjects.WikipediaPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -10,14 +10,13 @@ import java.util.concurrent.TimeUnit;
 
 public class TestRunner {
 
-    protected GooglePageObject googlePage;
-    protected WikipediaPageObject wikipediaPage;
+    protected GooglePage googlePage;
+    protected WikipediaPage wikipediaPage;
     protected String driverPath = "src/main/java/com/softserveinc/ita/resources/chromedriver.exe";
     protected WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() {
-        //Installing chrome driver
         System.setProperty("webdriver.chrome.driver", driverPath);
     }
 
