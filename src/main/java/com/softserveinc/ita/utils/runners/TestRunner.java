@@ -2,11 +2,9 @@ package com.softserveinc.ita.utils.runners;
 
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.CartSideMenu;
-import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchField;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -48,9 +46,6 @@ public abstract class TestRunner {
     }
         public Cart loadCart () {
             return new Cart(driver);
-        }
-        public HomePage loadHomePage () {
-            return new HomePage(driver);
         }
         public CartSideMenu loadCartSideMenu () {
             return new CartSideMenu(driver);
