@@ -2,11 +2,12 @@ package com.softserveinc.ita.mmakoviichuk;
 
 import com.softserveinc.ita.models.TitleData;
 import com.softserveinc.ita.pageobjects.SoftServePage;
-import com.softserveinc.ita.utils.runners.SoftServeRunner;
+import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class SoftServeTest extends SoftServeRunner {
+public class SoftServeTest extends TestRunner {
 
     private TitleData titleData = TitleData.builder()
             .firstTitle("Home")
@@ -14,6 +15,11 @@ public class SoftServeTest extends SoftServeRunner {
             .thirdTitle("Learn with us")
             .fourthTitle("Focus on the future")
             .build();
+
+    @BeforeMethod
+    public void beforeMethod() {
+        driver.get("https://www.softserveinc.com/en-us");
+    }
 
     @Test
     public void sidebarTest()  {

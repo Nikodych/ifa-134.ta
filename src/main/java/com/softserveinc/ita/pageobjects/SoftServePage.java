@@ -15,8 +15,8 @@ public class SoftServePage {
 
     public SoftServePage(WebDriver driver) {
         this.driver = driver;
-        sidebar = driver.findElements(By.xpath("//li[contains(@class ,\"side-navigation__item\")]"));
-        titles = driver.findElements(By.xpath("//div[contains(@class, \"side-navigation__title\")]"));
+        sidebar = driver.findElements(By.xpath("//li[contains(@class, 'side-navigation__item')]"));
+        titles = driver.findElements(By.xpath("//div[contains(@class, 'side-navigation__title')]"));
     }
 
     public void sidebarClick () {
