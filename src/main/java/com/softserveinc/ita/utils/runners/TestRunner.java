@@ -6,6 +6,7 @@ import com.softserveinc.ita.pageobjects.MainPage;
 import com.softserveinc.ita.pageobjects.SearchField;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -23,7 +24,10 @@ public abstract class TestRunner {
 
     @BeforeClass
     public void beforeClass() {
-        driver = new ChromeDriver();
+        ChromeOptions profile = new ChromeOptions();
+        profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
+        driver = new ChromeDriver(profile);
+       // driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
@@ -38,7 +42,7 @@ public abstract class TestRunner {
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        driver.manage().deleteAllCookies();
+        //driver.manage().deleteAllCookies();
         driver.quit();
     }
 

@@ -29,7 +29,6 @@ public abstract class RozetkaPageObject {
 
     private void webElements() {
         homePage = driver.findElement(By.cssSelector("div > a > picture"));
-        userButton = driver.findElement(By.xpath("//li[@class='header-actions__item header-actions__item--user']"));
     }
 
     public WebElement getHomePage() {
@@ -41,6 +40,8 @@ public abstract class RozetkaPageObject {
     }
 
     public WebElement getUserButton() {
+        userButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//rz-user[@class='header-actions__component']")));
+
         return userButton;
     }
 
@@ -71,7 +72,7 @@ public abstract class RozetkaPageObject {
     }
 
     public WebElement getSideUserMenu() {
-        sideUserMenu = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//svg[@class='ng-tns-c5-0']")));
+        sideUserMenu = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='header__button']")));
 
         return sideUserMenu;
     }
@@ -88,9 +89,9 @@ public abstract class RozetkaPageObject {
     }
 
     public WebElement getExitButton() {
-        exitButton = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button button--large side-menu__button']")));
+        exitButton = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@class='side-menu__item side-menu__item--bordered-bottom ng-tns-c5-0 ng-star-inserted']")));
 
-    return getExitButton();
+    return exitButton;
     }
 
     public void clickExitButton() {

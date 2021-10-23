@@ -43,7 +43,6 @@ public class MainPage extends RozetkaPageObject {
         getLanguageButton().click();
     }
     //functional
-
     public void fillEmailField(String text) {
         getEmailField().click();
         getEmailField().clear();
