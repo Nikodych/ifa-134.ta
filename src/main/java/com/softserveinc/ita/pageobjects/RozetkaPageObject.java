@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 public abstract class RozetkaPageObject {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
-    private final Long ONE_SECOND_DELAY = 1000L;
     private WebElement homePage;
 
     public RozetkaPageObject(WebDriver driver) {
