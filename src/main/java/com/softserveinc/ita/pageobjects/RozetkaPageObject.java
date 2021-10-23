@@ -115,13 +115,4 @@ public abstract class RozetkaPageObject {
 
         return implicitlyTimeout();
     }
-
-    public void presentationSleep(int seconds) {
-        try {
-            Thread.sleep(seconds * ONE_SECOND_DELAY); // For Presentation ONLY
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
 }

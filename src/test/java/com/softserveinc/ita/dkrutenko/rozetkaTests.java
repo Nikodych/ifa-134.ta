@@ -98,13 +98,8 @@ public class rozetkaTests extends TestRunner {
     public void rozetkaLoginTest(String email, String password) {
     MainPage mainPage = loadMainPage();
         mainPage.clickUserButton();
-        mainPage.presentationSleep(2);
         mainPage.waitElementCondition();
-        mainPage.getEmailField().click();
-        mainPage.presentationSleep(2);
-        mainPage.getEmailField().sendKeys(email);
-        //mainPage.fillEmailField(email);
-        mainPage.presentationSleep(7);
+        mainPage.fillEmailField(email);
         mainPage.fillPasswordField(password);
         mainPage.clickLoginButton();
         mainPage.waitElementCondition();
