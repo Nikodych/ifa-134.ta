@@ -82,7 +82,6 @@ public class rozetkaTests extends TestRunner {
             mainPage.clickLanguageButton();
             mainPage.waitElementCondition();
             mainPage.getMarketName();
-            System.out.println(mainPage.getMarketName());
             if(mainPage.getMarketName().contains(ru) || mainPage.getMarketName().contains(ukr)) {
                 Assert.assertTrue(true);
             }
