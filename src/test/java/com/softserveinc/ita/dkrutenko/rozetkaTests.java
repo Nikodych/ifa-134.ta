@@ -25,7 +25,7 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaItems")
     //searchItem = samsung or etc; item = some phone or etc.
-    public void rozetkaSearchTest(String searchItem, String item) {
+    public void checkSearchTest(String searchItem, String item) {
         SearchField searchField = loadSearch();
         searchField.fillSearch(searchItem);
         searchField.clickSearchButton();
@@ -48,7 +48,7 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaCheckCartItems")
     //searchItem = samsung or etc; item = some phone or etc.
-    public void rozetkaCartFunctionalTest(String searchItem, String item) {
+    public void verifyCartFunctionsTest(String searchItem, String item) {
         SearchField searchField = loadSearch();
         searchField.fillSearch(searchItem);
         searchField.clickSearchButton();
@@ -95,7 +95,7 @@ public class rozetkaTests extends TestRunner {
     }
 
     @Test(dataProvider = "rozetkaLoginData")
-    public void rozetkaLoginTest(String email, String password) {
+    public void verifyRozetkaLoginTest(String email, String password) {
         MainPage mainPage = loadMainPage();
         mainPage.waitElementCondition();
         mainPage.clickUserButton();

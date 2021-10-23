@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MainPage extends RozetkaPageObject {
+
     private WebElement homePage;
     private WebElement marketName;
     private WebElement languageButton;

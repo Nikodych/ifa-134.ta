@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CartSideMenu extends Cart {
+
     private WebElement cartContinue;
     private WebElement cartClose;
     private WebElement cartMenu;

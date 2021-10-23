@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Cart extends RozetkaPageObject {
+
     private WebElement addToCartButton;
     private WebElement cart;
     private WebElement itemString;

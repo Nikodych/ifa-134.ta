@@ -15,6 +15,7 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
+
     private WebDriver driver;
 
     @BeforeSuite

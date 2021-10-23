@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 
 public class SearchField extends RozetkaPageObject {
+
     private WebElement search;
     private WebElement searchButton;
     private List<WebElement> goods;
