@@ -71,12 +71,13 @@ public class rozetkaTests extends TestRunner {
     }
 
     @DataProvider
-    public Object[][] rozetkaResources() {
+    public Object[][] rozetkaLangVerification() {
         return new Object[][] {
         {" ТМ используется на основании лицензии правообладателя RozetkaLTD. ",
          " ТМ використовується на підставі ліцензії правовласника RozetkaLTD. "}};
 }
-        @Test(dataProvider = "rozetkaResources")
+
+        @Test(dataProvider = "rozetkaLangVerification")
         public void checkLanguageTest (String ru, String ukr) {
             MainPage mainPage = loadMainPage();
             mainPage.clickLanguageButton();
@@ -85,5 +86,31 @@ public class rozetkaTests extends TestRunner {
             if(mainPage.getMarketName().contains(ru) || mainPage.getMarketName().contains(ukr)) {
                 Assert.assertTrue(true);
             }
+    }
+
+    @DataProvider
+    public Object[][] rozetkaLoginData() {
+        return new Object[][] {
+                {"dospecwork@gmail.com", "Kkl445123",}};
+        }
+
+    @Test(dataProvider = "rozetkaLoginData")
+    public void rozetkaLoginTest(String email, String password) {
+    MainPage mainPage = loadMainPage();
+        mainPage.clickUserButton();
+        mainPage.presentationSleep(2);
+        mainPage.waitElementCondition();
+        mainPage.getEmailField().click();
+        mainPage.presentationSleep(2);
+        mainPage.getEmailField().sendKeys(email);
+        //mainPage.fillEmailField(email);
+        mainPage.presentationSleep(7);
+        mainPage.fillPasswordField(password);
+        mainPage.clickLoginButton();
+        mainPage.waitElementCondition();
+        mainPage.clickSideUserMenu();
+        mainPage.checkUserEmail();
+    Assert.assertTrue(mainPage.checkUserEmail().contains(email));
+        mainPage.clickExitButton();
     }
 }

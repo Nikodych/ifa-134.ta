@@ -54,7 +54,5 @@ public abstract class TestRunner {
             return new CartSideMenu(driver);
         }
 
-        public MainPage loadMainPage () {
-            return new MainPage(driver);
-        }
+        public MainPage loadMainPage () { return new MainPage(driver); }
     }
