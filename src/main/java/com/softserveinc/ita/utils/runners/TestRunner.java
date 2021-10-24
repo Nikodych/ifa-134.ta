@@ -7,20 +7,24 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestRunner {
+abstract public class TestRunner {
 
-    protected WebDriver driver;
-    private String driverPath = "C:\\Users\\Ferrl\\IdeaProjects\\ifa-134.ta\\src\\main\\java\\com\\softserveinc\\ita\\drivers\\chrome_driver.exe";
+    private WebDriver driver;
+    private String driverPath = "C:\\Users\\Ferrl\\IdeaProjects\\ifa-134.ta\\src\\main\\java\\com\\softserveinc\\ita\\drivers\\chromedriver.exe";
 
     @BeforeSuite
-    public void beforeSuite() {
+    public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     @AfterMethod
-    public void afterMethod() {
+    public void tearDown() {
         driver.quit();
+    }
+
+    public WebDriver getDriver() {
+        return driver;
     }
 }

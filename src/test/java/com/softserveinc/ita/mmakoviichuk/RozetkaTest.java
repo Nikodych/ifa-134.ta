@@ -10,25 +10,23 @@ import org.testng.annotations.Test;
 public class RozetkaTest extends TestRunner {
 
     @BeforeMethod
-    public void beforeMethod() {
-        driver.get("https://rozetka.com.ua/");
+    public void open() {
+        getDriver().get("https://rozetka.com.ua/");
+        getDriver().manage().window().maximize();;
     }
 
     @Test
     public void categoryTest() {
-        HomePage homePage = new HomePage(driver);
-        String categoryTitle = homePage.getCategory().toLowerCase();
-        homePage.categoryClick();
-        CategoriesPage categoriesPage = new CategoriesPage(driver);
-        Assert.assertEquals(categoryTitle, categoriesPage.getCategory().toLowerCase());
+        String categoryTitle = new HomePage(getDriver()).getCategory().toLowerCase();
+        new HomePage(getDriver()).categoryClick();
+        Assert.assertEquals(categoryTitle, new CategoriesPage(getDriver()).getCategory().toLowerCase());
     }
+
     @Test
-    public void dropdownCategoryTest() throws InterruptedException {
-        HomePage homePage = new HomePage(driver);
+    public void dropdownCategoryTest() {
+        HomePage homePage = new HomePage(getDriver());
         String categoryTitle = homePage.getDropdownCategory().toLowerCase();
         homePage.dropdownCategoryClick();
-        Thread.sleep(2000);
-        CategoriesPage categoriesPage = new CategoriesPage(driver);
-        Assert.assertEquals(categoryTitle, categoriesPage.getCategory().toLowerCase());
+        Assert.assertEquals(categoryTitle, new CategoriesPage(getDriver()).getCategory().toLowerCase());
     }
 }
