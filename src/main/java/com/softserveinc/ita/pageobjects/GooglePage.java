@@ -2,33 +2,19 @@ package com.softserveinc.ita.pageobjects;
 
 import org.openqa.selenium.*;
 
-public class GooglePage {
+public class GooglePage extends BaseGooglePage {
 
-    protected WebDriver driver;
-    private By searchBar;
-    private By searchButton;
-    private By openWikipedia;
+    private final By wikipediaUrl = By.xpath("//a[contains(@href, 'uk.wikipedia.org')]");
 
     public GooglePage(WebDriver driver) {
-        this.driver = driver;
-        googleSelectors();
+        super(driver);
     }
 
-    public void searchBarInputText(String searchText) {
-        driver.findElement(searchBar).sendKeys(searchText);
-    }
+    public GooglePage openWikipedia() {
+        driver
+                .findElement(wikipediaUrl)
+                .click();
 
-    public void searchButtonClick() {
-        driver.findElement(searchButton).click();
-    }
-
-    public void openWikipediaClick() {
-        driver.findElement(openWikipedia).click();
-    }
-
-    private void googleSelectors() {
-        searchBar = By.name("q");
-        searchButton = By.name("btnK");
-        openWikipedia = By.xpath("//a[contains(@href, 'wikipedia.org')]");
+        return this;
     }
 }

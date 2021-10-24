@@ -1,22 +1,21 @@
 package com.softserveinc.ita.pkuravskyi;
 
-import com.softserveinc.ita.pageobjects.GooglePage;
-import com.softserveinc.ita.pageobjects.WikipediaPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
+import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class PageObjectsTest extends TestRunner {
 
     @Test
-    // Search Wikipedia on google search & open it, find SoftServe article in it & open its website
-    public void verifyTest() {
-        googlePage = new GooglePage(driver);
+    // Search Wikipedia on google search & open it, find rozetka article in it & open its website
+    public void verifyWikipediaSearchTest() {
         googlePage.searchBarInputText("Wikipedia");
+        Assert.assertEquals(googlePage.getSearchBarText(), "Wikipedia");
         googlePage.searchButtonClick();
-        googlePage.openWikipediaClick();
-        wikipediaPage = new WikipediaPage(driver);
-        wikipediaPage.searchBarInputText("SoftServe");
+        googlePage.openWikipedia();
+        wikipediaPage.searchBarInputText("rozetka.ua");
+        Assert.assertEquals(wikipediaPage.getSearchBarText(), "rozetka.ua");
         wikipediaPage.searchButtonClick();
-        wikipediaPage.selectSoftServeUrlClick();
+        wikipediaPage.openRozetka();
     }
 }
