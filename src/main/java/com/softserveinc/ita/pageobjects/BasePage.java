@@ -7,38 +7,51 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
-public abstract class RozetkaPageObject {
+public abstract class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;
 
-    private final Long ONE_SECOND_DELAY = 1000L;
-
-    private WebElement homePage;
     private WebElement userButton;
-    private WebElement emailField;
-    private WebElement passwordField;
+    private WebElement emailInput;
+    private WebElement passwordInput;
     private WebElement loginButton;
     private WebElement sideUserMenu;
     private WebElement userEmail;
     private WebElement exitButton;
+    private By search = By.name("search");
+    private By searchButton = By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
 
-    public RozetkaPageObject(WebDriver driver) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
-        webElements();
     }
 
-    private void webElements() {
-        homePage = driver.findElement(By.cssSelector("div > a > picture"));
+    public BasePage getSearch() {
+        driver.findElement(search);
+
+        return this;
     }
 
-    public WebElement getHomePage() {
-        return homePage;
+    public void searchClick() {
+        getSearch().click();
     }
 
-    public void clickHomePage() {
-        getHomePage().click();
+    public void searchClear() {
+        getSearch().clear();
     }
+
+    public void searchSendKeys(String text) {
+        getSearch().sendKeys(text);
+    }
+
+    public WebElement getSearchButton() {
+        return searchButton;
+    }
+
+    public void clickSearchButton() {
+        getSearchButton().click();
+    }
+
 
     public WebElement getUserButton() {
         userButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//rz-user[@class='header-actions__component']")));
@@ -51,15 +64,15 @@ public abstract class RozetkaPageObject {
     }
 
     public WebElement getEmailField() {
-        emailField = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_email")));
+        emailInput = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_email")));
 
-        return emailField;
+        return emailInput;
     }
 
     public WebElement getPasswordField() {
-        passwordField = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_pass")));
+        passwordInput = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_pass")));
 
-        return passwordField;
+        return passwordInput;
     }
 
     public WebElement getLoginButton() {
@@ -82,11 +95,11 @@ public abstract class RozetkaPageObject {
         getSideUserMenu().click();
     }
 
-    public String checkUserEmail() {
+    public String getUserEmailTitle() {
         userEmail = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='side-menu__auth-caption']")));
-        String userEmailField = userEmail.getText();
+        String userEmailText = userEmail.getText();
 
-        return userEmailField;
+        return userEmailText;
     }
 
     public WebElement getExitButton() {
@@ -98,20 +111,20 @@ public abstract class RozetkaPageObject {
     public void clickExitButton() {
         getExitButton().click();
     }
-    //ExpectectCondition for elements
+
     public WebDriverWait waitElementCondition() {
         driverWait = new WebDriverWait(driver,500);
 
         return driverWait;
     }
-    //page load time
+
     public WebDriverWait pageLoadTimeout() {
        driverWait = new WebDriverWait(driver, 5);
        driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
 
        return pageLoadTimeout();
     }
-    //implicitly timeout
+
     public WebDriverWait implicitlyTimeout() {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 

@@ -1,7 +1,7 @@
 package com.softserveinc.ita.dkrutenko;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.CartSideMenu;
+import com.softserveinc.ita.pageobjects.ShoppingCartPage;
+import com.softserveinc.ita.pageobjects.ShoppingCartModal;
 import com.softserveinc.ita.pageobjects.MainPage;
 import com.softserveinc.ita.pageobjects.SearchField;
 import com.softserveinc.ita.utils.runners.TestRunner;
@@ -25,17 +25,18 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaItems")
     //searchItem = samsung or etc; item = some phone or etc.
-    public void checkSearchTest(String searchItem, String item) {
+    public void verifySearchTest(String searchItem, String item) {
         SearchField searchField = loadSearch();
         searchField.fillSearch(searchItem);
         searchField.clickSearchButton();
         searchField.waitElementCondition();
-        List<String> list = searchField.getGoodsList()
+        List<String> list = searchField
+                .getGoodsList()
                 .stream()
                 .map(WebElement::getText)
                 .filter(text -> text.contains(item))
                 .collect(Collectors.toList());
-        Assert.assertTrue(list.get(0).contains(item));
+        Assert.assertTrue(list.get(1).contains(item));
     }
 
     @DataProvider
@@ -48,26 +49,27 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaCheckCartItems")
     //searchItem = samsung or etc; item = some phone or etc.
-    public void verifyCartFunctionsTest(String searchItem, String item) {
+    public void verifyShoppingCartTest(String searchItem, String item) {
         SearchField searchField = loadSearch();
         searchField.fillSearch(searchItem);
         searchField.clickSearchButton();
         searchField.waitElementCondition();
         searchField.getExpectedItem(item).click();
-        Cart cart = loadCart();
+        ShoppingCartPage cart = loadCart();
         cart.clickAddToCartButton();
-        CartSideMenu cartSideMenu = loadCartSideMenu();
-        cartSideMenu.waitElementCondition();
-        cartSideMenu.clickContinueButton();
-        cartSideMenu.clickHomePage();
+        ShoppingCartModal shoppingCartModal = loadShoppingCartModal();
+        shoppingCartModal.waitElementCondition();
+        shoppingCartModal.clickShoppingCartContinueButton();
+        MainPage mainPage = loadMainPage();
+        mainPage.clickLogo();
         cart.waitElementCondition();
-        cart.clickCart();
+        cart.clickCartButton();
         cart.waitElementCondition();
-        cart.itemString();
-        Assert.assertTrue(cart.itemString().contains(item));
-        cartSideMenu.deleteFromCart();
-        cartSideMenu.waitElementCondition();
-        cartSideMenu.clickCartClose();
+        cart.getProductTitle();
+        Assert.assertTrue(cart.getProductTitle().contains(item));
+        shoppingCartModal.deleteFromShoppingCart();
+        shoppingCartModal.waitElementCondition();
+        shoppingCartModal.clickShoppingCartCloseButton();
     }
 
     @DataProvider
@@ -78,7 +80,7 @@ public class rozetkaTests extends TestRunner {
     }
 
     @Test(dataProvider = "rozetkaLangVerification")
-    public void checkLanguageTest(String ru, String ukr) {
+    public void verifySwitchLanguageTest(String ru, String ukr) {
         MainPage mainPage = loadMainPage();
         mainPage.clickLanguageButton();
         mainPage.waitElementCondition();
@@ -95,7 +97,7 @@ public class rozetkaTests extends TestRunner {
     }
 
     @Test(dataProvider = "rozetkaLoginData")
-    public void verifyRozetkaLoginTest(String email, String password) {
+    public void verifyLoginTest(String email, String password) {
         MainPage mainPage = loadMainPage();
         mainPage.waitElementCondition();
         mainPage.clickUserButton();
@@ -105,8 +107,8 @@ public class rozetkaTests extends TestRunner {
         mainPage.clickLoginButton();
         mainPage.waitElementCondition();
         mainPage.clickSideUserMenu();
-        mainPage.checkUserEmail();
-    Assert.assertTrue(mainPage.checkUserEmail().contains(email));
+        mainPage.getUserEmailTitle();
+    Assert.assertTrue(mainPage.getUserEmailTitle().contains(email));
         mainPage.clickExitButton();
     }
 }

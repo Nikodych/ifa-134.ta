@@ -5,9 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class MainPage extends RozetkaPageObject {
+public class MainPage extends BasePage {
 
-    private WebElement homePage;
+    private WebElement logo;
     private WebElement marketName;
     private WebElement languageButton;
 
@@ -17,16 +17,16 @@ public class MainPage extends RozetkaPageObject {
     }
 
     private void webElements() {
-        homePage = driver.findElement(By.cssSelector("div > a > picture"));
+        logo = driver.findElement(By.cssSelector("div > a > picture"));
         languageButton = driver.findElement(By.xpath("//a[@class='lang__link ng-star-inserted']"));
     }
 
-    public WebElement getHomePage() {
-        return homePage;
+    public WebElement getLogo() {
+        return logo;
     }
 
-    public void clickHomePage() {
-        getHomePage().click();
+    public void clickLogo() {
+        getLogo().click();
     }
 
     public String getMarketName() {
