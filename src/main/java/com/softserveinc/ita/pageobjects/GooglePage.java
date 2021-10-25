@@ -10,11 +10,11 @@ public class GooglePage extends BaseGooglePage {
         super(driver);
     }
 
-    public GooglePage openWikipedia() {
+    public WikipediaPage openWikipedia() {
         driver
                 .findElement(wikipediaUrl)
                 .click();
 
-        return this;
+        return new WikipediaPage(driver);
     }
 }
