@@ -1,16 +1,13 @@
 package com.softserveinc.ita.dkrutenko;
 
-import com.softserveinc.ita.pageobjects.ShoppingCartPage;
-import com.softserveinc.ita.pageobjects.ShoppingCartModal;
-import com.softserveinc.ita.pageobjects.MainPage;
-import com.softserveinc.ita.pageobjects.SearchField;
+import com.softserveinc.ita.pageobjects.*;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class rozetkaTests extends TestRunner {
 
@@ -26,19 +23,22 @@ public class rozetkaTests extends TestRunner {
     @Test(dataProvider = "rozetkaItems")
     //searchItem = samsung or etc; item = some phone or etc.
     public void verifySearchTest(String searchItem, String item) {
-        SearchField searchField = loadSearch();
-        searchField.fillSearch(searchItem);
-        searchField.clickSearchButton();
-        searchField.waitElementCondition();
-        List<String> list = searchField
+        SearchGoods searchGoods = loadSearchGoods();
+        searchGoods.clickSearch();
+        searchGoods.clearSearch();
+        searchGoods.sendKeysSearch(searchItem);
+        searchGoods.clickSearchButton();
+        searchGoods.waitElementCondition();
+        List<String> list = Collections.singletonList(searchGoods
                 .getGoodsList()
                 .stream()
                 .map(WebElement::getText)
                 .filter(text -> text.contains(item))
-                .collect(Collectors.toList());
-        Assert.assertTrue(list.get(1).contains(item));
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Message")));
+        Assert.assertTrue(list.contains(item));
     }
-
+/*
     @DataProvider
     public Object[][] rozetkaCheckCartItems() {
         return new Object[][]{
@@ -50,18 +50,18 @@ public class rozetkaTests extends TestRunner {
     @Test(dataProvider = "rozetkaCheckCartItems")
     //searchItem = samsung or etc; item = some phone or etc.
     public void verifyShoppingCartTest(String searchItem, String item) {
-        SearchField searchField = loadSearch();
-        searchField.fillSearch(searchItem);
-        searchField.clickSearchButton();
-        searchField.waitElementCondition();
-        searchField.getExpectedItem(item).click();
-        ShoppingCartPage cart = loadCart();
+        SearchGoods searchGoods = loadSearchGoods();
+        searchGoods.fillSearch(searchItem);
+        searchGoods.clickSearchButton();
+        searchGoods.waitElementCondition();
+        searchGoods.getExpectedItem(item).click();
+        ShoppingCartPage cart = loadShoppingCartPage();
         cart.clickAddToCartButton();
         ShoppingCartModal shoppingCartModal = loadShoppingCartModal();
         shoppingCartModal.waitElementCondition();
         shoppingCartModal.clickShoppingCartContinueButton();
-        MainPage mainPage = loadMainPage();
-        mainPage.clickLogo();
+        LoginPageModal loginPageModal = loadLoginPageModal();
+        loginPageModal.clickLogo();
         cart.waitElementCondition();
         cart.clickCartButton();
         cart.waitElementCondition();
@@ -81,11 +81,11 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaLangVerification")
     public void verifySwitchLanguageTest(String ru, String ukr) {
-        MainPage mainPage = loadMainPage();
-        mainPage.clickLanguageButton();
-        mainPage.waitElementCondition();
-        mainPage.getMarketName();
-        if (mainPage.getMarketName().contains(ru) || mainPage.getMarketName().contains(ukr)) {
+        LoginPageModal loginPageModal = loadLoginPageModal();
+        loginPageModal.clickLanguageButton();
+        loginPageModal.waitElementCondition();
+        loginPageModal.getMarketName();
+        if (loginPageModal.getMarketName().contains(ru) || loginPageModal.getMarketName().contains(ukr)) {
             Assert.assertTrue(true);
         }
     }
@@ -98,17 +98,23 @@ public class rozetkaTests extends TestRunner {
 
     @Test(dataProvider = "rozetkaLoginData")
     public void verifyLoginTest(String email, String password) {
-        MainPage mainPage = loadMainPage();
-        mainPage.waitElementCondition();
-        mainPage.clickUserButton();
-        mainPage.waitElementCondition();
-        mainPage.fillEmailField(email);
-        mainPage.fillPasswordField(password);
-        mainPage.clickLoginButton();
-        mainPage.waitElementCondition();
-        mainPage.clickSideUserMenu();
-        mainPage.getUserEmailTitle();
-    Assert.assertTrue(mainPage.getUserEmailTitle().contains(email));
-        mainPage.clickExitButton();
+        LoginPageModal loginPageModal = loadLoginPageModal();
+        loginPageModal.waitElementCondition();
+        loginPageModal.clickUserButton();
+        loginPageModal.waitElementCondition();
+        loginPageModal.fillEmailField(email);
+        loginPageModal.fillPasswordField(password);
+        loginPageModal.clickLoginButton();
+        loginPageModal.waitElementCondition();
+        loginPageModal.clickSideUserMenu();
+        loginPageModal.getUserEmailTitle();
+        Assert.assertTrue(loginPageModal.getUserEmailTitle().contains(email));
+        loginPageModal.clickExitButton();
     }
+    @Test
+    public void someTest() {
+        SearchGoods searchGoods = loadSearchGoods();
+    }
+
+ */
 }

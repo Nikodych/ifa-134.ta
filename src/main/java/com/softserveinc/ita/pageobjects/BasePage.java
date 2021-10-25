@@ -12,46 +12,62 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait driverWait;
 
+    private WebElement search;
+    private WebElement searchButton;
+    private WebElement logo;
+    private WebElement languageButton;
+    private WebElement marketName;
     private WebElement userButton;
-    private WebElement emailInput;
-    private WebElement passwordInput;
-    private WebElement loginButton;
-    private WebElement sideUserMenu;
-    private WebElement userEmail;
-    private WebElement exitButton;
-    private By search = By.name("search");
-    private By searchButton = By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        webElements();
     }
 
-    public BasePage getSearch() {
-        driver.findElement(search);
-
-        return this;
+    private void webElements() {
+        search = driver.findElement(By.name("search"));
+        searchButton = driver.findElement(By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']"));
+        logo = driver.findElement(By.cssSelector("div > a > picture"));
+        languageButton = driver.findElement(By.xpath("//a[@class='lang__link ng-star-inserted']"));
     }
 
-    public void searchClick() {
+    public WebElement getSearch() {
+        return search;
+    }
+    public void clickSearch() {
         getSearch().click();
     }
-
-    public void searchClear() {
+    public void clearSearch() {
         getSearch().clear();
     }
-
-    public void searchSendKeys(String text) {
+    public void sendKeysSearch(String text) {
         getSearch().sendKeys(text);
     }
-
-    public WebElement getSearchButton() {
+public WebElement getSearchButton() {
         return searchButton;
-    }
-
+}
     public void clickSearchButton() {
         getSearchButton().click();
     }
+public WebElement getLogo() {
+        return logo;
+}
+    public void clickLogo() {
+        getLogo().click();
+    }
+public WebElement getLanguageButton() {
+        return languageButton;
+}
+    public void clickLanguageButton() {
+        getLanguageButton().click();
+    }
 
+    public String getMarketName() {
+        marketName = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='main-copyright_color_gray']")));
+        String rozetka = marketName.getText();
+
+        return rozetka;
+    }
 
     public WebElement getUserButton() {
         userButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//rz-user[@class='header-actions__component']")));
@@ -63,71 +79,9 @@ public abstract class BasePage {
         getUserButton().click();
     }
 
-    public WebElement getEmailField() {
-        emailInput = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_email")));
-
-        return emailInput;
-    }
-
-    public WebElement getPasswordField() {
-        passwordInput = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_pass")));
-
-        return passwordInput;
-    }
-
-    public WebElement getLoginButton() {
-        loginButton = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@class='button button--large button--green auth-modal__submit ng-star-inserted']")));
-
-        return loginButton;
-    }
-
-    public void clickLoginButton() {
-        getLoginButton().click();
-    }
-
-    public WebElement getSideUserMenu() {
-        sideUserMenu = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='header__button']")));
-
-        return sideUserMenu;
-    }
-
-    public void clickSideUserMenu() {
-        getSideUserMenu().click();
-    }
-
-    public String getUserEmailTitle() {
-        userEmail = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='side-menu__auth-caption']")));
-        String userEmailText = userEmail.getText();
-
-        return userEmailText;
-    }
-
-    public WebElement getExitButton() {
-        exitButton = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@class='side-menu__item side-menu__item--bordered-bottom ng-tns-c5-0 ng-star-inserted']")));
-
-    return exitButton;
-    }
-
-    public void clickExitButton() {
-        getExitButton().click();
-    }
-
     public WebDriverWait waitElementCondition() {
         driverWait = new WebDriverWait(driver,500);
 
         return driverWait;
-    }
-
-    public WebDriverWait pageLoadTimeout() {
-       driverWait = new WebDriverWait(driver, 5);
-       driver.manage().timeouts().pageLoadTimeout(5,TimeUnit.SECONDS);
-
-       return pageLoadTimeout();
-    }
-
-    public WebDriverWait implicitlyTimeout() {
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        return implicitlyTimeout();
     }
 }

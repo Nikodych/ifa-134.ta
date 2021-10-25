@@ -17,7 +17,7 @@ public class SearchGoods extends BasePage {
     }
 
     public List<WebElement> getGoodsList() {
-        goods = driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"),30));
+        goods = driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"), 30));
 
         return goods;
     }
@@ -26,11 +26,5 @@ public class SearchGoods extends BasePage {
         expectedItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
 
         return expectedItem;
-    }
-
-    public void fillSearch(String text) {
-        clickSearch();
-        clearSearch();
-        sendKeysSearch(text);
     }
 }
