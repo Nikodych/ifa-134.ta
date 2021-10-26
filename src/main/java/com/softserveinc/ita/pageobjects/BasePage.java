@@ -22,12 +22,6 @@ public abstract class BasePage  {
         this.driver = driver;
 }
 
-    public BasePage getSearch() {
-        driver.findElement(search);
-
-        return this;
-    }
-
     public void searchClick() {
         driver.findElement(search).click();
     }
@@ -40,31 +34,14 @@ public abstract class BasePage  {
         driver.findElement(search).sendKeys(text);
     }
 
-    public BasePage getSearchButton() {
-        driver.findElement(searchButton);
-
-        return this;
-    }
-
     public void clickSearchButton() {
         driver.findElement(searchButton).click();
     }
-
-public BasePage getLogo() {
-    driver.findElement(logo);
-
-    return this;
-}
 
     public void clickLogo() {
         driver.findElement(logo).click();
     }
 
-public BasePage getLanguageButton() {
-    driver.findElement(languageButton);
-
-    return this;
-}
     public void clickLanguageButton() {
         driver.findElement(languageButton).click();
     }

@@ -27,6 +27,7 @@ public class SearchGoods extends BasePage {
 
         return actualItem;
     }
+
     public void fillSearch(String text) {
         searchClick();
         searchClear();

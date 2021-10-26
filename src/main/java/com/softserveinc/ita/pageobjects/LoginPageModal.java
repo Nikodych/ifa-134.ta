@@ -18,7 +18,7 @@ public class LoginPageModal extends BasePage {
         super(driver);
     }
 
-   public WebElement getEmailField() {
+    public WebElement getEmailField() {
         emailInput = driverWait.until(ExpectedConditions.elementToBeClickable(By.id("auth_email")));
 
         return emailInput;

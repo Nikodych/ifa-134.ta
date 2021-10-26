@@ -13,12 +13,12 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
+
 protected SearchGoods searchGoods;
 protected ShoppingCartPage shoppingCartPage;
 protected ShoppingCartModal shoppingCartModal;
 protected LoginPageModal loginPageModal;
-
-    protected WebDriver driver;
+protected WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
@@ -52,5 +52,4 @@ protected LoginPageModal loginPageModal;
         driver.manage().deleteAllCookies();
         driver.quit();
     }
-
 }
