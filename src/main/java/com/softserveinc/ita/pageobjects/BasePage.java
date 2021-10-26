@@ -5,61 +5,68 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
 
-public abstract class BasePage {
+public abstract class BasePage  {
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;
 
-    private WebElement search;
-    private WebElement searchButton;
-    private WebElement logo;
-    private WebElement languageButton;
+    private By search = By.name("search");
+    private By searchButton = By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
+    private By logo = By.cssSelector("div > a > picture");
+    private By languageButton = By.xpath("//a[@class='lang__link ng-star-inserted']");
     private WebElement marketName;
     private WebElement userButton;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        webElements();
-    }
-
-    private void webElements() {
-        search = driver.findElement(By.name("search"));
-        searchButton = driver.findElement(By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']"));
-        logo = driver.findElement(By.cssSelector("div > a > picture"));
-        languageButton = driver.findElement(By.xpath("//a[@class='lang__link ng-star-inserted']"));
-    }
-
-    public WebElement getSearch() {
-        return search;
-    }
-    public void clickSearch() {
-        getSearch().click();
-    }
-    public void clearSearch() {
-        getSearch().clear();
-    }
-    public void sendKeysSearch(String text) {
-        getSearch().sendKeys(text);
-    }
-public WebElement getSearchButton() {
-        return searchButton;
 }
+
+    public BasePage getSearch() {
+        driver.findElement(search);
+
+        return this;
+    }
+
+    public void searchClick() {
+        driver.findElement(search).click();
+    }
+
+    public void searchClear() {
+        driver.findElement(search).clear();
+    }
+
+    public void searchSendKeys(String text) {
+        driver.findElement(search).sendKeys(text);
+    }
+
+    public BasePage getSearchButton() {
+        driver.findElement(searchButton);
+
+        return this;
+    }
+
     public void clickSearchButton() {
-        getSearchButton().click();
+        driver.findElement(searchButton).click();
     }
-public WebElement getLogo() {
-        return logo;
+
+public BasePage getLogo() {
+    driver.findElement(logo);
+
+    return this;
 }
+
     public void clickLogo() {
-        getLogo().click();
+        driver.findElement(logo).click();
     }
-public WebElement getLanguageButton() {
-        return languageButton;
+
+public BasePage getLanguageButton() {
+    driver.findElement(languageButton);
+
+    return this;
 }
     public void clickLanguageButton() {
-        getLanguageButton().click();
+        driver.findElement(languageButton).click();
     }
 
     public String getMarketName() {

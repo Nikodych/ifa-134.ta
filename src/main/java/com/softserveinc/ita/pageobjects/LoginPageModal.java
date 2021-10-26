@@ -67,9 +67,9 @@ public class LoginPageModal extends BasePage {
         getExitButton().click();
     }
 
-    //functional
-    public void fillEmailField(String text) {
 
+    public void fillEmailField(String text) {
+        getEmailField().click();
         getEmailField().clear();
         getEmailField().sendKeys(text);
     }

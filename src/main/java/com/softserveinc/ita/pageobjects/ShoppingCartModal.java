@@ -31,8 +31,9 @@ public class ShoppingCartModal extends ShoppingCartPage {
 
         return cartCloseButton;
     }
+
     public void clickShoppingCartCloseButton() {getShoppingCartCloseButton().click();}
-    //cart context menu
+
     public WebElement getCartSideMenu() {
         cartMenu = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@class='button button--white button--small context-menu__toggle']")));
 

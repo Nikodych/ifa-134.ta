@@ -10,7 +10,7 @@ import java.util.List;
 public class SearchGoods extends BasePage {
 
     private List<WebElement> goods;
-    private WebElement expectedItem;
+    private WebElement actualItem;
 
     public SearchGoods(WebDriver driver) {
         super(driver);
@@ -22,9 +22,14 @@ public class SearchGoods extends BasePage {
         return goods;
     }
 
-    public WebElement getExpectedItem(String text) {
-        expectedItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
+    public WebElement getActualItem(String text) {
+        actualItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
 
-        return expectedItem;
+        return actualItem;
+    }
+    public void fillSearch(String text) {
+        searchClick();
+        searchClear();
+        searchSendKeys(text);
     }
 }
