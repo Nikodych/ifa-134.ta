@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,6 +16,9 @@ abstract public class BasePage {
         wait = new WebDriverWait(driver, 5);
     }
 
+    public WebElement waitForVisibility(By locator) {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
     public void waitForAttributeChanges(WebElement webElement, String attribute, String value) {
         wait.until(ExpectedConditions.attributeContains(webElement, attribute, value));
     }
