@@ -1,11 +1,10 @@
 package com.softserveinc.ita.pageobjects.rozetka;
 
-import com.softserveinc.ita.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class CategoriesPage extends BasePage {
+public class CategoriesPage extends RozetkaBasePage {
 
     private WebElement category;
 

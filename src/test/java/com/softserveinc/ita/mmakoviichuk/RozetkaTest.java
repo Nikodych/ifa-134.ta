@@ -1,9 +1,6 @@
 package com.softserveinc.ita.mmakoviichuk;
 
-import com.softserveinc.ita.pageobjects.rozetka.CategoriesPage;
-import com.softserveinc.ita.pageobjects.rozetka.HomePage;
-import com.softserveinc.ita.pageobjects.rozetka.ProductPage;
-import com.softserveinc.ita.pageobjects.rozetka.WishlistPage;
+import com.softserveinc.ita.pageobjects.rozetka.*;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -20,9 +17,9 @@ public class RozetkaTest extends TestRunner {
 
     @Test
     public void dropdownCategoryTest() {
-        HomePage homePage = new HomePage(getDriver());
-        String categoryTitle = homePage.getDropdownCategory().toLowerCase();
-        homePage.dropdownCategoryClick();
+        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage(getDriver());
+        String categoryTitle = rozetkaBasePage.getDropdownCategory().toLowerCase();
+        rozetkaBasePage.dropdownCategoryClick();
         Assert.assertEquals(categoryTitle, new CategoriesPage(getDriver()).getCategory().toLowerCase());
     }
 
@@ -35,14 +32,14 @@ public class RozetkaTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaLoginData")
     public void wishlistTest(String email, String password) {
-        HomePage homePage = new HomePage(getDriver());
-        homePage.loginInit(email, password);
+        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage(getDriver());
+        rozetkaBasePage.logIn(email, password);
         getDriver().get("https://rozetka.com.ua/ua/41556706/g41556706/");
         ProductPage productPage = new ProductPage(getDriver());
         productPage.addWish();
         String id = productPage.getId();
-        homePage.wishlistClick();
-        boolean check = new WishlistPage(getDriver()).containsId(id);
-        Assert.assertTrue(check);
+        rozetkaBasePage.wishlistClick();
+        boolean isProductInWishlist = new WishlistPage(getDriver()).containsId(id);
+        Assert.assertTrue(isProductInWishlist);
     }
 }

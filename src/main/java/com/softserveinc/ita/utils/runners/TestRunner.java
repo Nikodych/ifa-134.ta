@@ -1,5 +1,6 @@
 package com.softserveinc.ita.utils.runners;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 abstract public class TestRunner {
 
+    @Getter
     private WebDriver driver;
 
     @BeforeSuite
@@ -31,11 +33,9 @@ abstract public class TestRunner {
 
     @AfterClass
     public void tearDown() {
+        // disable for wishlist test
         //driver.manage().deleteAllCookies();
         driver.quit();
     }
 
-    public WebDriver getDriver() {
-        return driver;
-    }
 }

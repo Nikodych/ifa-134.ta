@@ -1,13 +1,12 @@
 package com.softserveinc.ita.pageobjects.rozetka;
 
-import com.softserveinc.ita.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class WishlistPage extends BasePage {
+public class WishlistPage extends RozetkaBasePage {
 
     private List<WebElement> goods;
 
