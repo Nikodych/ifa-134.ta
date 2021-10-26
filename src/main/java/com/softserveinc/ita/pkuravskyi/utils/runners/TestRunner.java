@@ -1,7 +1,7 @@
-package com.softserveinc.ita.utils.runners;
+package com.softserveinc.ita.pkuravskyi.utils.runners;
 
-import com.softserveinc.ita.pageobjects.GooglePage;
-import com.softserveinc.ita.pageobjects.WikipediaPage;
+import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
+import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -12,7 +12,7 @@ public abstract class TestRunner {
 
     protected GooglePage googlePage;
     protected WikipediaPage wikipediaPage;
-    private final String driverPath = "src/main/java/com/softserveinc/ita/resources/chromedriver.exe";
+    private final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
     private WebDriver driver;
 
     @BeforeSuite

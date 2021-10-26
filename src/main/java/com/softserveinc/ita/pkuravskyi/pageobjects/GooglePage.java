@@ -1,13 +1,18 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pkuravskyi.pageobjects;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
-public class GooglePage extends BaseGooglePage {
+import static org.openqa.selenium.By.name;
+
+public class GooglePage extends BasePage<GooglePage> {
 
     private final By wikipediaUrl = By.xpath("//a[contains(@href, 'uk.wikipedia.org')]");
 
     public GooglePage(WebDriver driver) {
         super(driver);
+        searchBar = name("q");
+        searchButton = name("btnK");
     }
 
     public WikipediaPage openWikipedia() {
