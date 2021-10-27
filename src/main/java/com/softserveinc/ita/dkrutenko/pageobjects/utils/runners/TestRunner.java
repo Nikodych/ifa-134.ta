@@ -7,9 +7,7 @@ import com.softserveinc.ita.dkrutenko.pageobjects.ShoppingCartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -23,13 +21,13 @@ protected WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "src/main/java/com/softserveinc/ita/dkrutenko/pageobjects/resources/chromedriver.exe");
-
+        System.setProperty("webdriver.chrome.driver",
+            "src/main/java/com/softserveinc/ita/dkrutenko/pageobjects/resources/chromedriver.exe");
         //uncomment this for login test and comment  "driver = new ChromeDriver();"
         ChromeOptions profile = new ChromeOptions();
-        profile.addArguments("user-data-dir=C:/Users/IT/AppData/Local/Google/Chrome/User Data/");
+        profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
         driver = new ChromeDriver(profile);
-        //driver = new ChromeDriver();
+       // driver = new ChromeDriver();
         driver
                 .manage()
                 .timeouts()
@@ -55,7 +53,7 @@ protected WebDriver driver;
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-       // driver.manage().deleteAllCookies(); //comment this for login test
+        //driver.manage().deleteAllCookies(); //comment this for login test
         driver.quit();
     }
 }

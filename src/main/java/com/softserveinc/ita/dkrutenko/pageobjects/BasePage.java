@@ -2,9 +2,10 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 public abstract class BasePage  {
 
@@ -15,8 +16,8 @@ public abstract class BasePage  {
     private By searchButton = By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
     private By logo = By.cssSelector("div > a > picture");
     private By languageButton = By.xpath("//a[@class='lang__link ng-star-inserted']");
-    private WebElement marketName;
-    private WebElement userButton;
+    private By marketName = By.xpath("//p[@class='main-copyright_color_gray']");
+    private By userButton = By.xpath("//rz-user[@class='header-actions__component']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -46,21 +47,16 @@ public abstract class BasePage  {
         driver.findElement(languageButton).click();
     }
 
-    public String getMarketName() {
-        marketName = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='main-copyright_color_gray']")));
-        String rozetka = marketName.getText();
+    public String getMarketNameTitle() {
+        waitElementCondition();
+        String rozetka = driverWait.until(ExpectedConditions.visibilityOfElementLocated(marketName)).getText();
 
         return rozetka;
     }
 
-    public WebElement getUserButton() {
-        userButton = driverWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//rz-user[@class='header-actions__component']")));
-
-        return userButton;
-    }
-
     public void clickUserButton() {
-        getUserButton().click();
+        waitElementCondition();
+        driverWait.until(ExpectedConditions.elementToBeClickable(userButton)).click();
     }
 
     public WebDriverWait waitElementCondition() {

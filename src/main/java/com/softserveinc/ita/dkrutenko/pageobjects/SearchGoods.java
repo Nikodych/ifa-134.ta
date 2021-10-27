@@ -17,12 +17,14 @@ public class SearchGoods extends BasePage {
     }
 
     public List<WebElement> getGoodsList() {
+        waitElementCondition();
         goods = driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"), 30));
 
         return goods;
     }
 
     public WebElement getActualItem(String text) {
+        waitElementCondition();
         actualItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
 
         return actualItem;
