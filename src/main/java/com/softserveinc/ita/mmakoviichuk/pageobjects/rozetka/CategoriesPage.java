@@ -1,4 +1,4 @@
-package com.softserveinc.ita.pageobjects.rozetka;
+package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

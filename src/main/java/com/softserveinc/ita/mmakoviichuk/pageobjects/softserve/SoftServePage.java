@@ -1,6 +1,6 @@
-package com.softserveinc.ita.pageobjects.softserve;
+package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import com.softserveinc.ita.pageobjects.BasePage;
+import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

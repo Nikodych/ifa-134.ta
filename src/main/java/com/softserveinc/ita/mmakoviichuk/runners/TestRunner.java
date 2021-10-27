@@ -1,4 +1,4 @@
-package com.softserveinc.ita.utils.runners;
+package com.softserveinc.ita.mmakoviichuk.runners;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;

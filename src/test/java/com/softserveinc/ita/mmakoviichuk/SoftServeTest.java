@@ -1,7 +1,7 @@
 package com.softserveinc.ita.mmakoviichuk;
 
-import com.softserveinc.ita.pageobjects.softserve.SoftServePage;
-import com.softserveinc.ita.utils.runners.TestRunner;
+import com.softserveinc.ita.mmakoviichuk.pageobjects.softserve.SoftServePage;
+import com.softserveinc.ita.mmakoviichuk.runners.TestRunner;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

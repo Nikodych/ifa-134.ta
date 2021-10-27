@@ -1,6 +1,6 @@
-package com.softserveinc.ita.pageobjects.rozetka;
+package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import com.softserveinc.ita.pageobjects.BasePage;
+import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

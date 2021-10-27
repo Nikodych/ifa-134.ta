@@ -1,4 +1,4 @@
-package com.softserveinc.ita.models;
+package com.softserveinc.ita.mmakoviichuk.models;
 
 import lombok.Builder;
 import lombok.Data;

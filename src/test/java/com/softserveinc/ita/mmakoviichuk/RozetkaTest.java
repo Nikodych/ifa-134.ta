@@ -1,7 +1,7 @@
 package com.softserveinc.ita.mmakoviichuk;
 
-import com.softserveinc.ita.pageobjects.rozetka.*;
-import com.softserveinc.ita.utils.runners.TestRunner;
+import com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka.*;
+import com.softserveinc.ita.mmakoviichuk.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

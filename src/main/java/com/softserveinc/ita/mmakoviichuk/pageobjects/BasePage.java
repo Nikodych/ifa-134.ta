@@ -1,4 +1,4 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.mmakoviichuk.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
