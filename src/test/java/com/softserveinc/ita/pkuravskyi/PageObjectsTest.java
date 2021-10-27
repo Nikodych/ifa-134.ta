@@ -2,7 +2,7 @@ package com.softserveinc.ita.pkuravskyi;
 
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 public class PageObjectsTest extends TestRunner {
 
@@ -11,14 +11,18 @@ public class PageObjectsTest extends TestRunner {
     public void verifyWikipediaSearchTest() {
         googlePage.searchBarInputText("Wikipedia");
         Assert.assertEquals(googlePage.getSearchBarText(), "Wikipedia");
+
         googlePage
                 .searchButtonClick()
                 .openWikipedia();
 
         wikipediaPage.searchBarInputText("rozetka.ua");
         Assert.assertEquals(wikipediaPage.getSearchBarText(), "rozetka.ua");
+
         wikipediaPage
                 .searchButtonClick()
                 .openRozetka();
+        // Verify that we actually opened correct rozetka website
+        Assert.assertEquals(wikipediaPage.currentUrl(), "https://rozetka.com.ua/");
     }
 }

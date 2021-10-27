@@ -4,7 +4,9 @@ import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
 import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 

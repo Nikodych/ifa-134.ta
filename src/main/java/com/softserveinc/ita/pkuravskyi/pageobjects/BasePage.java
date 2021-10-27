@@ -3,7 +3,7 @@ package com.softserveinc.ita.pkuravskyi.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public abstract class BasePage<T extends BasePage> {
+public abstract class BasePage<T> {
 
     protected WebDriver driver;
     protected By searchBar;
@@ -30,6 +30,12 @@ public abstract class BasePage<T extends BasePage> {
     }
 
     public String getSearchBarText() {
-        return driver.findElement(searchBar).getAttribute("value");
+        return driver
+                .findElement(searchBar)
+                .getAttribute("value");
+    }
+
+    public String currentUrl() {
+        return driver.getCurrentUrl();
     }
 }
