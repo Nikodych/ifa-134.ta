@@ -3,36 +3,45 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 public class SearchGoods extends BasePage {
 
-    private List<WebElement> goods;
-    private WebElement actualItem;
+    private List<WebElement> goodsElementsList;
+    private WebElement actualItemElement;
 
     public SearchGoods(WebDriver driver) {
         super(driver);
     }
 
     public List<WebElement> getGoodsList() {
-        waitElementCondition();
-        goods = driverWait.until(ExpectedConditions.numberOfElementsToBeMoreThan(By.xpath("//*[@class='goods-tile__title']"), 30));
+        goodsElementsList = waitOnElementsList(By.xpath("//*[@class='goods-tile__title']"), 30);
 
-        return goods;
+        return goodsElementsList;
+    }
+
+    public String getRequiredProductName(String item) {
+        var list = getGoodsList()
+                .stream()
+                .map(WebElement::getText)
+                .filter(text -> text.contains(item))
+                .collect(toList());
+
+        return list.stream().findFirst().toString();
     }
 
     public WebElement getActualItem(String text) {
-        waitElementCondition();
-        actualItem = driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText(text)));
+        actualItemElement = waitForElementVisibility(By.partialLinkText(text));
 
-        return actualItem;
+        return actualItemElement;
     }
 
-    public void fillSearch(String text) {
-        searchClick();
-        searchClear();
-        searchSendKeys(text);
+    public void fillSearchField(String text) {
+        clickSearchField();
+        clearSearchField();
+        sendKeysToSearchField(text);
     }
 }

@@ -2,36 +2,35 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static org.openqa.selenium.By.cssSelector;
+import static org.openqa.selenium.By.xpath;
+
 
 public class ShoppingCartModal extends ShoppingCartPage {
 
-    private By cartContinueButton = By.cssSelector("div.cart-footer.ng-star-inserted > a");
-    private By cartCloseButton = By.xpath("//button[@class='modal__close ng-star-inserted']");
-    private By cartSideMenu = By.xpath("//button[@class='button button--white button--small context-menu__toggle']");
-    private By deleteFromCart = By.xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']");
+    private final By cartContinueButtonSelector = cssSelector("div.cart-footer.ng-star-inserted > a");
+    private final By cartCloseButtonSelector = xpath("//button[@class='modal__close ng-star-inserted']");
+    private final By cartSideMenuButtonSelector = xpath("//button[@class='button button--white button--small context-menu__toggle']");
+    private final By deleteFromCartButtonSelector = xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']");
 
     public ShoppingCartModal(WebDriver driver) {
         super(driver);
     }
 
     public void clickCartContinueButton() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(cartContinueButton)).click();
+        waitForClickabelElement(cartContinueButtonSelector).click();
     }
 
     public void clickShoppingCartCloseButton() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(cartCloseButton)).click();}
+        waitForElementVisibility(cartCloseButtonSelector).click();}
 
     public void clickCartSideMenu() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(cartSideMenu)).click();
+        waitForClickabelElement(cartSideMenuButtonSelector).click();
     }
 
     public void clickDeleteFromShoppingCart() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(deleteFromCart)).click();
+        waitForElementVisibility(deleteFromCartButtonSelector).click();
     }
 
     public void deleteFromShoppingCart() {

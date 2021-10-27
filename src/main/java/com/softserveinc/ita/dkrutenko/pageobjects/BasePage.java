@@ -2,66 +2,77 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
+import java.util.List;
+
+import static org.openqa.selenium.By.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 public abstract class BasePage  {
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;
 
-    private By search = By.name("search");
-    private By searchButton = By.xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
-    private By logo = By.cssSelector("div > a > picture");
-    private By languageButton = By.xpath("//a[@class='lang__link ng-star-inserted']");
-    private By marketName = By.xpath("//p[@class='main-copyright_color_gray']");
-    private By userButton = By.xpath("//rz-user[@class='header-actions__component']");
+    private final By searchFieldSelector = name("search");
+    private final By searchButtonSelector = xpath("//button[@class='button button_color_green button_size_medium search-form__submit ng-star-inserted']");
+    private final By logoIconSelector = cssSelector("div > a > picture");
+    private final By languageButtonSelector = xpath("//a[@class='lang__link ng-star-inserted']");
+    private final By marketNameLabelSelector = xpath("//p[@class='main-copyright_color_gray']");
+    private final By userButtonSelector = xpath("//rz-user[@class='header-actions__component']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
+        driverWait = new WebDriverWait(driver, 100);
 }
 
-    public void searchClick() {
-        driver.findElement(search).click();
+    public void clickSearchField() {
+        driver.findElement(searchFieldSelector).click();
     }
 
-    public void searchClear() {
-        driver.findElement(search).clear();
+    public void clearSearchField() {
+        driver.findElement(searchFieldSelector).clear();
     }
 
-    public void searchSendKeys(String text) {
-        driver.findElement(search).sendKeys(text);
+    public void sendKeysToSearchField(String text) {
+        driver.findElement(searchFieldSelector).sendKeys(text);
     }
 
     public void clickSearchButton() {
-        driver.findElement(searchButton).click();
+        driver.findElement(searchButtonSelector).click();
     }
 
-    public void clickLogo() {
-        driver.findElement(logo).click();
+    public void clickLogoIcon() {
+        driver.findElement(logoIconSelector).click();
     }
 
     public void clickLanguageButton() {
-        driver.findElement(languageButton).click();
+        driver.findElement(languageButtonSelector).click();
     }
 
     public String getMarketNameTitle() {
-        waitElementCondition();
-        String rozetka = driverWait.until(ExpectedConditions.visibilityOfElementLocated(marketName)).getText();
 
-        return rozetka;
+        return waitForElementVisibility(marketNameLabelSelector).getText();
     }
 
     public void clickUserButton() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(userButton)).click();
+        waitForClickabelElement(userButtonSelector).click();
     }
 
-    public WebDriverWait waitElementCondition() {
-        driverWait = new WebDriverWait(driver,500);
+    public WebElement waitForClickabelElement(By locator) {
 
-        return driverWait;
+        return driverWait.until(elementToBeClickable(locator));
     }
+
+    public WebElement waitForElementVisibility(By locator) {
+
+        return driverWait.until(visibilityOfElementLocated(locator));
+    }
+
+    public List<WebElement> waitOnElementsList(By locator, int amount) {
+
+        return  driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
+    }
+
 }

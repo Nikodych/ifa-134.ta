@@ -23,11 +23,11 @@ protected WebDriver driver;
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
             "src/main/java/com/softserveinc/ita/dkrutenko/pageobjects/resources/chromedriver.exe");
-        //uncomment this for login test and comment  "driver = new ChromeDriver();"
-        ChromeOptions profile = new ChromeOptions();
-        profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
-        driver = new ChromeDriver(profile);
-       // driver = new ChromeDriver();
+        //uncomment line 27,28 and 29 for login test to avoid captcha
+        //ChromeOptions profile = new ChromeOptions();
+        //profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
+        //driver = new ChromeDriver(profile);
+        driver = new ChromeDriver();
         driver
                 .manage()
                 .timeouts()
@@ -53,7 +53,7 @@ protected WebDriver driver;
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        //driver.manage().deleteAllCookies(); //comment this for login test
+        driver.manage().deleteAllCookies(); //comment this for login test too
         driver.quit();
     }
 }

@@ -2,54 +2,49 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import static org.openqa.selenium.By.id;
+import static org.openqa.selenium.By.xpath;
 
 public class LoginPageModal extends BasePage {
 
-    private By emailInput = By.id("auth_email");
-    private By passwordInput = By.id("auth_pass");
-    private By loginButton = By.xpath("//button[@class='button button--large button--green auth-modal__submit ng-star-inserted']");
-    private By sideUserMenu = By.xpath("//button[@class='header__button']");
-    private By userEmail = By.xpath("//p[@class='side-menu__auth-caption']");
-    private By exitButton = By.xpath("//button[@class='button button--large side-menu__button']");
+    private final By emailInput = id("auth_email");
+    private final By passwordInput = id("auth_pass");
+    private final By loginButtonSelector = xpath("//button[@class='button button--large button--green auth-modal__submit ng-star-inserted']");
+    private final By sideUserMenuButtonSelector = xpath("//button[@class='header__button']");
+    private final By userEmailTitleSelector = xpath("//p[@class='side-menu__auth-caption']");
+    private final By exitButtonSelector = xpath("//button[@class='button button--large side-menu__button']");
 
     public LoginPageModal(WebDriver driver) {
         super(driver);
     }
 
     public void clickLoginButton() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.visibilityOfElementLocated(loginButton)).click();
+        waitForElementVisibility(loginButtonSelector).click();
     }
 
     public void clickSideUserMenu() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(sideUserMenu)).click();
+        waitForClickabelElement(sideUserMenuButtonSelector).click();
     }
 
     public String getUserEmailTitle() {
-        waitElementCondition();
-        String emailTitle = driverWait.until(ExpectedConditions.visibilityOfElementLocated(userEmail)).getText();
 
-        return emailTitle;
+        return waitForElementVisibility(userEmailTitleSelector).getText();
     }
 
     public void clickExitButton() {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(exitButton)).click();
+        waitForClickabelElement(exitButtonSelector).click();
     }
 
     public void fillEmailField(String text) {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(emailInput)).click();
-        driverWait.until(ExpectedConditions.elementToBeClickable(emailInput)).clear();
-        driverWait.until(ExpectedConditions.elementToBeClickable(emailInput)).sendKeys(text);
+        waitForClickabelElement(emailInput).click();
+        waitForClickabelElement(emailInput).clear();
+        waitForClickabelElement(emailInput).sendKeys(text);
     }
 
     public void fillPasswordField(String text) {
-        waitElementCondition();
-        driverWait.until(ExpectedConditions.elementToBeClickable(passwordInput)).click();
-        driverWait.until(ExpectedConditions.elementToBeClickable(passwordInput)).clear();
-        driverWait.until(ExpectedConditions.elementToBeClickable(passwordInput)).sendKeys(text);
+        waitForClickabelElement(passwordInput).click();
+        waitForClickabelElement(passwordInput).clear();
+        waitForClickabelElement(passwordInput).sendKeys(text);
     }
 }
