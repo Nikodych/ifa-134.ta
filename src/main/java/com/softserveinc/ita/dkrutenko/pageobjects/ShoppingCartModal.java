@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
 
-
 public class ShoppingCartModal extends ShoppingCartPage {
 
     private final By cartContinueButtonSelector = cssSelector("div.cart-footer.ng-star-inserted > a");
@@ -23,8 +22,7 @@ public class ShoppingCartModal extends ShoppingCartPage {
     }
 
     public void clickShoppingCartCloseButton() {
-        waitForElementVisibility(cartCloseButtonSelector).click();
-    }
+        waitForElementVisibility(cartCloseButtonSelector).click();}
 
     public void clickCartSideMenu() {
         waitForClickabelElement(cartSideMenuButtonSelector).click();

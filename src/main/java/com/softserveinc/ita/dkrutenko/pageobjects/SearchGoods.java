@@ -12,7 +12,7 @@ import static org.openqa.selenium.By.xpath;
 
 public class SearchGoods extends BasePage {
 
-    private List<WebElement> goodsElementsList;
+    private final By goodsElementsList = xpath("//*[@class='goods-tile__title']");
     private WebElement actualItemElement;
 
     public SearchGoods(WebDriver driver) {
@@ -20,9 +20,8 @@ public class SearchGoods extends BasePage {
     }
 
     public List<WebElement> getGoodsList() {
-        goodsElementsList = waitOnElementsList(xpath("//*[@class='goods-tile__title']"), 30);
 
-        return goodsElementsList;
+        return waitOnElementsList((goodsElementsList), 30);
     }
 
     public String getRequiredProductName(String item) {
@@ -36,9 +35,8 @@ public class SearchGoods extends BasePage {
     }
 
     public WebElement getActualItem(String text) {
-        actualItemElement = waitForElementVisibility(partialLinkText(text));
 
-        return actualItemElement;
+        return actualItemElement = waitForElementVisibility(partialLinkText(text));
     }
 
     public void fillSearchField(String text) {
