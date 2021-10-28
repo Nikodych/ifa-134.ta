@@ -18,7 +18,8 @@ public abstract class TestRunner {
     @BeforeSuite
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--user-data-dir=C:\\Users\\Ferrl\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2");
+        options.addArguments("--user-data-dir=C:\\Users\\Ferrl\\AppData\\Local\\Google\\Chrome\\User Data");
+        options.addArguments("--profile-directory=Profile 2");
         System.setProperty("webdriver.chrome.driver", "src\\main\\java\\com\\softserveinc\\ita\\mmakoviichuk\\resources\\chromedriver.exe");
         driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
