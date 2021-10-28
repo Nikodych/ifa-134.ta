@@ -74,5 +74,4 @@ public abstract class BasePage  {
 
         return  driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
     }
-
 }

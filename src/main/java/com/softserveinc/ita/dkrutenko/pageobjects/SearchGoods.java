@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.openqa.selenium.By.partialLinkText;
+import static org.openqa.selenium.By.xpath;
 
 public class SearchGoods extends BasePage {
 
@@ -18,7 +20,7 @@ public class SearchGoods extends BasePage {
     }
 
     public List<WebElement> getGoodsList() {
-        goodsElementsList = waitOnElementsList(By.xpath("//*[@class='goods-tile__title']"), 30);
+        goodsElementsList = waitOnElementsList(xpath("//*[@class='goods-tile__title']"), 30);
 
         return goodsElementsList;
     }
@@ -34,7 +36,7 @@ public class SearchGoods extends BasePage {
     }
 
     public WebElement getActualItem(String text) {
-        actualItemElement = waitForElementVisibility(By.partialLinkText(text));
+        actualItemElement = waitForElementVisibility(partialLinkText(text));
 
         return actualItemElement;
     }
