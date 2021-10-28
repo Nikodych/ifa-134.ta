@@ -3,43 +3,62 @@ package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 import static org.openqa.selenium.By.xpath;
 
 public class RozetkaBasePage extends BasePage {
 
-    private By dropdownCategory = xpath("(//a[contains (@class, 'menu-categories__link js-menu-categories__link')])[2]");
-    private By catalog = xpath("//button[@id='fat-menu']");
-    private By login = xpath("//li[contains(@class , 'user')]");
+    private By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
+    private By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
+    private By loginButtonSelector = xpath("//li[contains(@class , 'user')]");
     private By email = xpath("//input[@id = 'auth_email']");
-    private By password = xpath("//input[@id = 'auth_pass']");
-    private By enter = xpath("//button[contains(@class , 'auth-modal__submit')]");
-    private By wishlist = xpath("//li[contains(@class, 'wishlist')]");
+    private By passwordInputSelector = xpath("//input[@id = 'auth_pass']");
+    private By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
+    private By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
+
+    private List<WebElement> categoryList;
 
     public RozetkaBasePage(WebDriver driver) {
         super(driver);
+        categoryList = driver.findElements(dropdownCategorySelector);
     }
 
-    public String getDropdownCategory() {
-        driver.findElement(catalog).click();
-        var dropCat = driver.findElement(dropdownCategory).getText();
-        driver.findElement(catalog).click();
+    public String getDropdownCategoryUrl(int index) {
+        driver
+                .findElement(catalogButtonSelector)
+                .click();
+        var dropCatUrl = categoryList
+                .get(index)
+                .getAttribute("href");
+        driver
+                .findElement(catalogButtonSelector)
+                .click();
 
-        return dropCat;
+        return dropCatUrl;
     }
 
-    public void dropdownCategoryClick() {
-        driver.findElement(catalog).click();
-        driver.findElement(dropdownCategory).click();
+    public void dropdownCategoryClick(int index) {
+        driver
+                .findElement(catalogButtonSelector)
+                .click();
+        categoryList
+                .get(index)
+                .click();
     }
 
     public void logIn(String email, String password) {
-        driver.findElement(login).click();
+        driver
+                .findElement(loginButtonSelector)
+                .click();
         waitForVisibility(this.email).sendKeys(email);
-        waitForVisibility(this.password).sendKeys(password);
-        waitForVisibility(enter).click();
+        waitForVisibility(this.passwordInputSelector).sendKeys(password);
+        waitForVisibility(enterButtonSelector).click();
     }
+
     public void wishlistClick() {
-        driver.findElement(wishlist).click();
+        driver.findElement(wishListIconSelector ).click();
     }
 }

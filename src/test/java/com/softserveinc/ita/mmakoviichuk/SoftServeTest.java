@@ -1,7 +1,8 @@
 package com.softserveinc.ita.mmakoviichuk;
 
 import com.softserveinc.ita.mmakoviichuk.pageobjects.softserve.SoftServePage;
-import com.softserveinc.ita.mmakoviichuk.runners.TestRunner;
+import com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner;
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,7 +14,7 @@ public class SoftServeTest extends TestRunner {
     }
 
     @Test
-    public void sidebarSingleClick() {
-        new SoftServePage(getDriver()).sidebarClick(2);
+    public void sidebarSingleClickTest() {
+        Assert.assertTrue(new SoftServePage(getDriver()).sidebarClick(2));
     }
 }

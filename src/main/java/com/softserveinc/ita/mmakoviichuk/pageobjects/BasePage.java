@@ -3,10 +3,11 @@ package com.softserveinc.ita.mmakoviichuk.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-abstract public class BasePage {
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
+public abstract class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -17,9 +18,16 @@ abstract public class BasePage {
     }
 
     public WebElement waitForVisibility(By locator) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return wait.until(visibilityOfElementLocated(locator));
     }
+
     public void waitForAttributeChanges(WebElement webElement, String attribute, String value) {
-        wait.until(ExpectedConditions.attributeContains(webElement, attribute, value));
+        wait.until(attributeContains(webElement, attribute, value));
+    }
+
+    public String waitForUrlChanges(String url) {
+        wait.until(urlToBe(url));
+
+        return url;
     }
 }

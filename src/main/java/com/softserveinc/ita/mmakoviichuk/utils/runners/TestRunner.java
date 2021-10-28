@@ -1,4 +1,4 @@
-package com.softserveinc.ita.mmakoviichuk.runners;
+package com.softserveinc.ita.mmakoviichuk.utils.runners;
 
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
-abstract public class TestRunner {
+public abstract class TestRunner {
 
     @Getter
     private WebDriver driver;
@@ -18,17 +18,17 @@ abstract public class TestRunner {
     @BeforeSuite
     public void setUp() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--user-data-dir=C:\\Users\\Ferrl\\AppData\\Local\\Google\\Chrome\\User Data");
-        System.setProperty("webdriver.chrome.driver", "src\\main\\java\\com\\softserveinc\\ita\\drivers\\chromedriver.exe");
+        options.addArguments("--user-data-dir=C:\\Users\\Ferrl\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 2");
+        System.setProperty("webdriver.chrome.driver", "src\\main\\java\\com\\softserveinc\\ita\\mmakoviichuk\\resources\\chromedriver.exe");
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
     @BeforeMethod
     public void open() {
         driver.get("https://rozetka.com.ua/");
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
     }
 
     @AfterClass
@@ -37,5 +37,4 @@ abstract public class TestRunner {
         //driver.manage().deleteAllCookies();
         driver.quit();
     }
-
 }

@@ -6,23 +6,26 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static org.openqa.selenium.By.xpath;
+
 public class WishlistPage extends RozetkaBasePage {
 
-    private List<WebElement> goods;
+    private By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
+    private List<WebElement> goodsElementsList;
 
     public WishlistPage(WebDriver driver) {
         super(driver);
-        goods = driver.findElements(By.xpath("//ul[contains(@class , 'wish-grid')]"));
+        goodsElementsList = driver.findElements(goodsSelector);
     }
 
-    public boolean containsId(String id) {
-        boolean check = false;
-        for (WebElement product : goods) {
-            if (id.equals(product.findElement(By.xpath("//div[@class = 'goods-tile__inner']")).getAttribute("data-goods-id"))) {
-                check = true;
+    public boolean isContainsProductId(String id) {
+        boolean isContains = false;
+        for (WebElement product : goodsElementsList) {
+            if (id.equals(product.getAttribute("data-goods-id"))) {
+                isContains = true;
                 break;
             }
         }
-        return check;
+        return isContains;
     }
 }
