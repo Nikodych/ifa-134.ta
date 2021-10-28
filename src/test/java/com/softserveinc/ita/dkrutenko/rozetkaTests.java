@@ -66,7 +66,8 @@ public class rozetkaTests extends TestRunner {
     public void verifySwitchLanguageTest(String expectedRuText, String expectedUkrText) {
         //switch language in top right corner and check if language was actually changed
         loginPageModal.clickLanguageButton();
-        var marketNameTitle = (loginPageModal.getMarketNameTitle().contains(expectedRuText)||loginPageModal.getMarketNameTitle().contains(expectedUkrText));
+        var marketNameTitle = (loginPageModal.getMarketNameTitle().contains(expectedRuText)
+                || loginPageModal.getMarketNameTitle().contains(expectedUkrText));
         Assert.assertTrue(marketNameTitle);
     }
 
