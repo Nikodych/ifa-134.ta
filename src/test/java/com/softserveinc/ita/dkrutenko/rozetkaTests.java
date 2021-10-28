@@ -4,6 +4,7 @@ import com.softserveinc.ita.dkrutenko.pageobjects.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.Assertion;
 
 public class rozetkaTests extends TestRunner {
 
@@ -39,7 +40,7 @@ public class rozetkaTests extends TestRunner {
         //fill search with some brand name, click search button and click on required product
         searchGoods.fillSearchField(brandNameItem);
         searchGoods.clickSearchButton();
-        searchGoods.getActualItem(requiredItem).click();
+        searchGoods.getActualItem(requiredItem);
         //add to cart, click continue and go on main page
         shoppingCartPage.clickAddToCartButton();
         shoppingCartModal.clickCartContinueButton();
@@ -57,18 +58,16 @@ public class rozetkaTests extends TestRunner {
     @DataProvider
     public Object[][] rozetkaLangVerification() {
         return new Object[][]{
-                {" ТМ используется на основании лицензии правообладателя RozetkaLTD. ",
-                " ТМ використовується на підставі ліцензії правовласника RozetkaLTD. "}};
+                {"ТМ используется на основании лицензии правообладателя RozetkaLTD",
+                 "ТМ використовується на підставі ліцензії правовласника RozetkaLTD"}};
     }
 
     @Test(dataProvider = "rozetkaLangVerification")
     public void verifySwitchLanguageTest(String expectedRuText, String expectedUkrText) {
         //switch language in top right corner and check if language was actually changed
         loginPageModal.clickLanguageButton();
-        var marketNameTitle = loginPageModal.getMarketNameTitle();
-        if (marketNameTitle.contains(expectedRuText) || marketNameTitle.contains(expectedUkrText)) {
-            Assert.assertTrue(true);
-        }
+        var marketNameTitle = (loginPageModal.getMarketNameTitle().contains(expectedRuText)||loginPageModal.getMarketNameTitle().contains(expectedUkrText));
+        Assert.assertTrue(marketNameTitle);
     }
 
     @DataProvider

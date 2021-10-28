@@ -27,7 +27,7 @@ protected WebDriver driver;
         ChromeOptions profile = new ChromeOptions();
         profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
         driver = new ChromeDriver(profile);
-        //driver = new ChromeDriver();      //uncomment this and line #56 for test without cookies
+        //driver = new ChromeDriver();      //uncomment this for test without cookies
         driver
                 .manage()
                 .timeouts()
@@ -53,7 +53,6 @@ protected WebDriver driver;
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
-        //driver.manage().deleteAllCookies();
         driver.quit();
     }
 }

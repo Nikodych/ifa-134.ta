@@ -8,8 +8,8 @@ import static org.openqa.selenium.By.xpath;
 
 public class LoginPageModal extends BasePage {
 
-    private final By emailInput = id("auth_email");
-    private final By passwordInput = id("auth_pass");
+    private final By emailInputSelector = id("auth_email");
+    private final By passwordInputSelector = id("auth_pass");
     private final By loginButtonSelector = xpath("//button[@class='button button--large button--green auth-modal__submit ng-star-inserted']");
     private final By sideUserMenuButtonSelector = xpath("//button[@class='header__button']");
     private final By userEmailTitleSelector = xpath("//p[@class='side-menu__auth-caption']");
@@ -37,14 +37,14 @@ public class LoginPageModal extends BasePage {
     }
 
     public void fillEmailField(String text) {
-        waitForClickabelElement(emailInput).click();
-        waitForClickabelElement(emailInput).clear();
-        waitForClickabelElement(emailInput).sendKeys(text);
+        waitForClickabelElement(emailInputSelector).click();
+        waitForClickabelElement(emailInputSelector).clear();
+        waitForClickabelElement(emailInputSelector).sendKeys(text);
     }
 
     public void fillPasswordField(String text) {
-        waitForClickabelElement(passwordInput).click();
-        waitForClickabelElement(passwordInput).clear();
-        waitForClickabelElement(passwordInput).sendKeys(text);
+        waitForClickabelElement(passwordInputSelector).click();
+        waitForClickabelElement(passwordInputSelector).clear();
+        waitForClickabelElement(passwordInputSelector).sendKeys(text);
     }
 }
