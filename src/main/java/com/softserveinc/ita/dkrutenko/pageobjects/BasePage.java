@@ -27,18 +27,6 @@ public abstract class BasePage  {
         driverWait = new WebDriverWait(driver, 100);
 }
 
-    public void clickSearchField() {
-        driver.findElement(searchFieldSelector).click();
-    }
-
-    public void clearSearchField() {
-        driver.findElement(searchFieldSelector).clear();
-    }
-
-    public void sendKeysToSearchField(String text) {
-        driver.findElement(searchFieldSelector).sendKeys(text);
-    }
-
     public void clickSearchButton() {
         driver.findElement(searchButtonSelector).click();
     }
@@ -52,7 +40,6 @@ public abstract class BasePage  {
     }
 
     public String getMarketNameTitle() {
-
         return waitForElementVisibility(marketNameLabelSelector).getText();
     }
 
@@ -61,17 +48,20 @@ public abstract class BasePage  {
     }
 
     public WebElement waitForClickabelElement(By locator) {
-
         return driverWait.until(elementToBeClickable(locator));
     }
 
     public WebElement waitForElementVisibility(By locator) {
-
         return driverWait.until(visibilityOfElementLocated(locator));
     }
 
     public List<WebElement> waitOnElementsList(By locator, int amount) {
-
         return  driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
+    }
+
+    public void fillSearchField(String text) {
+        driver.findElement(searchFieldSelector).click();
+        driver.findElement(searchFieldSelector).clear();
+        driver.findElement(searchFieldSelector).sendKeys(text);
     }
 }

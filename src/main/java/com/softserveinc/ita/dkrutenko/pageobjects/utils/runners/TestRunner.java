@@ -23,11 +23,11 @@ protected WebDriver driver;
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
             "src/main/java/com/softserveinc/ita/dkrutenko/pageobjects/resources/chromedriver.exe");
-        //comment lines 27,28,29 if you wont use your current profile with cookies
-        ChromeOptions profile = new ChromeOptions();
-        profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
-        driver = new ChromeDriver(profile);
-        //driver = new ChromeDriver();      //uncomment this for test without cookies
+        //comment lines 27,28,29 if you won't use your current profile with cookies
+        //ChromeOptions profile = new ChromeOptions();
+        //profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
+        //driver = new ChromeDriver(profile);
+        driver = new ChromeDriver();      //uncomment this for test without cookies
         driver
                 .manage()
                 .timeouts()

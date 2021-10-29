@@ -24,7 +24,6 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public String getProductTitle() {
-
         return waitForElementVisibility(cartProductTitleLabelSelector).getText();
     }
 }

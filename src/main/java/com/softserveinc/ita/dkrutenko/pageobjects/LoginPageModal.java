@@ -28,7 +28,6 @@ public class LoginPageModal extends BasePage {
     }
 
     public String getUserEmailTitle() {
-
         return waitForElementVisibility(userEmailTitleSelector).getText();
     }
 

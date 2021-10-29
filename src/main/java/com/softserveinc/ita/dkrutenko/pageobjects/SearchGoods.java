@@ -13,14 +13,12 @@ import static org.openqa.selenium.By.xpath;
 public class SearchGoods extends BasePage {
 
     private final By goodsElementsListSelector = xpath("//*[@class='goods-tile__title']");
-    private WebElement actualItemElement;
 
     public SearchGoods(WebDriver driver) {
         super(driver);
     }
 
     public List<WebElement> getGoodsList() {
-
         return waitOnElementsList((goodsElementsListSelector), 30);
     }
 
@@ -35,12 +33,6 @@ public class SearchGoods extends BasePage {
     }
 
     public void getActualItem(String text) {
-        waitForElementVisibility(partialLinkText(text)).click();
-    }
-
-    public void fillSearchField(String text) {
-        clickSearchField();
-        clearSearchField();
-        sendKeysToSearchField(text);
+       waitForElementVisibility(partialLinkText(text)).click();
     }
 }
