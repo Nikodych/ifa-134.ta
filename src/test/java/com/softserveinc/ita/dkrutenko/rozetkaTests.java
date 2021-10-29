@@ -13,7 +13,6 @@ public class rozetkaTests extends TestRunner {
         return new Object[][]{
                 {"samsung", "Samsung Galaxy S20 FE"},
                 {"iphone", "iPhone 12 Pro Max"},
-                {"xiaomi", "Xiaomi Redmi Note 10"},
                 {"nokia", "Nokia G10"}};
     }
 
@@ -32,7 +31,7 @@ public class rozetkaTests extends TestRunner {
         return new Object[][]{
                 {"samsung", "Samsung Galaxy S20 FE"},
                 {"iphone", "iPhone 12 Pro Max"},
-                {"samsung", "Samsung Galaxy A72"}};
+                {"xiaomi", "Xiaomi Redmi Note 10"}};
     }
 
     @Test(dataProvider = "rozetkaProductItems")
