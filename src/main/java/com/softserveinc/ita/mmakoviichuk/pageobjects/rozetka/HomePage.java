@@ -10,12 +10,11 @@ import static org.openqa.selenium.By.xpath;
 
 public class HomePage extends RozetkaBasePage {
 
-    private By category = xpath("//ul[@class = 'menu-categories menu-categories_type_main']/li/a");
-
-    List<WebElement> categoryList;
+    private final List<WebElement> categoryList;
 
     public HomePage(WebDriver driver) {
         super(driver);
+        By category = xpath("//ul[@class = 'menu-categories menu-categories_type_main']/li/a");
         categoryList = driver.findElements(category);
     }
 

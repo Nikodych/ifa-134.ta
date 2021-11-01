@@ -15,6 +15,8 @@ public class SoftServeTest extends TestRunner {
 
     @Test
     public void sidebarSingleClickTest() {
-        Assert.assertTrue(new SoftServePage(getDriver()).sidebarClick(2));
+        SoftServePage softServePage = new SoftServePage(getDriver());
+        softServePage.sidebarClick(2);
+        Assert.assertTrue(softServePage.isSidebarActive(2));
     }
 }

@@ -7,8 +7,8 @@ import static org.openqa.selenium.By.xpath;
 
 public class ProductPage extends RozetkaBasePage {
 
-    private By wishlistButton = xpath("//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]");
-    private By productIdLabel = xpath("//p[@class = 'product__code detail-code']");
+    private final By wishlistButton = xpath("//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]");
+    private final By productIdLabel = xpath("//p[@class = 'product__code detail-code']");
 
     public ProductPage(WebDriver driver) {
         super(driver);
@@ -19,7 +19,6 @@ public class ProductPage extends RozetkaBasePage {
     }
 
     public String getProductId() {
-
         return driver
                 .findElement(productIdLabel)
                 .getText()

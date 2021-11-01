@@ -11,18 +11,18 @@ import static org.openqa.selenium.By.xpath;
 
 public class RozetkaBasePage extends BasePage {
 
-    private By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
-    private By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
-    private By loginButtonSelector = xpath("//li[contains(@class , 'user')]");
-    private By email = xpath("//input[@id = 'auth_email']");
-    private By passwordInputSelector = xpath("//input[@id = 'auth_pass']");
-    private By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
-    private By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
+    private final By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
+    private final By loginButtonSelector = xpath("//li[contains(@class , 'user')]");
+    private final By email = xpath("//input[@id = 'auth_email']");
+    private final By passwordInputSelector = xpath("//input[@id = 'auth_pass']");
+    private final By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
+    private final By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
 
-    private List<WebElement> categoryList;
+    private final List<WebElement> categoryList;
 
     public RozetkaBasePage(WebDriver driver) {
         super(driver);
+        By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
         categoryList = driver.findElements(dropdownCategorySelector);
     }
 
@@ -58,7 +58,7 @@ public class RozetkaBasePage extends BasePage {
         waitForVisibility(enterButtonSelector).click();
     }
 
-    public void wishlistClick() {
+    public void openWishList() {
         driver.findElement(wishListIconSelector ).click();
     }
 }

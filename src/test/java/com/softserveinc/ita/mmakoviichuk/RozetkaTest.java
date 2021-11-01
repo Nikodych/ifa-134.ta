@@ -38,7 +38,7 @@ public class RozetkaTest extends TestRunner {
         ProductPage productPage = new ProductPage(getDriver());
         productPage.addToWishlist();
         String id = productPage.getProductId();
-        rozetkaBasePage.wishlistClick();
+        rozetkaBasePage.openWishList();
         boolean isProductInWishlist = new WishlistPage(getDriver()).isContainsProductId(id);
         Assert.assertTrue(isProductInWishlist);
     }
