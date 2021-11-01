@@ -59,13 +59,11 @@ public abstract class BasePage  {
         return  driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
     }
 
-    public WebElement setSearch() {
-        return driver.findElement(searchFieldSelector);
-    }
-
     public void fillSearchField(String text) {
-        setSearch().click();
-        setSearch().clear();
-        setSearch().sendKeys(text);
+        var search = driver.findElement(searchFieldSelector);
+        
+        search.click();
+        search.clear();
+        search.sendKeys();
     }
 }

@@ -2,7 +2,6 @@ package com.softserveinc.ita.dkrutenko.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.By.xpath;
@@ -36,23 +35,19 @@ public class LoginPageModal extends BasePage {
         waitForClickabelElement(exitButtonSelector).click();
     }
 
-    public WebElement waitForEmailInputElement() {
-        return waitForClickabelElement(emailInputSelector);
-    }
-
     public void fillEmailField(String text) {
-        waitForEmailInputElement().click();
-        waitForEmailInputElement().clear();
-        waitForEmailInputElement().sendKeys(text);
+        var waitForEmail = waitForClickabelElement(emailInputSelector);
+
+        waitForEmail.click();
+        waitForEmail.clear();
+        waitForEmail.sendKeys(text);
     }
 
-    public WebElement waitForPasswordInputElement() {
-        return waitForClickabelElement(passwordInputSelector);
-    }
+   public void fillPasswordField(String text) {
+        var waitForPassword = waitForClickabelElement(passwordInputSelector);
 
-    public void fillPasswordField(String text) {
-        waitForPasswordInputElement().click();
-        waitForPasswordInputElement().clear();
-        waitForPasswordInputElement().sendKeys(text);
+        waitForPassword.click();
+        waitForPassword.clear();
+        waitForPassword.sendKeys(text);
     }
 }
