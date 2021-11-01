@@ -1,10 +1,9 @@
 package com.softserveinc.ita.dkrutenko;
 
-import com.softserveinc.ita.dkrutenko.pageobjects.utils.runners.TestRunner;
+import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import org.testng.asserts.Assertion;
 
 public class rozetkaTests extends TestRunner {
 

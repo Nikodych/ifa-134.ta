@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.utils.runners;
+package com.softserveinc.ita.dkrutenko.utils.runners;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.LoginPageModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.SearchGoods;
@@ -22,7 +22,7 @@ protected WebDriver driver;
     @BeforeSuite
     public void setUp() {
         System.setProperty("webdriver.chrome.driver",
-            "src/main/java/com/softserveinc/ita/dkrutenko/pageobjects/resources/chromedriver.exe");
+            "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe");
         //comment lines 27,28,29 if you won't use your current profile with cookies
         ChromeOptions profile = new ChromeOptions();
         profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");

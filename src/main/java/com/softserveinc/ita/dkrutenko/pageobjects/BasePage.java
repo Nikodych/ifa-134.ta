@@ -64,6 +64,6 @@ public abstract class BasePage  {
         
         search.click();
         search.clear();
-        search.sendKeys();
+        search.sendKeys(text);
     }
 }
