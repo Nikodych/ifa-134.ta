@@ -11,9 +11,10 @@ import static org.openqa.selenium.By.xpath;
 
 public class RozetkaBasePage extends BasePage {
 
+    private final By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
     private final By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
     private final By loginButtonSelector = xpath("//li[contains(@class , 'user')]");
-    private final By email = xpath("//input[@id = 'auth_email']");
+    private final By emailInputSelector = xpath("//input[@id = 'auth_email']");
     private final By passwordInputSelector = xpath("//input[@id = 'auth_pass']");
     private final By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
     private final By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
@@ -22,7 +23,6 @@ public class RozetkaBasePage extends BasePage {
 
     public RozetkaBasePage(WebDriver driver) {
         super(driver);
-        By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
         categoryList = driver.findElements(dropdownCategorySelector);
     }
 
@@ -53,7 +53,7 @@ public class RozetkaBasePage extends BasePage {
         driver
                 .findElement(loginButtonSelector)
                 .click();
-        waitForVisibility(this.email).sendKeys(email);
+        waitForVisibility(this.emailInputSelector).sendKeys(email);
         waitForVisibility(this.passwordInputSelector).sendKeys(password);
         waitForVisibility(enterButtonSelector).click();
     }

@@ -10,11 +10,11 @@ import static org.openqa.selenium.By.xpath;
 
 public class WishlistPage extends RozetkaBasePage {
 
+    private final By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
     private final List<WebElement> goodsElementsList;
 
     public WishlistPage(WebDriver driver) {
         super(driver);
-        By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
         goodsElementsList = driver.findElements(goodsSelector);
     }
 
