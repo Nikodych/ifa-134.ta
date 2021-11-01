@@ -39,7 +39,7 @@ public class rozetkaTests extends TestRunner {
         //fill search with some brand name, click search button and click on required product
         searchGoods.fillSearchField(brandNameItem);
         searchGoods.clickSearchButton();
-        searchGoods.getActualItem(requiredItem);
+        searchGoods.findActualtem(requiredItem);
         //add to cart, click continue and go on main page
         shoppingCartPage.clickAddToCartButton();
         shoppingCartModal.clickCartContinueButton();

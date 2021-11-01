@@ -32,7 +32,7 @@ public class SearchGoods extends BasePage {
         return list.stream().findFirst().toString();
     }
 
-    public void getActualItem(String text) {
+    public void findActualtem(String text) {
        waitForElementVisibility(partialLinkText(text)).click();
     }
 }
