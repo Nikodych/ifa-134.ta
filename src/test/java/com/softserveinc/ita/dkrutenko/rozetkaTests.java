@@ -87,7 +87,7 @@ public class rozetkaTests extends TestRunner {
         //click on sidebar menu, check if we are logged in by verifying email and click logout
         loginPageModal.clickSideUserMenu();
         var userTitle = loginPageModal.getUserEmailTitle();
-        Assert.assertTrue(userTitle.contains(email));
+        Assert.assertEquals(userTitle.trim(), email);
 
         loginPageModal.clickExitButton();
     }
