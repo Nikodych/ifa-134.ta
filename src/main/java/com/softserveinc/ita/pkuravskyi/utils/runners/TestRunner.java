@@ -1,7 +1,9 @@
 package com.softserveinc.ita.pkuravskyi.utils.runners;
 
 import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
+import com.softserveinc.ita.pkuravskyi.pageobjects.SoftServePage;
 import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
@@ -12,10 +14,13 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
 
+    public static final int defaultTimeout = 10;
     protected GooglePage googlePage;
     protected WikipediaPage wikipediaPage;
-    private final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
-    private WebDriver driver;
+    protected SoftServePage softServePage;
+    private static final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
+    @Getter
+    private static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
@@ -24,11 +29,11 @@ public abstract class TestRunner {
         driver
                 .manage()
                 .timeouts()
-                .pageLoadTimeout(20, TimeUnit.SECONDS);
+                .pageLoadTimeout(50, TimeUnit.SECONDS);
         driver
                 .manage()
                 .timeouts()
-                .implicitlyWait(10, TimeUnit.SECONDS);
+                .implicitlyWait(defaultTimeout, TimeUnit.SECONDS);
         driver
                 .manage()
                 .window()
@@ -36,10 +41,11 @@ public abstract class TestRunner {
     }
 
     @BeforeMethod
-    public void openGoogle() {
-        driver.get("https://www.google.com/");
-        googlePage = new GooglePage(driver);
-        wikipediaPage = new WikipediaPage(driver);
+    public void open() {
+        driver.get("https://www.softserveinc.com/en-us");
+        googlePage = new GooglePage(getDriver());
+        wikipediaPage = new WikipediaPage(getDriver());
+        softServePage = new SoftServePage();
     }
 
     @AfterMethod
