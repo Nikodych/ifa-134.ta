@@ -18,9 +18,10 @@ import org.testng.annotations.*;
 public class RozetkaTest extends TestRunner {
     @Test
     public void rozetkaTest() {
-        goLapTops();
-        lapTopsImgClick();
-        readyForOrderButton();
+        RztkPageObjects rztk = new RztkPageObjects();
+            rztk.findLapTop();
     }
+
+
 
 }
