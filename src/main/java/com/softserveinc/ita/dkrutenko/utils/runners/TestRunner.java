@@ -4,6 +4,7 @@ import com.softserveinc.ita.dkrutenko.pageobjects.LoginPageModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.SearchGoods;
 import com.softserveinc.ita.dkrutenko.pageobjects.ShoppingCartModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.ShoppingCartPage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,12 +13,14 @@ import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
-
-protected SearchGoods searchGoods;
-protected ShoppingCartPage shoppingCartPage;
-protected ShoppingCartModal shoppingCartModal;
-protected LoginPageModal loginPageModal;
-protected WebDriver driver;
+    public static final int defaultTimeout = 10;
+    protected SearchGoods searchGoods;
+    protected ShoppingCartPage shoppingCartPage;
+    protected ShoppingCartModal shoppingCartModal;
+    protected LoginPageModal loginPageModal;
+    private final String rozetkaUrl = "https://rozetka.com.ua/";
+    @Getter
+    private static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
@@ -31,7 +34,7 @@ protected WebDriver driver;
         driver
                 .manage()
                 .timeouts()
-                .implicitlyWait(10, TimeUnit.SECONDS);
+                .implicitlyWait(30, TimeUnit.SECONDS);
         driver
                 .manage()
                 .window()
@@ -44,11 +47,11 @@ protected WebDriver driver;
         loginPageModal = new LoginPageModal(driver);
         shoppingCartModal = new ShoppingCartModal(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
-        driver.get("https://rozetka.com.ua/");
+        driver.get(rozetkaUrl);
         driver
                 .manage()
                 .timeouts()
-                .pageLoadTimeout(10, TimeUnit.SECONDS);
+                .pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @AfterClass(alwaysRun = true)
