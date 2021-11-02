@@ -8,7 +8,13 @@ public class SoftServeTest extends TestRunner {
 
     @Test
     public void verifySideNavBar() {
-        softServePage.SideNavBar("Events");
-        Assert.assertEquals(softServePage.ActiveSideNavBarLink(), "Events");
+        softServePage.selectSideNavBarCategory("Events");
+        Assert.assertEquals(softServePage.activeSideNavBarCategory(), "Events");
+    }
+
+    @Test
+    public void verifyMenu() {
+        softServePage.selectMenuCategory("Services");
+        Assert.assertEquals(softServePage.activeMenuCategory(), "Services");
     }
 }

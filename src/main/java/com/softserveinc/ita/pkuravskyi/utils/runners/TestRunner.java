@@ -41,11 +41,11 @@ public abstract class TestRunner {
     }
 
     @BeforeMethod
-    public void open() {
+    public void openWebsite() {
         driver.get("https://www.softserveinc.com/en-us");
         googlePage = new GooglePage(getDriver());
         wikipediaPage = new WikipediaPage(getDriver());
-        softServePage = new SoftServePage();
+        softServePage = new SoftServePage(getDriver());
     }
 
     @AfterMethod
