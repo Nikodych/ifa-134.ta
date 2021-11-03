@@ -13,7 +13,8 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestRunner {
 
     @Getter
-    private WebDriver driver;
+    private static WebDriver driver;
+    public static final int defaultTimeout = 50;
 
     @BeforeSuite
     public void setUp() {

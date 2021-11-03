@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.xpath;
 
 public class RozetkaBasePage extends BasePage {
@@ -53,9 +54,9 @@ public class RozetkaBasePage extends BasePage {
         driver
                 .findElement(loginButtonSelector)
                 .click();
-        waitForVisibility(this.emailInputSelector).sendKeys(email);
-        waitForVisibility(this.passwordInputSelector).sendKeys(password);
-        waitForVisibility(enterButtonSelector).click();
+        $x(this.emailInputSelector).sendKeys(email);
+        $x(this.passwordInputSelector).sendKeys(password);
+        $x(enterButtonSelector).click();
     }
 
     public void openWishList() {

@@ -17,10 +17,6 @@ public abstract class BasePage {
         wait = new WebDriverWait(driver, 5);
     }
 
-    public WebElement waitForVisibility(By locator) {
-        return wait.until(visibilityOfElementLocated(locator));
-    }
-
     public void waitForAttributeChanges(WebElement webElement, String attribute, String value) {
         wait.until(attributeContains(webElement, attribute, value));
     }
