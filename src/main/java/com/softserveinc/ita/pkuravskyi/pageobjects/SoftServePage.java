@@ -8,9 +8,8 @@ import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
 
-public class SoftServePage {
+public class SoftServePage extends BasePage<SoftServePage> {
 
-    protected WebDriver driver;
     private final By sideNavBarCategoriesList = xpath("//a[contains(@class, 'side-navigation__link')]");
     private final By activeSideNavBarCategory = cssSelector(".side-navigation__link_active div");
     private final By menuButton = xpath("//button[@aria-label = 'Open menu']");
@@ -18,7 +17,7 @@ public class SoftServePage {
     private final By activeMenuCategory = cssSelector(".main-navigation__menu-opened a");
 
     public SoftServePage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public SoftServePage selectSideNavBarCategory(String category) {
@@ -64,10 +63,10 @@ public class SoftServePage {
 
     public String activeMenuCategory() {
         if (driver.getCurrentUrl().contains("resources") ||
-            driver.getCurrentUrl().contains("blog") ||
-            driver.getCurrentUrl().contains("locations") ||
-            driver.getCurrentUrl().contains("contact"))
-            return driver.getCurrentUrl();
+                driver.getCurrentUrl().contains("blog") ||
+                driver.getCurrentUrl().contains("locations") ||
+                driver.getCurrentUrl().contains("contact"))
+            return currentUrl();
 
         return $x(activeMenuCategory).getAttribute("href");
     }

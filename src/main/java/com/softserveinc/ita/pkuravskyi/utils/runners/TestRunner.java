@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
 
-    public static final int defaultTimeout = 15;
+    public static final int defaultTimeout = 20;
     protected GooglePage googlePage;
     protected WikipediaPage wikipediaPage;
     protected SoftServePage softServePage;
@@ -51,10 +51,10 @@ public abstract class TestRunner {
     @BeforeMethod
     public void openWebsite() {
         driver.get(softServeUrl);
-        googlePage = new GooglePage(getDriver());
-        wikipediaPage = new WikipediaPage(getDriver());
-        rozetkaPage = new RozetkaPage(getDriver());
-        softServePage = new SoftServePage(getDriver());
+        googlePage = new GooglePage(driver);
+        wikipediaPage = new WikipediaPage(driver);
+        rozetkaPage = new RozetkaPage(driver);
+        softServePage = new SoftServePage(driver);
     }
 
     @AfterClass
