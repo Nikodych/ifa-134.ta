@@ -1,11 +1,14 @@
 package com.softserveinc.ita.pkuravskyi.utils.runners;
 
 import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
+import com.softserveinc.ita.pkuravskyi.pageobjects.RozetkaPage;
 import com.softserveinc.ita.pkuravskyi.pageobjects.SoftServePage;
 import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -14,11 +17,15 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
 
-    public static final int defaultTimeout = 10;
+    public static final int defaultTimeout = 15;
     protected GooglePage googlePage;
     protected WikipediaPage wikipediaPage;
     protected SoftServePage softServePage;
+    protected RozetkaPage rozetkaPage;
     private static final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
+    private static final String googleUrl = "https://www.google.com.ua/";
+    private static final String rozetkaUrl = "https://rozetka.com.ua/";
+    private static final String softServeUrl = "https://www.softserveinc.com/en-us";
     @Getter
     private static WebDriver driver;
 
@@ -42,13 +49,14 @@ public abstract class TestRunner {
 
     @BeforeMethod
     public void openWebsite() {
-        driver.get("https://www.softserveinc.com/en-us");
+        driver.get(softServeUrl);
         googlePage = new GooglePage(getDriver());
         wikipediaPage = new WikipediaPage(getDriver());
+        rozetkaPage = new RozetkaPage(getDriver());
         softServePage = new SoftServePage(getDriver());
     }
 
-    @AfterMethod
+    @AfterClass
     public void tearDown() {
         driver.quit();
     }

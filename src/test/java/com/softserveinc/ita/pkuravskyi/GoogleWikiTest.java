@@ -4,7 +4,7 @@ import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PageObjectsTest extends TestRunner {
+public class GoogleWikiTest extends TestRunner {
 
     @Test
     // Search Wikipedia on google search & open it, find rozetka article in it & open its website

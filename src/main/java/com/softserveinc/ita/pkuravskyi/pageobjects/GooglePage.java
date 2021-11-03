@@ -3,6 +3,7 @@ package com.softserveinc.ita.pkuravskyi.pageobjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.name;
 import static org.openqa.selenium.By.xpath;
 
@@ -17,9 +18,7 @@ public class GooglePage extends BasePage<GooglePage> {
     }
 
     public WikipediaPage openWikipedia() {
-        driver
-                .findElement(wikipediaUrl)
-                .click();
+        $x(wikipediaUrl).click();
 
         return new WikipediaPage(driver);
     }

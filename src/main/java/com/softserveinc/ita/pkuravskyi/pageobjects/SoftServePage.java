@@ -5,16 +5,17 @@ import org.openqa.selenium.WebDriver;
 
 import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$$x;
 import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
+import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.xpath;
 
 public class SoftServePage {
 
     protected WebDriver driver;
     private final By sideNavBarCategoriesList = xpath("//a[contains(@class, 'side-navigation__link')]");
-    private final By activeSideNavBarCategory = xpath("//a[contains(@class, 'side-navigation__link_active')]/div");
+    private final By activeSideNavBarCategory = cssSelector(".side-navigation__link_active div");
     private final By menuButton = xpath("//button[@aria-label = 'Open menu']");
     private final By menuCategoriesList = xpath("//ul[@class = 'main-navigation__menu']//a");
-    private final By activeMenuCategory = xpath("//li[contains(@class,  'main-navigation__menu-opened')]");
+    private final By activeMenuCategory = cssSelector(".main-navigation__menu-opened a");
 
     public SoftServePage(WebDriver driver) {
         this.driver = driver;
@@ -62,6 +63,12 @@ public class SoftServePage {
     }
 
     public String activeMenuCategory() {
-        return $x(activeMenuCategory).getAttribute("textContent");
+        if (driver.getCurrentUrl().contains("resources") ||
+            driver.getCurrentUrl().contains("blog") ||
+            driver.getCurrentUrl().contains("locations") ||
+            driver.getCurrentUrl().contains("contact"))
+            return driver.getCurrentUrl();
+
+        return $x(activeMenuCategory).getAttribute("href");
     }
 }
