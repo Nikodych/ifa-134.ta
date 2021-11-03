@@ -48,5 +48,8 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Windows exe files
+*.exe
+
 # Ignore Mac DS_Store files
 .DS_Store
