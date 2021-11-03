@@ -44,15 +44,12 @@ public class softServeTests extends TestRunner {
         softServeBasePage.clickAcceptCookieMessageButton();
         softServeBasePage.clickHeaderContactsMenuButton();
         softServeBasePage.clickViewFullPage();
-       /* contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
+        contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
         contactUsPage.clickFormModalMenuButton();
         contactUsPage.selectFromModalMenu(expectedCategory);
         var actualEmail = contactUsPage.emailField();
-        assertEquals(actualEmail, email);
-        *
         contactUsPage.clickAcceptTermsAndPolicy();
-        */
         contactUsPage.clickUpdateOnLatestProducts();
+        assertEquals(actualEmail, email);
     }
-
 }
