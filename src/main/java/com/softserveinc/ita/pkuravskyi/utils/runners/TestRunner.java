@@ -9,7 +9,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
@@ -32,7 +31,9 @@ public abstract class TestRunner {
     @BeforeSuite
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("user-data-dir=C:/Users/Paul/AppData/Local/Google/Chrome/User Data/");
+        driver = new ChromeDriver(options);
         driver
                 .manage()
                 .timeouts()

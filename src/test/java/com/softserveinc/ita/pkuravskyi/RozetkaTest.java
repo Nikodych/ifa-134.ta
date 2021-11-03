@@ -14,7 +14,7 @@ public class RozetkaTest extends TestRunner {
 
     @Test
     public void verifyCategoriesOpen() {
-        rozetkaPage.selectCategory("Товары для дома");
-        Assert.assertEquals(rozetkaPage.verifySelectedCategory(), "Товары для дома");
+        rozetkaPage.selectCategory("Товари для дому");
+        Assert.assertEquals(rozetkaPage.verifySelectedCategory(), "Товари для дому");
     }
 }
