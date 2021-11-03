@@ -8,8 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.*;
 import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.defaultTimeout;
-import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.getDriver;
 import static java.time.Duration.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
@@ -27,7 +27,7 @@ public class ElementsUtil {
         }
     }
 
-    public static List<WebElement> S$x(By by) {
+    public static List<WebElement> $$x(By by) {
         try {
             return new WebDriverWait(getDriver(), defaultTimeout)
                     .pollingEvery(ofSeconds(1))
