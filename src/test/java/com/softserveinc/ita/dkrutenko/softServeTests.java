@@ -1,10 +1,10 @@
 package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class softServeTests extends TestRunner {
@@ -19,12 +19,41 @@ public class softServeTests extends TestRunner {
 
     @Test(dataProvider = "softServeLangVerification")
     public void verifyLanguageSwitcher(String english, String deutch, String ukrainian) {
-    softServeBasePage.acceptCookieMessageButton();
-    softServeBasePage.clickMenuButton();
+    softServeBasePage.clickAcceptCookieMessageButton();
+    softServeBasePage.clickHeaderMenuButton();
     softServeBasePage.clickLanguageSwitcher();
     var expectedTitle = softServeBasePage.getTitle().contains(english)
             || softServeBasePage.getTitle().contains(deutch)
             || softServeBasePage.getTitle().contains(ukrainian);
         assertTrue(expectedTitle);
+
+        softServeBasePage.clickHeaderMenuButton();
+        softServeBasePage.clickLanguageSwitcher();
+        assertTrue(expectedTitle);
     }
+
+    @DataProvider
+    public Object[][] softServeContactVerification() {
+        return new Object[][] {
+                {"Dmytro", "Krutenko", "dospecwork@gmail.com", "SoftServe Academy",
+                 "+380957125027", "test ''contact us'' page", "4"} };
+        }
+
+        @Test(dataProvider = "softServeContactVerification")
+    public void verifyContactUsPage(String firstName, String lastName, String email, String company, String phone, String message, String expectedCategory) {
+        softServeBasePage.clickAcceptCookieMessageButton();
+        softServeBasePage.clickHeaderContactsMenuButton();
+        softServeBasePage.clickViewFullPage();
+       /* contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
+        contactUsPage.clickFormButton();
+        contactUsPage.clickSelectForm(expectedCategory);
+
+        var actualEmail = contactUsPage.emailField();
+        assertEquals(actualEmail, email);
+        */
+
+          //  contactUsPage.clickAcceptTermsAndPolicy();
+            contactUsPage.clickUpdateOnLatestProducts();
+        }
+
     }

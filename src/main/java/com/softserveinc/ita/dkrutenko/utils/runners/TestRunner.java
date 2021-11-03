@@ -5,6 +5,7 @@ import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.BasePage;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,12 +18,13 @@ public abstract class TestRunner {
     public static final int defaultTimeout = 10;
 
     protected BasePage softServeBasePage;
+    protected ContactUsPage contactUsPage;
     protected SearchGoods searchGoods;
     protected ShoppingCartPage shoppingCartPage;
     protected ShoppingCartModal shoppingCartModal;
     protected LoginPageModal loginPageModal;
     private final String rozetkaUrl = "https://rozetka.com.ua/";
-    private final String softServeUrl = "https://www.softserveinc.com/en-us";
+    private final String softServeUrl = "https://www.softserveinc.com/";
     private static final String setDriver = "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe";
     @Getter
     private static WebDriver driver;
@@ -48,6 +50,7 @@ public abstract class TestRunner {
     @BeforeMethod
     public void open() {
         softServeBasePage = new BasePage(driver);
+        contactUsPage = new ContactUsPage(driver);
         searchGoods = new SearchGoods(driver);
         loginPageModal = new LoginPageModal(driver);
         shoppingCartModal = new ShoppingCartModal(driver);
