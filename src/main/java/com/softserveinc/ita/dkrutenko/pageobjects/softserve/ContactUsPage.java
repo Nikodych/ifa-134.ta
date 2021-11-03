@@ -19,9 +19,8 @@ public class ContactUsPage extends BasePage {
     private final By companySelector = id("company");
     private final By phoneNumberSelector = id("phoneNumber");
     private final By messageSelector = id("message");
-    private final By formHelpSelector = xpath("//select[@class='form-input__select']");
-    private final By formBoxSelector = xpath("//div[@class='form-input']");
-    private final By selectHelpFormSelector = id("typeOfInquiry");
+    private final By clickFormModalMenuButton = xpath("//select[@class='form-input__select']");
+    private final By selectFromModalMenu = id("typeOfInquiry");
     private final By acceptTermsAndUpdatesSelector = xpath("//div[@class='form-input__checkbox-label']");
 
     public ContactUsPage(WebDriver driver) {
@@ -59,12 +58,12 @@ public class ContactUsPage extends BasePage {
         message.sendKeys(messageText);
     }
 
-    public void clickFormButton() {
-        $x(formHelpSelector).click();
+    public void clickFormModalMenuButton() {
+        $x(clickFormModalMenuButton).click();
     }
 
-    public void clickSelectForm(String text) {
-        var selectForm = $x(selectHelpFormSelector);
+    public void selectFromModalMenu(String text) {
+        var selectForm = $x(selectFromModalMenu);
         Select value = new Select(selectForm);
         value.selectByValue(text);
         selectForm.click();
