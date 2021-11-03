@@ -15,7 +15,7 @@ import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
-    public static final int defaultTimeout = 10;
+    public static final int defaultTimeout = 20;
 
     protected BasePage softServeBasePage;
     protected ContactUsPage contactUsPage;

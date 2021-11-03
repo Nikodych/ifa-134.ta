@@ -3,6 +3,7 @@ package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+
 import java.util.concurrent.TimeUnit;
 
 import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
@@ -20,12 +21,9 @@ public class ContactUsPage extends BasePage {
     private final By selectFromModalMenu = id("typeOfInquiry");
     private final By acceptTermsAndUpdatesSelector = xpath("//input[@name='isTermsAccepted']");//xpath("//div[@class='form-input__checkbox-label']");
     private final By acceptUpdatesOfferSelector = xpath("//input[@name='isUpdatedOffersAccepted']");
+
     public ContactUsPage(WebDriver driver) {
         super(driver);
-    }
-
-    public String emailField() {
-        return $x(emailSelector).getAttribute("value").trim();
     }
 
     public void fillContactPageFields(String firstNameText, String lastNameText, String emailText,
@@ -55,6 +53,10 @@ public class ContactUsPage extends BasePage {
         message.sendKeys(messageText);
     }
 
+    public String emailField() {
+        return $x(emailSelector).getAttribute("value").trim();
+    }
+
     public void clickFormModalMenuButton() {
         $x(clickFormModalMenuButton).click();
     }
@@ -66,31 +68,30 @@ public class ContactUsPage extends BasePage {
         selectForm.click();
     }
 
-  /*  public void clickAcceptTermsAndPolicy() {
-        var eng = "I have read and accepted";
-        var ukr = "Я ознайомився";
-        var de = "Ich habe";
-        var selector = $x(acceptTermsAndUpdatesSelector);
-        var termsAccept = selector.getText();
-        if (termsAccept.contains(eng) || termsAccept.contains(ukr) || termsAccept.contains(de)) {
-            selector.click();
-        }if (selector.isSelected()) {
-            System.out.println("selected");
-        }else{
-            System.out.println("not selected");
-        }
-    }
-
-   */
-
+    /*  public void clickAcceptTermsAndPolicy() {
+          var eng = "I have read and accepted";
+          var ukr = "Я ознайомився";
+          var de = "Ich habe";
+          var selector = $x(acceptTermsAndUpdatesSelector);
+          var termsAccept = selector.getText();
+          if (termsAccept.contains(eng) || termsAccept.contains(ukr) || termsAccept.contains(de)) {
+              selector.click();
+          }if (selector.isSelected()) {
+              System.out.println("selected");
+          }else{
+              System.out.println("not selected");
+          }
+      }
+     */
     public void clickUpdateOnLatestProducts() {
         var selector = $xc(acceptUpdatesOfferSelector);
-        if(!selector.isSelected()) {
+        if (!selector.isSelected()) {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             selector.click();
-        }if (selector.isSelected()) {
+        }
+        if (selector.isSelected()) {
             System.out.println("selected");
-        }else{
+        } else {
             System.out.println("not selected");
         }
     }
