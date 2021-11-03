@@ -11,8 +11,7 @@ import java.util.List;
 import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.*;
 import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.defaultTimeout;
 import static java.time.Duration.*;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfAllElementsLocatedBy;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @UtilityClass
 public class ElementsUtil {
@@ -22,6 +21,16 @@ public class ElementsUtil {
             return new WebDriverWait(getDriver(), defaultTimeout)
                     .pollingEvery(ofSeconds(1))
                     .until(visibilityOfElementLocated(by));
+        } catch (TimeoutException ex) {
+            throw new AssertionError(ex);
+        }
+    }
+
+    public static WebElement $xc(By by) {
+        try {
+            return new WebDriverWait(getDriver(), defaultTimeout)
+                    .pollingEvery(ofSeconds(1))
+                    .until(elementToBeClickable(by));
         } catch (TimeoutException ex) {
             throw new AssertionError(ex);
         }
