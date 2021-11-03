@@ -1,4 +1,4 @@
-package com.softserveinc.ita.vsaroz;
+package com.softsgit cheerveinc.ita.vsaroz;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;

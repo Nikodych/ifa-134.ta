@@ -34,7 +34,6 @@ public abstract class TestRunner extends RztkPageObjects {
         public void afterClass() {
         driver.manage().deleteAllCookies();
         driver.quit();
-
     }
 
 }
