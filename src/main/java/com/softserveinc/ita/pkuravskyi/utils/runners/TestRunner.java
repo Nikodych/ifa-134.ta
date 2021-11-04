@@ -23,7 +23,7 @@ public abstract class TestRunner {
     protected static String homePage;
     private static final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
     @Getter
-    private static WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
