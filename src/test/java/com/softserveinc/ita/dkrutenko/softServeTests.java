@@ -40,16 +40,17 @@ public class softServeTests extends TestRunner {
     }
 
     @Test(dataProvider = "softServeContactVerification")
-    public void verifyContactUsPage(String firstName, String lastName, String email, String company, String phone, String message, String expectedCategory) {
+    public void verifyContactUsPage(String firstName, String lastName, String email,
+                                    String company, String phone, String message, String expectedCategory) {
         softServeBasePage.clickAcceptCookieMessageButton();
         softServeBasePage.clickHeaderContactsMenuButton();
         softServeBasePage.clickViewFullPage();
         contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
-        contactUsPage.clickFormModalMenuButton();
+        contactUsPage.clickFormModalMenu();
         contactUsPage.selectFromModalMenu(expectedCategory);
-        var actualEmail = contactUsPage.emailField();
-        contactUsPage.clickAcceptTermsAndPolicy();
-        contactUsPage.clickUpdateOnLatestProducts();
+        var actualEmail = contactUsPage.getAttributeFromEmailField();
+        contactUsPage.clickAcceptTermsAndPolicyCheckbox();
+        contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
         assertEquals(actualEmail, email);
     }
 }

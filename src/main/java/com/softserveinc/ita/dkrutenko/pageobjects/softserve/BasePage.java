@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
+import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$xc;
 import static org.openqa.selenium.By.xpath;
 
 public class BasePage {
@@ -22,23 +23,23 @@ public class BasePage {
     }
 
     public void clickAcceptCookieMessageButton() {
-        $x(cookieButtonSelector).click();
+        $xc(cookieButtonSelector).click();
     }
 
     public void clickHeaderContactsMenuButton() {
-        $x(headerMenuContactUsButtonSelector).click();
+        $xc(headerMenuContactUsButtonSelector).click();
     }
 
     public void clickHeaderMenuButton() {
-        $x(headerMenuButtonSelector).click();
+        $xc(headerMenuButtonSelector).click();
     }
 
-    public void clickViewFullPage(){
-        $x(fullContactPageSelector).click();
+    public void clickViewFullPage() {
+        $xc(fullContactPageSelector).click();
     }
 
     public void clickLanguageSwitcher() {
-        $x(languageSwitcherSelector).click();
+        $xc(languageSwitcherSelector).click();
     }
 
     public String getTitle() {

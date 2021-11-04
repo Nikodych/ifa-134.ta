@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class TestRunner {
     public static final int defaultTimeout = 20;
 
+    protected TestRunner testRunner;
     protected BasePage softServeBasePage;
     protected ContactUsPage contactUsPage;
     protected SearchGoods searchGoods;

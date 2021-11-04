@@ -9,68 +9,68 @@ import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.*;
 
 public class ContactUsPage extends BasePage {
-    private final By firstNameSelector = id("firstName");
-    private final By lastNameSelector = id("lastName");
-    private final By emailSelector = id("email");
-    private final By companySelector = id("company");
-    private final By phoneNumberSelector = id("phoneNumber");
-    private final By messageSelector = id("message");
-    private final By clickFormModalMenuButton = xpath("//select[@class='form-input__select']");
-    private final By selectFromModalMenu = id("typeOfInquiry");
-    private final By acceptTermsAndUpdatesSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
-    private final By acceptUpdatesOfferSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
+    private final By firstNameFieldSelector = id("firstName");
+    private final By lastNameFieldSelector = id("lastName");
+    private final By emailFieldSelector = id("email");
+    private final By companyFieldSelector = id("company");
+    private final By phoneNumberFieldSelector = id("phoneNumber");
+    private final By messageFieldSelector = id("message");
+    private final By formModalMenuButtonSelector = xpath("//select[@class='form-input__select']");
+    private final By selectFromModalMenuSelector = id("typeOfInquiry");
+    private final By acceptTermsAndConditionsSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
+    private final By acceptUpdatesAndOffersSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
 
     public ContactUsPage(WebDriver driver) {
         super(driver);
     }
 
-    public void fillContactPageFields(String firstNameText, String lastNameText, String emailText,
-                                      String companyText, String phoneNumberText, String messageText) {
-        var firstName = $x(firstNameSelector);
+    public void fillContactPageFields(String firstNameText, String lastNameText, String emailText, String companyText,
+                                      String phoneNumberText, String messageText) {
+        var firstName = $x(firstNameFieldSelector);
         firstName.click();
         firstName.sendKeys(firstNameText);
 
-        var lastName = $x(lastNameSelector);
+        var lastName = $x(lastNameFieldSelector);
         lastName.click();
         lastName.sendKeys(lastNameText);
 
-        var email = $x(emailSelector);
+        var email = $x(emailFieldSelector);
         email.click();
         email.sendKeys(emailText);
 
-        var company = $x(companySelector);
+        var company = $x(companyFieldSelector);
         company.click();
         company.sendKeys(companyText);
 
-        var phoneNumber = $x(phoneNumberSelector);
+        var phoneNumber = $x(phoneNumberFieldSelector);
         phoneNumber.click();
         phoneNumber.sendKeys(phoneNumberText);
 
-        var message = $x(messageSelector);
+        var message = $x(messageFieldSelector);
         message.click();
         message.sendKeys(messageText);
     }
 
-    public String emailField() {
-        return $x(emailSelector).getAttribute("value").trim();
+    public String getAttributeFromEmailField() {
+        return $x(emailFieldSelector).getAttribute("value").trim();
     }
 
-    public void clickFormModalMenuButton() {
-        $x(clickFormModalMenuButton).click();
+    public void clickFormModalMenu() {
+        $x(formModalMenuButtonSelector).click();
     }
 
     public void selectFromModalMenu(String text) {
-        var selectForm = $x(selectFromModalMenu);
+        var selectForm = $x(selectFromModalMenuSelector);
         Select value = new Select(selectForm);
         value.selectByValue(text);
         selectForm.click();
     }
 
-    public void clickAcceptTermsAndPolicy() {
-        $x(acceptTermsAndUpdatesSelector).sendKeys(Keys.SPACE);
+    public void clickAcceptTermsAndPolicyCheckbox() {
+        $x(acceptTermsAndConditionsSelector).sendKeys(Keys.SPACE);
     }
 
-    public void clickUpdateOnLatestProducts() {
-        $x(acceptUpdatesOfferSelector).sendKeys(Keys.SPACE);
+    public void clickAcceptUpdatesAndOffersCheckbox() {
+        $x(acceptUpdatesAndOffersSelector).sendKeys(Keys.SPACE);
     }
 }
