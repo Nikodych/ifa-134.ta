@@ -9,7 +9,6 @@ import java.time.Duration;
 import java.util.List;
 
 import static com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner.*;
-import static com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner.defaultTimeout;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @UtilityClass

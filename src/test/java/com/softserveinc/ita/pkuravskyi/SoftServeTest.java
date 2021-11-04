@@ -1,15 +1,23 @@
 package com.softserveinc.ita.pkuravskyi;
 
+import com.softserveinc.ita.pkuravskyi.pageobjects.SoftServePage;
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SoftServeTest extends TestRunner {
 
+    @BeforeClass
+    public void openSoftServe() {
+        homePage = "https://www.softserveinc.com/en-us";
+        softServePage = new SoftServePage();
+    }
+
     @DataProvider
     public Object[][] sideNavBarCategories() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Home"}, {"Careers"}, {"Learn with Us"}, {"Focus on the Future"}, {"Services"},
                 {"COVID-19 Solutions"}, {"Your Digital Journey"}, {"Our Partners"}, {"Industries"},
                 {"Client testimonials"}, {"Our Customers"}, {"Events"}, {"Insights"}, {"Contact Us"}};
@@ -23,7 +31,7 @@ public class SoftServeTest extends TestRunner {
 
     @DataProvider
     public Object[][] menuCategories() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Your Digital Journey", "https://www.softserveinc.com/en-us/your-journey/reveal"},
                 {"Industries", "https://www.softserveinc.com/en-us/industries"},
                 {"Services", "https://www.softserveinc.com/en-us/services"},
