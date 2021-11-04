@@ -19,7 +19,7 @@ public class ElementsUtil {
         try {
             return new WebDriverWait(getDriver(), defaultTimeout)
                     .pollingEvery(ofSeconds(1))
-                    .until(visibilityOfElementLocated(by));
+                    .until(presenceOfElementLocated(by));
         } catch (TimeoutException ex) {
             throw new AssertionError(ex);
         }
@@ -29,9 +29,19 @@ public class ElementsUtil {
         try {
             return new WebDriverWait(getDriver(), defaultTimeout)
                     .pollingEvery(ofSeconds(1))
-                    .until(visibilityOfAllElementsLocatedBy(by));
+                    .until(presenceOfAllElementsLocatedBy(by));
         } catch (TimeoutException ex) {
             throw new AssertionError(ex);
         }
+    }
+
+    public void waitForAttributeChanges(WebElement webElement, String attribute, String value) {
+        new WebDriverWait(getDriver(), defaultTimeout).until(attributeContains(webElement, attribute, value));
+    }
+
+    public String waitForUrlChanges(String url) {
+        new WebDriverWait(getDriver(), defaultTimeout).until(urlToBe(url));
+
+        return url;
     }
 }

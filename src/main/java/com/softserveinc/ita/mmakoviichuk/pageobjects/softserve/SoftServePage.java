@@ -1,23 +1,17 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
 import static java.lang.String.format;
 import static org.openqa.selenium.By.xpath;
 
-public class SoftServePage extends BasePage {
+public class SoftServePage {
 
     private WebElement sidebarSection;
 
-    public SoftServePage(WebDriver driver) {
-        super(driver);
-    }
-
     public void sidebarClick (String section) {
-        sidebarSection = driver.findElement(xpath(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)));
+        sidebarSection = $x(xpath(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)));
         sidebarSection.click();
     }
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$$x;
 import static org.openqa.selenium.By.xpath;
 
 public class WishlistPage extends RozetkaBasePage {
@@ -13,9 +14,8 @@ public class WishlistPage extends RozetkaBasePage {
     private final By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
     private final List<WebElement> goodsElementsList;
 
-    public WishlistPage(WebDriver driver) {
-        super(driver);
-        goodsElementsList = driver.findElements(goodsSelector);
+    public WishlistPage() {
+        goodsElementsList = $$x(goodsSelector);
     }
 
     public boolean isContainsProductId(String id) {

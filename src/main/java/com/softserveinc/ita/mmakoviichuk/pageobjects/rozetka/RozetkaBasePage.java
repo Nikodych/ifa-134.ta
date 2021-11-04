@@ -1,16 +1,14 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$x;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
 import static org.openqa.selenium.By.xpath;
 
-public class RozetkaBasePage extends BasePage {
+public class RozetkaBasePage {
 
     private final By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
     private final By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
@@ -22,44 +20,35 @@ public class RozetkaBasePage extends BasePage {
 
     private final List<WebElement> categoryList;
 
-    public RozetkaBasePage(WebDriver driver) {
-        super(driver);
-        categoryList = driver.findElements(dropdownCategorySelector);
+    public RozetkaBasePage() {
+        categoryList = $$x(dropdownCategorySelector);
     }
 
     public String getDropdownCategoryUrl(int index) {
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
+        $x(catalogButtonSelector).click();
         var dropCatUrl = categoryList
                 .get(index)
                 .getAttribute("href");
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
+        $x(catalogButtonSelector).click();
 
         return dropCatUrl;
     }
 
     public void dropdownCategoryClick(int index) {
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
+        $x(catalogButtonSelector).click();
         categoryList
                 .get(index)
                 .click();
     }
 
     public void logIn(String email, String password) {
-        driver
-                .findElement(loginButtonSelector)
-                .click();
+        $x(loginButtonSelector).click();
         $x(this.emailInputSelector).sendKeys(email);
         $x(this.passwordInputSelector).sendKeys(password);
         $x(enterButtonSelector).click();
     }
 
     public void openWishList() {
-        driver.findElement(wishListIconSelector ).click();
+        $x(wishListIconSelector ).click();
     }
 }

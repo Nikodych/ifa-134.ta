@@ -1,13 +1,8 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.WebDriver;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
 
-
-public class CategoriesPage extends RozetkaBasePage {
-
-    public CategoriesPage(WebDriver driver) {
-        super(driver);
-    }
+public class CategoriesPage {
 
     public String getCategoryUrl(String url) {
         return waitForUrlChanges(url);

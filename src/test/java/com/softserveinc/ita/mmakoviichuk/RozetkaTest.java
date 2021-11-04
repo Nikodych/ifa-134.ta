@@ -10,18 +10,18 @@ public class RozetkaTest extends TestRunner {
 
     @Test
     public void categoryTest() {
-        HomePage homePage = new HomePage(getDriver());
+        HomePage homePage = new HomePage();
         String categoryUrl = homePage.getCategoryUrl(1);
         homePage.categoryClick(1);
-        Assert.assertEquals(categoryUrl, new CategoriesPage(getDriver()).getCategoryUrl(categoryUrl));
+        Assert.assertEquals(categoryUrl, new CategoriesPage().getCategoryUrl(categoryUrl));
     }
 
     @Test
     public void dropdownCategoryTest() {
-        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage(getDriver());
+        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage();
         String categoryUrl = rozetkaBasePage.getDropdownCategoryUrl(1);
         rozetkaBasePage.dropdownCategoryClick(1);
-        Assert.assertEquals(categoryUrl, new CategoriesPage(getDriver()).getCategoryUrl(categoryUrl));
+        Assert.assertEquals(categoryUrl, new CategoriesPage().getCategoryUrl(categoryUrl));
     }
 
     @DataProvider
@@ -32,14 +32,14 @@ public class RozetkaTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaLoginData")
     public void wishlistTest(String email, String password) {
-        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage(getDriver());
+        RozetkaBasePage rozetkaBasePage = new RozetkaBasePage();
         rozetkaBasePage.logIn(email, password);
         getDriver().get("https://rozetka.com.ua/ua/41556706/g41556706/");
-        ProductPage productPage = new ProductPage(getDriver());
+        ProductPage productPage = new ProductPage();
         productPage.addToWishlist();
         String id = productPage.getProductId();
         rozetkaBasePage.openWishList();
-        boolean isProductInWishlist = new WishlistPage(getDriver()).isContainsProductId(id);
+        boolean isProductInWishlist = new WishlistPage().isContainsProductId(id);
         Assert.assertTrue(isProductInWishlist);
     }
 }
