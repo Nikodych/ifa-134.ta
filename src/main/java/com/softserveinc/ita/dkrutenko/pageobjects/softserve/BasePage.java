@@ -34,9 +34,7 @@ public class BasePage {
         $xc(headerMenuButtonSelector).click();
     }
 
-    public void clickViewFullPage() {
-        $xc(fullContactPageSelector).click();
-    }
+    public void clickViewFullPage() { $xc(fullContactPageSelector).click(); }
 
     public void clickLanguageSwitcher() {
         $xc(languageSwitcherSelector).click();
