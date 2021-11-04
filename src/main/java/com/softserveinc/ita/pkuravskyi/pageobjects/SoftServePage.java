@@ -30,6 +30,7 @@ public class SoftServePage extends BasePage<SoftServePage> {
                     .equals(category))
                 continue;
             item.click();
+            //wait until selected item gets "active" class
             $x(item, "className", "side-navigation__link_active");
             break;
         }
@@ -62,10 +63,10 @@ public class SoftServePage extends BasePage<SoftServePage> {
     }
 
     public String activeMenuCategory() {
-        if (driver.getCurrentUrl().contains("resources") ||
-                driver.getCurrentUrl().contains("blog") ||
-                driver.getCurrentUrl().contains("locations") ||
-                driver.getCurrentUrl().contains("contact"))
+        if (currentUrl().contains("resources") ||
+                currentUrl().contains("blog") ||
+                currentUrl().contains("locations") ||
+                currentUrl().contains("contact"))
             return currentUrl();
 
         return $x(activeMenuCategory).getAttribute("href");

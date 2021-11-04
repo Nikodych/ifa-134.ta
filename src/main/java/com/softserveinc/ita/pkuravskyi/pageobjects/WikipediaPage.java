@@ -18,7 +18,6 @@ public class WikipediaPage extends BasePage<WikipediaPage> {
     }
 
     public void openRozetka() {
-        $x(rozetkaUrl)
-                .click();
+        $x(rozetkaUrl).click();
     }
 }
