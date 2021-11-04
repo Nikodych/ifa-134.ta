@@ -1,5 +1,7 @@
 package com.softserveinc.ita.dkrutenko;
 
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -8,6 +10,8 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class softServeTests extends TestRunner {
+
+    private final MainPage softServeBasePage = new MainPage();
 
     @DataProvider
     public Object[][] softServeLangVerification() {
@@ -18,13 +22,14 @@ public class softServeTests extends TestRunner {
     }
 
     @Test(dataProvider = "softServeLangVerification")
-    public void verifyLanguageSwitcher(String english, String deutch, String ukrainian) {
+    public void verifyLanguageSwitcher(String english, String german, String ukrainian) {
         softServeBasePage.clickAcceptCookieMessageButton();
         softServeBasePage.clickHeaderMenuButton();
         softServeBasePage.clickLanguageSwitcher();
-        var expectedTitle = softServeBasePage.getTitle().contains(english)
-                || softServeBasePage.getTitle().contains(deutch)
-                || softServeBasePage.getTitle().contains(ukrainian);
+        var getTitle = softServeBasePage.getTitle();
+        var expectedTitle = getTitle.contains(english)
+                || getTitle.contains(german)
+                || getTitle.contains(ukrainian);
         assertTrue(expectedTitle);
 
         softServeBasePage.clickHeaderMenuButton();
@@ -44,13 +49,15 @@ public class softServeTests extends TestRunner {
                                     String company, String phone, String message, String expectedCategory) {
         softServeBasePage.clickAcceptCookieMessageButton();
         softServeBasePage.clickHeaderContactsMenuButton();
-        softServeBasePage.clickViewFullPage();
+        ContactUsPage contactUsPage = softServeBasePage.clickViewFullContactPage();
+
         contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
-        contactUsPage.clickFormModalMenu();
-        contactUsPage.selectFromModalMenu(expectedCategory);
-        var actualEmail = contactUsPage.getAttributeFromEmailField();
+        contactUsPage.clickFormInputModalMenu();
+        contactUsPage.selectFromInputModalMenu(expectedCategory);
+
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
+        var actualEmail = contactUsPage.getAttributeFromEmailField();
         assertEquals(actualEmail, email);
     }
 }

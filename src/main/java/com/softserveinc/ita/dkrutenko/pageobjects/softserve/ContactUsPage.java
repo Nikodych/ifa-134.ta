@@ -2,13 +2,14 @@ package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.*;
+import static org.openqa.selenium.Keys.*;
 
-public class ContactUsPage extends BasePage {
+public class ContactUsPage extends MainPage {
+
     private final By firstNameFieldSelector = id("firstName");
     private final By lastNameFieldSelector = id("lastName");
     private final By emailFieldSelector = id("email");
@@ -19,10 +20,6 @@ public class ContactUsPage extends BasePage {
     private final By selectFromModalMenuSelector = id("typeOfInquiry");
     private final By acceptTermsAndConditionsSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
     private final By acceptUpdatesAndOffersSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
-
-    public ContactUsPage(WebDriver driver) {
-        super(driver);
-    }
 
     public void fillContactPageFields(String firstNameText, String lastNameText, String emailText, String companyText,
                                       String phoneNumberText, String messageText) {
@@ -55,22 +52,22 @@ public class ContactUsPage extends BasePage {
         return $x(emailFieldSelector).getAttribute("value").trim();
     }
 
-    public void clickFormModalMenu() {
+    public void clickFormInputModalMenu() {
         $x(formModalMenuButtonSelector).click();
     }
 
-    public void selectFromModalMenu(String text) {
+    public void selectFromInputModalMenu(String text) {
         var selectForm = $x(selectFromModalMenuSelector);
-        Select value = new Select(selectForm);
+        var value = new Select(selectForm);
         value.selectByValue(text);
         selectForm.click();
     }
 
     public void clickAcceptTermsAndPolicyCheckbox() {
-        $x(acceptTermsAndConditionsSelector).sendKeys(Keys.SPACE);
+        $x(acceptTermsAndConditionsSelector).sendKeys(SPACE);
     }
 
     public void clickAcceptUpdatesAndOffersCheckbox() {
-        $x(acceptUpdatesAndOffersSelector).sendKeys(Keys.SPACE);
+        $x(acceptUpdatesAndOffersSelector).sendKeys(SPACE);
     }
 }

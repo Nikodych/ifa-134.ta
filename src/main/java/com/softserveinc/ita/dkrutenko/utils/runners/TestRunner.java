@@ -4,8 +4,6 @@ import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.LoginPageModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartPage;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.BasePage;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,9 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
     public static final int defaultTimeout = 20;
-    
-    protected BasePage softServeBasePage;
-    protected ContactUsPage contactUsPage;
+
     protected SearchGoods searchGoods;
     protected ShoppingCartPage shoppingCartPage;
     protected ShoppingCartModal shoppingCartModal;
@@ -49,8 +45,6 @@ public abstract class TestRunner {
 
     @BeforeMethod
     public void open() {
-        softServeBasePage = new BasePage(driver);
-        contactUsPage = new ContactUsPage(driver);
         searchGoods = new SearchGoods(driver);
         loginPageModal = new LoginPageModal(driver);
         shoppingCartModal = new ShoppingCartModal(driver);
