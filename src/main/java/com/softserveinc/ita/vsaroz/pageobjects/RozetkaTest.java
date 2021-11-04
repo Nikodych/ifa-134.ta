@@ -1,9 +1,9 @@
-package com.softsgit cheerveinc.ita.vsaroz;
+package com.softserveinc.ita.vsaroz.pageobjects;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import com.softserveinc.ita.vsaroz.pageobjects.RztkPageObjects;
+import com.softserveinc.ita.vsaroz.pageobjects.RozetkaPage;
 import com.softserveinc.ita.vsaroz.utils.runners.TestRunner;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,8 +18,9 @@ import org.testng.annotations.*;
 public class RozetkaTest extends TestRunner {
     @Test
     public void rozetkaTest() {
-        RztkPageObjects rztk = new RztkPageObjects();
-            rztk.findLapTop();
+        rozetkaPage.clickOnMenuItem();
+        rozetkaPage.clickLapTopImg();
+        rozetkaPage.filterByBrand();
     }
 
 

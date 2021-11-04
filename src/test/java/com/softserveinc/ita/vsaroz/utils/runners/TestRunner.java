@@ -3,7 +3,9 @@ package com.softserveinc.ita.vsaroz.utils.runners;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import com.softserveinc.ita.vsaroz.pageobjects.RztkPageObjects;
+import com.softserveinc.ita.pkuravskyi.PageObjectsTest;
+import com.softserveinc.ita.vsaroz.pageobjects.RozetkaPage;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.By;
@@ -14,8 +16,9 @@ import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-public abstract class TestRunner extends RztkPageObjects {
-    public WebDriver driver;
+public abstract class TestRunner {
+    protected WebDriver driver;
+    protected RozetkaPage rozetkaPage;
 
     @BeforeSuite
     public void beforeSuite() {
@@ -28,6 +31,7 @@ public abstract class TestRunner extends RztkPageObjects {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://rozetka.com.ua/ua");
+        rozetkaPage = new RozetkaPage(driver);
     }
 
     @AfterClass

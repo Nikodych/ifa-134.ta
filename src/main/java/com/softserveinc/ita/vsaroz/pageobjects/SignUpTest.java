@@ -1,5 +1,6 @@
-package com.softserveinc.ita.vsaroz;
+package com.softserveinc.ita.vsaroz.pageobjects;
 
+import com.softserveinc.ita.vsaroz.utils.runners.TestRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,12 +8,12 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class RegTest extends Data {
+public class SignUpTest extends DataProvider {
     private WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C://Users//vital//ifa-134.ta//src//test//java//com//softserveinc//ita//vsaroz//drivers//chromedriver_win32//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:/Users/vital/ifa-134.ta/src/test/java/com/softserveinc/ita/vsaroz/resources/chromedriver.exe");
     }
 
     @BeforeClass
@@ -31,7 +32,7 @@ public class RegTest extends Data {
     private By buttonJoin = By.xpath("//a[@class='btn btn-default btn-block-level js-fake-join-form-submit-button']");
 
     @Test
-    public void regTest() {
+    public void signUpTest() {
         driver.get(getUrl);
         driver.findElement(Join).click();
         driver.findElement(typeFirstName).sendKeys(firstName);

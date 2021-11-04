@@ -1,4 +1,4 @@
-package com.softserveinc.ita.vsaroz;
+package com.softserveinc.ita.vsaroz.pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,12 +7,12 @@ import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
-public class firstTest {
+public class PracticeTest {
     private WebDriver driver;
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C://Users//vital//ifa-134.ta//src//test//java//com//softserveinc//ita//vsaroz//drivers//chromedriver_win32//chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/com/softserveinc/ita/vsaroz/resources/chromedriver.exe");
     }
 
     @BeforeClass
