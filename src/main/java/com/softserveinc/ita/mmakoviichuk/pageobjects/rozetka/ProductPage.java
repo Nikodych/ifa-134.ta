@@ -1,7 +1,6 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$x;
 import static org.openqa.selenium.By.xpath;

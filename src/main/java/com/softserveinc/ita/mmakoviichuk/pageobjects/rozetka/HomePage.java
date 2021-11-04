@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$$x;
 import static org.openqa.selenium.By.xpath;
 
 public class HomePage extends RozetkaBasePage {

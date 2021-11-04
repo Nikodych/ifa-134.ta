@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.*;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.defaultTimeout;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.getDriver;
 import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 

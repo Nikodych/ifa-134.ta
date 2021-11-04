@@ -22,14 +22,13 @@ public abstract class RozetkaBasePage {
         $x(catalogButtonSelector).click();
         var dropCatUrl = getCategoryList()
                 .get(index)
-                .getAttribute("href");
+                .getAttribute("href").replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
         $x(catalogButtonSelector).click();
 
         return dropCatUrl;
     }
 
     public void dropdownCategoryClick(int index) {
-        $x(catalogButtonSelector).click();
         getCategoryList()
                 .get(index)
                 .click();
@@ -49,6 +48,7 @@ public abstract class RozetkaBasePage {
     }
 
     public List<WebElement> getCategoryList() {
+        $x(loginButtonSelector).click();
         return $$x(dropdownCategorySelector);
     }
 
