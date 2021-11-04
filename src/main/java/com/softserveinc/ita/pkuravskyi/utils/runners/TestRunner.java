@@ -7,7 +7,6 @@ import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -21,19 +20,15 @@ public abstract class TestRunner {
     protected WikipediaPage wikipediaPage;
     protected SoftServePage softServePage;
     protected RozetkaPage rozetkaPage;
+    protected static String homePage;
     private static final String driverPath = "src/main/java/com/softserveinc/ita/pkuravskyi/resources/chromedriver.exe";
-    private static final String googleUrl = "https://www.google.com.ua/";
-    private static final String rozetkaUrl = "https://rozetka.com.ua/";
-    private static final String softServeUrl = "https://www.softserveinc.com/en-us";
     @Getter
-    private static WebDriver driver;
+    public static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", driverPath);
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("user-data-dir=C:/Users/Paul/AppData/Local/Google/Chrome/User Data/");
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         driver
                 .manage()
                 .timeouts()
@@ -49,12 +44,9 @@ public abstract class TestRunner {
     }
 
     @BeforeMethod
-    public void openWebsite() {
-        driver.get(softServeUrl);
-        googlePage = new GooglePage(driver);
-        wikipediaPage = new WikipediaPage(driver);
-        rozetkaPage = new RozetkaPage(driver);
-        softServePage = new SoftServePage(driver);
+    public void openHomePage() {
+        driver.get(homePage);
+
     }
 
     @AfterClass

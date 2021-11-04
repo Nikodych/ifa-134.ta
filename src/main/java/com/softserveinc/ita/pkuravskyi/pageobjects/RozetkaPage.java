@@ -1,8 +1,6 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$$x;
 import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
@@ -15,8 +13,7 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     private final By verifyCategory = xpath("//h1[@class = 'portal__heading ng-star-inserted']");
     private final By languageButtons = xpath("//ul[@class = 'lang-header lang ng-star-inserted']//li");
 
-    public RozetkaPage(WebDriver driver) {
-        super(driver);
+    public RozetkaPage() {
         searchBar = name("search");
         searchButton = xpath("//div[@class = 'header-search js-app-search-suggest']/form/button");
     }
@@ -24,7 +21,7 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     public RozetkaPage changeLanguage() {
         var languageElements = $$x(languageButtons);
 
-        for (WebElement list : languageElements) {
+        for (var list : languageElements) {
             if (list
                     .getAttribute("className")
                     .contains("lang-header__item_state_active"))
@@ -39,8 +36,8 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     public RozetkaPage selectCategory(String categoryName) {
         var listOfCategories = $$x(categoriesList);
 
-        for (WebElement listItem : listOfCategories) {
-            if(!listItem
+        for (var listItem : listOfCategories) {
+            if (!listItem
                     .getAttribute("innerText")
                     .contains(categoryName))
                 continue;

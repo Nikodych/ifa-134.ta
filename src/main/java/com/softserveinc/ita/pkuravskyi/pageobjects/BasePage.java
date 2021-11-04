@@ -1,19 +1,14 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
+import static com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner.*;
 
 public abstract class BasePage<T> {
 
-    protected WebDriver driver;
     protected By searchBar;
     protected By searchButton;
-
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     public T searchBarInputText(String searchText) {
         $x(searchBar).sendKeys(searchText);
@@ -31,7 +26,7 @@ public abstract class BasePage<T> {
         return $x(searchBar).getAttribute("value");
     }
 
-    public String currentUrl() {
-        return driver.getCurrentUrl();
+    public static String getCurrentUrl() {
+        return getDriver().getCurrentUrl();
     }
 }
