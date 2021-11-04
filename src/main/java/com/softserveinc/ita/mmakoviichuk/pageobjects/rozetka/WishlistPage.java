@@ -12,20 +12,19 @@ import static org.openqa.selenium.By.xpath;
 public class WishlistPage extends RozetkaBasePage {
 
     private final By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
-    private final List<WebElement> goodsElementsList;
-
-    public WishlistPage() {
-        goodsElementsList = $$x(goodsSelector);
-    }
 
     public boolean isContainsProductId(String id) {
         boolean isContains = false;
-        for (WebElement product : goodsElementsList) {
+        for (WebElement product : getWishlist()) {
             if (id.equals(product.getAttribute("data-goods-id"))) {
                 isContains = true;
                 break;
             }
         }
         return isContains;
+    }
+
+    public List<WebElement> getWishlist() {
+        return $$x(goodsSelector);
     }
 }

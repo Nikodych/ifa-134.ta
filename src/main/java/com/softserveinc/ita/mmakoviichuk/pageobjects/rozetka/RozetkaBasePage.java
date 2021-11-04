@@ -8,7 +8,7 @@ import java.util.List;
 import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
 import static org.openqa.selenium.By.xpath;
 
-public class RozetkaBasePage {
+public abstract class RozetkaBasePage {
 
     private final By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
     private final By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
@@ -18,15 +18,9 @@ public class RozetkaBasePage {
     private final By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
     private final By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
 
-    private final List<WebElement> categoryList;
-
-    public RozetkaBasePage() {
-        categoryList = $$x(dropdownCategorySelector);
-    }
-
     public String getDropdownCategoryUrl(int index) {
         $x(catalogButtonSelector).click();
-        var dropCatUrl = categoryList
+        var dropCatUrl = getCategoryList()
                 .get(index)
                 .getAttribute("href");
         $x(catalogButtonSelector).click();
@@ -36,19 +30,29 @@ public class RozetkaBasePage {
 
     public void dropdownCategoryClick(int index) {
         $x(catalogButtonSelector).click();
-        categoryList
+        getCategoryList()
                 .get(index)
                 .click();
     }
 
     public void logIn(String email, String password) {
         $x(loginButtonSelector).click();
-        $x(this.emailInputSelector).sendKeys(email);
-        $x(this.passwordInputSelector).sendKeys(password);
+        $x(emailInputSelector).sendKeys(email);
+        $x(passwordInputSelector).sendKeys(password);
         $x(enterButtonSelector).click();
     }
 
-    public void openWishList() {
+    public WishlistPage openWishList() {
         $x(wishListIconSelector ).click();
+
+        return new WishlistPage();
+    }
+
+    public List<WebElement> getCategoryList() {
+        return $$x(dropdownCategorySelector);
+    }
+
+    public String getCurrentUrl(String url) {
+        return waitForUrlChanges(url);
     }
 }

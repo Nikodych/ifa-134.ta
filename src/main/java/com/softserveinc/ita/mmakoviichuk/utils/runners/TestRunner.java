@@ -14,7 +14,7 @@ public abstract class TestRunner {
 
     @Getter
     private static WebDriver driver;
-    public static final int defaultTimeout = 50;
+    public static final int defaultTimeout = 15;
 
     @BeforeSuite
     public void setUp() {

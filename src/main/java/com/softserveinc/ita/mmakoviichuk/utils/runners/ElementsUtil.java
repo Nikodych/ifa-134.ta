@@ -40,7 +40,7 @@ public class ElementsUtil {
     }
 
     public String waitForUrlChanges(String url) {
-        new WebDriverWait(getDriver(), defaultTimeout).until(urlToBe(url));
+        new WebDriverWait(getDriver(), defaultTimeout).until(urlContains(url));
 
         return url;
     }
