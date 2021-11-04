@@ -22,7 +22,8 @@ public class ShoppingCartModal extends ShoppingCartPage {
     }
 
     public void clickShoppingCartCloseButton() {
-        waitForElementVisibility(cartCloseButtonSelector).click();}
+        waitForElementVisibility(cartCloseButtonSelector).click();
+    }
 
     public void clickCartSideMenu() {
         waitForClickabelElement(cartSideMenuButtonSelector).click();

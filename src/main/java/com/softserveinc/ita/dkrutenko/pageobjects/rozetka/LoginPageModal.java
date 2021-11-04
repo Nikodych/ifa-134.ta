@@ -28,7 +28,7 @@ public class LoginPageModal extends BasePage {
     }
 
     public String getUserEmailTitle() {
-        return waitForElementVisibility(userEmailTitleSelector).getText();
+        return waitForElementVisibility(userEmailTitleSelector).getText().trim();
     }
 
     public void clickExitButton() {
@@ -43,7 +43,7 @@ public class LoginPageModal extends BasePage {
         waitForEmail.sendKeys(text);
     }
 
-   public void fillPasswordField(String text) {
+    public void fillPasswordField(String text) {
         var waitForPassword = waitForClickabelElement(passwordInputSelector);
 
         waitForPassword.click();

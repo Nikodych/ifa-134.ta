@@ -3,15 +3,21 @@ package com.softserveinc.ita.dkrutenko;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class softServeTests extends TestRunner {
+public class SoftServeTests extends TestRunner {
 
     private final MainPage softServeBasePage = new MainPage();
+
+    @BeforeClass
+    private void setUrl() {
+        driver.get(softServeUrl);
+    }
 
     @DataProvider
     public Object[][] softServeLangVerification() {

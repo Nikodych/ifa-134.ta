@@ -2,17 +2,19 @@ package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-public class rozetkaTests extends TestRunner {
+public class RozetkaTests extends TestRunner {
+
+    @BeforeClass
+    private void setUrl() {
+        driver.get(rozetkaUrl);
+    }
 
     @DataProvider
     public Object[][] rozetkaItemsForSearch() {
         return new Object[][]{
-                {"samsung", "Samsung Galaxy S20 FE"},
-                {"iphone", "iPhone 12 Pro Max"},
-                {"nokia", "Nokia G10"}};
+                {"samsung", "Samsung Galaxy S20 FE"}};
     }
 
     @Test(dataProvider = "rozetkaItemsForSearch")
@@ -23,14 +25,13 @@ public class rozetkaTests extends TestRunner {
         //take list of items and filter our required item. Check if that item are actually present
         var actualItem = searchGoods.getRequiredProductName(requiredItem);
         Assert.assertTrue(actualItem.contains(requiredItem));
+        searchGoods.clickLogoIcon();
     }
 
     @DataProvider
     public Object[][] rozetkaProductItems() {
         return new Object[][]{
-                {"samsung", "Samsung Galaxy S20 FE"},
-                {"iphone", "iPhone 12 Pro Max"},
-                {"xiaomi", "Xiaomi Redmi Note 10"}};
+                {"iphone", "iPhone 12 Pro Max"}};
     }
 
     @Test(dataProvider = "rozetkaProductItems")
@@ -57,22 +58,23 @@ public class rozetkaTests extends TestRunner {
     public Object[][] rozetkaLangVerification() {
         return new Object[][]{
                 {"ТМ используется на основании лицензии правообладателя RozetkaLTD",
-                 "ТМ використовується на підставі ліцензії правовласника RozetkaLTD"}};
+                        "ТМ використовується на підставі ліцензії правовласника RozetkaLTD"}};
     }
 
     @Test(dataProvider = "rozetkaLangVerification")
     public void verifySwitchLanguageTest(String expectedRuText, String expectedUkrText) {
         //switch language in top right corner and check if language was actually changed
         loginPageModal.clickLanguageButton();
-        var marketNameTitle = (loginPageModal.getMarketNameTitle().contains(expectedRuText)
-                || loginPageModal.getMarketNameTitle().contains(expectedUkrText));
+        var getTitle = loginPageModal.getMarketNameTitle();
+        var marketNameTitle = (getTitle.contains(expectedRuText)
+                || getTitle.contains(expectedUkrText));
         Assert.assertTrue(marketNameTitle);
     }
 
     @DataProvider
     public Object[][] rozetkaLoginData() {
         return new Object[][]{
-                {"dospecwork@gmail.com", "Qwerty123",} };
+                {"dospecwork@gmail.com", "Qwerty123"}};
     }
 
     //dont forget to uncomment chrome options to avoid captcha
@@ -86,7 +88,7 @@ public class rozetkaTests extends TestRunner {
         //click on sidebar menu, check if we are logged in by verifying email and click logout
         loginPageModal.clickSideUserMenu();
         var userTitle = loginPageModal.getUserEmailTitle();
-        Assert.assertEquals(userTitle.trim(), email);
+        Assert.assertEquals(userTitle, email);
 
         loginPageModal.clickExitButton();
     }

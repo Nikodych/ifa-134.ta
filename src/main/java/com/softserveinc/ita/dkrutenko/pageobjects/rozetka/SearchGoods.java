@@ -33,6 +33,6 @@ public class SearchGoods extends BasePage {
     }
 
     public void findActualtem(String text) {
-       waitForElementVisibility(partialLinkText(text)).click();
+        waitForElementVisibility(partialLinkText(text)).click();
     }
 }
