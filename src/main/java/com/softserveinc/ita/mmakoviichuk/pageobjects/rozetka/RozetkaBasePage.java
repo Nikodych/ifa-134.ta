@@ -20,16 +20,17 @@ public abstract class RozetkaBasePage {
 
     public String getDropdownCategoryUrl(int index) {
         $x(catalogButtonSelector).click();
-        var dropCatUrl = getCategoryList()
+        var dropCatUrl = getDropdownCategoryList()
                 .get(index)
-                .getAttribute("href").replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
+                .getAttribute("href")
+                .replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
         $x(catalogButtonSelector).click();
 
         return dropCatUrl;
     }
 
-    public void dropdownCategoryClick(int index) {
-        getCategoryList()
+    public void openCategoryFromDropdown(int index) {
+        getDropdownCategoryList()
                 .get(index)
                 .click();
     }
@@ -47,8 +48,9 @@ public abstract class RozetkaBasePage {
         return new WishlistPage();
     }
 
-    public List<WebElement> getCategoryList() {
+    public List<WebElement> getDropdownCategoryList() {
         $x(loginButtonSelector).click();
+
         return $$x(dropdownCategorySelector);
     }
 

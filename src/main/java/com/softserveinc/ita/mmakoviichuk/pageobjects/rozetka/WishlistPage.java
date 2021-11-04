@@ -23,7 +23,7 @@ public class WishlistPage extends RozetkaBasePage {
         return isContains;
     }
 
-    public List<WebElement> getWishlist() {
+    private List<WebElement> getWishlist() {
         return $$x(goodsSelector);
     }
 }

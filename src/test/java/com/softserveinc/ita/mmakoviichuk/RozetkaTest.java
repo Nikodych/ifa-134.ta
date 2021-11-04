@@ -12,7 +12,7 @@ public class RozetkaTest extends TestRunner {
     public void categoryTest() {
         HomePage homePage = new HomePage();
         String categoryUrl = homePage.getCategoryUrl(1);
-        homePage.categoryClick(1);
+        homePage.openCategory(1);
         Assert.assertEquals(categoryUrl, homePage.getCurrentUrl(categoryUrl));
     }
 
@@ -20,7 +20,7 @@ public class RozetkaTest extends TestRunner {
     public void dropdownCategoryTest() {
         HomePage homePage = new HomePage();
         String categoryUrl = homePage.getDropdownCategoryUrl(1);
-        homePage.dropdownCategoryClick(1);
+        homePage.openCategoryFromDropdown(1);
         Assert.assertEquals(categoryUrl, homePage.getCurrentUrl(categoryUrl));
     }
 

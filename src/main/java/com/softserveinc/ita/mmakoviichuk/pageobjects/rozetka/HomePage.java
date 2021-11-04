@@ -12,15 +12,18 @@ public class HomePage extends RozetkaBasePage {
 
     private final By category = xpath("//ul[@class = 'menu-categories menu-categories_type_main']/li/a");
 
-    public void categoryClick(int index) {
+    public void openCategory(int index) {
         getCategoryList().get(index).click();
     }
 
     public String getCategoryUrl(int index) {
-        return getCategoryList().get(index).getAttribute("href").replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
+        return getCategoryList()
+                .get(index)
+                .getAttribute("href")
+                .replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
     }
 
-    public List<WebElement> getCategoryList() {
+    private List<WebElement> getCategoryList() {
         return $$x(category);
     }
 }

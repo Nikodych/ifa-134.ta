@@ -10,12 +10,12 @@ public class SoftServePage {
 
     private WebElement sidebarSection;
 
-    public void sidebarClick (String section) {
+    public void switchSidebarSection (String section) {
         sidebarSection = $x(xpath(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)));
         sidebarSection.click();
     }
 
-    public boolean isSidebarActive() {
+    public boolean isSidebarSwitched() {
         waitForAttributeChanges(
                 sidebarSection,
                 "class",
