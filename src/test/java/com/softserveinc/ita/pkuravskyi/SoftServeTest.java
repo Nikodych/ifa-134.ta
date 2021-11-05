@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class SoftServeTest extends TestRunner {
 
     @BeforeClass
-    public void openSoftServe() {
+    public void setUpTest() {
         homePage = "https://www.softserveinc.com/en-us";
         softServePage = new SoftServePage();
     }
@@ -24,9 +24,9 @@ public class SoftServeTest extends TestRunner {
     }
 
     @Test(dataProvider = "sideNavBarCategories")
-    public void verifySideNavBar(String category) {
+    public void verifySideNavBarTest(String category) {
         softServePage.selectSideNavBarCategory(category);
-        Assert.assertEquals(softServePage.activeSideNavBarCategory(), category);
+        Assert.assertEquals(softServePage.getActiveSideNavBarCategory(), category);
     }
 
     @DataProvider
@@ -48,8 +48,8 @@ public class SoftServeTest extends TestRunner {
     }
 
     @Test(dataProvider = "menuCategories")
-    public void verifyMenu(String category, String expectedURL) {
+    public void verifyMenuTest(String category, String expectedURL) {
         softServePage.selectMenuCategory(category);
-        Assert.assertEquals(softServePage.activeMenuCategory(), expectedURL);
+        Assert.assertEquals(softServePage.getActiveMenuUrl(), expectedURL);
     }
 }

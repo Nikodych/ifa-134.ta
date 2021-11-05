@@ -20,22 +20,24 @@ public class SoftServePage {
         var sideNavBarItems = $$x(sideNavBarCategoriesList);
 
         for (var item : sideNavBarItems) {
-            if (!item
-                    .getAttribute("text")
+            var itemAttribute = item.getAttribute("text");
+
+            if (!itemAttribute
                     .substring(2)
                     .equals(category)) {
                 continue;
+            } else {
+                item.click();
+                //wait until selected item gets "active" class
+                $x(item, "className", "side-navigation__link_active");
+                break;
             }
-            item.click();
-            //wait until selected item gets "active" class
-            $x(item, "className", "side-navigation__link_active");
-            break;
         }
 
         return this;
     }
 
-    public String activeSideNavBarCategory() {
+    public String getActiveSideNavBarCategory() {
         return $x(activeSideNavBarCategory).getAttribute("innerHTML");
     }
 
@@ -49,18 +51,19 @@ public class SoftServePage {
         var menuNavBarItems = $$x(menuCategoriesList);
 
         for (var item : menuNavBarItems) {
-            if (!item
-                    .getAttribute("textContent")
-                    .equals(category)) {
+            var itemAttribute = item.getAttribute("textContent");
+
+            if (!itemAttribute.equals(category)) {
                 continue;
+            } else {
+                item.click();
+                break;
             }
-            item.click();
-            break;
         }
         return this;
     }
 
-    public String activeMenuCategory() {
+    public String getActiveMenuUrl() {
         var currentUrl = getCurrentUrl();
         var list = new String[]{"resources", "blog", "locations", "contact"};
 

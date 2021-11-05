@@ -12,7 +12,7 @@ import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl
 public class GoogleWikiTest extends TestRunner {
 
     @BeforeClass
-    public void openGoogle() {
+    public void setUpTest() {
         homePage = "https://www.google.com.ua/";
         googlePage = new GooglePage();
         wikipediaPage = new WikipediaPage();

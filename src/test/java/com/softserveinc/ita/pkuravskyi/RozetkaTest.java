@@ -12,13 +12,13 @@ import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl
 public class RozetkaTest extends TestRunner {
 
     @BeforeClass
-    public void openRozetka() {
+    public void setUpTest() {
         homePage = "https://rozetka.com.ua/ua/";
         rozetkaPage = new RozetkaPage();
     }
 
     @Test
-    public void verifyLanguageChange() {
+    public void verifyLanguageChangeTest() {
         rozetkaPage.changeLanguage();
         Assert.assertEquals(getCurrentUrl(), "https://rozetka.com.ua/");
     }
@@ -31,8 +31,8 @@ public class RozetkaTest extends TestRunner {
     }
 
     @Test(dataProvider = "categories")
-    public void verifyCategoriesOpen(String category) {
+    public void verifyCategoriesOpeningTest(String category) {
         rozetkaPage.selectCategory(category);
-        Assert.assertEquals(rozetkaPage.verifySelectedCategory(), category);
+        Assert.assertEquals(rozetkaPage.getSelectedCategoryName(), category);
     }
 }

@@ -10,7 +10,7 @@ import static org.openqa.selenium.By.xpath;
 public class RozetkaPage extends BasePage<RozetkaPage> {
 
     private final By categoriesList = xpath("//a[@class = 'menu-categories__link']");
-    private final By verifyCategory = xpath("//h1[@class = 'portal__heading ng-star-inserted']");
+    private final By selectedCategory = xpath("//h1[@class = 'portal__heading ng-star-inserted']");
     private final By languageButtons = xpath("//ul[@class = 'lang-header lang ng-star-inserted']//li");
 
     public RozetkaPage() {
@@ -21,13 +21,15 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     public RozetkaPage changeLanguage() {
         var languageElements = $$x(languageButtons);
 
-        for (var list : languageElements) {
-            if (list
-                    .getAttribute("className")
-                    .contains("lang-header__item_state_active"))
+        for (var listItem : languageElements) {
+            var itemAttribute = listItem.getAttribute("className");
+
+            if (itemAttribute.contains("lang-header__item_state_active")) {
                 continue;
-            list.click();
-            break;
+            } else {
+                listItem.click();
+                break;
+            }
         }
 
         return this;
@@ -37,18 +39,20 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
         var listOfCategories = $$x(categoriesList);
 
         for (var listItem : listOfCategories) {
-            if (!listItem
-                    .getAttribute("innerText")
-                    .contains(categoryName))
+            var itemAttribute = listItem.getAttribute("innerText");
+
+            if (!itemAttribute.contains(categoryName)) {
                 continue;
-            listItem.click();
-            break;
+            } else {
+                listItem.click();
+                break;
+            }
         }
 
         return this;
     }
 
-    public String verifySelectedCategory() {
-        return $x(verifyCategory).getText();
+    public String getSelectedCategoryName() {
+        return $x(selectedCategory).getText();
     }
 }
