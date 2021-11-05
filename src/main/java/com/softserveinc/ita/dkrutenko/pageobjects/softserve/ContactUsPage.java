@@ -17,7 +17,7 @@ public class ContactUsPage extends MainPage {
     private final By phoneNumberFieldSelector = id("phoneNumber");
     private final By messageFieldSelector = id("message");
     private final By formModalMenuButtonSelector = xpath("//select[@class='form-input__select']");
-    private final By selectFromModalMenuSelector = id("typeOfInquiry");
+    private final By selectFormModalMenuSelector = id("typeOfInquiry");
     private final By acceptTermsAndConditionsSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
     private final By acceptUpdatesAndOffersSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
 
@@ -56,8 +56,8 @@ public class ContactUsPage extends MainPage {
         $x(formModalMenuButtonSelector).click();
     }
 
-    public void selectFromInputModalMenu(String text) {
-        var selectForm = $x(selectFromModalMenuSelector);
+    public void selectFormInputModalMenu(String text) {
+        var selectForm = $x(selectFormModalMenuSelector);
         var value = new Select(selectForm);
         value.selectByValue(text);
         selectForm.click();

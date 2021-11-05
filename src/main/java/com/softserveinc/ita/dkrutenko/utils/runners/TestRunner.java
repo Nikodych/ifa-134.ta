@@ -21,13 +21,13 @@ public abstract class TestRunner {
     protected LoginPageModal loginPageModal;
     protected static final String rozetkaUrl = "https://rozetka.com.ua/";
     protected static final String softServeUrl = "https://www.softserveinc.com/";
-    private static final String setDriver = "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe";
+    private static final String driverPath = "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe";
     @Getter
     protected static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", setDriver);
+        System.setProperty("webdriver.chrome.driver", driverPath);
         //comment lines 27,28,29 if you won't use your current profile with cookies
         ChromeOptions profile = new ChromeOptions();
         profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");

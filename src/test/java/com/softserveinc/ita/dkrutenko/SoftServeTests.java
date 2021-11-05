@@ -3,7 +3,7 @@ package com.softserveinc.ita.dkrutenko;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,8 +14,8 @@ public class SoftServeTests extends TestRunner {
 
     private final MainPage softServeBasePage = new MainPage();
 
-    @BeforeClass
-    private void setUrl() {
+    @BeforeMethod
+    private void openUrl() {
         driver.get(softServeUrl);
     }
 
@@ -59,7 +59,7 @@ public class SoftServeTests extends TestRunner {
 
         contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
         contactUsPage.clickFormInputModalMenu();
-        contactUsPage.selectFromInputModalMenu(expectedCategory);
+        contactUsPage.selectFormInputModalMenu(expectedCategory);
 
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();

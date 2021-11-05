@@ -6,8 +6,8 @@ import org.testng.annotations.*;
 
 public class RozetkaTests extends TestRunner {
 
-    @BeforeClass
-    private void setUrl() {
+    @BeforeMethod
+    private void openUrl() {
         driver.get(rozetkaUrl);
     }
 
@@ -25,7 +25,6 @@ public class RozetkaTests extends TestRunner {
         //take list of items and filter our required item. Check if that item are actually present
         var actualItem = searchGoods.getRequiredProductName(requiredItem);
         Assert.assertTrue(actualItem.contains(requiredItem));
-        searchGoods.clickLogoIcon();
     }
 
     @DataProvider
