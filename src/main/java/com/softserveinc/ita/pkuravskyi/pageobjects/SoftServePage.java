@@ -20,11 +20,11 @@ public class SoftServePage {
         var sideNavBarItems = $$x(sideNavBarCategoriesList);
 
         for (var item : sideNavBarItems) {
-            var itemAttribute = item.getAttribute("text");
+            var itemAttribute = item
+                    .getAttribute("text")
+                    .substring(2);
 
-            if (!itemAttribute
-                    .substring(2)
-                    .equals(category)) {
+            if (!itemAttribute.equals(category)) {
                 continue;
             } else {
                 item.click();
