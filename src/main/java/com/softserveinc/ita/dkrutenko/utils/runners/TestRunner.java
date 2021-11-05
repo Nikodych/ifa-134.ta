@@ -1,9 +1,10 @@
 package com.softserveinc.ita.dkrutenko.utils.runners;
 
-import com.softserveinc.ita.dkrutenko.pageobjects.LoginPageModal;
-import com.softserveinc.ita.dkrutenko.pageobjects.SearchGoods;
-import com.softserveinc.ita.dkrutenko.pageobjects.ShoppingCartModal;
-import com.softserveinc.ita.dkrutenko.pageobjects.ShoppingCartPage;
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.LoginPageModal;
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartModal;
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartPage;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,17 +13,21 @@ import org.testng.annotations.*;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
+    public static final int defaultTimeout = 20;
 
-protected SearchGoods searchGoods;
-protected ShoppingCartPage shoppingCartPage;
-protected ShoppingCartModal shoppingCartModal;
-protected LoginPageModal loginPageModal;
-protected WebDriver driver;
+    protected SearchGoods searchGoods;
+    protected ShoppingCartPage shoppingCartPage;
+    protected ShoppingCartModal shoppingCartModal;
+    protected LoginPageModal loginPageModal;
+    protected static final String rozetkaUrl = "https://rozetka.com.ua/";
+    protected static final String softServeUrl = "https://www.softserveinc.com/";
+    private static final String driverPath = "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe";
+    @Getter
+    protected static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver",
-            "src/main/java/com/softserveinc/ita/dkrutenko/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", driverPath);
         //comment lines 27,28,29 if you won't use your current profile with cookies
         ChromeOptions profile = new ChromeOptions();
         profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
@@ -31,7 +36,7 @@ protected WebDriver driver;
         driver
                 .manage()
                 .timeouts()
-                .implicitlyWait(10, TimeUnit.SECONDS);
+                .implicitlyWait(30, TimeUnit.SECONDS);
         driver
                 .manage()
                 .window()
@@ -44,15 +49,15 @@ protected WebDriver driver;
         loginPageModal = new LoginPageModal(driver);
         shoppingCartModal = new ShoppingCartModal(driver);
         shoppingCartPage = new ShoppingCartPage(driver);
-        driver.get("https://rozetka.com.ua/");
         driver
                 .manage()
                 .timeouts()
-                .pageLoadTimeout(10, TimeUnit.SECONDS);
+                .pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
+        driver.manage().deleteAllCookies();
         driver.quit();
     }
 }

@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects;
+package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +33,6 @@ public class SearchGoods extends BasePage {
     }
 
     public void findActualtem(String text) {
-       waitForElementVisibility(partialLinkText(text)).click();
+        waitForElementVisibility(partialLinkText(text)).click();
     }
 }

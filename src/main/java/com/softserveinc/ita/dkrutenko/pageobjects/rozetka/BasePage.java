@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects;
+package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +10,7 @@ import java.util.List;
 import static org.openqa.selenium.By.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
-public abstract class BasePage  {
+public abstract class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait driverWait;
@@ -25,7 +25,7 @@ public abstract class BasePage  {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         driverWait = new WebDriverWait(driver, 100);
-}
+    }
 
     public void clickSearchButton() {
         driver.findElement(searchButtonSelector).click();
@@ -56,12 +56,12 @@ public abstract class BasePage  {
     }
 
     public List<WebElement> waitOnElementsList(By locator, int amount) {
-        return  driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
+        return driverWait.until(numberOfElementsToBeMoreThan(locator, amount));
     }
 
     public void fillSearchField(String text) {
         var search = driver.findElement(searchFieldSelector);
-        
+
         search.click();
         search.clear();
         search.sendKeys(text);
