@@ -1,14 +1,27 @@
 package com.softserveinc.ita.pkuravskyi;
 
+import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
+import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PageObjectsTest extends TestRunner {
+import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl;
+
+public class GoogleWikiTest extends TestRunner {
+
+    @BeforeClass
+    public void setUpTest() {
+        homePage = "https://www.google.com.ua/";
+        googlePage = new GooglePage();
+        wikipediaPage = new WikipediaPage();
+    }
 
     @Test
     // Search Wikipedia on google search & open it, find rozetka article in it & open its website
     public void verifyWikipediaSearchTest() {
+
         googlePage.searchBarInputText("Wikipedia");
         Assert.assertEquals(googlePage.getSearchBarText(), "Wikipedia");
 
@@ -22,7 +35,6 @@ public class PageObjectsTest extends TestRunner {
         wikipediaPage
                 .searchButtonClick()
                 .openRozetka();
-        // Verify that we actually opened correct rozetka website
-        Assert.assertEquals(wikipediaPage.currentUrl(), "https://rozetka.com.ua/");
+        Assert.assertEquals(getCurrentUrl(), "https://rozetka.com.ua/");
     }
 }
