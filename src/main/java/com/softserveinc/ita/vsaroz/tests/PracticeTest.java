@@ -1,4 +1,4 @@
-package com.softserveinc.ita.vsaroz.pageobjects;
+package com.softserveinc.ita.vsaroz.tests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

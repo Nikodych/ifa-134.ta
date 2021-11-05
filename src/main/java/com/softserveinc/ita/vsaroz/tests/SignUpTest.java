@@ -1,6 +1,6 @@
-package com.softserveinc.ita.vsaroz.pageobjects;
+package com.softserveinc.ita.vsaroz.tests;
 
-import com.softserveinc.ita.vsaroz.utils.runners.TestRunner;
+import com.softserveinc.ita.vsaroz.resources.DataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +13,7 @@ public class SignUpTest extends DataProvider {
 
     @BeforeSuite
     public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "C:/Users/vital/ifa-134.ta/src/test/java/com/softserveinc/ita/vsaroz/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "src/test/java/com/softserveinc/ita/vsaroz/resources/chromedriver.exe");
     }
 
     @BeforeClass

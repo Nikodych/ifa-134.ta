@@ -1,5 +1,4 @@
-package com.softserveinc.ita.vsaroz.pageobjects;
-
+package com.softserveinc.ita.vsaroz.resources;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,11 +10,12 @@ import java.util.List;
 
 import static org.openqa.selenium.By.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+
 public class DataProvider {
     protected String getUrl = "https://unsplash.com/login";
-    protected String firstName = "name";
-    protected String lastName = "lastname";
-    protected String email = "admin.admin@gmail.com";
-    protected String userName = "username";
-    protected String password = "012345678";
+    protected String firstName = "UsersFirstName";
+    protected String lastName = "YourLastName";
+    protected String email = "test.testadmin@gmail.com";
+    protected String userName = "YourUserName";
+    protected String password = "987654321";
 }

@@ -1,4 +1,4 @@
-package com.softserveinc.ita.vsaroz.pageobjects;
+package com.softserveinc.ita.vsaroz.tests;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
