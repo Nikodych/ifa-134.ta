@@ -32,6 +32,7 @@ public class SoftServeTests extends TestRunner {
         softServeBasePage.clickAcceptCookieMessageButton();
         softServeBasePage.clickHeaderMenuButton();
         softServeBasePage.clickLanguageSwitcher();
+        
         var getTitle = softServeBasePage.getTitle();
         var expectedTitle = getTitle.contains(english)
                 || getTitle.contains(german)
