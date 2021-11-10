@@ -1,16 +1,12 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import com.codeborne.selenide.ElementsCollection;
 
-import java.util.List;
-
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$$x;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$$x;
 
 public class HomePage extends RozetkaBasePage {
 
-    private final By category = xpath("//ul[@class = 'menu-categories menu-categories_type_main']/li/a");
+    private final String category = "//ul[@class = 'menu-categories menu-categories_type_main']/li/a";
 
     public void openCategory(int index) {
         getCategoryList().get(index).click();
@@ -23,7 +19,12 @@ public class HomePage extends RozetkaBasePage {
                 .replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
     }
 
-    private List<WebElement> getCategoryList() {
+    private ElementsCollection getCategoryList() {
         return $$x(category);
+    }
+
+    //TODO
+    public String getCurrentUrl(String url) {
+        return url;
     }
 }

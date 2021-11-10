@@ -1,16 +1,13 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.$$x;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$$x;
 
 public class WishlistPage extends RozetkaBasePage {
 
-    private final By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
+    private final String goodsSelector = "//div[@class = 'goods-tile__inner']";
 
     public boolean isContainsProductId(String id) {
         boolean isContains = false;
@@ -23,7 +20,7 @@ public class WishlistPage extends RozetkaBasePage {
         return isContains;
     }
 
-    private List<WebElement> getWishlist() {
+    private ElementsCollection getWishlist() {
         return $$x(goodsSelector);
     }
 }

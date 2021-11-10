@@ -6,6 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Selenide.open;
+
 public class RozetkaTest extends TestRunner {
 
     @Test
@@ -34,7 +36,7 @@ public class RozetkaTest extends TestRunner {
     public void wishlistTest(String email, String password) {
         HomePage homePage = new HomePage();
         homePage.logIn(email, password);
-        getDriver().get("https://rozetka.com.ua/ua/41556706/g41556706/");
+        open("https://rozetka.com.ua/ua/41556706/g41556706/");
 
         ProductPage productPage = new ProductPage();
         productPage.addToWishlist();

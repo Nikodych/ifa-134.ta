@@ -1,5 +1,7 @@
 package com.softserveinc.ita.mmakoviichuk.utils.runners;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,33 +12,21 @@ import org.testng.annotations.BeforeSuite;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.codeborne.selenide.Selenide.open;
+
 public abstract class TestRunner {
 
-    @Getter
-    private static WebDriver driver;
     public static final int defaultTimeout = 15;
 
     @BeforeSuite
     public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--user-data-dir=C:\\Users\\Ferrl\\AppData\\Local\\Google\\Chrome\\User Data");
-        options.addArguments("--profile-directory=Profile 2");
-        System.setProperty("webdriver.chrome.driver", "src\\main\\java\\com\\softserveinc\\ita\\mmakoviichuk\\resources\\chromedriver.exe");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-    }
-
-    @BeforeMethod
-    public void open() {
-        driver.get("https://rozetka.com.ua/");
+        Configuration.browserSize = "1920x1080";
+        Configuration.pageLoadTimeout = 1000;
+        open("https://rozetka.com.ua/");
     }
 
     @AfterClass
     public void tearDown() {
-        // disable for wishlist test
-        //driver.manage().deleteAllCookies();
-        driver.quit();
+        Selenide.closeWebDriver();
     }
 }
