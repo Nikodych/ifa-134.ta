@@ -1,45 +1,44 @@
 package com.softserveinc.ita.vsaroz.tests;
 
-import com.softserveinc.ita.vsaroz.resources.DataProvider;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Configuration;
 import org.testng.annotations.*;
+import com.codeborne.selenide.SelenideElement;
 
-import java.util.concurrent.TimeUnit;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.open;
 
-public class SignUpTest extends DataProvider {
-    private WebDriver driver;
+public class SignUpTest {
 
-    @BeforeSuite
-    public void beforeSuite() {
-        System.setProperty("webdriver.chrome.driver", "src/test/java/com/softserveinc/ita/vsaroz/resources/chromedriver.exe");
+    private String firstName = "UsersFirstName";
+    private String lastName = "YourLastName";
+    private String email = "test.testadmin@gmail.com";
+    private String userName = "YourUserName";
+    private String password = "987654321";
+
+    private final SelenideElement Join = $x("//a[@href='/join']");
+    private final SelenideElement typeFirstName = $x("//input[@name='user[first_name]']");
+    private final SelenideElement typeLastName = $x("//input[@name='user[last_name]']");
+    private final SelenideElement typeEmail = $x("//input[@name='user[email]']");
+    private final SelenideElement typeUserName = $x("//input[@name='user[username]']");
+    private final SelenideElement typePassword = $x("//input[@name='user[password]']");
+    private final SelenideElement buttonJoin = $x("//a[@class='btn btn-default btn-block-level js-fake-join-form-submit-button']");
+
+    @BeforeMethod
+    public void setUp() {
+        Configuration.browserSize = "1920x1080";
+        open("https://unsplash.com/login");
     }
-
-    @BeforeClass
-    public void beforeClass() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-    }
-
-    private By Join = By.xpath("//a[@href='/join']");
-    private By typeFirstName = By.id("user_first_name");
-    private By typeLastName = By.id("user_last_name");
-    private By typeEmail = By.id("user_email");
-    private By typeUserName = By.id("user_username");
-    private By typePassword = By.id("user_password");
-    private By buttonJoin = By.xpath("//a[@class='btn btn-default btn-block-level js-fake-join-form-submit-button']");
 
     @Test
     public void signUpTest() {
-        driver.get(getUrl);
-        driver.findElement(Join).click();
-        driver.findElement(typeFirstName).sendKeys(firstName);
-        driver.findElement(typeLastName).sendKeys(lastName);
-        driver.findElement(typeEmail).sendKeys(email);
-        driver.findElement(typeUserName).sendKeys(userName);
-        driver.findElement(typePassword).sendKeys(password);
-        driver.findElement(buttonJoin).click();
+        $(Join).click();
+        $(typeFirstName).sendKeys(firstName);
+        $(typeLastName).sendKeys(lastName);
+        $(typeEmail).sendKeys(email);
+        $(typeUserName).sendKeys(userName);
+        $(typePassword).sendKeys(password);
+        $(buttonJoin).shouldBe(Condition.visible).click();
     }
 }
