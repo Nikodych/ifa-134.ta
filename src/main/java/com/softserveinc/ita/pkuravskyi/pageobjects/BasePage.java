@@ -1,17 +1,14 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
-import org.openqa.selenium.By;
-
-import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
-import static com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 public abstract class BasePage<T> {
 
-    protected By searchBar;
-    protected By searchButton;
+    protected String searchBar;
+    protected String searchButton;
 
     public T searchBarInputText(String searchText) {
-        $x(searchBar).sendKeys(searchText);
+        $x(searchBar).setValue(searchText);
 
         return (T) this;
     }
@@ -24,9 +21,5 @@ public abstract class BasePage<T> {
 
     public String getSearchBarText() {
         return $x(searchBar).getAttribute("value");
-    }
-
-    public static String getCurrentUrl() {
-        return getDriver().getCurrentUrl();
     }
 }
