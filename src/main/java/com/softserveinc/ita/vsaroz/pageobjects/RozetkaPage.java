@@ -11,10 +11,15 @@ public class RozetkaPage {
     private final SelenideElement lapTops = $x("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//li[1]");
     private final SelenideElement filterByLapTop = $x("//a[@title='Ноутбуки']");
     private final SelenideElement dell = $x("//div[@class='sidebar-block ng-star-inserted']//li[4]");
+    private final String name = "Dell";
 
-    public void clickOnMenuItem() { $(lapTops).click(); }
+    public void clickOnMenuItem() { (lapTops).click(); }
 
-    public void clickLapTop() { $(filterByLapTop).click(); }
+    public void clickLapTop() { (filterByLapTop).click(); }
 
-    public void filterByBrand() { $(dell).shouldHave(Condition.text("Dell")).click(); }
+    public void filterByBrand(String name) {
+        (dell)
+                .shouldHave(Condition.text(name))
+                .click();
+    }
 }

@@ -18,10 +18,4 @@ public abstract class TestRunner {
         Configuration.browserSize = "1920x1080";
         open("https://rozetka.com.ua/ua/");
     }
-
-    @AfterClass
-    public void tearDown() {
-        Selenide.clearBrowserCookies();
-        Selenide.closeWindow();
-    }
 }
