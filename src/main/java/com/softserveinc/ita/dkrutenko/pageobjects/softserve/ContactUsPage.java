@@ -1,7 +1,6 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
