@@ -4,11 +4,13 @@ import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import static com.codeborne.selenide.Selenide.open;
+
 public class RozetkaTests extends TestRunner {
 
     @BeforeMethod
     private void openUrl() {
-        driver.get(rozetkaUrl);
+        open(rozetkaUrl);
     }
 
     @DataProvider

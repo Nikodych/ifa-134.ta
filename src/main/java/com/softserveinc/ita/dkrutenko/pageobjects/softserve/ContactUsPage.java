@@ -1,24 +1,23 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
-import static org.openqa.selenium.By.*;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.Keys.*;
 
 public class ContactUsPage extends MainPage {
 
-    private final By firstNameFieldSelector = id("firstName");
-    private final By lastNameFieldSelector = id("lastName");
-    private final By emailFieldSelector = id("email");
-    private final By companyFieldSelector = id("company");
-    private final By phoneNumberFieldSelector = id("phoneNumber");
-    private final By messageFieldSelector = id("message");
-    private final By formModalMenuButtonSelector = xpath("//select[@class='form-input__select']");
-    private final By selectFormModalMenuSelector = id("typeOfInquiry");
-    private final By acceptTermsAndConditionsSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
-    private final By acceptUpdatesAndOffersSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
+    private final String firstNameFieldSelector = "//*[@id = 'firstName']";
+    private final String lastNameFieldSelector = "//*[@id = 'lastName']";
+    private final String emailFieldSelector = "//*[@id = 'email']";
+    private final String companyFieldSelector = "//*[@id = 'company']";
+    private final String phoneNumberFieldSelector = "//*[@id = 'phoneNumber']";
+    private final String messageFieldSelector = "//*[@id = 'message']";
+    private final String selectFormModalMenuSelector = "//*[@id = 'typeOfInquiry']";
+    private final String formModalMenuButtonSelector = "//select[@class='form-input__select']";
+    private final String acceptTermsAndConditionsSelector = "//input[@name='isTermsAccepted']/ancestor::label";
+    private final String acceptUpdatesAndOffersSelector = "//input[@name='isUpdatedOffersAccepted']/ancestor::label";
 
     public void fillContactPageFields(String firstNameText, String lastNameText, String emailText, String companyText,
                                       String phoneNumberText, String messageText) {

@@ -9,54 +9,55 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import static com.codeborne.selenide.Selenide.open;
 
 public class SoftServeTests extends TestRunner {
 
-    private final MainPage softServeBasePage = new MainPage();
+    private final MainPage softServeMainPage = new MainPage();
 
     @BeforeMethod
     private void openUrl() {
-        driver.get(softServeUrl);
+        open(softServeUrl);
     }
 
     @DataProvider
-    public Object[][] softServeLangVerification() {
+    public Object[][] softServeChangeLanguageVerification() {
         return new Object[][]{
                 {"We are advisors, engineers, and designers solving business challenges with innovative technology solutions",
                         "SoftServe berät Unternehmen weltweit in Digitalisierungs- prozessen und arbeitet am neuesten Stand der Technik",
                         "SoftServe - це провідна ІТ-компанія, що займається консалтингом та надає послуги у сфері цифрових технологій"}};
     }
 
-    @Test(dataProvider = "softServeLangVerification")
-    public void verifyLanguageSwitcher(String english, String german, String ukrainian) {
-        softServeBasePage.clickAcceptCookieMessageButton();
-        softServeBasePage.clickHeaderMenuButton();
-        softServeBasePage.clickLanguageSwitcher();
+    @Test(dataProvider = "softServeChangeLanguageVerification")
+    public void verifyChangeLanguageFunction(String english, String german, String ukrainian) {
+        softServeMainPage.clickAcceptCookieMessageButton();
+        softServeMainPage.clickHeaderMenuButton();
+        softServeMainPage.clickLanguageSwitcher();
         
-        var getTitle = softServeBasePage.getTitle();
+        var getTitle = softServeMainPage.getTitle();
         var expectedTitle = getTitle.contains(english)
                 || getTitle.contains(german)
                 || getTitle.contains(ukrainian);
         assertTrue(expectedTitle);
 
-        softServeBasePage.clickHeaderMenuButton();
-        softServeBasePage.clickLanguageSwitcher();
+        softServeMainPage.clickHeaderMenuButton();
+        softServeMainPage.clickLanguageSwitcher();
         assertTrue(expectedTitle);
     }
 
     @DataProvider
-    public Object[][] softServeContactVerification() {
+    public Object[][] softServeContactUsFieldsVerification() {
         return new Object[][]{
                 {"Dmytro", "Krutenko", "dospecwork@gmail.com", "SoftServe Academy",
                         "+380957125027", "test ''contact us'' page", "4"}};
     }
 
-    @Test(dataProvider = "softServeContactVerification")
-    public void verifyContactUsPage(String firstName, String lastName, String email,
-                                    String company, String phone, String message, String expectedCategory) {
-        softServeBasePage.clickAcceptCookieMessageButton();
-        softServeBasePage.clickHeaderContactsMenuButton();
-        ContactUsPage contactUsPage = softServeBasePage.clickViewFullContactPage();
+    @Test(dataProvider = "softServeContactUsFieldsVerification")
+    public void verifyContactUsFields(String firstName, String lastName, String email,
+                                      String company, String phone, String message, String expectedCategory) {
+        softServeMainPage.clickAcceptCookieMessageButton();
+        softServeMainPage.clickHeaderContactsMenuButton();
+        ContactUsPage contactUsPage = softServeMainPage.clickViewFullContactPage();
 
         contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
         contactUsPage.clickFormInputModalMenu();
