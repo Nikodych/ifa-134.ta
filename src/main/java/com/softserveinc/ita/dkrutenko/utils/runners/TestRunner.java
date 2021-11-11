@@ -28,11 +28,7 @@ public abstract class TestRunner {
     @BeforeSuite
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", setDriver);
-        //comment lines 27,28,29 if you won't use your current profile with cookies
-        ChromeOptions profile = new ChromeOptions();
-        profile.addArguments("user-data-dir=C:/Users/dokp/AppData/Local/Google/Chrome/User Data/");
-        driver = new ChromeDriver(profile);
-        //driver = new ChromeDriver();      //uncomment this for test without cookies
+        driver = new ChromeDriver();
         driver
                 .manage()
                 .timeouts()

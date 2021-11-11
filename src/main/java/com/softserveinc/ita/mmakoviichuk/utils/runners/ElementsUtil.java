@@ -8,9 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.defaultTimeout;
 import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.*;
-import static java.time.Duration.ofSeconds;
+import static com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner.defaultTimeout;
+import static java.time.Duration.*;
 import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 @UtilityClass

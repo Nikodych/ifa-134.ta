@@ -11,9 +11,10 @@ import org.testng.annotations.BeforeSuite;
 import java.util.concurrent.TimeUnit;
 
 public abstract class TestRunner {
+    public static final int defaultTimeout = 20;
 
     @Getter
-    private WebDriver driver;
+    protected static WebDriver driver;
 
     @BeforeSuite
     public void setUp() {
