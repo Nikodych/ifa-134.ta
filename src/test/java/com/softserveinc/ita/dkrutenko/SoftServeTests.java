@@ -2,6 +2,8 @@ package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.User;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.UserRepository;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -47,25 +49,22 @@ public class SoftServeTests extends TestRunner {
     @DataProvider
     public Object[][] softServeContactUsFieldsVerification() {
         return new Object[][]{
-                {"Dmytro", "Krutenko", "dospecwork@gmail.com", "SoftServe Academy",
-                        "+380957125027", "test ''contact us'' page", "4"}};
+                { new UserRepository().getContactUsUser() }};
     }
 
     @Test(dataProvider = "softServeContactUsFieldsVerification")
-    public void verifyContactUsFields(String firstName, String lastName, String email,
-                                      String company, String phone, String message, String expectedCategory) {
+    public void verifyContactUsFields(User user) {
         softServeMainPage.clickAcceptCookieMessageButton();
         softServeMainPage.clickHeaderContactsMenuButton();
         ContactUsPage contactUsPage = softServeMainPage.clickViewFullContactPage();
 
-        contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
+        contactUsPage.fillContactPageFields(user);
         contactUsPage.clickFormInputModalMenu();
-        contactUsPage.selectFormInputModalMenu(expectedCategory);
+        contactUsPage.selectFormInputModalMenu(user.getExpectedCategory());
 
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
         var actualEmail = contactUsPage.getAttributeFromEmailField();
-        assertThat(actualEmail.equals(email));
-
+        assertThat(actualEmail.equals(user.getEmail()));
     }
 }

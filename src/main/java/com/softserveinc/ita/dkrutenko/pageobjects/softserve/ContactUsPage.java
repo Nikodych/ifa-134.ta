@@ -1,5 +1,6 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.User;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -19,31 +20,30 @@ public class ContactUsPage extends MainPage {
     private final String acceptTermsAndConditionsSelector = "//input[@name='isTermsAccepted']/ancestor::label";
     private final String acceptUpdatesAndOffersSelector = "//input[@name='isUpdatedOffersAccepted']/ancestor::label";
 
-    public void fillContactPageFields(String firstNameText, String lastNameText, String emailText, String companyText,
-                                      String phoneNumberText, String messageText) {
+    public void fillContactPageFields(User user) {
         var firstName = $x(firstNameFieldSelector);
         firstName.click();
-        firstName.sendKeys(firstNameText);
+        firstName.sendKeys(user.getFirstname());
 
         var lastName = $x(lastNameFieldSelector);
         lastName.click();
-        lastName.sendKeys(lastNameText);
+        lastName.sendKeys(user.getLastname());
 
         var email = $x(emailFieldSelector);
         email.click();
-        email.sendKeys(emailText);
+        email.sendKeys(user.getEmail());
 
         var company = $x(companyFieldSelector);
         company.click();
-        company.sendKeys(companyText);
+        company.sendKeys(user.getCompany());
 
         var phoneNumber = $x(phoneNumberFieldSelector);
         phoneNumber.click();
-        phoneNumber.sendKeys(phoneNumberText);
+        phoneNumber.sendKeys(user.getPhone());
 
         var message = $x(messageFieldSelector);
         message.click();
-        message.sendKeys(messageText);
+        message.sendKeys(user.getMessage());
     }
 
     public String getAttributeFromEmailField() {
