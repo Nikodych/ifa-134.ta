@@ -6,14 +6,14 @@ import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class SoftServePage {
 
-    private static final String sideNavBarCategoriesList = "//a[contains(@class, 'side-navigation__link')]";
-    private static final String activeSideNavBarCategory = ".side-navigation__link_active div";
-    private static final String menuButton = "//button[@aria-label = 'Open menu']";
-    private static final String menuCategoriesList = "//ul[@class = 'main-navigation__menu']//a";
-    private static final String activeMenuCategory = ".main-navigation__menu-opened a";
+    private final String sideNavBarCategoriesSelector = "//a[contains(@class, 'side-navigation__link')]";
+    private final String activeSideNavBarCategorySelector = ".side-navigation__link_active div";
+    private final String menuButtonSelector = "//button[@aria-label = 'Open menu']";
+    private final String menuCategoriesSelector = "//ul[@class = 'main-navigation__menu']//a";
+    private final String activeMenuCategorySelector = ".main-navigation__menu-opened a";
 
     public SoftServePage selectSideNavBarCategory(String category) {
-        var sideNavBarItems = $$x(sideNavBarCategoriesList);
+        var sideNavBarItems = $$x(sideNavBarCategoriesSelector);
 
         for (var item : sideNavBarItems) {
             var itemAttribute = item
@@ -34,17 +34,17 @@ public class SoftServePage {
     }
 
     public String getActiveSideNavBarCategory() {
-        return $(activeSideNavBarCategory).getAttribute("innerHTML");
+        return $(activeSideNavBarCategorySelector).getAttribute("innerHTML");
     }
 
     public void openMenu() {
-        $x(menuButton).click();
+        $x(menuButtonSelector).click();
     }
 
     public SoftServePage selectMenuCategory(String category) {
         openMenu();
 
-        var menuNavBarItems = $$x(menuCategoriesList);
+        var menuNavBarItems = $$x(menuCategoriesSelector);
 
         for (var item : menuNavBarItems) {
             var itemAttribute = item.getAttribute("textContent");
@@ -69,6 +69,6 @@ public class SoftServePage {
             }
         }
 
-        return $x(activeMenuCategory).getAttribute("href");
+        return $x(activeMenuCategorySelector).getAttribute("href");
     }
 }

@@ -4,7 +4,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class WikipediaPage extends BasePage<WikipediaPage> {
 
-    private static final String rozetkaUrl = "//a[contains(@href, 'rozetka.ua')]";
+    private final String rozetkaUrlSelector = "//a[contains(@href, 'rozetka.ua')]";
 
     public WikipediaPage() {
         searchBar = "//input[@name = 'search']";
@@ -12,7 +12,7 @@ public class WikipediaPage extends BasePage<WikipediaPage> {
     }
 
     public RozetkaPage openRozetka() {
-        $x(rozetkaUrl).click();
+        $x(rozetkaUrlSelector).click();
 
         return new RozetkaPage();
     }

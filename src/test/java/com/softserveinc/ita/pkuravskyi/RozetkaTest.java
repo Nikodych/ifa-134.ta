@@ -41,4 +41,15 @@ public class RozetkaTest extends TestRunner {
                 .as("Category name should be correct")
                 .contains(category);
     }
+
+    @Test
+    public void verifySearchBarTest() {
+        rozetkaPage
+                .searchBarInputText("Xiaomi redmi note 10")
+                .searchButtonClick();
+        var selectedProductName = rozetkaPage.getSelectedProductName();
+        assertThat(selectedProductName)
+                .as("Product name should be correct")
+                .contains("Xiaomi redmi note 10");
+    }
 }

@@ -8,13 +8,14 @@ import static java.lang.String.format;
 
 public class RozetkaPage extends BasePage<RozetkaPage> {
 
-    private static final String CATEGORIES_LIST_TEMPLATE = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
-    private static final String selectedCategory = "//h1[@class = 'portal__heading ng-star-inserted']";
-    private static final String LANGUAGE_SWITCH_BUTTON_TEMPLATE = "//a[contains(@class, 'lang__link') and contains(text(), '%s')]";
+    private final String CATEGORIES_LIST_TEMPLATE = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
+    private final String selectedCategorySelector = "//h1[@class = 'portal__heading ng-star-inserted']";
+    private final String selectedProductSelector = "//h1[@class = 'catalog-heading ng-star-inserted']";
+    private final String LANGUAGE_SWITCH_BUTTON_TEMPLATE = "//a[contains(@class, 'lang__link') and contains(text(), '%s')]";
 
     public RozetkaPage() {
-        searchBar = "search";
-        searchButton = "button.search-form__submit";
+        searchBar = "//input[contains(@class, 'search-form__input')]";
+        searchButton = "//button[contains(@class, 'search-form__submit')]";
     }
 
     public RozetkaPage changeLanguageTo(LanguageSwitcher language) {
@@ -38,6 +39,11 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     }
 
     public String getSelectedCategoryName() {
-        return $x(selectedCategory).getText();
+        return $x(selectedCategorySelector).getText();
     }
+
+    public String getSelectedProductName() {
+        return $x(selectedProductSelector).getText();
+    }
+
 }

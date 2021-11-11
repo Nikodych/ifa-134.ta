@@ -20,6 +20,6 @@ public abstract class BasePage<T> {
     }
 
     public String getSearchBarText() {
-        return $x(searchBar).getAttribute("value");
+        return $x(searchBar).getValue();
     }
 }
