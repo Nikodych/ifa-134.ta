@@ -6,6 +6,7 @@
 .idea/jsLibraryMappings.xml
 *.iml
 *.exe
+build/
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids

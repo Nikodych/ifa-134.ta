@@ -18,11 +18,10 @@ public abstract class TestRunner {
 
     public static final int defaultTimeout = 15;
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         Configuration.browserSize = "1920x1080";
-        Configuration.pageLoadTimeout = 1000;
-        open("https://rozetka.com.ua/");
+        open("https://rozetka.com.ua/ua/");
     }
 
     @AfterClass

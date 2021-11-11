@@ -2,29 +2,14 @@ package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
 import com.codeborne.selenide.ElementsCollection;
 
-import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.format;
 
 public class HomePage extends RozetkaBasePage {
 
-    private final String category = "//ul[@class = 'menu-categories menu-categories_type_main']/li/a";
+    private static final String category = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
 
-    public void openCategory(int index) {
-        getCategoryList().get(index).click();
-    }
-
-    public String getCategoryUrl(int index) {
-        return getCategoryList()
-                .get(index)
-                .getAttribute("href")
-                .replaceAll("https://rozetka.com.ua|https://rozetka.com.ua/ua", "");
-    }
-
-    private ElementsCollection getCategoryList() {
-        return $$x(category);
-    }
-
-    //TODO
-    public String getCurrentUrl(String url) {
-        return url;
+    public void openCategory(String categoryName) {
+        $x(format(category, categoryName)).click();
     }
 }
