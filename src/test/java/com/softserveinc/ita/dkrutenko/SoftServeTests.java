@@ -7,8 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.codeborne.selenide.Selenide.open;
 
 public class SoftServeTests extends TestRunner {
@@ -38,11 +37,11 @@ public class SoftServeTests extends TestRunner {
         var expectedTitle = getTitle.contains(english)
                 || getTitle.contains(german)
                 || getTitle.contains(ukrainian);
-        assertTrue(expectedTitle);
+        assertThat(expectedTitle);
 
         softServeMainPage.clickHeaderMenuButton();
         softServeMainPage.clickLanguageSwitcher();
-        assertTrue(expectedTitle);
+        assertThat(expectedTitle);
     }
 
     @DataProvider
@@ -66,6 +65,7 @@ public class SoftServeTests extends TestRunner {
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
         var actualEmail = contactUsPage.getAttributeFromEmailField();
-        assertEquals(actualEmail, email);
+        assertThat(actualEmail.equals(email));
+
     }
 }
