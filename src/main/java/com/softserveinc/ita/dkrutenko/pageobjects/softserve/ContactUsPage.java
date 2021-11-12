@@ -4,7 +4,6 @@ import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.User;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.$;
 import static org.openqa.selenium.Keys.*;
 
 public class ContactUsPage extends MainPage {

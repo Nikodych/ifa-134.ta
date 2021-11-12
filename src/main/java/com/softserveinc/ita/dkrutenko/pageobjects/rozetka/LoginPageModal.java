@@ -1,6 +1,5 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
-
 import static com.codeborne.selenide.Selenide.$x;
 
 public class LoginPageModal extends BasePage {
