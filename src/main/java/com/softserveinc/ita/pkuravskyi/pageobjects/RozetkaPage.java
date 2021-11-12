@@ -45,5 +45,4 @@ public class RozetkaPage extends BasePage<RozetkaPage> {
     public String getSelectedProductName() {
         return $x(selectedProductSelector).getText();
     }
-
 }
