@@ -1,25 +1,18 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
+import static com.codeborne.selenide.Selectors.byPartialLinkText;
+import static com.codeborne.selenide.Selenide.*;
 import static java.util.stream.Collectors.toList;
-import static org.openqa.selenium.By.partialLinkText;
-import static org.openqa.selenium.By.xpath;
 
 public class SearchGoods extends BasePage {
 
-    private final By goodsElementsListSelector = xpath("//*[@class='goods-tile__title']");
+    private final String goodsElementsListSelector = "//*[@class='goods-tile__title']";
 
-    public SearchGoods(WebDriver driver) {
-        super(driver);
-    }
-
-    public List<WebElement> getGoodsList() {
-        return waitOnElementsList((goodsElementsListSelector), 30);
+    public ElementsCollection getGoodsList() {
+        return $$x(goodsElementsListSelector);
     }
 
     public String getRequiredProductName(String item) {
@@ -32,7 +25,9 @@ public class SearchGoods extends BasePage {
         return list.stream().findFirst().toString();
     }
 
-    public void findActualtem(String text) {
-        waitForElementVisibility(partialLinkText(text)).click();
+    public ShoppingCartModal findActualtem(String text) {
+        $(byPartialLinkText(text)).click();
+
+        return new ShoppingCartModal();
     }
 }

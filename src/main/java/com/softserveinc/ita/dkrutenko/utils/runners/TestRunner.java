@@ -15,10 +15,6 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 
 public abstract class TestRunner {
 
-    protected SearchGoods searchGoods;
-    protected ShoppingCartPage shoppingCartPage;
-    protected ShoppingCartModal shoppingCartModal;
-    protected LoginPageModal loginPageModal;
     protected static final String rozetkaUrl = "https://rozetka.com.ua/";
     protected static final String softServeUrl = "https://www.softserveinc.com/";
     private static final String chromeProfile = "C:/Users/IT/AppData/Local/Google/Chrome/User Data/";

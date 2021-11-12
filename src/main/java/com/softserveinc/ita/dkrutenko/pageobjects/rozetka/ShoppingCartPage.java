@@ -1,29 +1,23 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ShoppingCartPage extends BasePage {
 
-    private final By addToCartButtonSelector = xpath("//*[@class='buy-button__label ng-star-inserted']");
-    private final By cartButtonSelector = xpath("//rz-cart[@class='header-actions__component']");
-    private final By cartProductTitleLabelSelector = xpath("//a[@class='cart-product__title']");
+    private final String addToCartButtonSelector = "//*[@class='buy-button__label ng-star-inserted']";
+    private final String cartButtonSelector = "//rz-cart[@class='header-actions__component']";
+    private final String cartProductTitleLabelSelector = "//a[@class='cart-product__title']";
 
-    public ShoppingCartPage(WebDriver driver) {
-        super(driver);
-    }
-
-    public void clickAddToCartButton() {
-        driver.findElement(addToCartButtonSelector).click();
+    public ShoppingCartModal clickAddToCartButton() {
+        $x(addToCartButtonSelector).click();
+        return new ShoppingCartModal();
     }
 
     public void clickCartButton() {
-        waitForElementVisibility(cartButtonSelector).click();
+        $x(cartButtonSelector).click();
     }
 
     public String getProductTitle() {
-        return waitForElementVisibility(cartProductTitleLabelSelector).getText();
+        return $x(cartProductTitleLabelSelector).getText();
     }
 }
