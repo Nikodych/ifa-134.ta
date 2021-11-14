@@ -14,7 +14,7 @@ import org.testng.annotations.*;
 public class RozetkaTest extends TestRunner {
 
     @Test
-    public void filterFunctionalityTest() {
+    public void verifyFilterFunctionality() {
         rozetkaPage.clickOnMenuItem();
         rozetkaPage.clickLapTop();
         rozetkaPage.filterByBrand("Dell");

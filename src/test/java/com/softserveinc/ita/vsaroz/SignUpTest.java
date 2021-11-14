@@ -1,10 +1,10 @@
 package com.softserveinc.ita.vsaroz;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.*;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -31,15 +31,15 @@ public class SignUpTest {
     }
 
     @Test
-    public void signUpTest() {
-        (Join).click();
-        (typeFirstName).sendKeys(firstName);
-        (typeLastName).sendKeys(lastName);
-        (typeEmail).sendKeys(email);
-        (typeUserName).sendKeys(userName);
-        (typePassword).sendKeys(password);
-        (buttonJoin)
-                .shouldBe(Condition.visible)
+    public void verifySignUp() {
+        Join.click();
+        typeFirstName.sendKeys(firstName);
+        typeLastName.sendKeys(lastName);
+        typeEmail.sendKeys(email);
+        typeUserName.sendKeys(userName);
+        typePassword.sendKeys(password);
+        buttonJoin
+                .shouldBe(visible)
                 .click();
     }
 }

@@ -15,7 +15,7 @@
         <selenium.java.version>4.0.0</selenium.java.version>
         <webdrivermanager.version>4.4.3</webdrivermanager.version>
         <org.projectlombok.version>1.18.22</org.projectlombok.version>
-        <version>6.0.3</version>
+        <selenide.version>6.0.3</selenide.version>
     </properties>
 
     <dependencies>

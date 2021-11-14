@@ -18,6 +18,8 @@ public class PracticeTest {
     private final SelenideElement product = $x("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']");
     private final SelenideElement add = $x("//button[@class='exclusive']//span");
     private final SelenideElement closeModal = $x("//span[@class='cross']");
+    private final SelenideElement viewShoppingCart = $x("//a[@href='http://automationpractice.com/index.php?controller=order']");
+    private final SelenideElement cartQuantity = $x("//span[@class='ajax_cart_quantity']");
 
     @BeforeMethod
     public void setUp() {
@@ -26,15 +28,18 @@ public class PracticeTest {
     }
 
     @Test
-    public void modalWindowTest () {
-        (product)
+    public void verifyAddToCartTest () {
+        product
                 .shouldBe(visible)
                 .click();
-        (add)
+        add
                 .shouldBe(visible)
                 .click();
-        (closeModal)
+        closeModal
                 .shouldBe(disappear)
                 .click();
+        viewShoppingCart.click();
+        String quantity = cartQuantity.getText();
+        System.out.println(quantity);
     }
 }
