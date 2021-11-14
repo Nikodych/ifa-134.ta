@@ -2,12 +2,12 @@ package com.softserveinc.ita.pkuravskyi;
 
 import com.softserveinc.ita.pkuravskyi.pageobjects.RozetkaPage;
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl;
+import static com.softserveinc.ita.pkuravskyi.models.LanguageSwitcher.RU;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RozetkaTest extends TestRunner {
 
@@ -19,8 +19,11 @@ public class RozetkaTest extends TestRunner {
 
     @Test
     public void verifyLanguageChangeTest() {
-        rozetkaPage.changeLanguage();
-        Assert.assertEquals(getCurrentUrl(), "https://rozetka.com.ua/");
+        rozetkaPage.changeLanguageTo(RU);
+        var isLangChanged = rozetkaPage.isLanguageChangedTo(RU);
+        assertThat(isLangChanged)
+                .as("Language should be changed")
+                .isEqualTo(true);
     }
 
     @DataProvider
@@ -33,6 +36,20 @@ public class RozetkaTest extends TestRunner {
     @Test(dataProvider = "categories")
     public void verifyCategoriesOpeningTest(String category) {
         rozetkaPage.selectCategory(category);
-        Assert.assertEquals(rozetkaPage.getSelectedCategoryName(), category);
+        var selectedCategoryName = rozetkaPage.getSelectedCategoryName();
+        assertThat(selectedCategoryName)
+                .as("Category name should be correct")
+                .contains(category);
+    }
+
+    @Test
+    public void verifySearchBarTest() {
+        rozetkaPage
+                .searchBarInputText("Xiaomi redmi note 10")
+                .searchButtonClick();
+        var selectedProductName = rozetkaPage.getSelectedProductName();
+        assertThat(selectedProductName)
+                .as("Product name should be correct")
+                .contains("Xiaomi redmi note 10");
     }
 }

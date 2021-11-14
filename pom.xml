@@ -12,9 +12,10 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <testng.version>7.4.0</testng.version>
-        <selenium.java.version>3.141.59</selenium.java.version>
-        <webdrivermanager.version>4.4.3</webdrivermanager.version>
+        <selenium.java.version>4.0.0</selenium.java.version>
         <org.projectlombok.version>1.18.22</org.projectlombok.version>
+        <selenide.version>6.0.3</selenide.version>
+        <assertj.version>3.21.0</assertj.version>
     </properties>
 
     <dependencies>
@@ -39,18 +40,23 @@
         </dependency>
 
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>${webdrivermanager.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${org.projectlombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 </project>

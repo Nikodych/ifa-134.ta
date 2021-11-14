@@ -38,6 +38,7 @@
 .idea/
 target/
 test-output/
+build/
 
 # JIRA plugin
 atlassian-ide-plugin.xml
