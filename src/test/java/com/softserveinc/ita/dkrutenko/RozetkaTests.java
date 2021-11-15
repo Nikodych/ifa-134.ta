@@ -7,18 +7,12 @@ import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartPage;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.annotations.*;
 
-import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class RozetkaTests extends TestRunner {
 
     private final SearchGoods searchGoods = new SearchGoods();
     private final LoginPageModal loginPageModal = new LoginPageModal();
-
-    @BeforeMethod
-    private void openUrl() {
-        open(rozetkaUrl);
-    }
 
     @DataProvider
     public Object[][] rozetkaItemsForSearch() {

@@ -1,6 +1,11 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
 public class User {
+
     private String firstname;
     private String lastname;
     private String email;
@@ -9,6 +14,7 @@ public class User {
     private String message;
     private String expectedCategory;
 
+    @Builder
     public User(String firstname, String lastname, String email, String company,
                 String phone, String message, String expectedCategory) {
         this.firstname = firstname;
@@ -18,36 +24,6 @@ public class User {
         this.phone = phone;
         this.message = message;
         this.expectedCategory = expectedCategory;
-    }
-
-    public User() {}
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCompany() {
-        return company;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getExpectedCategory() {
-        return expectedCategory;
     }
 
     @Override
@@ -61,3 +37,4 @@ public class User {
                 + " ExpectedCategory: " + getExpectedCategory();
     }
 }
+

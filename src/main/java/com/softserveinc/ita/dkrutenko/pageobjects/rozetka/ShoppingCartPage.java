@@ -10,6 +10,7 @@ public class ShoppingCartPage extends BasePage {
 
     public ShoppingCartModal clickAddToCartButton() {
         $x(addToCartButtonSelector).click();
+
         return new ShoppingCartModal();
     }
 

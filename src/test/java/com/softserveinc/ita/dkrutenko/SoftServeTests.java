@@ -2,9 +2,8 @@ package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.User;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.usermodel.UserRepository;
-import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.UserRepo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,8 +11,8 @@ import org.testng.annotations.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static com.codeborne.selenide.Selenide.open;
 
-public class SoftServeTests extends TestRunner {
-
+public class SoftServeTests {
+    protected static final String softServeUrl = "https://www.softserveinc.com/";
     private final MainPage softServeMainPage = new MainPage();
 
     @BeforeMethod
@@ -34,7 +33,7 @@ public class SoftServeTests extends TestRunner {
         softServeMainPage.clickAcceptCookieMessageButton();
         softServeMainPage.clickHeaderMenuButton();
         softServeMainPage.clickLanguageSwitcher();
-        
+
         var getTitle = softServeMainPage.getTitle();
         var expectedTitle = getTitle.contains(english)
                 || getTitle.contains(german)
@@ -49,7 +48,7 @@ public class SoftServeTests extends TestRunner {
     @DataProvider
     public Object[][] softServeContactUsFieldsVerification() {
         return new Object[][]{
-                { new UserRepository().getContactUsUser() }};
+                {new UserRepo().getContactUsUser()}};
     }
 
     @Test(dataProvider = "softServeContactUsFieldsVerification")
