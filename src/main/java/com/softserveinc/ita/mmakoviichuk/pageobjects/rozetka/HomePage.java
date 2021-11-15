@@ -7,9 +7,9 @@ import static java.lang.String.format;
 
 public class HomePage extends RozetkaBasePage {
 
-    private static final String category = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
+    private final String CATEGORY_SELECTOR_TEMPLATE = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
 
     public void openCategory(String categoryName) {
-        $x(format(category, categoryName)).click();
+        $x(format(CATEGORY_SELECTOR_TEMPLATE, categoryName)).click();
     }
 }

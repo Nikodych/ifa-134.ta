@@ -16,16 +16,9 @@ import static com.codeborne.selenide.Selenide.open;
 
 public abstract class TestRunner {
 
-    public static final int defaultTimeout = 15;
-
     @BeforeMethod
     public void setUp() {
         Configuration.browserSize = "1920x1080";
         open("https://rozetka.com.ua/ua/");
-    }
-
-    @AfterClass
-    public void tearDown() {
-        Selenide.closeWebDriver();
     }
 }

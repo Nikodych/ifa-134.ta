@@ -4,15 +4,15 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ProductPage extends RozetkaBasePage {
 
-    private final String wishlistButton = "//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]";
-    private final String productIdLabel = "//p[@class = 'product__code detail-code']";
+    private final String wishlistButtonSelector = "//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]";
+    private final String productIdLabelSelector = "//p[@class = 'product__code detail-code']";
 
     public void addToWishlist() {
-        $x(wishlistButton).click();
+        $x(wishlistButtonSelector).click();
     }
 
     public String getProductId() {
-        return $x(productIdLabel)
+        return $x(productIdLabelSelector)
                 .getText()
                 .replaceAll("[^0-9]", "");
     }

@@ -9,19 +9,16 @@ import static java.lang.String.format;
 
 public class SoftServePage {
 
-    private SelenideElement sidebarSection;
-
     public void switchSidebarSection (String section) {
-        sidebarSection = $x(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section));
-        sidebarSection.click();
+        $x(format("//a[div[@Class = 'side-navigation__title' and text() = '%s']]", section)).click();
     }
 
-    public boolean isSidebarSwitched() {
-        waitForAttributeChanges(
-                sidebarSection,
+    public boolean isSidebarSwitched(String section) {
+        expectedAttribute(
+                $x(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)),
                 "class",
                 "side-navigation__link_active");
 
-        return sidebarSection.getAttribute("class").contains("side-navigation__link_active");
+        return $x(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)).getAttribute("class").contains("side-navigation__link_active");
     }
 }

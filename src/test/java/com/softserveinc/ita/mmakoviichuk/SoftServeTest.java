@@ -18,6 +18,7 @@ public class SoftServeTest extends TestRunner {
     public void sidebarSingleClickTest() {
         SoftServePage softServePage = new SoftServePage();
         softServePage.switchSidebarSection("Careers");
-        Assert.assertTrue(softServePage.isSidebarSwitched());
+
+        Assert.assertTrue(softServePage.isSidebarSwitched("Careers"));
     }
 }
