@@ -5,7 +5,6 @@ import lombok.experimental.UtilityClass;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-
 @UtilityClass
 public class ElementsUtil {
 

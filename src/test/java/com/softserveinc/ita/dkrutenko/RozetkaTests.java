@@ -43,9 +43,9 @@ public class RozetkaTests extends TestRunner {
         //fill search with some brand name, click search button and click on required product
         searchGoods.fillSearchField(brandNameItem);
         searchGoods.clickSearchButton();
-        ShoppingCartPage shoppingCartPage = searchGoods.findActualtem(requiredItem);
+        var shoppingCartPage = searchGoods.findActualtem(requiredItem);
         //add to cart, click continue and go on main page
-        ShoppingCartModal shoppingCartModal = shoppingCartPage.clickAddToCartButton();
+        var shoppingCartModal = shoppingCartPage.clickAddToCartButton();
         shoppingCartModal.clickCartContinueButton();
         shoppingCartModal.clickLogoIcon();
         //click on 'cart' and get title of our product.

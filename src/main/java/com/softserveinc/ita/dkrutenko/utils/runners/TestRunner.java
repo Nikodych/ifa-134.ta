@@ -19,7 +19,7 @@ public abstract class TestRunner {
     private WebDriver driver;
 
     //uncomment "BeforeSuite" and "AfterMethod" for rozetka login test only
-    @BeforeSuite
+    /*@BeforeSuite
     public void setUp() {
 
         ChromeOptions options = new ChromeOptions();
@@ -31,10 +31,10 @@ public abstract class TestRunner {
         open(rozetkaUrl);
     }
 
-    @SneakyThrows
     @AfterMethod
     public void quit() {
         getWebDriver().manage().deleteAllCookies();
         getWebDriver().quit();
     }
+     */
 }

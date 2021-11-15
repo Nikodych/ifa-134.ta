@@ -3,7 +3,7 @@ package com.softserveinc.ita.dkrutenko;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.UserRepo;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.UserRepo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -12,12 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static com.codeborne.selenide.Selenide.open;
 
 public class SoftServeTests {
-    protected static final String softServeUrl = "https://www.softserveinc.com/";
     private final MainPage softServeMainPage = new MainPage();
 
     @BeforeMethod
     private void openUrl() {
-        open(softServeUrl);
+        open("https://www.softserveinc.com/");
     }
 
     @DataProvider
@@ -57,7 +56,7 @@ public class SoftServeTests {
     public void verifyContactUsFields(User user) {
         softServeMainPage.clickAcceptCookieMessageButton();
         softServeMainPage.clickHeaderContactsMenuButton();
-        ContactUsPage contactUsPage = softServeMainPage.clickViewFullContactPage();
+        var contactUsPage = softServeMainPage.clickViewFullContactPage();
 
         contactUsPage.fillContactPageFields(user);
         contactUsPage.clickFormInputModalMenu();

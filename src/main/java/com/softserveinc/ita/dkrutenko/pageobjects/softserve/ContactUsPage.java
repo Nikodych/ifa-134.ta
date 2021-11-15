@@ -4,7 +4,9 @@ import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.setText;
+import com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil;
+
+import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.*;
 import static org.openqa.selenium.Keys.*;
 
 public class ContactUsPage extends MainPage {

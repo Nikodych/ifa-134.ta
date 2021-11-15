@@ -25,16 +25,5 @@ public class User {
         this.message = message;
         this.expectedCategory = expectedCategory;
     }
-
-    @Override
-    public String toString() {
-        return "Firstname: " + getFirstname()
-                + " Lastname: " + getLastname()
-                + " Email: " + getEmail()
-                + " Company: " + getCompany()
-                + " Phone: " + getPhone()
-                + " Message: " + getMessage()
-                + " ExpectedCategory: " + getExpectedCategory();
-    }
 }
 
