@@ -1,16 +1,11 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
-
-import com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil;
-import com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.*;
-
 import org.openqa.selenium.support.ui.Select;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.setText;
 import static org.openqa.selenium.Keys.*;
-
 
 public class ContactUsPage extends MainPage {
 

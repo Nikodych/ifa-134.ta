@@ -35,14 +35,16 @@ public class SoftServeTests {
         softServeMainPage.clickLanguageSwitcher();
 
         var getTitle = softServeMainPage.getTitle();
-        var expectedTitle = getTitle.contains(english)
-                || getTitle.contains(german)
-                || getTitle.contains(ukrainian);
-        assertThat(expectedTitle);
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(german, english, ukrainian);
 
         softServeMainPage.clickHeaderMenuButton();
         softServeMainPage.clickLanguageSwitcher();
-        assertThat(expectedTitle);
+
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(german, english, ukrainian);
     }
 
     @DataProvider
@@ -64,6 +66,8 @@ public class SoftServeTests {
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
         var actualEmail = contactUsPage.getAttributeFromEmailField();
-        assertThat(actualEmail.equals(user.getEmail()));
+        assertThat(actualEmail)
+                .as("Test fail: Text should be: " + user.getEmail())
+                .isEqualTo(user.getEmail());
     }
 }

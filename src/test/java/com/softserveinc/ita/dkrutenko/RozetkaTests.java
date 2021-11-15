@@ -27,7 +27,9 @@ public class RozetkaTests extends TestRunner {
         searchGoods.clickSearchButton();
         //take list of items and filter our required item. Check if that item are actually present
         var actualItem = searchGoods.getRequiredProductName(requiredItem);
-        assertThat(actualItem.contains(requiredItem));
+        assertThat(actualItem)
+                .as("Test fail: Text should be: " + actualItem)
+                .contains(requiredItem);
     }
 
     @DataProvider
@@ -48,9 +50,11 @@ public class RozetkaTests extends TestRunner {
         shoppingCartModal.clickLogoIcon();
         //click on 'cart' and get title of our product.
         shoppingCartPage.clickCartButton();
-        shoppingCartPage.getProductTitle();
+        var getProductTitle = shoppingCartPage.getProductTitle();
         //check if our product title contains required item, after that-delete product from the cart and click on close button
-        assertThat(shoppingCartPage.getProductTitle().contains(requiredItem));
+        assertThat(getProductTitle)
+                .as("Test fail: Text should be: " + getProductTitle)
+                .contains(requiredItem);
 
         shoppingCartModal.deleteFromShoppingCart();
         shoppingCartModal.clickShoppingCartCloseButton();
@@ -68,9 +72,9 @@ public class RozetkaTests extends TestRunner {
         //switch language in top right corner and check if language was actually changed
         loginPageModal.clickLanguageButton();
         var getTitle = loginPageModal.getMarketNameTitle();
-        var marketNameTitle = (getTitle.contains(expectedRuText)
-                || getTitle.contains(expectedUkrText));
-        assertThat(marketNameTitle);
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(expectedRuText, expectedUkrText);
     }
 
     @DataProvider
@@ -90,7 +94,9 @@ public class RozetkaTests extends TestRunner {
         //click on sidebar menu, check if we are logged in by verifying email and click logout
         loginPageModal.clickSideUserMenu();
         var userTitle = loginPageModal.getUserEmailTitle();
-        assertThat(userTitle.equals(email));
+        assertThat(userTitle)
+                .as("Test fail: Text should be: " + userTitle)
+                .isEqualTo(email);
 
         loginPageModal.clickExitButton();
     }
