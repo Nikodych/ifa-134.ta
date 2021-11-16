@@ -4,7 +4,7 @@ import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class HomePageTest extends TestRunner {
+public class RozetkaTests extends TestRunner {
 
     @BeforeMethod
     private void openUrl() {
