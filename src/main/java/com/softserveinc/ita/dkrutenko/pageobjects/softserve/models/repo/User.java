@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo;
 
 import lombok.Builder;
 import lombok.Getter;

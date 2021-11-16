@@ -1,4 +1,6 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo;
+
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.User;
 
 public final class UserRepo {
 
