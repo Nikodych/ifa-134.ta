@@ -2,8 +2,6 @@ package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.LoginPageModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
-import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartModal;
-import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.ShoppingCartPage;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.annotations.*;
 
