@@ -24,8 +24,8 @@ public class ContactUsPage extends MainPage {
 
     public void fillContactPageFields(User user) {
 
-        setText(firstNameFieldSelector, user.getFirstname());
-        setText(lastNameFieldSelector, user.getLastname());
+        setText(firstNameFieldSelector, user.getFirstName());
+        setText(lastNameFieldSelector, user.getLastName());
         setText(emailFieldSelector, user.getEmail());
         setText(companyFieldSelector, user.getCompany());
         setText(phoneNumberFieldSelector, user.getPhone());

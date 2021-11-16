@@ -3,9 +3,14 @@ package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models;
 public final class UserRepo {
 
     public static User getContactUsUser() {
-        return new User("Dmytro", "Krutenko",
-                "dospecwork@gmail.com", "SoftServe Academy", "+380957125027",
-                "test ''contact us'' page", "4");
+        return User.builder()
+                .firstName("Dmytro")
+                .lastName("Krutenko")
+                .email("dospecwork@gmail.com")
+                .company("SoftServe Academy")
+                .phone("+380957125027")
+                .message("test ''contact us'' page")
+                .expectedCategory("4")
+                .build();
     }
-
 }
