@@ -5,7 +5,6 @@
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 *.iml
-*.exe
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids

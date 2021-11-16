@@ -2,48 +2,41 @@ package com.softserveinc.ita.pageobjects;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public abstract class BasePage {
+public abstract class BasePage<T> {
 
-    private String menuButtonSelector = "//button[@class = 'header__button']";
-    private String catalogButtonSelector = "//button[contains(@class, 'menu__toggle')]";
-    private String searchBarSelector = "//input[@name = 'search']";
-    private String searchButtonSelector = "//button[contains(@class, 'search-form__submit')]";
-    private String logInButtonSelector = "//rz-user[@class='header-actions__component']";
-    private String basketButtonSelector = "//rz-cart[@class = 'header-actions__component']";
+    public MenuModal openMenu() {
+        $x("//button[@class = 'header__button']").click();
 
-    public BasePage openMenu() {
-        $x(menuButtonSelector).click();
-
-        return this;
+        return new MenuModal();
     }
 
-    public BasePage openCatalog() {
-        $x(catalogButtonSelector).click();
+    public CatalogModal openCatalog() {
+        $x("//button[contains(@id, 'fat-menu')]").click();
 
-        return this;
+        return new CatalogModal();
     }
 
-    public BasePage searchBarInputText(String inputText) {
-        $x(searchBarSelector).setValue(inputText);
+    public T searchBarInputText(String inputText) {
+        $x("//input[@name = 'search']").setValue(inputText);
 
-        return this;
+        return (T) this;
     }
 
-    public BasePage search() {
-        $x(searchButtonSelector).click();
+    public T search() {
+        $x("//button[contains(@class, 'search-form__submit')]").click();
 
-        return this;
+        return (T) this;
     }
 
-    public BasePage openLogInMenu() {
-        $x(logInButtonSelector).click();
+    public UserModal openUserModalWindow() {
+        $x("//rz-user[@class='header-actions__component']").click();
 
-        return this;
+        return new UserModal();
     }
 
-    public BasePage openBasket() {
-        $x(basketButtonSelector).click();
+    public BasketModal openBasket() {
+        $x("//rz-cart[@class = 'header-actions__component']").click();
 
-        return this;
+        return new BasketModal();
     }
 }
