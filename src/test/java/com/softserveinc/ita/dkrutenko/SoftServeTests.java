@@ -1,8 +1,8 @@
 package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.User;
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.UserRepo;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.repo.User;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.repo.UserRepo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

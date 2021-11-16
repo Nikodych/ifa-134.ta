@@ -1,6 +1,6 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo.User;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.repo.User;
 import org.openqa.selenium.support.ui.Select;
 
 import static com.codeborne.selenide.Selenide.$x;

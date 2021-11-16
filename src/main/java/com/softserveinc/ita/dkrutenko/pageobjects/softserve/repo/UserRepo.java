@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repo;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.repo;
 
 public final class UserRepo {
 
