@@ -2,24 +2,20 @@ package com.softserveinc.ita.vsaroz;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
-import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PracticeTest {
 
-    private final SelenideElement product = $x("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']");
-    private final SelenideElement add = $x("//button[@class='exclusive']//span");
-    private final SelenideElement closeModal = $x("//span[@class='cross']");
-    private final SelenideElement viewShoppingCart = $x("//a[@href='http://automationpractice.com/index.php?controller=order']");
-    private final SelenideElement cartQuantity = $x("//span[@class='ajax_cart_quantity']");
+    private final SelenideElement productElement = $x("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']");
+    private final SelenideElement addToCartButtonElement = $x("//button[@class='exclusive']//span");
+    private final SelenideElement closeModalButtonElement = $x("//span[@class='cross']");
+    private final SelenideElement viewShoppingCartButtonElement = $x("//a[@href='http://automationpractice.com/index.php?controller=order']");
+    private final SelenideElement itemsInCart = $x("//span[@class='ajax_cart_quantity']");
 
     @BeforeMethod
     public void setUp() {
@@ -29,17 +25,17 @@ public class PracticeTest {
 
     @Test
     public void verifyAddToCartTest () {
-        product
+        productElement
                 .shouldBe(visible)
                 .click();
-        add
+        addToCartButtonElement
                 .shouldBe(visible)
                 .click();
-        closeModal
+        closeModalButtonElement
                 .shouldBe(disappear)
                 .click();
-        viewShoppingCart.click();
-        String quantity = cartQuantity.getText();
-        System.out.println(quantity);
+        viewShoppingCartButtonElement.click();
+        String quantity = itemsInCart.getText();
+        assertThat(quantity).isNotNull();
     }
 }
