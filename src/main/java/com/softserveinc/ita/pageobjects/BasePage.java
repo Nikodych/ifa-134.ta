@@ -23,13 +23,13 @@ public abstract class BasePage<T> {
     }
 
     public T searchBarInputText(String inputText) {
-        searchButtonElement.setValue(inputText);
+        $x("//input[@name = 'search']").setValue(inputText);
 
         return (T) this;
     }
 
     public T search() {
-        $x("//button[contains(@class, 'search-form__submit')]").click();
+        searchButtonElement.click();
 
         return (T) this;
     }
