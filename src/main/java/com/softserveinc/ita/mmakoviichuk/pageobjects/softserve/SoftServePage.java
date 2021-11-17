@@ -1,21 +1,20 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import com.codeborne.selenide.Condition;
-
+import static com.codeborne.selenide.Condition.attribute;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.mmakoviichuk.models.Template.SIDEBAR_SELECTOR_TEMPLATE;
 import static java.lang.String.format;
 
 public class SoftServePage {
+    private final String SIDEBAR_SELECTOR_TEMPLATE = "//a[div[@Class = 'side-navigation__title' and text() = '%s']]";
 
     public void switchSidebarSection (String section) {
-        $x(format(SIDEBAR_SELECTOR_TEMPLATE.getTemplate(), section)).click();
+        $x(format(SIDEBAR_SELECTOR_TEMPLATE, section)).click();
     }
 
     public boolean isSidebarSwitched(String section) {
-        var condition = Condition.attribute("class", "side-navigation__link side-navigation__link_active");
+        var condition = attribute("class", "side-navigation__link side-navigation__link_active");
 
-        return $x(format(SIDEBAR_SELECTOR_TEMPLATE.getTemplate(), section))
+        return $x(format(SIDEBAR_SELECTOR_TEMPLATE, section))
                 .shouldHave(condition)
                 .has(condition);
     }

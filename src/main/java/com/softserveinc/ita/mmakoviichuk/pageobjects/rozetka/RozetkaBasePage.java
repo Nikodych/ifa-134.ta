@@ -1,11 +1,11 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.mmakoviichuk.models.Template.DROPDOWN_CATEGORY_SELECTOR_TEMPLATE;
 import static java.lang.String.format;
 
 public abstract class RozetkaBasePage {
 
+    private final String DROPDOWN_CATEGORY_SELECTOR_TEMPLATE = "//a[@class = 'menu-categories__link js-menu-categories__link' and contains(text(), '%s')]";
     private final String catalogButtonSelector  = "//button[@id='fat-menu']";
     private final String loginButtonSelector = "//li[contains(@class , 'user')]";
     private final String emailInputSelector = "//input[@id = 'auth_email']";
@@ -15,7 +15,7 @@ public abstract class RozetkaBasePage {
 
     public void openCategoryFromDropdown(String title) {
         $x(catalogButtonSelector).click();
-        $x(format(DROPDOWN_CATEGORY_SELECTOR_TEMPLATE.getTemplate(), title)).click();
+        $x(format(DROPDOWN_CATEGORY_SELECTOR_TEMPLATE, title)).click();
     }
 
     public void logIn(String email, String password) {
