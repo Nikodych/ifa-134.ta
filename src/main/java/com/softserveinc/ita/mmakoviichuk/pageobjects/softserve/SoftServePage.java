@@ -1,24 +1,22 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.WebElement;
+import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
+import static com.softserveinc.ita.mmakoviichuk.models.Template.SIDEBAR_SELECTOR_TEMPLATE;
 import static java.lang.String.format;
 
 public class SoftServePage {
 
     public void switchSidebarSection (String section) {
-        $x(format("//a[div[@Class = 'side-navigation__title' and text() = '%s']]", section)).click();
+        $x(format(SIDEBAR_SELECTOR_TEMPLATE.getTemplate(), section)).click();
     }
 
     public boolean isSidebarSwitched(String section) {
-        expectedAttribute(
-                $x(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)),
-                "class",
-                "side-navigation__link_active");
+        var condition = Condition.attribute("class", "side-navigation__link side-navigation__link_active");
 
-        return $x(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)).getAttribute("class").contains("side-navigation__link_active");
+        return $x(format(SIDEBAR_SELECTOR_TEMPLATE.getTemplate(), section))
+                .shouldHave(condition)
+                .has(condition);
     }
 }

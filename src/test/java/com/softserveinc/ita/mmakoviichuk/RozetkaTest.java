@@ -2,7 +2,6 @@ package com.softserveinc.ita.mmakoviichuk;
 
 import com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka.*;
 import com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -53,6 +52,6 @@ public class RozetkaTest extends TestRunner {
         WishlistPage wishlistPage = homePage.openWishList();
 
         boolean isProductInWishlist = wishlistPage.isContainsProductId(id);
-        Assert.assertTrue(isProductInWishlist);
+        assertThat(isProductInWishlist).isTrue();
     }
 }

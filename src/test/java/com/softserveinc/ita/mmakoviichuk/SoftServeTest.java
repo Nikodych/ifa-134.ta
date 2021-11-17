@@ -3,9 +3,10 @@ package com.softserveinc.ita.mmakoviichuk;
 import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.mmakoviichuk.pageobjects.softserve.SoftServePage;
 import com.softserveinc.ita.mmakoviichuk.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SoftServeTest extends TestRunner {
 
@@ -19,6 +20,8 @@ public class SoftServeTest extends TestRunner {
         SoftServePage softServePage = new SoftServePage();
         softServePage.switchSidebarSection("Careers");
 
-        Assert.assertTrue(softServePage.isSidebarSwitched("Careers"));
+        assertThat(softServePage.isSidebarSwitched("Careers"))
+                .as("Careers" + " sidebar should be switched")
+                .isTrue();
     }
 }
