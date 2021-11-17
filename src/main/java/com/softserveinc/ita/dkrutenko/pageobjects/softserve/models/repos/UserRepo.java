@@ -1,4 +1,6 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.entities.enums;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repos;
+
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
 
 public final class UserRepo {
 

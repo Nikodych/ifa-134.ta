@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.entities.enums;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models;
 
 import lombok.Builder;
 import lombok.Getter;
