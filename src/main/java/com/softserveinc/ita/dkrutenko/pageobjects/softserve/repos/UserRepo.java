@@ -1,4 +1,4 @@
-package com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.repos;
+package com.softserveinc.ita.dkrutenko.pageobjects.softserve.repos;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
 
