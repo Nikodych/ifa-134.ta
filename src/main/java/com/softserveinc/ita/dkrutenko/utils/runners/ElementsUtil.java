@@ -1,48 +1,18 @@
 package com.softserveinc.ita.dkrutenko.utils.runners;
 
+import com.codeborne.selenide.SelenideElement;
 import lombok.experimental.UtilityClass;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
-import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.*;
-import static com.softserveinc.ita.dkrutenko.utils.runners.TestRunner.defaultTimeout;
-import static java.time.Duration.*;
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static com.codeborne.selenide.Selenide.$x;
 
 @UtilityClass
 public class ElementsUtil {
 
-    public static WebElement $x(By by) {
-        try {
-            return new WebDriverWait(getDriver(), defaultTimeout)
-                    .pollingEvery(ofSeconds(1))
-                    .until(visibilityOfElementLocated(by));
-        } catch (TimeoutException ex) {
-            throw new AssertionError(ex);
-        }
-    }
+    public SelenideElement setText(String elementSelector, String text) {
+        var input = $x(elementSelector);
+        input.click();
+        input.sendKeys(text);
 
-    public static WebElement $xc(By by) {
-        try {
-            return new WebDriverWait(getDriver(), defaultTimeout)
-                    .pollingEvery(ofSeconds(1))
-                    .until(elementToBeClickable(by));
-        } catch (TimeoutException ex) {
-            throw new AssertionError(ex);
-        }
-    }
-
-    public static List<WebElement> $$x(By by) {
-        try {
-            return new WebDriverWait(getDriver(), defaultTimeout)
-                    .pollingEvery(ofSeconds(1))
-                    .until(visibilityOfAllElementsLocatedBy(by));
-        } catch (TimeoutException ex) {
-            throw new AssertionError(ex);
-        }
+        return input;
     }
 }

@@ -1,36 +1,28 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import static org.openqa.selenium.By.cssSelector;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ShoppingCartModal extends ShoppingCartPage {
 
-    private final By cartContinueButtonSelector = cssSelector("div.cart-footer.ng-star-inserted > a");
-    private final By cartCloseButtonSelector = xpath("//button[@class='modal__close ng-star-inserted']");
-    private final By cartSideMenuButtonSelector = xpath("//button[@class='button button--white button--small context-menu__toggle']");
-    private final By deleteFromCartButtonSelector = xpath("//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']");
-
-    public ShoppingCartModal(WebDriver driver) {
-        super(driver);
-    }
+    private final String cartContinueButtonSelector = "//a[@class='button button_size_medium button_color_gray cart-footer__continue ng-star-inserted']";
+    private final String cartCloseButtonSelector = "//button[@class='modal__close ng-star-inserted']";
+    private final String cartSideMenuButtonSelector = "//button[@class='button button--white button--small context-menu__toggle']";
+    private final String deleteFromCartButtonSelector = "//button[@class='button button--medium button--with-icon button--link context-menu-actions__button']";
 
     public void clickCartContinueButton() {
-        waitForClickabelElement(cartContinueButtonSelector).click();
+        $x(cartContinueButtonSelector).click();
     }
 
     public void clickShoppingCartCloseButton() {
-        waitForElementVisibility(cartCloseButtonSelector).click();
+        $x(cartCloseButtonSelector).click();
     }
 
     public void clickCartSideMenu() {
-        waitForClickabelElement(cartSideMenuButtonSelector).click();
+        $x(cartSideMenuButtonSelector).click();
     }
 
     public void clickDeleteFromShoppingCart() {
-        waitForElementVisibility(deleteFromCartButtonSelector).click();
+        $x(deleteFromCartButtonSelector).click();
     }
 
     public void deleteFromShoppingCart() {

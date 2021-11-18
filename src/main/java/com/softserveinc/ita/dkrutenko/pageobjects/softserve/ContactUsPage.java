@@ -1,51 +1,33 @@
 package com.softserveinc.ita.dkrutenko.pageobjects.softserve;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
 import org.openqa.selenium.support.ui.Select;
 
-import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.$x;
-import static org.openqa.selenium.By.*;
+import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.dkrutenko.utils.runners.ElementsUtil.*;
 import static org.openqa.selenium.Keys.*;
 
 public class ContactUsPage extends MainPage {
 
-    private final By firstNameFieldSelector = id("firstName");
-    private final By lastNameFieldSelector = id("lastName");
-    private final By emailFieldSelector = id("email");
-    private final By companyFieldSelector = id("company");
-    private final By phoneNumberFieldSelector = id("phoneNumber");
-    private final By messageFieldSelector = id("message");
-    private final By formModalMenuButtonSelector = xpath("//select[@class='form-input__select']");
-    private final By selectFormModalMenuSelector = id("typeOfInquiry");
-    private final By acceptTermsAndConditionsSelector = xpath("//input[@name='isTermsAccepted']/ancestor::label");
-    private final By acceptUpdatesAndOffersSelector = xpath("//input[@name='isUpdatedOffersAccepted']/ancestor::label");
+    private final String firstNameFieldSelector = "//*[@id = 'firstName']";
+    private final String lastNameFieldSelector = "//*[@id = 'lastName']";
+    private final String emailFieldSelector = "//*[@id = 'email']";
+    private final String companyFieldSelector = "//*[@id = 'company']";
+    private final String phoneNumberFieldSelector = "//*[@id = 'phoneNumber']";
+    private final String messageFieldSelector = "//*[@id = 'message']";
+    private final String selectFormModalMenuSelector = "//*[@id = 'typeOfInquiry']";
+    private final String formModalMenuButtonSelector = "//select[@class='form-input__select']";
+    private final String acceptTermsAndConditionsSelector = "//input[@name='isTermsAccepted']/ancestor::label";
+    private final String acceptUpdatesAndOffersSelector = "//input[@name='isUpdatedOffersAccepted']/ancestor::label";
 
-    public void fillContactPageFields(String firstNameText, String lastNameText, String emailText, String companyText,
-                                      String phoneNumberText, String messageText) {
-        var firstName = $x(firstNameFieldSelector);
-        firstName.click();
-        firstName.sendKeys(firstNameText);
+    public void fillContactPageFields(User user) {
 
-        var lastName = $x(lastNameFieldSelector);
-        lastName.click();
-        lastName.sendKeys(lastNameText);
-
-        var email = $x(emailFieldSelector);
-        email.click();
-        email.sendKeys(emailText);
-
-        var company = $x(companyFieldSelector);
-        company.click();
-        company.sendKeys(companyText);
-
-        var phoneNumber = $x(phoneNumberFieldSelector);
-        phoneNumber.click();
-        phoneNumber.sendKeys(phoneNumberText);
-
-        var message = $x(messageFieldSelector);
-        message.click();
-        message.sendKeys(messageText);
+        setText(firstNameFieldSelector, user.getFirstName());
+        setText(lastNameFieldSelector, user.getLastName());
+        setText(emailFieldSelector, user.getEmail());
+        setText(companyFieldSelector, user.getCompany());
+        setText(phoneNumberFieldSelector, user.getPhone());
+        setText(messageFieldSelector, user.getMessage());
     }
 
     public String getAttributeFromEmailField() {

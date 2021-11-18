@@ -1,70 +1,71 @@
 package com.softserveinc.ita.dkrutenko;
 
-import com.softserveinc.ita.dkrutenko.pageobjects.softserve.ContactUsPage;
 import com.softserveinc.ita.dkrutenko.pageobjects.softserve.MainPage;
-import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.models.User;
+import com.softserveinc.ita.dkrutenko.pageobjects.softserve.repos.UserRepo;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
+import static com.codeborne.selenide.Selenide.open;
 
-public class SoftServeTests extends TestRunner {
-
-    private final MainPage softServeBasePage = new MainPage();
+public class SoftServeTests {
+    private final MainPage softServeMainPage = new MainPage();
 
     @BeforeMethod
     private void openUrl() {
-        driver.get(softServeUrl);
+        open("https://www.softserveinc.com/");
     }
 
     @DataProvider
-    public Object[][] softServeLangVerification() {
+    public Object[][] softServeChangeLanguageVerification() {
         return new Object[][]{
                 {"We are advisors, engineers, and designers solving business challenges with innovative technology solutions",
                         "SoftServe berät Unternehmen weltweit in Digitalisierungs- prozessen und arbeitet am neuesten Stand der Technik",
                         "SoftServe - це провідна ІТ-компанія, що займається консалтингом та надає послуги у сфері цифрових технологій"}};
     }
 
-    @Test(dataProvider = "softServeLangVerification")
-    public void verifyLanguageSwitcher(String english, String german, String ukrainian) {
-        softServeBasePage.clickAcceptCookieMessageButton();
-        softServeBasePage.clickHeaderMenuButton();
-        softServeBasePage.clickLanguageSwitcher();
-        
-        var getTitle = softServeBasePage.getTitle();
-        var expectedTitle = getTitle.contains(english)
-                || getTitle.contains(german)
-                || getTitle.contains(ukrainian);
-        assertTrue(expectedTitle);
+    @Test(dataProvider = "softServeChangeLanguageVerification")
+    public void verifyChangeLanguageFunction(String english, String german, String ukrainian) {
+        softServeMainPage.clickAcceptCookieMessageButton();
+        softServeMainPage.clickHeaderMenuButton();
+        softServeMainPage.clickLanguageSwitcher();
 
-        softServeBasePage.clickHeaderMenuButton();
-        softServeBasePage.clickLanguageSwitcher();
-        assertTrue(expectedTitle);
+        var getTitle = softServeMainPage.getTitle();
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(german, english, ukrainian);
+
+        softServeMainPage.clickHeaderMenuButton();
+        softServeMainPage.clickLanguageSwitcher();
+
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(german, english, ukrainian);
     }
 
     @DataProvider
-    public Object[][] softServeContactVerification() {
+    public Object[][] softServeContactUsFieldsVerification() {
         return new Object[][]{
-                {"Dmytro", "Krutenko", "dospecwork@gmail.com", "SoftServe Academy",
-                        "+380957125027", "test ''contact us'' page", "4"}};
+                {new UserRepo().getContactUsUser()}};
     }
 
-    @Test(dataProvider = "softServeContactVerification")
-    public void verifyContactUsPage(String firstName, String lastName, String email,
-                                    String company, String phone, String message, String expectedCategory) {
-        softServeBasePage.clickAcceptCookieMessageButton();
-        softServeBasePage.clickHeaderContactsMenuButton();
-        ContactUsPage contactUsPage = softServeBasePage.clickViewFullContactPage();
+    @Test(dataProvider = "softServeContactUsFieldsVerification")
+    public void verifyContactUsFields(User user) {
+        softServeMainPage.clickAcceptCookieMessageButton();
+        softServeMainPage.clickHeaderContactsMenuButton();
+        var contactUsPage = softServeMainPage.clickViewFullContactPage();
 
-        contactUsPage.fillContactPageFields(firstName, lastName, email, company, phone, message);
+        contactUsPage.fillContactPageFields(user);
         contactUsPage.clickFormInputModalMenu();
-        contactUsPage.selectFormInputModalMenu(expectedCategory);
+        contactUsPage.selectFormInputModalMenu(user.getExpectedCategory());
 
         contactUsPage.clickAcceptTermsAndPolicyCheckbox();
         contactUsPage.clickAcceptUpdatesAndOffersCheckbox();
         var actualEmail = contactUsPage.getAttributeFromEmailField();
-        assertEquals(actualEmail, email);
+        assertThat(actualEmail)
+                .as("Test fail: Text should be: " + user.getEmail())
+                .isEqualTo(user.getEmail());
     }
 }
