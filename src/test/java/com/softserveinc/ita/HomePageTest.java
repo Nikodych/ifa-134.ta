@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.BasePage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
