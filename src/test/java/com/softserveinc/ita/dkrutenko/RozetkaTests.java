@@ -2,12 +2,17 @@ package com.softserveinc.ita.dkrutenko;
 
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.LoginPageModal;
 import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
-import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
 import org.testng.annotations.*;
 
+import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class RozetkaTests extends TestRunner {
+public class RozetkaTests {
+
+    @BeforeMethod
+    public void openUrl() {
+        open("https://rozetka.com.ua/");
+    }
 
     private final SearchGoods searchGoods = new SearchGoods();
     private final LoginPageModal loginPageModal = new LoginPageModal();

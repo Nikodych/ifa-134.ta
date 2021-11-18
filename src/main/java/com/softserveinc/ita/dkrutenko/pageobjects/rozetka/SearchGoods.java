@@ -13,27 +13,23 @@ public class SearchGoods extends BasePage {
 
     private final String goodsElementsListSelector = "//*[@class='goods-tile__title']";
 
-    public List<String> getGoodsList(String item) {
-        return $$x(goodsElementsListSelector)
+    public ElementsCollection getGoodsList() {
+        return $$x(goodsElementsListSelector);
+    }
+
+    public String getRequiredProductName(String item) {
+        var list = getGoodsList()
                 .stream()
                 .map(WebElement::getText)
                 .filter(text -> text.contains(item))
                 .collect(toList());
+
+        return list.stream().findFirst().toString();
     }
 
-    public String getFirstRequiredItem(String item) {
-        return getGoodsList(item).stream().findFirst().toString();
+        public ShoppingCartModal findActualtem(String text) {
+            $(byPartialLinkText(text)).click();
+
+            return new ShoppingCartModal();
+        }
     }
-
-    public String getLastRequiredItem(String item) {
-        var list = getGoodsList(item);
-
-        return list.get(list.size() -1);
-    }
-
-    public ShoppingCartModal findActualtem(String text) {
-        $(byPartialLinkText(text)).click();
-
-        return new ShoppingCartModal();
-    }
-}
