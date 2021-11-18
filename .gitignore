@@ -6,6 +6,7 @@
 .idea/jsLibraryMappings.xml
 *.iml
 *.exe
+
 # Sensitive or high-churn files:
 .idea/dataSources.ids
 .idea/dataSources.xml
@@ -38,6 +39,7 @@
 target/
 test-output/
 build/
+
 # JIRA plugin
 atlassian-ide-plugin.xml
 

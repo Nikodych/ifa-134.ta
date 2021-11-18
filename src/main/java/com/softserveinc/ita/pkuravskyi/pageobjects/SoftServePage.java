@@ -1,23 +1,19 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
-import org.openqa.selenium.By;
-
-import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl;
-import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$$x;
-import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
-import static org.openqa.selenium.By.cssSelector;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Condition.attributeMatching;
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.WebDriverRunner.url;
 
 public class SoftServePage {
 
-    private final By sideNavBarCategoriesList = xpath("//a[contains(@class, 'side-navigation__link')]");
-    private final By activeSideNavBarCategory = cssSelector(".side-navigation__link_active div");
-    private final By menuButton = xpath("//button[@aria-label = 'Open menu']");
-    private final By menuCategoriesList = xpath("//ul[@class = 'main-navigation__menu']//a");
-    private final By activeMenuCategory = cssSelector(".main-navigation__menu-opened a");
+    private final String sideNavBarCategoriesSelector = "//a[contains(@class, 'side-navigation__link')]";
+    private final String activeSideNavBarCategorySelector = ".side-navigation__link_active div";
+    private final String menuButtonSelector = "//button[@aria-label = 'Open menu']";
+    private final String menuCategoriesSelector = "//ul[@class = 'main-navigation__menu']//a";
+    private final String activeMenuCategorySelector = ".main-navigation__menu-opened a";
 
     public SoftServePage selectSideNavBarCategory(String category) {
-        var sideNavBarItems = $$x(sideNavBarCategoriesList);
+        var sideNavBarItems = $$x(sideNavBarCategoriesSelector);
 
         for (var item : sideNavBarItems) {
             var itemAttribute = item
@@ -29,7 +25,7 @@ public class SoftServePage {
             } else {
                 item.click();
                 //wait until selected item gets "active" class
-                $x(item, "className", "side-navigation__link_active");
+                item.shouldHave(attributeMatching("className", ".*side-navigation__link_active.*"));
                 break;
             }
         }
@@ -38,17 +34,17 @@ public class SoftServePage {
     }
 
     public String getActiveSideNavBarCategory() {
-        return $x(activeSideNavBarCategory).getAttribute("innerHTML");
+        return $(activeSideNavBarCategorySelector).getAttribute("innerHTML");
     }
 
     public void openMenu() {
-        $x(menuButton).click();
+        $x(menuButtonSelector).click();
     }
 
     public SoftServePage selectMenuCategory(String category) {
         openMenu();
 
-        var menuNavBarItems = $$x(menuCategoriesList);
+        var menuNavBarItems = $$x(menuCategoriesSelector);
 
         for (var item : menuNavBarItems) {
             var itemAttribute = item.getAttribute("textContent");
@@ -60,19 +56,19 @@ public class SoftServePage {
                 break;
             }
         }
+
         return this;
     }
 
     public String getActiveMenuUrl() {
-        var currentUrl = getCurrentUrl();
         var list = new String[]{"resources", "blog", "locations", "contact"};
 
         for (var item : list) {
-            if (currentUrl.contains(item)) {
-                return currentUrl;
+            if (url().contains(item)) {
+                return url();
             }
         }
 
-        return $x(activeMenuCategory).getAttribute("href");
+        return $x(activeMenuCategorySelector).getAttribute("href");
     }
 }

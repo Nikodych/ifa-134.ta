@@ -1,15 +1,16 @@
 package com.softserveinc.ita.dkrutenko;
 
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.LoginPageModal;
+import com.softserveinc.ita.dkrutenko.pageobjects.rozetka.SearchGoods;
 import com.softserveinc.ita.dkrutenko.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.*;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class RozetkaTests extends TestRunner {
 
-    @BeforeMethod
-    private void openUrl() {
-        driver.get(rozetkaUrl);
-    }
+    private final SearchGoods searchGoods = new SearchGoods();
+    private final LoginPageModal loginPageModal = new LoginPageModal();
 
     @DataProvider
     public Object[][] rozetkaItemsForSearch() {
@@ -24,7 +25,9 @@ public class RozetkaTests extends TestRunner {
         searchGoods.clickSearchButton();
         //take list of items and filter our required item. Check if that item are actually present
         var actualItem = searchGoods.getRequiredProductName(requiredItem);
-        Assert.assertTrue(actualItem.contains(requiredItem));
+        assertThat(actualItem)
+                .as("Test fail: Text should be: " + actualItem)
+                .contains(requiredItem);
     }
 
     @DataProvider
@@ -38,16 +41,18 @@ public class RozetkaTests extends TestRunner {
         //fill search with some brand name, click search button and click on required product
         searchGoods.fillSearchField(brandNameItem);
         searchGoods.clickSearchButton();
-        searchGoods.findActualtem(requiredItem);
+        var shoppingCartPage = searchGoods.findActualtem(requiredItem);
         //add to cart, click continue and go on main page
-        shoppingCartPage.clickAddToCartButton();
+        var shoppingCartModal = shoppingCartPage.clickAddToCartButton();
         shoppingCartModal.clickCartContinueButton();
         shoppingCartModal.clickLogoIcon();
         //click on 'cart' and get title of our product.
         shoppingCartPage.clickCartButton();
-        shoppingCartPage.getProductTitle();
+        var getProductTitle = shoppingCartPage.getProductTitle();
         //check if our product title contains required item, after that-delete product from the cart and click on close button
-        Assert.assertTrue(shoppingCartPage.getProductTitle().contains(requiredItem));
+        assertThat(getProductTitle)
+                .as("Test fail: Text should be: " + getProductTitle)
+                .contains(requiredItem);
 
         shoppingCartModal.deleteFromShoppingCart();
         shoppingCartModal.clickShoppingCartCloseButton();
@@ -65,9 +70,9 @@ public class RozetkaTests extends TestRunner {
         //switch language in top right corner and check if language was actually changed
         loginPageModal.clickLanguageButton();
         var getTitle = loginPageModal.getMarketNameTitle();
-        var marketNameTitle = (getTitle.contains(expectedRuText)
-                || getTitle.contains(expectedUkrText));
-        Assert.assertTrue(marketNameTitle);
+        assertThat(getTitle)
+                .as("Test fail: Text should be: " + getTitle)
+                .containsAnyOf(expectedRuText, expectedUkrText);
     }
 
     @DataProvider
@@ -87,7 +92,9 @@ public class RozetkaTests extends TestRunner {
         //click on sidebar menu, check if we are logged in by verifying email and click logout
         loginPageModal.clickSideUserMenu();
         var userTitle = loginPageModal.getUserEmailTitle();
-        Assert.assertEquals(userTitle, email);
+        assertThat(userTitle)
+                .as("Test fail: Text should be: " + userTitle)
+                .isEqualTo(email);
 
         loginPageModal.clickExitButton();
     }

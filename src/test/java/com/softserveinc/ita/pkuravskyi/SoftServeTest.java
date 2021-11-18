@@ -2,10 +2,13 @@ package com.softserveinc.ita.pkuravskyi;
 
 import com.softserveinc.ita.pkuravskyi.pageobjects.SoftServePage;
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
+import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import static org.assertj.core.api.Assertions.*;
 
 public class SoftServeTest extends TestRunner {
 
@@ -26,7 +29,10 @@ public class SoftServeTest extends TestRunner {
     @Test(dataProvider = "sideNavBarCategories")
     public void verifySideNavBarTest(String category) {
         softServePage.selectSideNavBarCategory(category);
-        Assert.assertEquals(softServePage.getActiveSideNavBarCategory(), category);
+        var activeSideNavBarCategory = softServePage.getActiveSideNavBarCategory();
+        assertThat(activeSideNavBarCategory)
+                .as("Category name should be correct")
+                .contains(category);
     }
 
     @DataProvider
@@ -48,8 +54,11 @@ public class SoftServeTest extends TestRunner {
     }
 
     @Test(dataProvider = "menuCategories")
-    public void verifyMenuTest(String category, String expectedURL) {
+    public void verifyMenuTest(String category, String expectedUrl) {
         softServePage.selectMenuCategory(category);
-        Assert.assertEquals(softServePage.getActiveMenuUrl(), expectedURL);
+        var activeMenuUrl = softServePage.getActiveMenuUrl();
+        assertThat(activeMenuUrl)
+                .as("Category name should be correct")
+                .contains(expectedUrl);
     }
 }

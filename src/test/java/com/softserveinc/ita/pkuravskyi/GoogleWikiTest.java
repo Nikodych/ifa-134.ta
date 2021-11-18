@@ -3,11 +3,11 @@ package com.softserveinc.ita.pkuravskyi;
 import com.softserveinc.ita.pkuravskyi.pageobjects.GooglePage;
 import com.softserveinc.ita.pkuravskyi.pageobjects.WikipediaPage;
 import com.softserveinc.ita.pkuravskyi.utils.runners.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.pkuravskyi.pageobjects.BasePage.getCurrentUrl;
+import static com.codeborne.selenide.WebDriverRunner.url;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleWikiTest extends TestRunner {
 
@@ -23,18 +23,29 @@ public class GoogleWikiTest extends TestRunner {
     public void verifyWikipediaSearchTest() {
 
         googlePage.searchBarInputText("Wikipedia");
-        Assert.assertEquals(googlePage.getSearchBarText(), "Wikipedia");
+        var googleSearchBarText = googlePage.getSearchBarText();
+        assertThat(googleSearchBarText)
+                .as("Text in search bar should be correct")
+                .isEqualTo("Wikipedia");
 
         googlePage
                 .searchButtonClick()
                 .openWikipedia();
+        assertThat(url())
+                .as("Ukrainian wikipedia should be opened")
+                .contains("uk.wikipedia.org");
 
         wikipediaPage.searchBarInputText("rozetka.ua");
-        Assert.assertEquals(wikipediaPage.getSearchBarText(), "rozetka.ua");
+        var wikipediaSearchBarText = wikipediaPage.getSearchBarText();
+        assertThat(wikipediaSearchBarText)
+                .as("Text in search bar should be correct")
+                .isEqualTo("rozetka.ua");
 
         wikipediaPage
                 .searchButtonClick()
                 .openRozetka();
-        Assert.assertEquals(getCurrentUrl(), "https://rozetka.com.ua/");
+        assertThat(url())
+                .as("Rozetka should be opened")
+                .isEqualTo("https://rozetka.com.ua/");
     }
 }

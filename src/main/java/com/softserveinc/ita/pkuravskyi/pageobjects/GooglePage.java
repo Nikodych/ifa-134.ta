@@ -1,22 +1,18 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
-import org.openqa.selenium.By;
-
-import static com.softserveinc.ita.pkuravskyi.utils.runners.ElementsUtil.$x;
-import static org.openqa.selenium.By.name;
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class GooglePage extends BasePage<GooglePage> {
 
-    private final By wikipediaUrl = xpath("//a[contains(@href, 'uk.wikipedia.org')]");
+    private final String wikipediaUrlSelector = "//a[contains(@href, 'uk.wikipedia.org')]";
 
     public GooglePage() {
-        searchBar = name("q");
-        searchButton = name("btnK");
+        searchBar = "//input[@name = 'q']";
+        searchButton = "//input[@name = 'btnK']";
     }
 
     public WikipediaPage openWikipedia() {
-        $x(wikipediaUrl).click();
+        $x(wikipediaUrlSelector).click();
 
         return new WikipediaPage();
     }
