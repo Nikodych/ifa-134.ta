@@ -56,6 +56,6 @@ public abstract class BasePage<T> {
         var verificationWord = language.getVerificationWord();
         var searchButtonText = searchButtonElement.getText();
 
-        return searchButtonText.contains(verificationWord);
+        return searchButtonText.equals(verificationWord);
     }
 }
