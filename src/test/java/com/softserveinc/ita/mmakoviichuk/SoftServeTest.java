@@ -17,11 +17,12 @@ public class SoftServeTest extends TestRunner {
 
     @Test
     public void sidebarSingleClickTest() {
+        var title = "Careers";
         SoftServePage softServePage = new SoftServePage();
-        softServePage.switchSidebarSection("Careers");
+        softServePage.switchSidebarSection(title);
 
-        assertThat(softServePage.isSidebarSwitched("Careers"))
-                .as("Careers" + " sidebar should be switched")
+        assertThat(softServePage.isSidebarSwitched(title))
+                .as(title + " sidebar should be switched")
                 .isTrue();
     }
 }

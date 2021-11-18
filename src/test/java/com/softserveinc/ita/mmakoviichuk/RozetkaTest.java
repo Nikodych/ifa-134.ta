@@ -53,7 +53,7 @@ public class RozetkaTest extends TestRunner {
 
         boolean isProductInWishlist = wishlistPage.isContainsProductId(id);
         assertThat(isProductInWishlist)
-                .as("Product" + "product should be in wishlist")
+                .as("Product should be in wishlist")
                 .isTrue();
     }
 }
