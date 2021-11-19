@@ -1,26 +1,21 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import org.openqa.selenium.WebElement;
-
-import static com.softserveinc.ita.mmakoviichuk.utils.runners.ElementsUtil.*;
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
-import static org.openqa.selenium.By.xpath;
 
 public class SoftServePage {
-
-    private WebElement sidebarSection;
+    private final String SIDEBAR_SELECTOR_TEMPLATE = "//a[div[@Class = 'side-navigation__title' and text() = '%s']]";
 
     public void switchSidebarSection (String section) {
-        sidebarSection = $x(xpath(format("//a[div[@class = 'side-navigation__title' and text() = '%s']]", section)));
-        sidebarSection.click();
+        $x(format(SIDEBAR_SELECTOR_TEMPLATE, section)).click();
     }
 
-    public boolean isSidebarSwitched() {
-        waitForAttributeChanges(
-                sidebarSection,
-                "class",
-                "side-navigation__link_active");
+    public boolean isSidebarSwitched(String section) {
+        var condition = attribute("class", "side-navigation__link side-navigation__link_active");
 
-        return sidebarSection.getAttribute("class").contains("side-navigation__link_active");
+        return $x(format(SIDEBAR_SELECTOR_TEMPLATE, section))
+                .shouldHave(condition)
+                .has(condition);
     }
 }

@@ -5,6 +5,7 @@
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 *.iml
+*.exe
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
@@ -47,9 +48,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
-
-# Windows exe files
-*.exe
 
 # Ignore Mac DS_Store files
 .DS_Store
