@@ -1,29 +1,18 @@
 package com.softserveinc.ita.vsaroz;
 
 import com.codeborne.selenide.Configuration;
+import com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
+import com.softserveinc.ita.vsaroz.repo.UserRepo;
 import org.testng.annotations.*;
-import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.vsaroz.models.User;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SignUpTest {
-
-    private String firstName = "UsersFirstName";
-    private String lastName = "YourLastName";
-    private String email = "test.testadmin@gmail.com";
-    private String userName = "YourUserName";
-    private String password = "987654321";
-
-    private final SelenideElement homepageJoinButtonElement = $x("//a[@href='/join']");
-    private final SelenideElement firstnameInputElement = $x("//input[@name='user[first_name]']");
-    private final SelenideElement lastnameInputElement = $x("//input[@name='user[last_name]']");
-    private final SelenideElement emailInputElement = $x("//input[@name='user[email]']");
-    private final SelenideElement usernameInputElement = $x("//input[@name='user[username]']");
-    private final SelenideElement passwordInputElement = $x("//input[@name='user[password]']");
-    private final SelenideElement joinButtonElement = $x("//a[@class='btn btn-default btn-block-level js-fake-join-form-submit-button']");
+public class SignUpTest extends JoinFormPage {
+    private final JoinFormPage joinFormPage = new JoinFormPage();
 
     @BeforeMethod
     public void setUp() {
@@ -31,16 +20,22 @@ public class SignUpTest {
         open("https://unsplash.com/login");
     }
 
-    @Test
-    public void verifySignUpTest() {
-        homepageJoinButtonElement.click();
-        firstnameInputElement.sendKeys(firstName);
-        lastnameInputElement.sendKeys(lastName);
-        emailInputElement.sendKeys(email);
-        usernameInputElement.sendKeys(userName);
-        passwordInputElement.sendKeys(password);
-        joinButtonElement
+    @DataProvider
+    public Object[][] loginformFillInputs() {
+        return new Object[][]{
+                {new UserRepo().getUsersContacts()}};
+    }
+
+    @Test(dataProvider = "loginformFillInputs")
+    public void verifySignUpTest(User user) {
+        $x(homepageJoinButtonElement).click();
+        joinFormPage.fillInputs(user);
+        $x(joinButtonElement)
                 .shouldBe(visible)
                 .click();
+        $x(avatarElement).click();
+
+        assertThat(viewProfileElement)
+                .as("Some Errors occured while registration");
     }
 }

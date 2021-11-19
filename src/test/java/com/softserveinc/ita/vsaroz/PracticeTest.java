@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PracticeTest {
 
-    private final SelenideElement productElement = $x("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']");
-    private final SelenideElement addToCartButtonElement = $x("//button[@class='exclusive']//span");
-    private final SelenideElement closeModalButtonElement = $x("//span[@class='cross']");
-    private final SelenideElement viewShoppingCartButtonElement = $x("//a[@href='http://automationpractice.com/index.php?controller=order']");
-    private final SelenideElement itemsInCart = $x("//span[@class='ajax_cart_quantity']");
+    private final String productElement = ("//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']");
+    private final String addToCartButtonElement = ("//button[@class='exclusive']//span");
+    private final String closeModalButtonElement = ("//span[@class='cross']");
+    private final String viewShoppingCartButtonElement = ("//a[@href='http://automationpractice.com/index.php?controller=order']");
+    private final String itemsInCart = ("//span[@class='ajax_cart_quantity']");
 
     @BeforeMethod
     public void setUp() {
@@ -25,17 +25,20 @@ public class PracticeTest {
 
     @Test
     public void verifyAddToCartTest () {
-        productElement
+        $x(productElement)
                 .shouldBe(visible)
                 .click();
-        addToCartButtonElement
+        $x(addToCartButtonElement)
                 .shouldBe(visible)
                 .click();
-        closeModalButtonElement
+        $x(closeModalButtonElement)
                 .shouldBe(disappear)
                 .click();
-        viewShoppingCartButtonElement.click();
-        String quantity = itemsInCart.getText();
-        assertThat(quantity).isNotNull();
+        $x(viewShoppingCartButtonElement).click();
+        var quantity = $x(itemsInCart).getText();
+        Integer.parseInt(quantity);
+
+        assertThat(quantity)
+                .as("Incorrect product quantity in the shopping cart");
     }
 }

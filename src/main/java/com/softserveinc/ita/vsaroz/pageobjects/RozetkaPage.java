@@ -1,33 +1,20 @@
 package com.softserveinc.ita.vsaroz.pageobjects;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
-
-import javax.swing.*;
-import java.util.List;
-
-import static com.codeborne.selenide.CollectionCondition.itemWithText;
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.id;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class RozetkaPage {
 
-    private final SelenideElement laptopMenuItemElement = $x("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//li[1]");
-    private final SelenideElement laptopFilterCheckboxElement = $x("//a[@title='Ноутбуки']");
-    private final List<SelenideElement> brandFilterCheckboxes = $$x("//div@class='sidebar-block__inner ng-star-inserted'");
+    private final String categoryTypeSelector = ("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//li[1]");
+    private final String laptopFilterCheckboxElement = ("//a[@title='Ноутбуки']");
+    private final String filteredCheckboxName = ("//label[@for='Dell']");
 
-    public void clickOnLaptopMenuItem() { laptopMenuItemElement.click(); }
+    public void clickOnCategorySelector() { $x(categoryTypeSelector).click(); }
 
-    public void filterByLaptop() { laptopFilterCheckboxElement.click(); }
+    public void clickOnLaptopFilter() { $x(laptopFilterCheckboxElement).click(); }
 
-    public void filterByBrand(String id) {
-
+    public void filterByBrand(String item) {
+        $x("//a[@class='checkbox-filter__link']" + "[@href='/ua/notebooks/c80004/producer=" + item + "/']").click();
     }
 
-
+    public void checkFilter() { $x(filteredCheckboxName).getText(); }
 }
