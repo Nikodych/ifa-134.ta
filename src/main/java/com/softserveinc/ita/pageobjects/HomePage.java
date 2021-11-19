@@ -9,5 +9,4 @@ public class HomePage extends BasePage<HomePage>{
     public void openCategory(String categoryName) {
         $x(format(CATEGORY_SELECTOR_TEMPLATE, categoryName)).click();
     }
-
 }
