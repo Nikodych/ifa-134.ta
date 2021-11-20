@@ -3,6 +3,8 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
@@ -57,5 +59,15 @@ public abstract class BasePage<T> {
         var searchButtonText = searchButtonElement.getText();
 
         return searchButtonText.equals(verificationWord);
+    }
+
+    public T closeAdBanner() {
+        var adBannerCrossIconSelector = $("span .exponea-close-cross");
+
+        if (adBannerCrossIconSelector.is(visible)) {
+            adBannerCrossIconSelector.click();
+        }
+
+        return (T) this;
     }
 }
