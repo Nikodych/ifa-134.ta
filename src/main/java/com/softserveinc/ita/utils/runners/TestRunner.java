@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import static com.codeborne.selenide.Selenide.open;
 
 public abstract class TestRunner {
-
     protected HomePage homePage = new HomePage();
 
     @BeforeMethod
