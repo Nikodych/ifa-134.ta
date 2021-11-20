@@ -4,14 +4,11 @@ import com.codeborne.selenide.Configuration;
 import com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
 import com.softserveinc.ita.vsaroz.repo.UserRepo;
 import org.testng.annotations.*;
-import com.softserveinc.ita.vsaroz.models.User;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SignUpTest extends JoinFormPage {
+public class SignUpTest {
     private final JoinFormPage joinFormPage = new JoinFormPage();
 
     @BeforeMethod
@@ -20,22 +17,19 @@ public class SignUpTest extends JoinFormPage {
         open("https://unsplash.com/login");
     }
 
-    @DataProvider
-    public Object[][] loginformFillInputs() {
-        return new Object[][]{
-                {new UserRepo().getUsersContacts()}};
-    }
+    @Test
+    public void verifySignUpTest() {
+        joinFormPage.clickHomepageJoinButtonElement();
+        joinFormPage.fillInputs(UserRepo.getUsersContacts());
+        joinFormPage.signUp();
+        joinFormPage.clickAvatarAndProfileElements();
 
-    @Test(dataProvider = "loginformFillInputs")
-    public void verifySignUpTest(User user) {
-        $x(homepageJoinButtonElement).click();
-        joinFormPage.fillInputs(user);
-        $x(joinButtonElement)
-                .shouldBe(visible)
-                .click();
-        $x(avatarElement).click();
+        String newUserProfileName = joinFormPage
+                .verifyRegistration()
+                .trim();
 
-        assertThat(viewProfileElement)
-                .as("Some Errors occured while registration");
+        assertThat(newUserProfileName)
+                .as("Something wrong with your registration")
+                .isEqualTo("vitalii1 saroz1");
     }
 }

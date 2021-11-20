@@ -6,22 +6,20 @@ import org.testng.annotations.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RozetkaTest extends TestRunner {
-    @DataProvider
-    public Object[][] filterItems() {
-        return new Object[][]{
-                {"dell"}};
-    }
 
-    @Test(dataProvider = "filterItems")
-    public void verifyFilterFunctionality(String brand) {
+    @Test
+    public void verifyFilterFunctionality() {
+        String brand = "dell";
         rozetkaPage.clickOnCategorySelector();
-        rozetkaPage.clickOnLaptopFilter();
+        rozetkaPage.clickOnCategory();
         rozetkaPage.filterByBrand(brand);
-        rozetkaPage.checkFilter();
 
-        assertThat(brand)
+        String brandName = rozetkaPage
+                .getFilterName()
+                .trim();
+
+        assertThat(brandName)
                 .as("Incorrect filter displayed")
-                .isEqualTo("dell");
-
+                .isEqualTo("Dell");
     }
 }
