@@ -1,43 +1,45 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.Selenide.$;
 import static com.softserveinc.ita.repos.CustomerOrderDataRepo.getCustomerOrderData;
 import static java.lang.Integer.parseInt;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
 
-    private final String cityDropdownSelector = "li.autocomplete__item";
-    private final String surnameField = "div.js-surname input";
-    private final String nameField = "div.js-name input";
-    private final String phoneField = "div.js-phone input";
-    private final String cityField = "div.js-city input";
+    private final SelenideElement cityDropdownElement = $("li.autocomplete__item");
+    private final SelenideElement surnameFieldElement = $("div.js-surname input");
+    private final SelenideElement nameFieldElement = $("div.js-name input");
+    private final SelenideElement phoneFieldElement = $("div.js-phone input");
+    private final SelenideElement cityFieldElement = $("div.js-city input");
 
     public String getSurnameFieldText() {
-        return $(surnameField).getValue();
+        return surnameFieldElement.getValue();
     }
 
     public String getNameFieldText() {
-        return $(nameField).getValue();
+        return nameFieldElement.getValue();
     }
 
     public String getPhoneFieldText() {
-        return $(phoneField).getValue();
+        return phoneFieldElement.getValue();
     }
 
     public String getCityFieldText() {
-        return $(cityField).getValue();
+        return cityFieldElement.getValue();
     }
 
     public CheckoutPage inputCustomerData() {
-        $(surnameField).setValue(getCustomerOrderData().getSurname());
-        $(nameField).setValue(getCustomerOrderData().getName());
-        $(phoneField).setValue(getCustomerOrderData().getPhone());
-        var customerCity = $(cityField).setValue(getCustomerOrderData().getCity());
+        surnameFieldElement.setValue(getCustomerOrderData().getSurname());
+        nameFieldElement.setValue(getCustomerOrderData().getName());
+        phoneFieldElement.setValue(getCustomerOrderData().getPhone());
+        var customerCity = cityFieldElement.setValue(getCustomerOrderData().getCity());
 
-        if ($(cityDropdownSelector)
+        if (cityDropdownElement
                 .getText()
                 .contains(customerCity.getText())) {
-            $(cityDropdownSelector).click();
+            cityDropdownElement.click();
         }
 
         return this;

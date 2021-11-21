@@ -11,6 +11,7 @@ import static java.lang.String.format;
 public abstract class BasePage<T> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
+    private final SelenideElement adBannerCrossIconElement = $("span .exponea-close-cross");
 
     public MenuModal openMenu() {
         $x("//button[@class = 'header__button']").click();
@@ -62,10 +63,8 @@ public abstract class BasePage<T> {
     }
 
     public T closeAdBanner() {
-        var adBannerCrossIconSelector = $("span .exponea-close-cross");
-
-        if (adBannerCrossIconSelector.is(visible)) {
-            adBannerCrossIconSelector.click();
+        if (adBannerCrossIconElement.is(visible)) {
+            adBannerCrossIconElement.click();
         }
 
         return (T) this;
