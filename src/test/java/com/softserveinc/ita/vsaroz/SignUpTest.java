@@ -9,12 +9,13 @@ import static com.codeborne.selenide.Selenide.open;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignUpTest {
-    private final JoinFormPage joinFormPage = new JoinFormPage();
+    private JoinFormPage joinFormPage;
 
     @BeforeMethod
     public void setUp() {
         Configuration.browserSize = "1920x1080";
         open("https://unsplash.com/login");
+        joinFormPage = new JoinFormPage();
     }
 
     @Test

@@ -4,7 +4,7 @@ import com.softserveinc.ita.vsaroz.models.User;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.vsaroz.utils.runners.ElementUtils.setText;
+import static com.softserveinc.ita.vsaroz.utils.runners.ElementUtils.*;
 
 public class JoinFormPage {
 
