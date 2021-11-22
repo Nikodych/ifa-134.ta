@@ -1,19 +1,22 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Random;
 
-import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
+import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 public abstract class BasePage<T> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
+    private final String selectFromPriceModalMenuSelector = "div > rz-sort > select";
 
     public MenuModal openMenu() {
         $x("//button[@class = 'header__button']").click();
@@ -86,5 +89,58 @@ public abstract class BasePage<T> {
         var searchButtonText = searchButtonElement.getText();
 
         return searchButtonText.equals(verificationWord);
+    }
+
+    public void selectRandomCategory() {
+        var listOfCategories = $$("sidebar-fat-menu > div > ul > li > a");
+        var random = new Random();
+        listOfCategories
+                .get(random.nextInt(listOfCategories.size() - 3))
+                .click();
+    }
+
+    public void selectRandomSubCategory() {
+        var listOfSubCategories = $$("rz-list-tile > div > a.tile-cats__heading");
+        listOfSubCategories
+                .get(0)
+                .click();
+    }
+
+    public void setMinimalPrice(String price) {
+        var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
+        minPriceField.click();
+        minPriceField.setValue(price);
+    }
+
+    public void setMaximalPrice(String price) {
+        var maxPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']");
+        maxPriceField.click();
+        maxPriceField.setValue(price);
+    }
+
+    public void clickOnPriceButton() {
+        $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
+    }
+
+    public String findActualPrice(String price) {
+        var listOfPrices = $$x("//span[@class='goods-tile__price-value']")
+                .stream()
+                .map(SelenideElement::getText)
+                .filter(text -> text.contains(price))
+                .collect(toList());
+
+        return listOfPrices
+                .stream()
+                .findFirst()
+                .toString()
+                .trim();
+    }
+
+    public void selectFromCheapToExpensive() {
+        selectPriceFromModalMenu(1, selectFromPriceModalMenuSelector);
+    }
+
+    public void selectFromExpensiveToCheap() {
+        selectPriceFromModalMenu(2, selectFromPriceModalMenuSelector);
     }
 }

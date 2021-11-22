@@ -37,4 +37,31 @@ public class HomePageTest extends TestRunner {
                 .as("Test failed: Last item should contains: " + requiredItem)
                 .contains(requiredItem);
     }
+
+    @DataProvider
+    public Object[][] priceSortingFunctionality() {
+        return new Object[][]{
+                {"999", "9999"}};
+    }
+
+    @Test(dataProvider = "priceSortingFunctionality")
+    public void verifyPriceSortingFunctionality(String minPrice, String maxPrice) {
+        homePage.selectRandomCategory();
+        homePage.selectRandomSubCategory();
+        homePage.setMinimalPrice(minPrice);
+        homePage.setMaximalPrice(maxPrice);
+        homePage.clickOnPriceButton();
+        homePage.selectFromCheapToExpensive();
+        var fromCheapToExpensivePrice = homePage.findActualPrice(minPrice);
+        System.out.println(fromCheapToExpensivePrice);
+        assertThat(fromCheapToExpensivePrice)
+                .as("Test failed: Minimal price should be " + minPrice)
+                .contains(minPrice);
+
+        homePage.selectFromExpensiveToCheap();
+        var fromExpensiveToCheapPrice = homePage.findActualPrice(maxPrice);
+        assertThat(fromExpensiveToCheapPrice)
+                .as("Test failed: Maximal price should be " + maxPrice)
+                .contains(maxPrice);
+    }
 }
