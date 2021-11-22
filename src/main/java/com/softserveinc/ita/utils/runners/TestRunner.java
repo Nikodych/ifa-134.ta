@@ -10,6 +10,6 @@ public abstract class TestRunner {
 
     @BeforeMethod
     public void openHomePage() {
-        open("https://rozetka.com.ua/ua/telefony-tv-i-ehlektronika/c4627949/");
+        open("https://rozetka.com.ua/");
     }
 }

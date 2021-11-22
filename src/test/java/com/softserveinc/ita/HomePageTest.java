@@ -29,11 +29,11 @@ public class HomePageTest extends TestRunner {
         homePage.clickSearchButton();
         var firstItem = homePage.getFirstRequiredItem(requiredItem);
         var lastItem = homePage.getLastRequiredItem(requiredItem);
-        AssertionsForClassTypes.assertThat(firstItem)
+        assertThat(firstItem)
                 .as("Test failed: First item should contains: " + requiredItem)
                 .contains(requiredItem);
 
-        AssertionsForClassTypes.assertThat(lastItem)
+        assertThat(lastItem)
                 .as("Test failed: Last item should contains: " + requiredItem)
                 .contains(requiredItem);
     }
@@ -41,27 +41,31 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
-                {"999", "9999"}};
+                {"3999", "9999"}};
     }
 
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String minPrice, String maxPrice) {
-        //homePage.selectCategory();
-        homePage.selectRandomSubCategory();
+        homePage.selectCategory();
+        homePage.selectSubcategory();
+
         homePage.setMinimalPrice(minPrice);
         homePage.setMaximalPrice(maxPrice);
         homePage.clickOnPriceButton();
+
         homePage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = homePage.findActualPrice(minPrice);
+        var fromCheapToExpensivePrice = homePage.listOfPrices(minPrice);
         System.out.println(fromCheapToExpensivePrice);
         assertThat(fromCheapToExpensivePrice)
                 .as("Test failed: Minimal price should be " + minPrice)
-                .contains(minPrice);
+                .containsAnyOf(minPrice);
 
-        homePage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = homePage.findActualPrice(maxPrice);
+       /* homePage.selectFromExpensiveToCheap();
+        var fromExpensiveToCheapPrice = homePage.getFirstItemPrice(maxPrice);
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .contains(maxPrice);
+
+        */
     }
 }

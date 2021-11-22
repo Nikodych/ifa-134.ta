@@ -1,17 +1,21 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import org.openqa.selenium.WebElement;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.Condition.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
+import static java.time.Duration.*;
+import static java.util.stream.Collectors.*;
 import static java.util.stream.Collectors.toList;
 
 public abstract class BasePage<T> {
@@ -31,13 +35,11 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public T searchBarInputField(String inputText) {
+    public void searchBarInputField(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
         search.setValue(inputText);
-
-        return (T) this;
     }
 
     public List<String> getGoodsList(String item) {
@@ -61,10 +63,8 @@ public abstract class BasePage<T> {
         return list.get(list.size() - 1);
     }
 
-    public T clickSearchButton() {
+    public void clickSearchButton() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
-
-        return (T) this;
     }
 
     public UserModal openUserModalWindow() {
@@ -96,6 +96,10 @@ public abstract class BasePage<T> {
         $x("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//a[contains(@href, 'telefony')]").click();
     }
 
+    public void selectSubcategory() {
+        $x("//div[@class='tile-cats']//a[contains(@href, 'all-tv')]").click();
+    }
+
     public void selectRandomSubCategory() {
         var random = new Random();
         var list = $$x("//*[@class='portal-grid__cell ng-star-inserted']");
@@ -103,10 +107,12 @@ public abstract class BasePage<T> {
         randomCategory.click();
     }
 
-    public void setMinimalPrice(String price) {
+    public T setMinimalPrice(String price) {
         var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
         minPriceField.click();
         minPriceField.setValue(price);
+
+        return (T) this;
     }
 
     public void setMaximalPrice(String price) {
@@ -115,29 +121,30 @@ public abstract class BasePage<T> {
         maxPriceField.setValue(price);
     }
 
-    public void clickOnPriceButton() {
-        $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
-    }
-
-    public String findActualPrice(String price) {
-        var listOfPrices = $$x("//*[@class='goods-tile__prices']")
+    public String listOfPrices(String price) {
+        var list = $$x("//span[@class='goods-tile__price-value']")
                 .stream()
-                .map(SelenideElement::getText)
-                .filter(text -> text.contains(price))
+                .map(SelenideElement::text)
+                .filter(text->text.contains(price))
                 .collect(toList());
 
-        return listOfPrices
-                .stream()
-                .findFirst()
-                .toString()
-                .trim();
+        return list.get(0);
     }
 
-    public void selectFromCheapToExpensive() {
+    public T selectFromCheapToExpensive() {
         selectPriceFilterFromModalMenu(1, selectFromPriceModalMenuSelector);
+
+        return (T) this;
     }
 
-    public void selectFromExpensiveToCheap() {
+    public T selectFromExpensiveToCheap() {
         selectPriceFilterFromModalMenu(2, selectFromPriceModalMenuSelector);
+
+        return (T) this;
+    }
+
+    public T clickOnPriceButton() {
+        $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
+        return (T) this;
     }
 }
