@@ -64,6 +64,6 @@ public class HomePageTest extends TestRunner {
         var productAmountPrice = checkoutPage.getProductAmountPrice();
         assertThat(productAmountPrice)
                 .as("Product amount price should be '" + productAmountPrice + "'")
-                .isEqualTo(checkoutPage.getProductPrice() * checkoutPage.getProductCount());
+                .isEqualTo(checkoutPage.getProductPrice() * checkoutPage.getProductQuantity());
     }
 }

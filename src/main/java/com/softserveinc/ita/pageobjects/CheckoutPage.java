@@ -8,11 +8,11 @@ import static java.lang.Integer.parseInt;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
 
-    private final SelenideElement cityDropdownElement = $("li.autocomplete__item");
     private final SelenideElement surnameFieldElement = $("div.js-surname input");
     private final SelenideElement nameFieldElement = $("div.js-name input");
     private final SelenideElement phoneFieldElement = $("div.js-phone input");
     private final SelenideElement cityFieldElement = $("div.js-city input");
+    private final SelenideElement cityDropdownElement = $("li.autocomplete__item");
 
     public String getSurnameFieldText() {
         return surnameFieldElement.getValue();
@@ -67,10 +67,10 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return parseInt(productAmountPrice);
     }
 
-    public int getProductCount() {
-        var productCount = $(".js-product-quantity dd")
+    public int getProductQuantity() {
+        var productQuantity = $(".js-product-quantity dd")
                 .getText();
 
-        return parseInt(productCount);
+        return parseInt(productQuantity);
     }
 }

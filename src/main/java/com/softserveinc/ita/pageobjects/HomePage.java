@@ -7,7 +7,9 @@ public class HomePage extends BasePage<HomePage> {
 
     public String getLastProductOfSection(String sectionName) {
         var selectedSection = $x(format("//*[contains(@class, 'main-goods__heading') and contains(text(), '%s')]", sectionName));
-        var lastProductOfSelectedSection = selectedSection.$$x("./following-sibling::ul//a[@class = 'tile__title']").last();
+        var lastProductOfSelectedSection = selectedSection
+                .$$x("./following-sibling::ul//a[@class = 'tile__title']")
+                .last();
 
         lastProductOfSelectedSection.click();
 
