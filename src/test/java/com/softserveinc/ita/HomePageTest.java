@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.CatalogModal;
+import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,6 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
+    private HomePage homePage = new HomePage();
+
     @DataProvider
     public Object[][] rozetkaCategoryData() {
         return new Object[][]{
@@ -20,26 +23,28 @@ public class HomePageTest extends TestRunner {
     }
     @Test(dataProvider = "rozetkaCategoryData")
     public void categoryTest(String title) {
-        homePage.openCategory(title);
-        categoriesPage.openSubCategory();
-        categoriesPage.openProduct();
+         homePage.openCategory(title)
+                .openSubCategory()
+                .openProduct();
 
-        assertThat(productPage.isCategoryCorrect(title))
+        assertThat(new ProductPage().getProductCategory().contains(title))
                 .as("Product should correspond " + title + " category")
                 .isTrue();
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
     public void dropdownCategoryTest(String title) {
-        CatalogModal catalogModal = categoriesPage.openCatalog();
-        catalogModal.openDropdownCategory(title);
-        categoriesPage.openSubCategory();
-        categoriesPage.openProduct();
+        homePage.openCatalog()
+                .openDropdownCategory(title)
+                .openSubCategory()
+                .openProduct();
 
-        assertThat(productPage.isCategoryCorrect(title))
-                .as("Product should correspond " + title + " category");
+        assertThat(new ProductPage().getProductCategory().contains(title))
+                .as("Product should correspond " + title + " category")
+                .isTrue();
     }
-    @Test
+
+    @Test(enabled = false)
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;
         homePage.switchLanguageTo(languageToSwitch);
