@@ -1,7 +1,7 @@
 package com.softserveinc.ita.vsaroz;
 
 import com.codeborne.selenide.Configuration;
-imporgit com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
+import com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
 import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.open;
