@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 @UtilityClass
 public class ElementsUtil {
 
-    public void selectPriceFromModalMenu(int value,String selector) {
+    public void selectPriceFilterFromModalMenu(int value,String selector) {
         var selectCheap = $(selector);
         var index = new Select(selectCheap);
         index.selectByIndex(value);

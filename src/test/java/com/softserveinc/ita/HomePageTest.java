@@ -46,7 +46,7 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String minPrice, String maxPrice) {
-        homePage.selectRandomCategory();
+        //homePage.selectCategory();
         homePage.selectRandomSubCategory();
         homePage.setMinimalPrice(minPrice);
         homePage.setMaximalPrice(maxPrice);

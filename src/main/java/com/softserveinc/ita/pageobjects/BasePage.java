@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import org.openqa.selenium.WebElement;
@@ -91,19 +92,15 @@ public abstract class BasePage<T> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public void selectRandomCategory() {
-        var listOfCategories = $$("sidebar-fat-menu > div > ul > li > a");
-        var random = new Random();
-        listOfCategories
-                .get(random.nextInt(listOfCategories.size() - 3))
-                .click();
+    public void selectCategory() {
+        $x("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//a[contains(@href, 'telefony')]").click();
     }
 
     public void selectRandomSubCategory() {
-        var listOfSubCategories = $$("rz-list-tile > div > a.tile-cats__heading");
-        listOfSubCategories
-                .get(0)
-                .click();
+        var random = new Random();
+        var list = $$x("//*[@class='portal-grid__cell ng-star-inserted']");
+        var randomCategory = list.get(random.nextInt(list.size()));
+        randomCategory.click();
     }
 
     public void setMinimalPrice(String price) {
@@ -123,7 +120,7 @@ public abstract class BasePage<T> {
     }
 
     public String findActualPrice(String price) {
-        var listOfPrices = $$x("//span[@class='goods-tile__price-value']")
+        var listOfPrices = $$x("//*[@class='goods-tile__prices']")
                 .stream()
                 .map(SelenideElement::getText)
                 .filter(text -> text.contains(price))
@@ -137,10 +134,10 @@ public abstract class BasePage<T> {
     }
 
     public void selectFromCheapToExpensive() {
-        selectPriceFromModalMenu(1, selectFromPriceModalMenuSelector);
+        selectPriceFilterFromModalMenu(1, selectFromPriceModalMenuSelector);
     }
 
     public void selectFromExpensiveToCheap() {
-        selectPriceFromModalMenu(2, selectFromPriceModalMenuSelector);
+        selectPriceFilterFromModalMenu(2, selectFromPriceModalMenuSelector);
     }
 }
