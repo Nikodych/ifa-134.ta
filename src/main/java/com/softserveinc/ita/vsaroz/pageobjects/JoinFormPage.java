@@ -37,11 +37,11 @@ public class JoinFormPage {
                 .click();
     }
 
-    public void profileDropDownMenu() {
+    public void openProfileDropDownMenu() {
         $x(avatarIconSelector).click();
     }
 
-    public void moveToUserPage () {
+    public void openUserPage () {
         $x(viewProfileButtonSelector).click();
     }
 

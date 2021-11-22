@@ -1,7 +1,7 @@
 package com.softserveinc.ita.vsaroz;
 
 import com.codeborne.selenide.Configuration;
-import com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
+imporgit com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
 import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.open;
@@ -23,8 +23,8 @@ public class SignUpTest {
         joinFormPage.pressJoin();
         joinFormPage.setUserRegistrationData(getUsersContacts());
         joinFormPage.signUp();
-        joinFormPage.profileDropDownMenu();
-        joinFormPage.moveToUserPage();
+        joinFormPage.openProfileDropDownMenu();
+        joinFormPage.openUserPage();
 
         String newUserProfileName = joinFormPage.getUserProfileName();
 
