@@ -1,26 +1,21 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.softserve;
 
-import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import static com.codeborne.selenide.Condition.attribute;
+import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.format;
 
-import static org.openqa.selenium.By.xpath;
+public class SoftServePage {
+    private final String SIDEBAR_SELECTOR_TEMPLATE = "//a[div[@Class = 'side-navigation__title' and text() = '%s']]";
 
-public class SoftServePage extends BasePage {
-
-    private final By sidebarElementsList = xpath("//a[contains(@class, 'side-navigation__link')]");
-
-    public SoftServePage(WebDriver driver) {
-        super(driver);
+    public void switchSidebarSection (String section) {
+        $x(format(SIDEBAR_SELECTOR_TEMPLATE, section)).click();
     }
 
-    public void sidebarClick (int section) {
-        driver.findElements(sidebarElementsList).get(section).click();
-    }
+    public boolean isSidebarSwitched(String section) {
+        var condition = attribute("class", "side-navigation__link side-navigation__link_active");
 
-    public boolean isSidebarActive(int section) {
-        waitForAttributeChanges(driver.findElements(sidebarElementsList).get(section), "class", "side-navigation__link_active");
-
-        return driver.findElements(sidebarElementsList).get(section).getAttribute("class").contains("side-navigation__link_active");
+        return $x(format(SIDEBAR_SELECTOR_TEMPLATE, section))
+                .shouldHave(condition)
+                .has(condition);
     }
 }

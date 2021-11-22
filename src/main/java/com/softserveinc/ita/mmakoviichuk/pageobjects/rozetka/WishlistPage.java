@@ -1,31 +1,26 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;
 
-import java.util.List;
-
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$$x;
 
 public class WishlistPage extends RozetkaBasePage {
 
-    private final By goodsSelector = xpath("//div[@class = 'goods-tile__inner']");
-    private final List<WebElement> goodsElementsList;
-
-    public WishlistPage(WebDriver driver) {
-        super(driver);
-        goodsElementsList = driver.findElements(goodsSelector);
-    }
+    private final String goodsSelector = "//div[@class = 'goods-tile__inner']";
 
     public boolean isContainsProductId(String id) {
         boolean isContains = false;
-        for (WebElement product : goodsElementsList) {
+        for (WebElement product : getWishlist()) {
             if (id.equals(product.getAttribute("data-goods-id"))) {
                 isContains = true;
                 break;
             }
         }
         return isContains;
+    }
+
+    private ElementsCollection getWishlist() {
+        return $$x(goodsSelector);
     }
 }

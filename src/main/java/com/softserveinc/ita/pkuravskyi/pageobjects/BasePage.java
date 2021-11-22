@@ -1,41 +1,25 @@
 package com.softserveinc.ita.pkuravskyi.pageobjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import static com.codeborne.selenide.Selenide.$x;
 
 public abstract class BasePage<T> {
 
-    protected WebDriver driver;
-    protected By searchBar;
-    protected By searchButton;
-
-    public BasePage(WebDriver driver) {
-        this.driver = driver;
-    }
+    protected String searchBar;
+    protected String searchButton;
 
     public T searchBarInputText(String searchText) {
-        driver
-                .findElement(searchBar)
-                .sendKeys(searchText);
+        $x(searchBar).setValue(searchText);
 
         return (T) this;
     }
 
     public T searchButtonClick() {
-        driver
-                .findElement(searchButton)
-                .click();
+        $x(searchButton).click();
 
         return (T) this;
     }
 
     public String getSearchBarText() {
-        return driver
-                .findElement(searchBar)
-                .getAttribute("value");
-    }
-
-    public String currentUrl() {
-        return driver.getCurrentUrl();
+        return $x(searchBar).getValue();
     }
 }

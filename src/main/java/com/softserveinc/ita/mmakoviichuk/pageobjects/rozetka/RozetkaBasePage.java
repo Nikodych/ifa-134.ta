@@ -1,64 +1,33 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import com.softserveinc.ita.mmakoviichuk.pageobjects.BasePage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.format;
 
-import java.util.List;
+public abstract class RozetkaBasePage {
 
-import static org.openqa.selenium.By.xpath;
+    private final String DROPDOWN_CATEGORY_SELECTOR_TEMPLATE = "//a[@class = 'menu-categories__link js-menu-categories__link' and contains(text(), '%s')]";
+    private final String catalogButtonSelector  = "//button[@id='fat-menu']";
+    private final String loginButtonSelector = "//li[contains(@class , 'user')]";
+    private final String emailInputSelector = "//input[@id = 'auth_email']";
+    private final String passwordInputSelector = "//input[@id = 'auth_pass']";
+    private final String enterButtonSelector = "//button[contains(@class , 'auth-modal__submit')]";
+    private final String wishListIconSelector  = "//li[contains(@class, 'wishlist')]";
 
-public class RozetkaBasePage extends BasePage {
-
-    private final By dropdownCategorySelector = xpath("//ul[@class = 'menu-categories ng-star-inserted']/li/a");
-    private final By catalogButtonSelector  = xpath("//button[@id='fat-menu']");
-    private final By loginButtonSelector = xpath("//li[contains(@class , 'user')]");
-    private final By emailInputSelector = xpath("//input[@id = 'auth_email']");
-    private final By passwordInputSelector = xpath("//input[@id = 'auth_pass']");
-    private final By enterButtonSelector = xpath("//button[contains(@class , 'auth-modal__submit')]");
-    private final By wishListIconSelector  = xpath("//li[contains(@class, 'wishlist')]");
-
-    private final List<WebElement> categoryList;
-
-    public RozetkaBasePage(WebDriver driver) {
-        super(driver);
-        categoryList = driver.findElements(dropdownCategorySelector);
-    }
-
-    public String getDropdownCategoryUrl(int index) {
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
-        var dropCatUrl = categoryList
-                .get(index)
-                .getAttribute("href");
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
-
-        return dropCatUrl;
-    }
-
-    public void dropdownCategoryClick(int index) {
-        driver
-                .findElement(catalogButtonSelector)
-                .click();
-        categoryList
-                .get(index)
-                .click();
+    public void openCategoryFromDropdown(String title) {
+        $x(catalogButtonSelector).click();
+        $x(format(DROPDOWN_CATEGORY_SELECTOR_TEMPLATE, title)).click();
     }
 
     public void logIn(String email, String password) {
-        driver
-                .findElement(loginButtonSelector)
-                .click();
-        waitForVisibility(this.emailInputSelector).sendKeys(email);
-        waitForVisibility(this.passwordInputSelector).sendKeys(password);
-        waitForVisibility(enterButtonSelector).click();
+        $x(loginButtonSelector).click();
+        $x(emailInputSelector).sendKeys(email);
+        $x(passwordInputSelector).sendKeys(password);
+        $x(enterButtonSelector).click();
     }
 
-    public void openWishList() {
-        driver.findElement(wishListIconSelector ).click();
+    public WishlistPage openWishList() {
+        $x(wishListIconSelector ).click();
+
+        return new WishlistPage();
     }
 }

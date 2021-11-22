@@ -11,11 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class PracticeTest {
 
-    private final String productElement = "//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']";
-    private final String addToCartButtonElement = "//button[@class='exclusive']//span";
-    private final String closeModalButtonElement = "//span[@class='cross']";
-    private final String viewShoppingCartButtonElement = "//a[@href='http://automationpractice.com/index.php?controller=order']";
-    private final String itemsInCart = "//span[@class='ajax_cart_quantity']";
+    private final String productSelector = "//a[@href='http://automationpractice.com/index.php?id_product=3&controller=product']";
+    private final String addToCartButtonSelector = "//button[@class='exclusive']//span";
+    private final String closeModalButtonSelector = "//span[@class='cross']";
+    private final String shoppingCartButtonSelector = "//a[@href='http://automationpractice.com/index.php?controller=order']";
+    private final String itemsInCartSelector = "//span[@class='ajax_cart_quantity']";
 
     @BeforeMethod
     public void setUp() {
@@ -25,17 +25,17 @@ public class PracticeTest {
 
     @Test
     public void verifyAddToCartTest() {
-        $x(productElement)
+        $x(productSelector)
                 .shouldBe(visible)
                 .click();
-        $x(addToCartButtonElement)
+        $x(addToCartButtonSelector)
                 .shouldBe(visible)
                 .click();
-        $x(closeModalButtonElement)
+        $x(closeModalButtonSelector)
                 .shouldBe(disappear)
                 .click();
-        $x(viewShoppingCartButtonElement).click();
-        var quantity = $x(itemsInCart).getText();
+        $x(shoppingCartButtonSelector).click();
+        var quantity = $x(itemsInCartSelector).getText();
 
         assertThat(parseInt(quantity))
                 .as("Incorrect product quantity in the shopping cart")

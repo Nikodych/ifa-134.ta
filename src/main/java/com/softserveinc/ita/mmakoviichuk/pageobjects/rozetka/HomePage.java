@@ -1,28 +1,13 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-
-import java.util.List;
-
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.format;
 
 public class HomePage extends RozetkaBasePage {
 
-    private final By category = xpath("//ul[@class = 'menu-categories menu-categories_type_main']/li/a");
-    private final List<WebElement> categoryList;
+    private final String CATEGORY_SELECTOR_TEMPLATE = "//a[@class ='menu-categories__link' and contains(text(), '%s')]";
 
-    public HomePage(WebDriver driver) {
-        super(driver);
-        categoryList = driver.findElements(category);
-    }
-
-    public void categoryClick(int index) {
-        categoryList.get(index).click();
-    }
-
-    public String getCategoryUrl(int index) {
-        return categoryList.get(index).getAttribute("href");
+    public void openCategory(String categoryName) {
+        $x(format(CATEGORY_SELECTOR_TEMPLATE, categoryName)).click();
     }
 }

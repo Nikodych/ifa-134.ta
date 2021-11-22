@@ -2,10 +2,10 @@ package com.softserveinc.ita.vsaroz;
 
 import com.codeborne.selenide.Configuration;
 import com.softserveinc.ita.vsaroz.pageobjects.JoinFormPage;
-import com.softserveinc.ita.vsaroz.repo.UserRepo;
 import org.testng.annotations.*;
 
 import static com.codeborne.selenide.Selenide.open;
+import static com.softserveinc.ita.vsaroz.repo.UserRepo.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SignUpTest {
@@ -20,14 +20,13 @@ public class SignUpTest {
 
     @Test
     public void verifySignUpTest() {
-        joinFormPage.clickHomepageJoinButtonElement();
-        joinFormPage.fillInputs(UserRepo.getUsersContacts());
+        joinFormPage.pressJoin();
+        joinFormPage.setUserRegistrationData(getUsersContacts());
         joinFormPage.signUp();
-        joinFormPage.clickAvatarAndProfileElements();
+        joinFormPage.profileDropDownMenu();
+        joinFormPage.moveToUserPage();
 
-        String newUserProfileName = joinFormPage
-                .verifyRegistration()
-                .trim();
+        String newUserProfileName = joinFormPage.getUserProfileName();
 
         assertThat(newUserProfileName)
                 .as("Something wrong with your registration")

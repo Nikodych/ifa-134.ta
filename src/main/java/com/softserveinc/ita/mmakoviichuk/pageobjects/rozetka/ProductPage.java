@@ -1,26 +1,18 @@
 package com.softserveinc.ita.mmakoviichuk.pageobjects.rozetka;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-
-import static org.openqa.selenium.By.xpath;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class ProductPage extends RozetkaBasePage {
 
-    private final By wishlistButton = xpath("//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]");
-    private final By productIdLabel = xpath("//p[@class = 'product__code detail-code']");
-
-    public ProductPage(WebDriver driver) {
-        super(driver);
-    }
+    private final String wishlistButtonSelector = "//li[@class = 'product-actions__item']//button[contains(@class, 'wish-button')]";
+    private final String productIdLabelSelector = "//p[@class = 'product__code detail-code']";
 
     public void addToWishlist() {
-        driver.findElement(wishlistButton).click();
+        $x(wishlistButtonSelector).click();
     }
 
     public String getProductId() {
-        return driver
-                .findElement(productIdLabel)
+        return $x(productIdLabelSelector)
                 .getText()
                 .replaceAll("[^0-9]", "");
     }

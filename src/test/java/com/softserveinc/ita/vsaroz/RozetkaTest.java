@@ -10,13 +10,11 @@ public class RozetkaTest extends TestRunner {
     @Test
     public void verifyFilterFunctionality() {
         String brand = "dell";
-        rozetkaPage.clickOnCategorySelector();
-        rozetkaPage.clickOnCategory();
+        rozetkaPage.selectCategory();
+        rozetkaPage.activateLaptopFilter();
         rozetkaPage.filterByBrand(brand);
 
-        String brandName = rozetkaPage
-                .getFilterName()
-                .trim();
+        String brandName = rozetkaPage.getFilterName();
 
         assertThat(brandName)
                 .as("Incorrect filter displayed")

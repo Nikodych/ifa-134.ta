@@ -5,16 +5,16 @@ import static java.lang.String.format;
 
 public class RozetkaPage {
 
-    private final String categoryTypeSelector = "//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//li[1]";
-    private final String laptopFilterCheckboxElement = "//a[@title='Ноутбуки']";
-    private final String filteredCheckboxName = "//label[@for='Dell']";
+    private final String categorySelector = "//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//li[1]";
+    private final String laptopIconSelector = "//a[@title='Ноутбуки']";
+    private final String brandFilterSelector = "//label[@for='Dell']";
 
-    public void clickOnCategorySelector() {
-        $x(categoryTypeSelector).click();
+    public void selectCategory() {
+        $x(categorySelector).click();
     }
 
-    public void clickOnCategory() {
-        $x(laptopFilterCheckboxElement).click();
+    public void activateLaptopFilter() {
+        $x(laptopIconSelector).click();
     }
 
     public void filterByBrand(String producer) {
@@ -22,7 +22,8 @@ public class RozetkaPage {
     }
 
     public String getFilterName() {
-        String name = $x(filteredCheckboxName).getText();
-        return name;
+        return $x(brandFilterSelector)
+                .getText()
+                .trim();
     }
 }
