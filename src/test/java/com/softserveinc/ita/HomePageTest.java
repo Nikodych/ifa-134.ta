@@ -21,18 +21,19 @@ public class HomePageTest extends TestRunner {
                 {"Побутова техніка"}
         };
     }
+
     @Test(dataProvider = "rozetkaCategoryData")
     public void verifyCategoryTransitionTest(String title) {
-         homePage
-                 .openCategory(title)
+        homePage
+                .openCategory(title)
                 .openSubCategory()
                 .openProduct();
 
-         var actualTitle = new ProductPage().getProductCategory();
+        var actualTitle = new ProductPage().getProductCategory();
 
-        assertThat(actualTitle.contains(title))
+        assertThat(actualTitle)
                 .as("Product should correspond " + title + " category")
-                .isTrue();
+                .contains(title);
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
@@ -45,9 +46,9 @@ public class HomePageTest extends TestRunner {
 
         var actualTitle = new ProductPage().getProductCategory();
 
-        assertThat(actualTitle.contains(title))
+        assertThat(actualTitle)
                 .as("Product should correspond " + title + " category")
-                .isTrue();
+                .contains(title);
     }
 
     @Test
