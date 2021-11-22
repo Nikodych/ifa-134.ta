@@ -22,29 +22,35 @@ public class HomePageTest extends TestRunner {
         };
     }
     @Test(dataProvider = "rozetkaCategoryData")
-    public void categoryTest(String title) {
-         homePage.openCategory(title)
+    public void verifyCategoryTransitionTest(String title) {
+         homePage
+                 .openCategory(title)
                 .openSubCategory()
                 .openProduct();
 
-        assertThat(new ProductPage().getProductCategory().contains(title))
+         var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle.contains(title))
                 .as("Product should correspond " + title + " category")
                 .isTrue();
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
-    public void dropdownCategoryTest(String title) {
-        homePage.openCatalog()
+    public void verifyCategoryTransitionThroughDropdownTest(String title) {
+        homePage
+                .openCatalog()
                 .openDropdownCategory(title)
                 .openSubCategory()
                 .openProduct();
 
-        assertThat(new ProductPage().getProductCategory().contains(title))
+        var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle.contains(title))
                 .as("Product should correspond " + title + " category")
                 .isTrue();
     }
 
-    @Test(enabled = false)
+    @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;
         homePage.switchLanguageTo(languageToSwitch);
