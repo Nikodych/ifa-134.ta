@@ -2,7 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import static com.codeborne.selenide.Selenide.$;
 
-public class ProductPage {
+public class ProductPage extends BasePage<ProductPage> {
 
     public BasketModal addProductToBasket() {
         $("div.product-about__block button.buy-button").click();

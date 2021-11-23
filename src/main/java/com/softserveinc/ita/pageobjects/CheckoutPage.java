@@ -2,9 +2,10 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.repos.CustomerOrderDataRepo.getCustomerOrderData;
 import static java.lang.Integer.parseInt;
+import static java.lang.String.format;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
 
@@ -12,7 +13,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     private final SelenideElement nameFieldElement = $("div.js-name input");
     private final SelenideElement phoneFieldElement = $("div.js-phone input");
     private final SelenideElement cityFieldElement = $("div.js-city input");
-    private final SelenideElement cityDropdownElement = $("li.autocomplete__item");
+    private final String CITY_DROPDOWN_SELECTOR_TEMPLATE = "//li[contains(@Class,'autocomplete__item')][normalize-space()=contains(text(),'%s')]";
 
     public String getSurnameFieldText() {
         return surnameFieldElement.getValue();
@@ -30,16 +31,18 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return cityFieldElement.getValue();
     }
 
-    public CheckoutPage inputCustomerData() {
-        surnameFieldElement.setValue(getCustomerOrderData().getSurname());
-        nameFieldElement.setValue(getCustomerOrderData().getName());
-        phoneFieldElement.setValue(getCustomerOrderData().getPhone());
-        var customerCity = cityFieldElement.setValue(getCustomerOrderData().getCity());
+    public CheckoutPage setCustomerData() {
+        var customerOrderData = getCustomerOrderData();
+        surnameFieldElement.setValue(customerOrderData.getSurname());
+        nameFieldElement.setValue(customerOrderData.getName());
+        phoneFieldElement.setValue(customerOrderData.getPhone());
+        cityFieldElement.setValue(customerOrderData.getCity());
 
-        if (cityDropdownElement
+        var cityDropdownItem = $x(format(CITY_DROPDOWN_SELECTOR_TEMPLATE, customerOrderData.getCity()));
+        if (cityDropdownItem
                 .getText()
-                .contains(customerCity.getText())) {
-            cityDropdownElement.click();
+                .contains(customerOrderData.getCity())) {
+            cityDropdownItem.click();
         }
 
         return this;
@@ -59,18 +62,25 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return parseInt(productPrice);
     }
 
-    public int getProductAmountPrice() {
-        var productAmountPrice = $(".js-product-amount dd")
+    public int getProductTotalPrice() {
+        var productTotalPrice = $(".js-product-amount dd")
                 .getText()
                 .replaceAll(" ₴", "");
 
-        return parseInt(productAmountPrice);
+        return parseInt(productTotalPrice);
     }
 
     public int getProductQuantity() {
-        var productQuantity = $(".js-product-quantity dd")
-                .getText();
+        var productQuantity = $(".js-product-quantity dd").getText();
 
         return parseInt(productQuantity);
+    }
+
+    public boolean didCheckoutPageOpenCorrectly() {
+        if ($("rz-critical-error.ng-star-inserted").exists()) {
+            refresh();
+        }
+
+        return true;
     }
 }
