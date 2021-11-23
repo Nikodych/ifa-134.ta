@@ -58,14 +58,16 @@ public abstract class BasePage<T> {
     }
 
     public String getLastRequiredItem(String item) {
-        timeout = 5000;
+        timeout = 8000;
         var list = getGoodsList(item);
 
         return list.get(list.size() - 1);
     }
 
-    public void clickSearchButton() {
+    public T clickSearchButton() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
+
+        return (T) this;
     }
 
     public UserModal openUserModalWindow() {

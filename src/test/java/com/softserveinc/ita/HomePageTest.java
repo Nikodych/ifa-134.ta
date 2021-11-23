@@ -10,6 +10,7 @@ import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
+
     private HomePage homePage = new HomePage();
 
     @Test
