@@ -1,6 +1,8 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.BasketModal;
+import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -10,6 +12,8 @@ import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
+
+    private HomePage homePage = new HomePage();
 
     @DataProvider
     public Object[][] rozetkaCategoryData() {
@@ -21,16 +25,47 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaCategoryData")
     public void cartTest(String title) {
-        homePage.openCategory(title);
-        categoriesPage.openSubCategory();
-        categoriesPage.openProduct();
+        var productTitle = homePage
+                .openCategory(title)
+                .openSubCategory()
+                .openProduct()
+                .getProductTitle();
 
-        var productTitle = productPage.getProductTitle();
+        var productPage = new ProductPage();
         BasketModal basketModal = productPage.addToCart();
 
-        assertThat(basketModal.isProductInBasket(productTitle))
+        assertThat(basketModal.getProductTitle())
                 .as("Product should be in cart")
-                .isTrue();
+                .contains(productTitle);
+    }
+
+    @Test(dataProvider = "rozetkaCategoryData")
+    public void verifyCategoryTransitionTest(String title) {
+        homePage
+                .openCategory(title)
+                .openSubCategory()
+                .openProduct();
+
+        var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle)
+                .as("Product should correspond " + title + " category")
+                .contains(title);
+    }
+
+    @Test(dataProvider = "rozetkaCategoryData")
+    public void verifyCategoryTransitionThroughDropdownTest(String title) {
+        homePage
+                .openCatalog()
+                .openDropdownCategory(title)
+                .openSubCategory()
+                .openProduct();
+
+        var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle)
+                .as("Product should correspond " + title + " category")
+                .contains(title);
     }
 
     @Test

@@ -6,7 +6,7 @@ public class BasketModal extends BasePage<BasketModal> {
 
     private final String productTitleSelector = "//a[@class = 'cart-product__title']";
 
-    public boolean isProductInBasket(String productTitle) {
-        return $x(productTitleSelector).getText().contains(productTitle);
+    public String getProductTitle() {
+        return $x(productTitleSelector).getText();
     }
 }
