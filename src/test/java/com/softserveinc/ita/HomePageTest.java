@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.models.CustomerOrderData;
 import com.softserveinc.ita.pageobjects.CheckoutPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
@@ -14,6 +15,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HomePageTest extends TestRunner {
 
     protected HomePage homePage = new HomePage();
+    protected ProductPage productPage = new ProductPage();
+    protected CheckoutPage checkoutPage = new CheckoutPage();
 
     @Test
     public void verifyLanguageSwitchingTest() {
@@ -25,9 +28,6 @@ public class HomePageTest extends TestRunner {
                 .as("Language should be switched to '" + languageToSwitch + "'")
                 .isTrue();
     }
-
-    protected ProductPage productPage = new ProductPage();
-    protected CheckoutPage checkoutPage = new CheckoutPage();
 
     @Test
     public void verifyCheckoutPageFunctionalityTest() {
@@ -43,9 +43,9 @@ public class HomePageTest extends TestRunner {
                 .goToCheckout()
                 .didCheckoutPageOpenCorrectly();
 
-        checkoutPage.setCustomerData();
-
         var customerOrderData = getCustomerOrderData();
+        checkoutPage.setCustomerData(customerOrderData);
+
         var expectedSurname = customerOrderData.getSurname();
         assertThat(checkoutPage.getSurnameFieldText())
                 .as("Surname should be '" + expectedSurname + "'")

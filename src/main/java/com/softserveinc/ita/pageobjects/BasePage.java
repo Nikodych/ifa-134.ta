@@ -62,7 +62,11 @@ public abstract class BasePage<T> {
     }
 
     public T closeAdBanner() {
-        $("span .exponea-close-cross").shouldBe(visible).click();
+        if ($("a#rz-banner").exists()) {
+            $("span .exponea-close-cross")
+                    .shouldBe(visible)
+                    .click();
+        }
 
         return (T) this;
     }

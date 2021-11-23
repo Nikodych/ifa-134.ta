@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.models.CustomerOrderData;
+import com.softserveinc.ita.repos.CustomerOrderDataRepo;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.repos.CustomerOrderDataRepo.getCustomerOrderData;
@@ -31,8 +33,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return cityFieldElement.getValue();
     }
 
-    public CheckoutPage setCustomerData() {
-        var customerOrderData = getCustomerOrderData();
+    public CheckoutPage setCustomerData(CustomerOrderData customerOrderData) {
         surnameFieldElement.setValue(customerOrderData.getSurname());
         nameFieldElement.setValue(customerOrderData.getName());
         phoneFieldElement.setValue(customerOrderData.getPhone());
