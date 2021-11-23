@@ -58,6 +58,7 @@ public abstract class BasePage<T> {
     }
 
     public String getLastRequiredItem(String item) {
+        timeout = 5000;
         var list = getGoodsList(item);
 
         return list.get(list.size() - 1);

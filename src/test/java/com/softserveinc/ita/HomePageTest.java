@@ -31,12 +31,11 @@ public class HomePageTest extends TestRunner {
                 .clickSearchButton();
 
         var firstItem = homePage.getFirstRequiredItem(requiredItem);
-        var lastItem = homePage.getLastRequiredItem(requiredItem);
-
         assertThat(firstItem)
                 .as("Test failed: First item should contains: " + requiredItem)
                 .contains(requiredItem);
-
+        
+        var lastItem = homePage.getLastRequiredItem(requiredItem);
         assertThat(lastItem)
                 .as("Test failed: Last item should contains: " + requiredItem)
                 .contains(requiredItem);
