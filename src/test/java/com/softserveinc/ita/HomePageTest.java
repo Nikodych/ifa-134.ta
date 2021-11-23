@@ -26,8 +26,9 @@ public class HomePageTest extends TestRunner {
     @Test
     public void verifySearchTest() {
         var requiredItem = "Xiaomi Redmi Note 10";
-        homePage.setTextInSearchBar(requiredItem);
-        homePage.clickSearchButton();
+        homePage
+                .setTextInSearchBar(requiredItem)
+                .clickSearchButton();
 
         var firstItem = homePage.getFirstRequiredItem(requiredItem);
         var lastItem = homePage.getLastRequiredItem(requiredItem);
@@ -49,12 +50,13 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
-        homePage.selectCategory(categoryName);
-        homePage.selectRandomSubCategory();
+        homePage
+                .selectCategory(categoryName)
+                .selectRandomSubCategory();
 
-        homePage.setMinimalPrice(minPrice.replaceAll("\\s", ""));
-        homePage.setMaximalPrice(maxPrice.replaceAll("\\s", ""));
-        homePage.clickOnPriceButton();
+        homePage.setMinimalPrice(minPrice.replaceAll("\\s", ""))
+                .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
+                .clickOnPriceButton();
 
         homePage.selectFromCheapToExpensive();
         var fromCheapToExpensivePrice = homePage.getFirstItemPrice(minPrice);

@@ -33,11 +33,13 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public void setTextInSearchBar(String inputText) {
+    public T setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
         search.setValue(inputText);
+
+        return (T) this;
     }
 
     public List<String> getGoodsList(String item) {
@@ -90,8 +92,10 @@ public abstract class BasePage<T> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public void selectCategory(String categoryName) {
+    public T selectCategory(String categoryName) {
         $x("//a[@class ='menu-categories__link' and contains(text(),'"+categoryName+"')]").click();
+
+    return (T) this;
     }
 
     public void selectRandomSubCategory() {
@@ -102,18 +106,22 @@ public abstract class BasePage<T> {
         list.get(random.nextInt(list.size())).click();
     }
 
-    public void setMinimalPrice(String price) {
+    public T setMinimalPrice(String price) {
         var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
         timeout = 5000;
         minPriceField.click();
         minPriceField.setValue(price);
+
+        return (T) this;
     }
 
-    public void setMaximalPrice(String price) {
+    public T setMaximalPrice(String price) {
         var maxPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']");
         timeout = 5000;
         maxPriceField.click();
         maxPriceField.setValue(price);
+
+        return (T) this;
     }
 
     public String getFirstItemPrice(String itemPrice) {
