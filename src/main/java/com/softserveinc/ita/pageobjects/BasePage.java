@@ -3,19 +3,12 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import org.openqa.selenium.WebElement;
-
-import java.time.Duration;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.CollectionCondition.*;
-import static com.codeborne.selenide.Condition.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
-import static java.time.Duration.*;
-import static java.util.stream.Collectors.*;
 import static java.util.stream.Collectors.toList;
 
 public abstract class BasePage<T> {
@@ -35,7 +28,7 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public void searchBarInputField(String inputText) {
+    public void setTextInSearchBar (String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();

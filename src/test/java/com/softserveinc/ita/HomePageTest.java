@@ -1,7 +1,7 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.utils.runners.TestRunner;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -10,6 +10,7 @@ import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
+    protected HomePage homePage = new HomePage();
 
     @Test
     public void verifyLanguageSwitchingTest() {
@@ -25,10 +26,12 @@ public class HomePageTest extends TestRunner {
     @Test
     public void verifySearchTest() {
         var requiredItem = "Xiaomi Redmi Note 10";
-        homePage.searchBarInputField(requiredItem);
+        homePage.setTextInSearchBar(requiredItem);
         homePage.clickSearchButton();
+
         var firstItem = homePage.getFirstRequiredItem(requiredItem);
         var lastItem = homePage.getLastRequiredItem(requiredItem);
+
         assertThat(firstItem)
                 .as("Test failed: First item should contains: " + requiredItem)
                 .contains(requiredItem);
