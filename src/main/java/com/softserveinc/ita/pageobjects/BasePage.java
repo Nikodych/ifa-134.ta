@@ -3,9 +3,14 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import org.openqa.selenium.WebElement;
+
+import java.time.Duration;
 import java.util.List;
 import java.util.Random;
 
+import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Configuration.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
@@ -28,7 +33,7 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public void setTextInSearchBar (String inputText) {
+    public void setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
@@ -85,43 +90,37 @@ public abstract class BasePage<T> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public void selectCategory() {
-        $x("//div[@class='menu-wrapper menu-wrapper_state_static ng-star-inserted']//a[contains(@href, 'telefony')]").click();
-    }
-
-    public void selectSubcategory() {
-        $x("//div[@class='tile-cats']//a[contains(@href, 'all-tv')]").click();
+    public void selectCategory(String categoryName) {
+        $x("//a[@class ='menu-categories__link' and contains(text(),'"+categoryName+"')]").click();
     }
 
     public void selectRandomSubCategory() {
         var random = new Random();
-        var list = $$x("//*[@class='portal-grid__cell ng-star-inserted']");
-        var randomCategory = list.get(random.nextInt(list.size()));
-        randomCategory.click();
+        timeout = 15000;
+        var list = $$x("//*[@class='portal-grid__cell ng-star-inserted']")
+                .shouldBe(sizeGreaterThan(0));
+        list.get(random.nextInt(list.size())).click();
     }
 
-    public T setMinimalPrice(String price) {
+    public void setMinimalPrice(String price) {
         var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
+        timeout = 5000;
         minPriceField.click();
         minPriceField.setValue(price);
-
-        return (T) this;
     }
 
     public void setMaximalPrice(String price) {
         var maxPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']");
+        timeout = 5000;
         maxPriceField.click();
         maxPriceField.setValue(price);
     }
 
-    public String listOfPrices(String price) {
-        var list = $$x("//span[@class='goods-tile__price-value']")
-                .stream()
-                .map(SelenideElement::text)
-                .filter(text->text.contains(price))
-                .collect(toList());
-
-        return list.get(0);
+    public String getFirstItemPrice(String itemPrice) {
+        return $x("//span[@class='goods-tile__price-value']")
+                .shouldHave(text(itemPrice), Duration.ofSeconds(12))
+                .getText()
+                .trim();
     }
 
     public T selectFromCheapToExpensive() {
@@ -138,6 +137,7 @@ public abstract class BasePage<T> {
 
     public T clickOnPriceButton() {
         $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
+
         return (T) this;
     }
 }

@@ -10,7 +10,7 @@ import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
-    protected HomePage homePage = new HomePage();
+    private HomePage homePage = new HomePage();
 
     @Test
     public void verifyLanguageSwitchingTest() {
@@ -44,31 +44,28 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
-                {"3999", "9999"}};
+                {"Смартфони, ТВ і електроніка", "2 999", "8 999"}};
     }
 
     @Test(dataProvider = "priceSortingFunctionality")
-    public void verifyPriceSortingFunctionality(String minPrice, String maxPrice) {
-        homePage.selectCategory();
-        homePage.selectSubcategory();
+    public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
+        homePage.selectCategory(categoryName);
+        homePage.selectRandomSubCategory();
 
-        homePage.setMinimalPrice(minPrice);
-        homePage.setMaximalPrice(maxPrice);
+        homePage.setMinimalPrice(minPrice.replaceAll("\\s", ""));
+        homePage.setMaximalPrice(maxPrice.replaceAll("\\s", ""));
         homePage.clickOnPriceButton();
 
         homePage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = homePage.listOfPrices(minPrice);
-        System.out.println(fromCheapToExpensivePrice);
+        var fromCheapToExpensivePrice = homePage.getFirstItemPrice(minPrice);
         assertThat(fromCheapToExpensivePrice)
                 .as("Test failed: Minimal price should be " + minPrice)
                 .containsAnyOf(minPrice);
 
-       /* homePage.selectFromExpensiveToCheap();
+        homePage.selectFromExpensiveToCheap();
         var fromExpensiveToCheapPrice = homePage.getFirstItemPrice(maxPrice);
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .contains(maxPrice);
-
-        */
     }
 }
