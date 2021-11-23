@@ -45,7 +45,7 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
-                {"Смартфони, ТВ і електроніка", "2 999", "8 999"}};
+                {"Ноутбуки", "2 999", "8 999"}};
     }
 
     @Test(dataProvider = "priceSortingFunctionality")

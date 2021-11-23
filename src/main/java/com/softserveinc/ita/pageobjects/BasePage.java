@@ -101,9 +101,11 @@ public abstract class BasePage<T> {
     public void selectRandomSubCategory() {
         var random = new Random();
         timeout = 15000;
-        var list = $$x("//*[@class='portal-grid__cell ng-star-inserted']")
+        var list = $$x("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
                 .shouldBe(sizeGreaterThan(0));
-        list.get(random.nextInt(list.size())).click();
+        list
+                .get(random.nextInt(list.size()))
+                .click();
     }
 
     public T setMinimalPrice(String price) {
