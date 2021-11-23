@@ -14,6 +14,7 @@ import static com.codeborne.selenide.Configuration.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
+import static java.time.Duration.*;
 import static java.util.stream.Collectors.toList;
 
 public abstract class BasePage<T> {
@@ -44,6 +45,7 @@ public abstract class BasePage<T> {
 
     public List<String> getGoodsList(String item) {
         return $$x("//*[@class='goods-tile__title']")
+                .shouldBe(CollectionCondition.sizeGreaterThan(0),ofSeconds(6))
                 .stream()
                 .map(WebElement::getText)
                 .filter(text -> text.contains(item))
@@ -96,9 +98,9 @@ public abstract class BasePage<T> {
     }
 
     public T selectCategory(String categoryName) {
-        $x("//a[@class ='menu-categories__link' and contains(text(),'"+categoryName+"')]").click();
+        $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
 
-    return (T) this;
+        return (T) this;
     }
 
     public void selectRandomSubCategory() {
@@ -131,7 +133,7 @@ public abstract class BasePage<T> {
 
     public String getFirstItemPrice(String itemPrice) {
         return $x("//span[@class='goods-tile__price-value']")
-                .shouldHave(text(itemPrice), Duration.ofSeconds(12))
+                .shouldHave(text(itemPrice), ofSeconds(12))
                 .getText()
                 .trim();
     }
