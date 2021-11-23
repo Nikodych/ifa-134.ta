@@ -1,8 +1,6 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.utils.runners.TestRunner;
-import org.assertj.core.api.AssertionsForClassTypes;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
@@ -25,15 +23,17 @@ public class HomePageTest extends TestRunner {
     @Test
     public void verifySearchTest() {
         var requiredItem = "Xiaomi Redmi Note 10";
-        homePage.searchBarInputField(requiredItem);
-        homePage.clickSearchButton();
+        homePage
+                .setTextInSearchBar(requiredItem)
+                .clickSearchButton();
+
         var firstItem = homePage.getFirstRequiredItem(requiredItem);
-        var lastItem = homePage.getLastRequiredItem(requiredItem);
-        AssertionsForClassTypes.assertThat(firstItem)
+        assertThat(firstItem)
                 .as("Test failed: First item should contains: " + requiredItem)
                 .contains(requiredItem);
 
-        AssertionsForClassTypes.assertThat(lastItem)
+        var lastItem = homePage.getLastRequiredItem(requiredItem);
+        assertThat(lastItem)
                 .as("Test failed: Last item should contains: " + requiredItem)
                 .contains(requiredItem);
     }
