@@ -24,6 +24,7 @@ public class HomePageTest extends TestRunner {
     public void verifySearchTest() {
         var requiredItem = "Xiaomi Redmi Note 10";
         homePage
+                .closeAdvertisingBanner()
                 .setTextInSearchBar(requiredItem)
                 .clickSearchButton();
 

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Configuration.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
@@ -26,6 +27,14 @@ public abstract class BasePage<T> {
         $x("//button[contains(@id, 'fat-menu')]").click();
 
         return new CatalogModal();
+    }
+
+    public T closeAdvertisingBanner() {
+        var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
+        if (banner.isDisplayed()) {
+            banner.click();
+        }
+        return (T) this;
     }
 
     public T setTextInSearchBar(String inputText) {
