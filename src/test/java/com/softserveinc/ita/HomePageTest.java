@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
-    private HomePage homePage = new HomePage();
+    private final HomePage homePage = new HomePage();
 
     @DataProvider
     public Object[][] rozetkaCategoryData() {
