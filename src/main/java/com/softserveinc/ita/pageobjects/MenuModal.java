@@ -8,15 +8,17 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class MenuModal extends BasePage<MenuModal> {
 
-    private final SelenideElement city = $x("//button[contains(@class, 'city-toggle')]");
+    private final SelenideElement cityButton = $x("//button[contains(@class, 'city-toggle')]");
 
     public CityModal openCityModal() {
-        city.click();
+        cityButton.click();
 
         return new CityModal();
     }
 
     public String getCityName() {
-        return city.shouldBe(visible).getText();
+        return cityButton
+                .shouldBe(visible)
+                .getText();
     }
 }

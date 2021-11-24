@@ -51,30 +51,6 @@ public class HomePageTest extends TestRunner {
                 .contains(title);
     }
 
-    @DataProvider
-    public Object[][] rozetkaCityData() {
-        return new Object[][]{
-                {"Харків"},
-                {"Дніпро"}
-        };
-    }
-    @Test(dataProvider = "rozetkaCityData")
-    public void cityChangingTest(String expectedCityName) {
-        homePage
-                .openMenu()
-                .openCityModal()
-                .changeCity(expectedCityName)
-                .submit();
-
-        var actualCityName = homePage
-                .openMenu()
-                .getCityName();
-
-        assertThat(actualCityName)
-                .as("City should be changed")
-                .contains(expectedCityName);
-    }
-
     @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;
