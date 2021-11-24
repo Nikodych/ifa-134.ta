@@ -61,14 +61,13 @@ public class HomePageTest extends TestRunner {
                 .clickOnPriceButton();
 
         homePage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = homePage.getFirstItemPrice();
+        var fromCheapToExpensivePrice = homePage.getPriceFromFirstItem();
         assertThat(fromCheapToExpensivePrice)
                 .as("Test failed: Minimal price should be " + minPrice)
                 .isGreaterThanOrEqualTo(minPrice);
 
         homePage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = homePage.getFirstItemPrice();
-        System.out.println(fromExpensiveToCheapPrice);
+        var fromExpensiveToCheapPrice = homePage.getPriceFromFirstItem();
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .isLessThanOrEqualTo(maxPrice);

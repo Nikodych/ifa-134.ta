@@ -2,20 +2,15 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
-import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.Random;
 
-import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Configuration.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 import static java.time.Duration.*;
-import static java.util.stream.Collectors.toList;
+
 
 public abstract class BasePage<T> {
 
@@ -52,12 +47,7 @@ public abstract class BasePage<T> {
     }
 
     public List<String> getGoodsList(String item) {
-        return $$x("//*[@class='goods-tile__title']")
-                .shouldBe(CollectionCondition.sizeGreaterThan(0), ofSeconds(6))
-                .stream()
-                .map(WebElement::getText)
-                .filter(text -> text.contains(item))
-                .collect(toList());
+        return getListWithGoods("//*[@class='goods-tile__title']", item);
     }
 
     public String getFirstRequiredItem(String item) {
@@ -68,7 +58,6 @@ public abstract class BasePage<T> {
     }
 
     public String getLastRequiredItem(String item) {
-        timeout = 8000;
         var list = getGoodsList(item);
 
         return list.get(list.size() - 1);
@@ -111,35 +100,25 @@ public abstract class BasePage<T> {
         return (T) this;
     }
 
-    public void selectRandomSubCategory() {
-        var random = new Random();
-        timeout = 15000;
-        var list = $$x("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
-                .shouldBe(sizeGreaterThan(0));
-        list
-                .get(random.nextInt(list.size()))
-                .click();
+    public T selectRandomSubCategory() {
+        randomizerForListCategories("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']");
+
+        return (T) this;
     }
 
     public T setMinimalPrice(String price) {
-        var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
-        timeout = 5000;
-        minPriceField.click();
-        minPriceField.setValue(price);
+        setPriceValueInFilter("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']", price);
 
         return (T) this;
     }
 
     public T setMaximalPrice(String price) {
-        var maxPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']");
-        timeout = 5000;
-        maxPriceField.click();
-        maxPriceField.setValue(price);
+        setPriceValueInFilter("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']", price);
 
         return (T) this;
     }
 
-    public String getFirstItemPrice() {
+    public String getPriceFromFirstItem() {
         return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
                 .shouldBe(visible, ofSeconds(12))
                 .getText()
