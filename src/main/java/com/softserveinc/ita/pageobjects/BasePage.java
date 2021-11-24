@@ -34,6 +34,14 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
+    public T closeAdvertisingBanner() {
+        var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
+        if (banner.isDisplayed()) {
+            banner.click();
+        }
+        return (T) this;
+    }
+
     public T setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
@@ -45,7 +53,7 @@ public abstract class BasePage<T> {
 
     public List<String> getGoodsList(String item) {
         return $$x("//*[@class='goods-tile__title']")
-                .shouldBe(CollectionCondition.sizeGreaterThan(0),ofSeconds(6))
+                .shouldBe(CollectionCondition.sizeGreaterThan(0), ofSeconds(6))
                 .stream()
                 .map(WebElement::getText)
                 .filter(text -> text.contains(item))
@@ -131,9 +139,9 @@ public abstract class BasePage<T> {
         return (T) this;
     }
 
-    public String getFirstItemPrice(String itemPrice) {
-        return $x("//span[@class='goods-tile__price-value']")
-                .shouldHave(text(itemPrice), ofSeconds(12))
+    public String getFirstItemPrice() {
+        return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
+                .shouldBe(visible, ofSeconds(12))
                 .getText()
                 .trim();
     }

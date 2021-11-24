@@ -35,7 +35,7 @@ public class HomePageTest extends TestRunner {
         assertThat(firstItem)
                 .as("Test failed: First item should contains: " + requiredItem)
                 .contains(requiredItem);
-        
+
         var lastItem = homePage.getLastRequiredItem(requiredItem);
         assertThat(lastItem)
                 .as("Test failed: Last item should contains: " + requiredItem)
@@ -51,23 +51,26 @@ public class HomePageTest extends TestRunner {
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
         homePage
+                .closeAdvertisingBanner()
                 .selectCategory(categoryName)
                 .selectRandomSubCategory();
 
-        homePage.setMinimalPrice(minPrice.replaceAll("\\s", ""))
+        homePage
+                .setMinimalPrice(minPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton();
 
         homePage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = homePage.getFirstItemPrice(minPrice);
+        var fromCheapToExpensivePrice = homePage.getFirstItemPrice();
         assertThat(fromCheapToExpensivePrice)
                 .as("Test failed: Minimal price should be " + minPrice)
-                .containsAnyOf(minPrice);
+                .isGreaterThanOrEqualTo(minPrice);
 
         homePage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = homePage.getFirstItemPrice(maxPrice);
+        var fromExpensiveToCheapPrice = homePage.getFirstItemPrice();
+        System.out.println(fromExpensiveToCheapPrice);
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
-                .contains(maxPrice);
+                .isLessThanOrEqualTo(maxPrice);
     }
 }
