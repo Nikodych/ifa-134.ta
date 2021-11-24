@@ -2,16 +2,13 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
-import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Configuration.*;
+import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
-import static java.time.Duration.ofSeconds;
-import static java.util.stream.Collectors.toList;
 
 public abstract class BasePage<T> {
 
@@ -47,16 +44,10 @@ public abstract class BasePage<T> {
     }
 
     public List<String> getGoodsList(String item) {
-        return $$x("//*[@class='goods-tile__title']")
-                .shouldBe(CollectionCondition.sizeGreaterThan(0),ofSeconds(6))
-                .stream()
-                .map(WebElement::getText)
-                .filter(text -> text.contains(item))
-                .collect(toList());
+        return getListWithGoods("//*[@class='goods-tile__title']", item);
     }
 
     public String getFirstRequiredItem(String item) {
-        timeout=8000;
         return getGoodsList(item)
                 .stream()
                 .findFirst()
@@ -64,7 +55,6 @@ public abstract class BasePage<T> {
     }
 
     public String getLastRequiredItem(String item) {
-        timeout = 8000;
         var list = getGoodsList(item);
 
         return list.get(list.size() - 1);
