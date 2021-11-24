@@ -43,23 +43,6 @@ public abstract class BasePage<T> {
         return (T) this;
     }
 
-    public List<String> getGoodsList(String item) {
-        return getListWithGoods("//*[@class='goods-tile__title']", item);
-    }
-
-    public String getFirstRequiredItem(String item) {
-        return getGoodsList(item)
-                .stream()
-                .findFirst()
-                .toString();
-    }
-
-    public String getLastRequiredItem(String item) {
-        var list = getGoodsList(item);
-
-        return list.get(list.size() - 1);
-    }
-
     public T clickSearchButton() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
 
