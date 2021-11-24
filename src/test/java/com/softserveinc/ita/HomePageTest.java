@@ -59,20 +59,20 @@ public class HomePageTest extends TestRunner {
         };
     }
     @Test(dataProvider = "rozetkaCityData")
-    public void cityChangingTest(String city) {
+    public void cityChangingTest(String expectedCityName) {
         homePage
                 .openMenu()
                 .openCityModal()
-                .changeCity(city)
+                .changeCity(expectedCityName)
                 .submit();
 
-        var cityName = homePage
+        var actualCityName = homePage
                 .openMenu()
                 .getCityName();
 
-        assertThat(cityName)
+        assertThat(actualCityName)
                 .as("City should be changed")
-                .contains(city);
+                .contains(expectedCityName);
     }
 
     @Test
