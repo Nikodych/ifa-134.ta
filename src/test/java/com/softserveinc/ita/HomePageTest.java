@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
-    private HomePage homePage = new HomePage();
+    private final HomePage homePage = new HomePage();
 
     @DataProvider
     public Object[][] rozetkaCategoryData() {
@@ -49,6 +49,30 @@ public class HomePageTest extends TestRunner {
         assertThat(actualTitle)
                 .as("Product should correspond " + title + " category")
                 .contains(title);
+    }
+
+    @DataProvider
+    public Object[][] rozetkaCityData() {
+        return new Object[][]{
+                {"Харків"},
+                {"Дніпро"}
+        };
+    }
+    @Test(dataProvider = "rozetkaCityData")
+    public void cityChangingTest(String city) {
+        homePage
+                .openMenu()
+                .openCityModal()
+                .changeCity(city)
+                .submit();
+
+        var cityName = homePage
+                .openMenu()
+                .getCityName();
+
+        assertThat(cityName)
+                .as("City should be changed")
+                .contains(city);
     }
 
     @Test
