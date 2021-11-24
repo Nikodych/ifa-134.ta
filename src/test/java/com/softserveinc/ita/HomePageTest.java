@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -55,19 +56,20 @@ public class HomePageTest extends TestRunner {
                 .selectCategory(categoryName)
                 .selectRandomSubCategory();
 
-        homePage
+        var productPage = new ProductPage();
+        productPage
                 .setMinimalPrice(minPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton();
 
-        homePage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = homePage.getPriceFromFirstItem();
+        productPage.selectFromCheapToExpensive();
+        var fromCheapToExpensivePrice = productPage.getPriceFromFirstItem();
         assertThat(fromCheapToExpensivePrice)
                 .as("Test failed: Minimal price should be " + minPrice)
                 .isGreaterThanOrEqualTo(minPrice);
 
-        homePage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = homePage.getPriceFromFirstItem();
+        productPage.selectFromExpensiveToCheap();
+        var fromExpensiveToCheapPrice = productPage.getPriceFromFirstItem();
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .isLessThanOrEqualTo(maxPrice);

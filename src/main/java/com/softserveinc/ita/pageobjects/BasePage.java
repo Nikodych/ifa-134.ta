@@ -9,13 +9,10 @@ import static com.codeborne.selenide.Condition.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
-import static java.time.Duration.*;
-
 
 public abstract class BasePage<T> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
-    private final String selectFromPriceModalMenuSelector = "div > rz-sort > select";
 
     public MenuModal openMenu() {
         $x("//button[@class = 'header__button']").click();
@@ -100,46 +97,9 @@ public abstract class BasePage<T> {
         return (T) this;
     }
 
-    public T selectRandomSubCategory() {
+    public ProductPage selectRandomSubCategory() {
         randomizerForListCategories("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']");
 
-        return (T) this;
-    }
-
-    public T setMinimalPrice(String price) {
-        setPriceValueInFilter("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']", price);
-
-        return (T) this;
-    }
-
-    public T setMaximalPrice(String price) {
-        setPriceValueInFilter("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']", price);
-
-        return (T) this;
-    }
-
-    public String getPriceFromFirstItem() {
-        return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
-                .shouldBe(visible, ofSeconds(12))
-                .getText()
-                .trim();
-    }
-
-    public T selectFromCheapToExpensive() {
-        selectPriceFilterFromModalMenu(1, selectFromPriceModalMenuSelector);
-
-        return (T) this;
-    }
-
-    public T selectFromExpensiveToCheap() {
-        selectPriceFilterFromModalMenu(2, selectFromPriceModalMenuSelector);
-
-        return (T) this;
-    }
-
-    public T clickOnPriceButton() {
-        $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
-
-        return (T) this;
+        return new ProductPage();
     }
 }
