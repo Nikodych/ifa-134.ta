@@ -25,24 +25,6 @@ public class HomePageTest extends TestRunner {
                 .isTrue();
     }
 
-    @Test
-    public void verifySearchTest() {
-        var requiredItem = "Xiaomi Redmi Note 10";
-        homePage
-                .setTextInSearchBar(requiredItem)
-                .clickSearchButton();
-
-        var firstItem = homePage.getFirstRequiredItem(requiredItem);
-        assertThat(firstItem)
-                .as("Test failed: First item should contains: " + requiredItem)
-                .contains(requiredItem);
-
-        var lastItem = homePage.getLastRequiredItem(requiredItem);
-        assertThat(lastItem)
-                .as("Test failed: Last item should contains: " + requiredItem)
-                .contains(requiredItem);
-    }
-
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
