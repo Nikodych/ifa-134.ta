@@ -22,16 +22,18 @@ public class BasketModalTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaCategoryData")
     public void verifyAddingProductToCartTest(String title) {
-        var productTitle = homePage
+        var expectedProductTitle = homePage
                 .openCategory(title)
                 .openSubCategory()
                 .openProduct()
                 .getProductTitle();
 
-        var basketModal = new ProductPage().addToCart();
+        var actualProductTitle = new ProductPage()
+                .addToCart()
+                .getProductTitle();
 
-        assertThat(basketModal.getProductTitle())
+        assertThat(actualProductTitle)
                 .as("Product should be in cart")
-                .contains(productTitle);
+                .contains(expectedProductTitle);
     }
 }

@@ -5,8 +5,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class ProductPage extends BasePage<ProductPage>{
 
     public BasketModal addToCart() {
-        String buySelector = "//button[contains(@class,'buy-button button button_with_icon')]";
-        $x(buySelector)
+        $x("//button[contains(@class,'buy-button button button_with_icon')]")
                 .hover()
                 .click();
 
@@ -14,14 +13,10 @@ public class ProductPage extends BasePage<ProductPage>{
     }
 
     public String getProductTitle() {
-        String productTitleSelector = "//h1[@class='product__title']";
-
-        return $x(productTitleSelector).getText();
+        return $x("//h1[@class='product__title']").getText();
     }
 
     public String getProductCategory() {
-        String productCategorySelector = "//ul[@class='breadcrumbs ng-star-inserted']";
-
-        return $x(productCategorySelector).getText();
+        return $x("//ul[@class='breadcrumbs ng-star-inserted']").getText();
     }
 }
