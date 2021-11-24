@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.models.CustomerOrderData;
 import com.softserveinc.ita.pageobjects.CheckoutPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;

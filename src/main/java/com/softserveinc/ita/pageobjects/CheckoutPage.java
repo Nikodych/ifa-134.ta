@@ -2,10 +2,8 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.CustomerOrderData;
-import com.softserveinc.ita.repos.CustomerOrderDataRepo;
 
 import static com.codeborne.selenide.Selenide.*;
-import static com.softserveinc.ita.repos.CustomerOrderDataRepo.getCustomerOrderData;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
@@ -15,7 +13,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     private final SelenideElement nameFieldElement = $("div.js-name input");
     private final SelenideElement phoneFieldElement = $("div.js-phone input");
     private final SelenideElement cityFieldElement = $("div.js-city input");
-    private final String CITY_DROPDOWN_SELECTOR_TEMPLATE = "//li[contains(@Class,'autocomplete__item')][normalize-space()=contains(text(),'%s')]";
+    private final String CITY_DROPDOWN_SELECTOR_TEMPLATE = "//li[contains(@Class,'autocomplete__item')]/b[normalize-space()=contains(text(),'%s')]";
 
     public String getSurnameFieldText() {
         return surnameFieldElement.getValue();

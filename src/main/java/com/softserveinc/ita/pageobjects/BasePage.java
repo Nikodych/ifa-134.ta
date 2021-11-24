@@ -3,7 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
@@ -62,10 +62,10 @@ public abstract class BasePage<T> {
     }
 
     public T closeAdBanner() {
-        if ($("a#rz-banner").exists()) {
-            $("span .exponea-close-cross")
-                    .shouldBe(visible)
-                    .click();
+        if ($("#rz-banner")
+                .should(exist)
+                .isDisplayed()) {
+            $("span .exponea-close-cross").click();
         }
 
         return (T) this;

@@ -10,7 +10,7 @@ public class CustomerOrderDataRepo {
                 .surname("Пупкін")
                 .name("Вася")
                 .phone("099 123 98 76")
-                .city("Івано-Франківськ")
+                .city("Львів")
                 .build();
     }
 }
