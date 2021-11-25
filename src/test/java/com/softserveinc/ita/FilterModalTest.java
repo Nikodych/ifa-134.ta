@@ -13,11 +13,11 @@ public class FilterModalTest extends TestRunner {
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
-                {"Ноутбуки", "2 999", "8 999"}};
+                {"Ноутбуки", "2 999", "8 999", "9 999"}};
     }
 
     @Test(dataProvider = "priceSortingFunctionality")
-    public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
+    public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice, String invalidValue) {
         var homePage = new HomePage();
         homePage
                 .closeAdvertisingBannerIfDisplayed()
@@ -41,5 +41,10 @@ public class FilterModalTest extends TestRunner {
         assertThat(fromExpensiveToCheapPrice)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .isLessThanOrEqualTo(maxPrice);
+
+        assertThat(fromExpensiveToCheapPrice)
+                .as("Test failed: Maximal price should be " + maxPrice)
+                .isNotEqualTo(invalidValue)
+                .isLessThan(invalidValue);
     }
 }
