@@ -21,9 +21,7 @@ public class CheckoutPageTest extends TestRunner {
 
         var lastProductOfSection = homePage.getLastProductTitleOfSection(testSectionName);
 
-        homePage.openLastProductOfSection(testSectionName);
-
-        var productPage = new ProductPage();
+        var productPage = homePage.openLastProductOfSection(testSectionName);
 
         assertThat(productPage.getProductTitle())
                 .as("Last product of section " + testSectionName + " should be opened")
