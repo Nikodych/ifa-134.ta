@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 
 public class SearchResultPage extends BasePage<SearchResultPage> {
 
-    public List<String> getGoodsListBy(String productName) {
+    public static List<String> getGoodsListBy(String productName) {
         return $$x("//*[@class='goods-tile__title']")
                 .shouldBe(sizeGreaterThan(0), ofSeconds(8))
                 .stream()

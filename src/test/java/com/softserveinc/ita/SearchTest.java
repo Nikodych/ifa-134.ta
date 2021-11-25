@@ -18,8 +18,7 @@ public class SearchTest extends TestRunner {
                 .setTextInSearchBar(requiredItem)
                 .performSearch();
 
-        var searchResultPage = new SearchResultPage();
-        var firstItem = searchResultPage
+        var firstItem = SearchResultPage
                 .getGoodsListBy(requiredItem)
                 .stream()
                 .findFirst()
@@ -29,7 +28,7 @@ public class SearchTest extends TestRunner {
                 .as("Test failed: The first item should contain: " + requiredItem)
                 .contains(requiredItem);
 
-        var lastItem = searchResultPage.getGoodsListBy(requiredItem);
+        var lastItem = SearchResultPage.getGoodsListBy(requiredItem);
         assertThat(lastItem.get(lastItem.size() - 1))
                 .as("Test failed: The last item should contain: " + requiredItem)
                 .contains(requiredItem);

@@ -42,10 +42,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    public T performSearch() {
+    public SearchResultPage performSearch() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
 
-        return (T) this;
+        return new SearchResultPage();
     }
 
     public UserModal openUserModalWindow() {
