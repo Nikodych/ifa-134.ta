@@ -1,6 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.SearchPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
@@ -9,7 +9,6 @@ import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
-    private SearchPage searchPage = new SearchPage();
 
     @Test
     public void verifyLanguageSwitchingTest() {
@@ -23,21 +22,26 @@ public class HomePageTest extends TestRunner {
     }
 
     @Test
-    public void verifySearchTest() {
+    public void verifySearchResultsTest() {
         var requiredItem = "Xiaomi Redmi Note 10";
         homePage
-                .closeAdvertisingBanner()
+                .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
-                .clickSearchButton();
+                .performSearch();
 
-        var firstItem = searchPage.getFirstRequiredItem(requiredItem);
+        var searchResultPage = new SearchResultPage();
+        var firstItem = searchResultPage.getGoodsList(requiredItem)
+                .stream()
+                .findFirst()
+                .toString();
+        
         assertThat(firstItem)
-                .as("Test failed: First item should contains: " + requiredItem)
+                .as("Test failed: The first item should contain: " + requiredItem)
                 .contains(requiredItem);
 
-        var lastItem = searchPage.getLastRequiredItem(requiredItem);
-        assertThat(lastItem)
-                .as("Test failed: Last item should contains: " + requiredItem)
+        var lastItem = searchResultPage.getGoodsList(requiredItem);
+        assertThat(lastItem.get(lastItem.size() - 1))
+                .as("Test failed: The last item should contain: " + requiredItem)
                 .contains(requiredItem);
     }
 }

@@ -10,7 +10,7 @@ import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
-public abstract class BasePage<T> {
+public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
@@ -26,11 +26,13 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public T closeAdvertisingBanner() {
+    public T closeAdvertisingBannerIfDisplayed() {
         var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
+
         if (banner.isDisplayed()) {
             banner.click();
         }
+
         return (T) this;
     }
 
@@ -43,7 +45,7 @@ public abstract class BasePage<T> {
         return (T) this;
     }
 
-    public T clickSearchButton() {
+    public T performSearch() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
 
         return (T) this;
