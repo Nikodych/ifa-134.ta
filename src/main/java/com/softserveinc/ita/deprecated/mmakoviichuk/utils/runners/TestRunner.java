@@ -1,17 +1,15 @@
-package com.softserveinc.ita.utils.runners;
+package com.softserveinc.ita.deprecated.mmakoviichuk.utils.runners;
 
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
 
 import static com.codeborne.selenide.Selenide.open;
-import static java.time.Duration.ofSeconds;
 
 public abstract class TestRunner {
 
     @BeforeMethod
-    public void openHomePage() {
+    public void setUp() {
         Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 8000;
         open("https://rozetka.com.ua/ua/");
     }
 }
