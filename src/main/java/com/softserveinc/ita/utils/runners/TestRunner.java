@@ -4,7 +4,6 @@ import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
 
 import static com.codeborne.selenide.Selenide.open;
-import static java.time.Duration.ofSeconds;
 
 public abstract class TestRunner {
 

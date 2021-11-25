@@ -6,7 +6,7 @@ import static java.lang.String.format;
 public class HomePage extends BasePage<HomePage> {
 
     private final String GOODS_SECTION_TEMPLATE = "//h2[contains(text(), '%s')]";
-  
+
     public CategoriesPage openCategory(String categoryName) {
         $x(format("//a[@class='menu-categories__link' and contains(text(), '%s')]", categoryName)).click();
 
@@ -24,7 +24,7 @@ public class HomePage extends BasePage<HomePage> {
         var lastProductOfSection = getLastProductTitleOfSection(sectionName);
 
         $x(format(GOODS_SECTION_TEMPLATE, sectionName))
-                .$x(format("./following-sibling::ul//a[contains(@title,'%s')]", lastProductOfSection))
+                .$x(format("./following-sibling::ul//a[contains(@title,\"%s\")]", lastProductOfSection))
                 .click();
 
         return new ProductPage();

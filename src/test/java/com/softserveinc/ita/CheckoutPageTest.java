@@ -15,19 +15,22 @@ public class CheckoutPageTest extends TestRunner {
 
     @Test
     public void verifyCheckoutPageFunctionalityTest() {
-        homePage
-                .closeAdBanner()
-                .openLastProductOfSection("Акційні пропозиції");
+        var testSectionName = "Акційні пропозиції";
 
-        var lastProductOfSection = homePage.getLastProductTitleOfSection("Акційні пропозиції");
+        homePage.closeAdBanner();
+
+        var lastProductOfSection = homePage.getLastProductTitleOfSection(testSectionName);
+
+        homePage.openLastProductOfSection(testSectionName);
+
         var productPage = new ProductPage();
 
-        assertThat(lastProductOfSection)
-                .as("Last product of section should be opened")
-                .isEqualTo(productPage.getProductTitle());
+        assertThat(productPage.getProductTitle())
+                .as("Last product of section " + testSectionName + " should be opened")
+                .isEqualTo(lastProductOfSection);
 
         productPage
-                .addProductToBasket()
+                .addToCart()
                 .goToCheckout();
 
         var checkoutPage = new CheckoutPage();
