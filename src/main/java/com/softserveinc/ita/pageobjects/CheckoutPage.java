@@ -3,6 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.CustomerOrderData;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.Integer.parseInt;
@@ -49,7 +50,9 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     }
 
     public BasketModal editOrder() {
-        $("a.checkout-product__edit-button").click();
+        $("a.checkout-product__edit-button")
+                .shouldBe(visible)
+                .click();
 
         return new BasketModal();
     }

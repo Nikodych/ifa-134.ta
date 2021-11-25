@@ -24,16 +24,16 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public T searchBarInputText(String inputText) {
+    public BasePage<T> searchBarInputText(String inputText) {
         $x("//input[@name = 'search']").setValue(inputText);
 
-        return (T) this;
+        return this;
     }
 
-    public T search() {
+    public BasePage<T> search() {
         searchButtonElement.click();
 
-        return (T) this;
+        return this;
     }
 
     public UserModal openUserModalWindow() {
@@ -48,10 +48,10 @@ public abstract class BasePage<T> {
         return new BasketModal();
     }
 
-    public T switchLanguageTo(LanguageSwitcher language) {
+    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return (T) this;
+        return this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -61,13 +61,13 @@ public abstract class BasePage<T> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public T closeAdBanner() {
+    public BasePage<T> closeAdBanner() {
         if ($("#rz-banner")
                 .should(exist)
                 .isDisplayed()) {
             $("span .exponea-close-cross").click();
         }
 
-        return (T) this;
+        return this;
     }
 }

@@ -2,7 +2,6 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.CheckoutPage;
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
