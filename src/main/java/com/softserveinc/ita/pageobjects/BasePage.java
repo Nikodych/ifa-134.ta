@@ -14,7 +14,7 @@ public abstract class BasePage<T extends BasePage <T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
-    public MenuModal openMenu() {
+    public MenuModal openSideMenu() {
         $x("//button[@class = 'header__button']").click();
 
         return new MenuModal();

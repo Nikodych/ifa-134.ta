@@ -12,8 +12,45 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
-    private HomePage homePage = new HomePage();
+    private final HomePage homePage = new HomePage();
 
+    @DataProvider
+    public Object[][] rozetkaCategoryData() {
+        return new Object[][]{
+                {"Товари для геймерів"},
+                {"Побутова техніка"}
+        };
+    }
+
+    @Test(dataProvider = "rozetkaCategoryData")
+    public void verifyCategoryTransitionTest(String title) {
+        homePage
+                .openCategory(title)
+                .openSubCategory()
+                .openProduct();
+
+        var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle)
+                .as("Product should correspond " + title + " category")
+                .contains(title);
+    }
+
+    @Test(dataProvider = "rozetkaCategoryData")
+    public void verifyCategoryTransitionThroughDropdownTest(String title) {
+        homePage
+                .openCatalog()
+                .openDropdownCategory(title)
+                .openSubCategory()
+                .openProduct();
+
+        var actualTitle = new ProductPage().getProductCategory();
+
+        assertThat(actualTitle)
+                .as("Product should correspond " + title + " category")
+                .contains(title);
+    }
+    
     @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;
