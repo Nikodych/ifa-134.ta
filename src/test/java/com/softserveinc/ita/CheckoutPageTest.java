@@ -11,25 +11,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CheckoutPageTest extends TestRunner {
 
-    protected HomePage homePage = new HomePage();
-    protected ProductPage productPage = new ProductPage();
-    protected CheckoutPage checkoutPage = new CheckoutPage();
+    private final HomePage homePage = new HomePage();
 
     @Test
     public void verifyCheckoutPageFunctionalityTest() {
-        homePage.closeAdBanner();
-        var lastProductOfSection = homePage.getLastProductOfSection("Акційні пропозиції");
+        homePage
+                .closeAdBanner()
+                .openLastProductOfSection("Акційні пропозиції");
+
+        var lastProductOfSection = homePage.getLastProductTitleOfSection("Акційні пропозиції");
+        var productPage = new ProductPage();
 
         assertThat(lastProductOfSection)
                 .as("Last product of section should be opened")
-                .isEqualTo(productPage.getProductName());
+                .isEqualTo(productPage.getProductTitle());
 
         productPage
                 .addProductToBasket()
-                .goToCheckout()
-                .didCheckoutPageOpenCorrectly();
+                .goToCheckout();
 
+        var checkoutPage = new CheckoutPage();
         var customerOrderData = getCustomerOrderData();
+
         checkoutPage.setCustomerData(customerOrderData);
 
         var expectedSurname = customerOrderData.getSurname();
@@ -55,8 +58,7 @@ public class CheckoutPageTest extends TestRunner {
         checkoutPage
                 .editOrder()
                 .addOneMoreProduct()
-                .goToCheckout()
-                .didCheckoutPageOpenCorrectly();
+                .goToCheckout();
 
         var productTotalPrice = checkoutPage.getProductTotalPrice();
         assertThat(productTotalPrice)

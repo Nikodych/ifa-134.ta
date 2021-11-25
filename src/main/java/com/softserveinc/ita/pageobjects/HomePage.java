@@ -5,14 +5,22 @@ import static java.lang.String.format;
 
 public class HomePage extends BasePage<HomePage> {
 
-    public String getLastProductOfSection(String sectionName) {
-        var selectedSection = $x(format("//*[contains(@class, 'main-goods__heading') and contains(text(), '%s')]", sectionName));
-        var lastProductOfSelectedSection = selectedSection
+    private final String GOODS_SECTION_TEMPLATE = "//h2[contains(text(), '%s')]";
+
+    public String getLastProductTitleOfSection(String sectionName) {
+        return $x(format(GOODS_SECTION_TEMPLATE, sectionName))
                 .$$x("./following-sibling::ul//a[@class = 'tile__title']")
-                .last();
+                .last()
+                .getText();
+    }
 
-        lastProductOfSelectedSection.click();
+    public ProductPage openLastProductOfSection(String sectionName) {
+        var lastProductOfSection = getLastProductTitleOfSection(sectionName);
 
-        return lastProductOfSelectedSection.getText();
+        $x(format(GOODS_SECTION_TEMPLATE, sectionName))
+                .$x(format("./following-sibling::ul//a[contains(@title,'%s')]", lastProductOfSection))
+                .click();
+
+        return new ProductPage();
     }
 }

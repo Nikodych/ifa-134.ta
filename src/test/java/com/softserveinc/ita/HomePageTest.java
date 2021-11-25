@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
-    protected HomePage homePage = new HomePage();
+    private final HomePage homePage = new HomePage();
 
     @Test
     public void verifyLanguageSwitchingTest() {

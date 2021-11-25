@@ -10,7 +10,7 @@ public class ProductPage extends BasePage<ProductPage> {
         return new BasketModal();
     }
 
-    public String getProductName() {
+    public String getProductTitle() {
         return $("h1.product__title").getText();
     }
 }

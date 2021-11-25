@@ -3,7 +3,8 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.CustomerOrderData;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
@@ -73,13 +74,5 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         var productQuantity = $(".js-product-quantity dd").getText();
 
         return parseInt(productQuantity);
-    }
-
-    public boolean didCheckoutPageOpenCorrectly() {
-        if ($("rz-critical-error.ng-star-inserted").exists()) {
-            refresh();
-        }
-
-        return true;
     }
 }
