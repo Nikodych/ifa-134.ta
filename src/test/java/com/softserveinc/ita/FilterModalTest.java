@@ -2,12 +2,13 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
+import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FilterModalTest {
+public class FilterModalTest extends TestRunner {
 
     @DataProvider
     public Object[][] priceSortingFunctionality() {
