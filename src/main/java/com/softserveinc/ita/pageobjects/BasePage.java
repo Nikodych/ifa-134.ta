@@ -2,15 +2,15 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
-
 import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.softserveinc.ita.models.RandomUtil.*;
 import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
-public abstract class BasePage<T> {
+public abstract class BasePage<T extends BasePage <T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
@@ -26,11 +26,13 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public T closeAdvertisingBanner() {
+    public T closeAdvertisingBannerIfDisplayed() {
         var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
+
         if (banner.isDisplayed()) {
             banner.click();
         }
+
         return (T) this;
     }
 
@@ -60,7 +62,7 @@ public abstract class BasePage<T> {
         return list.get(list.size() - 1);
     }
 
-    public T clickSearchButton() {
+    public T performSearch() {
         $x("//button[contains(@class, 'search-form__submit')]").click();
 
         return (T) this;
@@ -91,14 +93,14 @@ public abstract class BasePage<T> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public T selectCategory(String categoryName) {
+    public T selectRequiredCategory(String categoryName) {
         $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
 
         return (T) this;
     }
 
     public ProductPage selectRandomSubCategory() {
-        randomizerForListCategories("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']");
+        randomizerForListCategories($$x("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']"));
 
         return new ProductPage();
     }

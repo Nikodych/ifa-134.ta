@@ -34,8 +34,8 @@ public class HomePageTest extends TestRunner {
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
         homePage
-                .closeAdvertisingBanner()
-                .selectCategory(categoryName)
+                .closeAdvertisingBannerIfDisplayed()
+                .selectRequiredCategory(categoryName)
                 .selectRandomSubCategory();
 
         var productPage = new ProductPage();
