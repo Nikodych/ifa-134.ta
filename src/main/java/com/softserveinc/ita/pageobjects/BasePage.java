@@ -3,10 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
-import java.util.List;
-
 import static com.codeborne.selenide.Condition.visible;
-import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
