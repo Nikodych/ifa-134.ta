@@ -2,7 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class ProductPage extends BasePage<ProductPage>{
+public class ProductPage extends BasePage<ProductPage> {
 
     public BasketModal addToCart() {
         $x("//button[contains(@class,'buy-button button button_with_icon')]")

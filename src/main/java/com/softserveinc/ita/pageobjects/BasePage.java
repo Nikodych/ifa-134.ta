@@ -3,6 +3,8 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
@@ -22,16 +24,16 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public T searchBarInputText(String inputText) {
+    public BasePage<T> searchBarInputText(String inputText) {
         $x("//input[@name = 'search']").setValue(inputText);
 
-        return (T) this;
+        return this;
     }
 
-    public T search() {
+    public BasePage<T> search() {
         searchButtonElement.click();
 
-        return (T) this;
+        return this;
     }
 
     public UserModal openUserModalWindow() {
@@ -46,10 +48,10 @@ public abstract class BasePage<T> {
         return new BasketModal();
     }
 
-    public T switchLanguageTo(LanguageSwitcher language) {
+    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return (T) this;
+        return this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -57,5 +59,15 @@ public abstract class BasePage<T> {
         var searchButtonText = searchButtonElement.getText();
 
         return searchButtonText.equals(verificationWord);
+    }
+
+    public BasePage<T> closeAdBanner() {
+        if ($("#rz-banner")
+                .should(exist)
+                .isDisplayed()) {
+            $("span .exponea-close-cross").click();
+        }
+
+        return this;
     }
 }
