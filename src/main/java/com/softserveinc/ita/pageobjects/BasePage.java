@@ -3,10 +3,12 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.*;
-import static com.softserveinc.ita.models.RandomUtil.*;
 import static com.codeborne.selenide.Selenide.*;
+import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
 
 public abstract class BasePage<T extends BasePage <T>> {
 
@@ -81,7 +83,11 @@ public abstract class BasePage<T extends BasePage <T>> {
     }
 
     public ProductPage selectRandomSubCategory() {
-        randomizerForListCategories($$x("//*[@class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']"));
+        var list = $$x("//*[@Class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
+                .shouldBe(sizeNotEqual(0), ofSeconds(10));
+        list
+                .get(getRandomNumber(list.size()))
+                .click();
 
         return new ProductPage();
     }

@@ -1,9 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.support.ui.Select;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -36,17 +35,17 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     public ProductPage selectFromCheapToExpensive() {
-        var selectCheap = selectFromPriceModalMenuSelector.should(Condition.appear);
-        var index = new Select(selectCheap);
-        index.selectByIndex(1);
+        selectFromPriceModalMenuSelector
+                .should(appear)
+                .selectOption(1);
 
         return this;
     }
 
     public ProductPage selectFromExpensiveToCheap() {
-        var selectCheap = selectFromPriceModalMenuSelector.should(Condition.appear);
-        var index = new Select(selectCheap);
-        index.selectByIndex(2);
+        selectFromPriceModalMenuSelector
+                .should(appear)
+                .selectOption(2);
 
         return this;
     }
