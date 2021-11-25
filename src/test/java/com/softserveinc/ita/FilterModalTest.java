@@ -31,20 +31,14 @@ public class FilterModalTest extends TestRunner {
                 .clickOnPriceButton();
 
         productPage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = productPage.getPriceFromFirstItem();
-        assertThat(fromCheapToExpensivePrice)
+        var getPriceFromFilteredItems = productPage.getPriceFromFirstItem();
+        assertThat(getPriceFromFilteredItems)
                 .as("Test failed: Minimal price should be " + minPrice)
                 .isGreaterThanOrEqualTo(minPrice);
 
         productPage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = productPage.getPriceFromFirstItem();
-        assertThat(fromExpensiveToCheapPrice)
+        assertThat(getPriceFromFilteredItems)
                 .as("Test failed: Maximal price should be " + maxPrice)
                 .isLessThanOrEqualTo(maxPrice);
-
-        assertThat(fromExpensiveToCheapPrice)
-                .as("Test failed: Maximal price should be " + maxPrice)
-                .isNotEqualTo(invalidValue)
-                .isLessThan(invalidValue);
     }
 }
