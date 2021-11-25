@@ -1,9 +1,7 @@
 package com.softserveinc.ita.models;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import lombok.experimental.UtilityClass;
-
 import java.util.Random;
 
 import static com.codeborne.selenide.CollectionCondition.*;

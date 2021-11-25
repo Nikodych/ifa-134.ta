@@ -2,11 +2,9 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
-import java.util.List;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.softserveinc.ita.models.RandomUtil.*;
-import static com.softserveinc.ita.utils.runners.ElementsUtil.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 
@@ -43,23 +41,6 @@ public abstract class BasePage<T extends BasePage <T>> {
         search.setValue(inputText);
 
         return (T) this;
-    }
-
-    public List<String> getGoodsList(String item) {
-        return getListWithGoods("//*[@class='goods-tile__title']", item);
-    }
-
-    public String getFirstRequiredItem(String item) {
-        return getGoodsList(item)
-                .stream()
-                .findFirst()
-                .toString();
-    }
-
-    public String getLastRequiredItem(String item) {
-        var list = getGoodsList(item);
-
-        return list.get(list.size() - 1);
     }
 
     public T performSearch() {

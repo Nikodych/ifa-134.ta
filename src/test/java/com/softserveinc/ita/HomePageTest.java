@@ -61,36 +61,4 @@ public class HomePageTest extends TestRunner {
                 .as("Language should be switched")
                 .isTrue();
     }
-
-    @DataProvider
-    public Object[][] priceSortingFunctionality() {
-        return new Object[][]{
-                {"Ноутбуки", "2 999", "8 999"}};
-    }
-
-    @Test(dataProvider = "priceSortingFunctionality")
-    public void verifyPriceSortingFunctionality(String categoryName, String minPrice, String maxPrice) {
-        homePage
-                .closeAdvertisingBannerIfDisplayed()
-                .selectRequiredCategory(categoryName)
-                .selectRandomSubCategory();
-
-        var productPage = new ProductPage();
-        productPage
-                .setMinimalPrice(minPrice.replaceAll("\\s", ""))
-                .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
-                .clickOnPriceButton();
-
-        productPage.selectFromCheapToExpensive();
-        var fromCheapToExpensivePrice = productPage.getPriceFromFirstItem();
-        assertThat(fromCheapToExpensivePrice)
-                .as("Test failed: Minimal price should be " + minPrice)
-                .isGreaterThanOrEqualTo(minPrice);
-
-        productPage.selectFromExpensiveToCheap();
-        var fromExpensiveToCheapPrice = productPage.getPriceFromFirstItem();
-        assertThat(fromExpensiveToCheapPrice)
-                .as("Test failed: Maximal price should be " + maxPrice)
-                .isLessThanOrEqualTo(maxPrice);
-    }
 }
