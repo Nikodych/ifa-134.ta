@@ -19,7 +19,8 @@ public class SearchTest extends TestRunner {
                 .performSearch();
 
         var searchResultPage = new SearchResultPage();
-        var firstItem = searchResultPage.getGoodsListBy(requiredItem)
+        var firstItem = searchResultPage
+                .getGoodsListBy(requiredItem)
                 .stream()
                 .findFirst()
                 .toString();
