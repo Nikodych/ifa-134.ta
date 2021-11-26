@@ -3,6 +3,8 @@ package com.softserveinc.ita.deprecated.dkrutenko.pageobjects.rozetka;
 import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Selectors.byPartialLinkText;
 import static com.codeborne.selenide.Selenide.*;
 import static java.util.stream.Collectors.toList;
@@ -25,9 +27,9 @@ public class SearchGoods extends BasePage {
         return list.stream().findFirst().toString();
     }
 
-    public ShoppingCartModal findActualtem(String text) {
-        $(byPartialLinkText(text)).click();
+        public ShoppingCartModal findActualtem(String text) {
+            $(byPartialLinkText(text)).click();
 
-        return new ShoppingCartModal();
+            return new ShoppingCartModal();
+        }
     }
-}

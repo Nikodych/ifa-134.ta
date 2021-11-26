@@ -4,11 +4,12 @@ import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
-public abstract class BasePage<T> {
+public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
@@ -24,16 +25,29 @@ public abstract class BasePage<T> {
         return new CatalogModal();
     }
 
-    public BasePage<T> searchBarInputText(String inputText) {
-        $x("//input[@name = 'search']").setValue(inputText);
+    public T closeAdvertisingBannerIfDisplayed() {
+        var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
 
-        return this;
+        if (banner.isDisplayed()) {
+            banner.click();
+        }
+
+        return (T) this;
     }
 
-    public BasePage<T> search() {
+    public T setTextInSearchBar(String inputText) {
+        var search = $x("//input[@name = 'search']");
+        search.click();
+        search.clear();
+        search.setValue(inputText);
+
+        return (T) this;
+    }
+
+    public SearchResultPage performSearch() {
         searchButtonElement.click();
 
-        return this;
+        return new SearchResultPage();
     }
 
     public UserModal openUserModalWindow() {
