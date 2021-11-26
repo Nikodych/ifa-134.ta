@@ -96,13 +96,13 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new ProductPage();
     }
 
-    public BasePage<T> closeAdBanner() {
+    public T closeAdBanner() {
         if ($("#rz-banner")
                 .should(exist)
                 .isDisplayed()) {
             $("span .exponea-close-cross").click();
         }
 
-        return this;
+        return (T) this;
     }
 }
