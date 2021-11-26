@@ -11,6 +11,8 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 
 public abstract class BasePage<T extends BasePage<T>> {
 
@@ -28,14 +30,14 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new CatalogModal();
     }
 
-    public BasePage<T> closeAdvertisingBannerIfDisplayed() {
+    public T closeAdvertisingBannerIfDisplayed() {
         var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
 
         if (banner.isDisplayed()) {
             banner.click();
         }
 
-        return this;
+        return (T) this;
     }
 
     public T setTextInSearchBar(String inputText) {
@@ -47,10 +49,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    public BasePage<T> performSearch() {
+    public SearchResultPage performSearch() {
         searchButtonElement.click();
 
-        return this;
+        return new SearchResultPage();
     }
 
     public UserModal openUserModalWindow() {
