@@ -38,13 +38,13 @@ public abstract class BasePage<T extends BasePage<T>> {
         return this;
     }
 
-    public BasePage<T> setTextInSearchBar(String inputText) {
+    public T setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
         search.setValue(inputText);
 
-        return this;
+        return (T) this;
     }
 
     public BasePage<T> performSearch() {
