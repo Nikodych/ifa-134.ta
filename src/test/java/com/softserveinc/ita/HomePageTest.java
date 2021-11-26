@@ -50,7 +50,7 @@ public class HomePageTest extends TestRunner {
                 .as("Product should correspond " + title + " category")
                 .contains(title);
     }
-
+    
     @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;

@@ -1,14 +1,18 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import com.codeborne.selenide.SelenideElement;
+
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.*;
+import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
+import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.String.format;
-
+//TODO: move methods not related to this page to other page objects
 public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
@@ -23,16 +27,6 @@ public abstract class BasePage<T extends BasePage<T>> {
         $x("//button[contains(@id, 'fat-menu')]").click();
 
         return new CatalogModal();
-    }
-
-    public T closeAdvertisingBannerIfDisplayed() {
-        var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
-
-        if (banner.isDisplayed()) {
-            banner.click();
-        }
-
-        return (T) this;
     }
 
     public T setTextInSearchBar(String inputText) {
@@ -75,13 +69,28 @@ public abstract class BasePage<T extends BasePage<T>> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public BasePage<T> closeAdBanner() {
-        if ($("#rz-banner")
-                .should(exist)
-                .isDisplayed()) {
+    public T selectRequiredCategory(String categoryName) {
+        $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
+
+        return (T) this;
+    }
+
+    public ProductPage selectRandomSubCategory() {
+        var list = $$x("//*[@Class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
+                .shouldBe(sizeNotEqual(0), ofSeconds(10));
+        list
+                .get(getRandomNumber(list.size()))
+                .click();
+
+        return new ProductPage();
+    }
+
+    public T closeAdvertisingBannerIfDisplayed() {
+        var banner = $("#rz-banner").should(exist);
+        if (banner.isDisplayed()) {
             $("span .exponea-close-cross").click();
         }
 
-        return this;
+        return (T) this;
     }
 }
