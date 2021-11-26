@@ -22,7 +22,7 @@ public class FilterModalTest extends TestRunner {
                                                 String negativeMinPrice, String negativeMaxPrice) {
         var homePage = new HomePage();
         homePage
-                .closeAdBanner()
+                .closeAdvertisingBannerIfDisplayed()
                 .selectRequiredCategory(categoryName)
                 .selectRandomSubCategory();
 
