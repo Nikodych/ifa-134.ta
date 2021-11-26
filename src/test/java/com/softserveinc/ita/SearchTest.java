@@ -12,13 +12,13 @@ public class SearchTest extends TestRunner {
     @Test
     public void verifySearchResultsTest() {
         var homePage = new HomePage();
-        var searchResultPage = new SearchResultPage();
         var requiredItem = "Xiaomi Redmi Note 10";
-        homePage
+
+        var searchResultPage =  homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
                 .performSearch();
-        
+
         var firstItem = searchResultPage
                 .getGoodsListBy(requiredItem)
                 .stream()
