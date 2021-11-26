@@ -30,16 +30,6 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new CatalogModal();
     }
 
-    public T closeAdvertisingBannerIfDisplayed() {
-        var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
-
-        if (banner.isDisplayed()) {
-            banner.click();
-        }
-
-        return (T) this;
-    }
-
     public T setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
@@ -97,9 +87,9 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     public T closeAdBanner() {
-        if ($("#rz-banner")
-                .should(exist)
-                .isDisplayed()) {
+        var banner = $("#rz-banner")
+                .should(exist);
+               if(banner.isDisplayed()) {
             $("span .exponea-close-cross").click();
         }
 
