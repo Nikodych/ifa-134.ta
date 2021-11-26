@@ -6,14 +6,13 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-
+//TODO: move methods not related to this page to other page objects
 public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");

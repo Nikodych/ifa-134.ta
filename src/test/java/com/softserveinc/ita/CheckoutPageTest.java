@@ -16,7 +16,7 @@ public class CheckoutPageTest extends TestRunner {
     public void verifyCheckoutPageFunctionalityTest() {
         var testSectionName = "Акційні пропозиції";
 
-        homePage.closeAdBanner();
+        homePage.closeAdvertisingBannerIfDisplayed();
 
         var lastProductOfSection = homePage.getLastProductTitleOfSection(testSectionName);
 
