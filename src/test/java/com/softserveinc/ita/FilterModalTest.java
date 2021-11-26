@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.FilterModal;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
@@ -25,13 +26,13 @@ public class FilterModalTest extends TestRunner {
                 .selectRequiredCategory(categoryName)
                 .selectRandomSubCategory();
 
-        var productPage = new ProductPage();
-        productPage
+        var filterModal = new FilterModal();
+        var productPage = filterModal
                 .setMinimalPrice(positiveMinPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(positiveMaxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton();
 
-        productPage.selectFromCheapToExpensive();
+        filterModal.selectFromCheapToExpensive();
         var firstItemPriceFromCheapToExpensive = productPage.getPriceFromFirstItem();
         assertThat(firstItemPriceFromCheapToExpensive)
                 .as("Test failed: Minimal price should be " + positiveMinPrice)
@@ -41,7 +42,7 @@ public class FilterModalTest extends TestRunner {
                 .as("Test failed: Minimal price should be greater or equal " + positiveMinPrice)
                 .isNotEqualTo(negativeMinPrice);
 
-        productPage.selectFromExpensiveToCheap();
+        filterModal.selectFromExpensiveToCheap();
         var firstItemPriceFromExpensiveToCheap = productPage.getPriceFromFirstItem();
         assertThat(firstItemPriceFromExpensiveToCheap)
                 .as("Test failed: Maximal price should be " + positiveMaxPrice)

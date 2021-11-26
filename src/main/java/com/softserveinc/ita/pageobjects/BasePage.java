@@ -80,10 +80,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public BasePage<T> selectRequiredCategory(String categoryName) {
+    public T selectRequiredCategory(String categoryName) {
         $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
 
-        return this;
+        return (T) this;
     }
 
     public ProductPage selectRandomSubCategory() {

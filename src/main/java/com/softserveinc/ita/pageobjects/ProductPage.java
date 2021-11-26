@@ -1,54 +1,10 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.SelenideElement;
-
-import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.time.Duration.ofSeconds;
 
 public class ProductPage extends BasePage<ProductPage> {
-
-    private final SelenideElement selectFromPriceModalMenuSelector = $("div > rz-sort > select");
-
-    public ProductPage setMinimalPrice(String price) {
-        var minPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='min']");
-        minPriceField.click();
-        minPriceField.setValue(price);
-
-        return this;
-    }
-
-    public ProductPage setMaximalPrice(String price) {
-        var maxPriceField = $x("//input[@class='slider-filter__input ng-untouched ng-pristine ng-valid'][@formcontrolname='max']");
-        maxPriceField.click();
-        maxPriceField.setValue(price);
-
-        return this;
-    }
-
-    public ProductPage clickOnPriceButton() {
-        $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
-
-        return this;
-    }
-
-    public ProductPage selectFromCheapToExpensive() {
-        selectFromPriceModalMenuSelector
-                .should(appear)
-                .selectOption(1);
-
-        return this;
-    }
-
-    public ProductPage selectFromExpensiveToCheap() {
-        selectFromPriceModalMenuSelector
-                .should(appear)
-                .selectOption(2);
-
-        return this;
-    }
 
     public String getPriceFromFirstItem() {
         return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
