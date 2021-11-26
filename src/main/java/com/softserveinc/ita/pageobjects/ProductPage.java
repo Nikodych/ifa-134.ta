@@ -73,3 +73,4 @@ public class ProductPage extends BasePage<ProductPage> {
         return $x("//ul[@class='breadcrumbs ng-star-inserted']").getText();
     }
 }
+

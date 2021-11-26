@@ -1,16 +1,18 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.*;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import com.codeborne.selenide.SelenideElement;
+
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-public abstract class BasePage<T extends BasePage <T>> {
+public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
@@ -26,29 +28,29 @@ public abstract class BasePage<T extends BasePage <T>> {
         return new CatalogModal();
     }
 
-    public T closeAdvertisingBannerIfDisplayed() {
+    public BasePage<T> closeAdvertisingBannerIfDisplayed() {
         var banner = $x("//span[@class='exponea-close-cross']").shouldBe(visible);
 
         if (banner.isDisplayed()) {
             banner.click();
         }
 
-        return (T) this;
+        return this;
     }
 
-    public T setTextInSearchBar(String inputText) {
+    public BasePage<T> setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
         search.setValue(inputText);
 
-        return (T) this;
+        return this;
     }
 
-    public T performSearch() {
-        $x("//button[contains(@class, 'search-form__submit')]").click();
+    public BasePage<T> performSearch() {
+        searchButtonElement.click();
 
-        return (T) this;
+        return this;
     }
 
     public UserModal openUserModalWindow() {
@@ -63,10 +65,10 @@ public abstract class BasePage<T extends BasePage <T>> {
         return new BasketModal();
     }
 
-    public T switchLanguageTo(LanguageSwitcher language) {
+    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return (T) this;
+        return this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -76,10 +78,10 @@ public abstract class BasePage<T extends BasePage <T>> {
         return searchButtonText.equals(verificationWord);
     }
 
-    public T selectRequiredCategory(String categoryName) {
+    public BasePage<T> selectRequiredCategory(String categoryName) {
         $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
 
-        return (T) this;
+        return this;
     }
 
     public ProductPage selectRandomSubCategory() {
@@ -90,5 +92,15 @@ public abstract class BasePage<T extends BasePage <T>> {
                 .click();
 
         return new ProductPage();
+    }
+
+    public BasePage<T> closeAdBanner() {
+        if ($("#rz-banner")
+                .should(exist)
+                .isDisplayed()) {
+            $("span .exponea-close-cross").click();
+        }
+
+        return this;
     }
 }
