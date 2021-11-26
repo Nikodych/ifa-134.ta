@@ -58,7 +58,7 @@ public class HomePageTest extends TestRunner {
         var isLanguageSwitched = homePage.isLanguageSwitchedTo(languageToSwitch);
 
         assertThat(isLanguageSwitched)
-                .as("Language should be switched")
+                .as("Language should be switched to '" + languageToSwitch + "'")
                 .isTrue();
     }
 }

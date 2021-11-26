@@ -1,10 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.*;
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
 public abstract class BasePage<T extends BasePage<T>> {
@@ -33,7 +35,7 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    public T setTextInSearchBar(String inputText) {
+    public BasePage<T> setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
         search.clear();
@@ -43,7 +45,7 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     public SearchResultPage performSearch() {
-        $x("//button[contains(@class, 'search-form__submit')]").click();
+        searchButtonElement.click();
 
         return new SearchResultPage();
     }
@@ -60,10 +62,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new BasketModal();
     }
 
-    public T switchLanguageTo(LanguageSwitcher language) {
+    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return (T) this;
+        return this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -71,5 +73,15 @@ public abstract class BasePage<T extends BasePage<T>> {
         var searchButtonText = searchButtonElement.getText();
 
         return searchButtonText.equals(verificationWord);
+    }
+
+    public BasePage<T> closeAdBanner() {
+        if ($("#rz-banner")
+                .should(exist)
+                .isDisplayed()) {
+            $("span .exponea-close-cross").click();
+        }
+
+        return this;
     }
 }
