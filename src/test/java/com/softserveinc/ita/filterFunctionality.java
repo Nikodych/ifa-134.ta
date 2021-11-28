@@ -1,4 +1,4 @@
-package com.softserveinc.ita.vsaroz;
+package com.softserveinc.ita;
 
 import com.softserveinc.ita.utils.runners.TestRunner;
 import com.softserveinc.ita.pageobjects.*;
@@ -6,44 +6,45 @@ import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class RozetkaTest extends TestRunner {
+public class filterFunctionality extends TestRunner {
     private HomePage homePage = new HomePage();
     private CategoriesPage categoriesPage = new CategoriesPage();
     private ProductPage productPage = new ProductPage();
+    private SearchResultPage searchResultPage = new SearchResultPage();
 
     @DataProvider
     public Object[][] filterOptions() {
         return new Object[][]{
-                {"Ноутбуки та комп’ютери", "lenovo", "5 000", "10 000"}};
+                {"Ноутбуки та комп’ютери", "lenovo", "10 000", "20 000", 0}};
     }
 
     @Test(dataProvider = "filterOptions")
-    public void verifyFilterFunctionality(String category, String brand, String minPrice, String maxPrice) {
+    public void verifyFilterFunctionality(String category, String brand, String minPrice, String maxPrice, int first) {
 
         homePage
                 .openCategory(category)
-                .openLaptopsSubcategory();
+                .openSubCategory();
 
-        categoriesPage
+        searchResultPage
                 .filterByBrand(brand)
                 .setMinimalPrice(minPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton()
                 .filterAvailableItems();
 
-        productPage.getFirstFilteredItem();
+        productPage.getFirstFilteredItem(first);
 
         assertThat(productPage.getProductTitle())
                 .as("Incorrect brand selected")
                 .contains("Lenovo");
 
         assertThat(productPage.getProductPrice())
-                .as("Select correct price")
-                .isGreaterThanOrEqualTo(minPrice);
-                //.isLessThanOrEqualTo(maxPrice);
+                .as("Select another price range")
+                .isGreaterThanOrEqualTo(minPrice)
+                .isLessThanOrEqualTo(maxPrice);
 
         assertThat(productPage.getItemStatus())
                 .as("Item is unavailable for order")
-                .isTrue();
+                .contains("Є в наявності");
     }
 }
