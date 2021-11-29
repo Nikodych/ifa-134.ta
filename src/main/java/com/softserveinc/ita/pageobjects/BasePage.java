@@ -4,18 +4,20 @@ import com.softserveinc.ita.models.LanguageSwitcher;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.*;
-import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
-import static java.time.Duration.ofSeconds;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-//TODO: move methods not related to this page to other page objects
+
 public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
+
+    public T clickOnMainPageLogo() {
+        $x("//a[@class='header__logo']").click();
+
+        return (T) this;
+    }
 
     public MenuModal openSideMenu() {
         $x("//button[@class = 'header__button']").click();
@@ -67,22 +69,6 @@ public abstract class BasePage<T extends BasePage<T>> {
         var searchButtonText = searchButtonElement.getText();
 
         return searchButtonText.equals(verificationWord);
-    }
-
-    public T selectRequiredCategory(String categoryName) {
-        $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
-
-        return (T) this;
-    }
-
-    public ProductPage selectRandomSubCategory() {
-        var list = $$x("//*[@Class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
-                .shouldBe(sizeNotEqual(0), ofSeconds(10));
-        list
-                .get(getRandomNumber(list.size()))
-                .click();
-
-        return new ProductPage();
     }
 
     public T closeAdvertisingBannerIfDisplayed() {

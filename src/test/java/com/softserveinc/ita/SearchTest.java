@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.Configuration;
+import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
@@ -14,7 +16,7 @@ public class SearchTest extends TestRunner {
         var homePage = new HomePage();
         var requiredItem = "Xiaomi Redmi Note 10";
 
-        var searchResultPage =  homePage
+        var searchResultPage = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
                 .performSearch();
@@ -33,5 +35,22 @@ public class SearchTest extends TestRunner {
         assertThat(lastItem.get(lastItem.size() - 1))
                 .as("Test failed: The last item should contain: " + requiredItem)
                 .contains(requiredItem);
+    }
+
+    @Test
+    public void verifyRecentlyViewedProducts() {
+        var category = "Ноутбуки";
+        var categoriesPage = new CategoriesPage();
+        categoriesPage
+                .selectRequiredCategory(category)
+                .selectRandomSubCategory()
+                .selectFirstItemFromProductPage()
+                .getProductTitle()
+                .clickOnMainPageLogo();
+
+        var homePage = new HomePage();
+        homePage.getTitleOfLastViewedItem()
+                .clickOnLastViewedItem()
+                .getProductTitle();
     }
 }
