@@ -26,10 +26,8 @@ public class ProductPage extends BasePage<ProductPage> {
         return new BasketModal();
     }
 
-    public ProductPage getProductTitle() {
-        $x("//h1[@class='product__title']").getText();
-
-        return this;
+    public String getProductTitle() {
+        return $x("//h1[@class='product__title']").getText();
     }
 
     public String getProductCategory() {
@@ -37,13 +35,11 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     public ProductPage selectFirstItemFromProductPage() {
-        var requiredItem = $$x("//div[@class='goods-tile__inner']")
+        $$x("//div[@class='goods-tile__inner']")
+                .shouldHave(sizeNotEqual(0), ofSeconds(8))
                 .stream()
                 .findFirst()
-                .get();
-
-        requiredItem
-                .shouldBe(visible, ofSeconds(8))
+                .get()
                 .click();
 
         return new ProductPage();

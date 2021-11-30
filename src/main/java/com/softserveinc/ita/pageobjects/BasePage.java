@@ -4,10 +4,13 @@ import com.softserveinc.ita.models.LanguageSwitcher;
 
 import com.codeborne.selenide.SelenideElement;
 
+import java.util.stream.Collectors;
+
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
+import static java.time.Duration.*;
 
 public abstract class BasePage<T extends BasePage<T>> {
 

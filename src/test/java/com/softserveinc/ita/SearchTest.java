@@ -1,21 +1,19 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Configuration;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchTest extends TestRunner {
+    private final HomePage homePage = new HomePage();
 
     @Test
     public void verifySearchResultsTest() {
-        var homePage = new HomePage();
-        var requiredItem = "Xiaomi Redmi Note 10";
 
+        var requiredItem = "Xiaomi Redmi Note 10";
         var searchResultPage = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
@@ -41,16 +39,28 @@ public class SearchTest extends TestRunner {
     public void verifyRecentlyViewedProducts() {
         var category = "Ноутбуки";
         var categoriesPage = new CategoriesPage();
-        categoriesPage
+
+        var expectedItem = categoriesPage
+                .closeAdvertisingBannerIfDisplayed()
                 .selectRequiredCategory(category)
                 .selectRandomSubCategory()
                 .selectFirstItemFromProductPage()
-                .getProductTitle()
-                .clickOnMainPageLogo();
+                .getProductTitle();
 
-        var homePage = new HomePage();
-        homePage.getTitleOfLastViewedItem()
+        var lastViewedItemFromMainPage = homePage
+                .clickOnMainPageLogo()
+                .homePageLastViewedProductTitle(expectedItem);
+
+        assertThat(lastViewedItemFromMainPage)
+                .as("Test failed: last viewed item must be: " + expectedItem)
+                .contains(expectedItem);
+
+        var lastViewedItemTitle = homePage
                 .clickOnLastViewedItem()
                 .getProductTitle();
+
+        assertThat(lastViewedItemTitle)
+                .as("Test failed: last viewed item must be: " + expectedItem)
+                .contains(expectedItem);
     }
 }
