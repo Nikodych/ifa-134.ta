@@ -6,7 +6,8 @@ import org.testng.annotations.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class filterFunctionality extends TestRunner {
+public class FilterFunctionalityTest extends TestRunner {
+
     private HomePage homePage = new HomePage();
     private CategoriesPage categoriesPage = new CategoriesPage();
     private ProductPage productPage = new ProductPage();
@@ -15,24 +16,22 @@ public class filterFunctionality extends TestRunner {
     @DataProvider
     public Object[][] filterOptions() {
         return new Object[][]{
-                {"Ноутбуки та комп’ютери", "lenovo", "10 000", "20 000", 0}};
+                {"Ноутбуки та комп’ютери", 0, "lenovo", "10 000", "20 000", 0}};
     }
 
     @Test(dataProvider = "filterOptions")
-    public void verifyFilterFunctionality(String category, String brand, String minPrice, String maxPrice, int first) {
+    public void verifyFilterFunctionality(String category, int orderNumber, String brand, String minPrice, String maxPrice, int first) {
 
-        homePage
-                .openCategory(category)
-                .openSubCategory();
+        homePage.openCategory(category);
 
         searchResultPage
+                .openSubCategoryByOrderNumber(orderNumber)
                 .filterByBrand(brand)
                 .setMinimalPrice(minPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton()
-                .filterAvailableItems();
-
-        productPage.getFirstFilteredItem(first);
+                .filterAvailableItems()
+                .getFirstFilteredItem(first);
 
         assertThat(productPage.getProductTitle())
                 .as("Incorrect brand selected")

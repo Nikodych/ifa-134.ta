@@ -1,7 +1,9 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,21 +15,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HomePageTest extends TestRunner {
 
     private HomePage homePage = new HomePage();
+    private SearchResultPage searchResultPage = new SearchResultPage();
+    private CategoriesPage categoriesPage = new CategoriesPage();
+    private ProductPage productPage = new ProductPage();
 
     @DataProvider
     public Object[][] rozetkaCategoryData() {
         return new Object[][]{
                 {"Товари для геймерів"},
-                {"Побутова техніка"}
+                {"Побутова техніка"},
+                {0},
+                {0}
         };
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
-    public void verifyCategoryTransitionTest(String title) {
-        homePage
-                .openCategory(title)
-                .openSubCategory()
-                .openProduct();
+    public void verifyCategoryTransitionTest(String title, int orderNumber, int productNumber) {
+        homePage.openCategory(title);
+        searchResultPage.openSubCategoryByOrderNumber(orderNumber);
+        productPage.openProductByNumber(productNumber);
 
         var actualTitle = new ProductPage().getProductCategory();
 
@@ -37,12 +43,12 @@ public class HomePageTest extends TestRunner {
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
-    public void verifyCategoryTransitionThroughDropdownTest(String title) {
+    public void verifyCategoryTransitionThroughDropdownTest(String title, int orderNumber, int productNumber) {
         homePage
                 .openCatalog()
-                .openDropdownCategory(title)
-                .openSubCategory()
-                .openProduct();
+                .openDropdownCategory(title);
+        searchResultPage.openSubCategoryByOrderNumber(orderNumber);
+        productPage.openProductByNumber(productNumber);
 
         var actualTitle = new ProductPage().getProductCategory();
 
