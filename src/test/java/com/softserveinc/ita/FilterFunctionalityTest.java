@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FilterFunctionalityTest extends TestRunner {
 
     private HomePage homePage = new HomePage();
-    private CategoriesPage categoriesPage = new CategoriesPage();
     private ProductPage productPage = new ProductPage();
     private SearchResultPage searchResultPage = new SearchResultPage();
 
@@ -45,5 +44,20 @@ public class FilterFunctionalityTest extends TestRunner {
         assertThat(productPage.getItemStatus())
                 .as("Item is unavailable for order")
                 .contains("Є в наявності");
+    }
+
+    @DataProvider
+    public Object[][] dataOptions() {
+        return new Object[][]{
+                {"Спорт і захоплення", 2}};
+    }
+
+    @Test(dataProvider = "dataOptions")
+    public void verifyShowmoreButtonFunctionality(String category, int orderNumber) {
+
+        homePage.openCategory(category);
+        searchResultPage
+                .openSubCategoryByOrderNumber(orderNumber)
+                .showMoreItems();
     }
 }

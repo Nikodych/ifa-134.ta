@@ -11,6 +11,8 @@ public class SearchResultPage extends  BasePage<SearchResultPage> {
 
     private final String subCategorySelector =  "//rz-widget-list//ul/li//a[contains(@Class , 'tile-cats__heading')]";
     private final String filteredItemsSelector = "//div[@class='goods-tile__inner']";
+    private final String showmoreButtonSelector = "//a[@class='show-more show-more--horizontal']";
+    private final String activePageNumbersSelector = "//a[@class='pagination__link ng-star-inserted pagination__link_state_active']";
 
     public SearchResultPage openSubCategoryByOrderNumber(int orderNumber ) {
         $$x(subCategorySelector)
@@ -62,6 +64,15 @@ public class SearchResultPage extends  BasePage<SearchResultPage> {
 
         firstItem
                 .shouldBe(visible, ofSeconds(6))
+                .click();
+    }
+
+    public void showMoreItems() {
+        $x(showmoreButtonSelector)
+                .shouldBe(visible, ofSeconds(5))
+                .click();
+        $x(showmoreButtonSelector)
+                .shouldBe(visible, ofSeconds(5))
                 .click();
     }
 }
