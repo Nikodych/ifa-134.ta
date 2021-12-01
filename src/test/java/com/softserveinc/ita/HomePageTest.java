@@ -50,6 +50,26 @@ public class HomePageTest extends TestRunner {
                 .as("Product should correspond " + title + " category")
                 .contains(title);
     }
+
+    @DataProvider
+    public Object[][] rozetkaSocialMedia() {
+        return new Object[][]{
+                {"Facebook"},
+                {"Telegram"}
+        };
+    }
+
+    @Test(dataProvider = "rozetkaSocialMedia")
+    public void verifySocialMediaLinks(String socialMediaName) {
+        var isSocialMediaCorrect = homePage
+                .openSocialMediaPage(socialMediaName)
+                .isSocialMediaCorrect(socialMediaName);
+
+        assertThat(isSocialMediaCorrect)
+                .as("Social media link shoul correspond " + socialMediaName)
+                .isTrue();
+
+    }
     
     @Test
     public void verifyLanguageSwitchingTest() {

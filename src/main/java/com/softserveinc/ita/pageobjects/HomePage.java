@@ -1,5 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import com.softserveinc.ita.models.SocialMedia;
+
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
@@ -28,5 +35,20 @@ public class HomePage extends BasePage<HomePage> {
                 .click();
 
         return new ProductPage();
+    }
+
+    public HomePage openSocialMediaPage(String mediaName) {
+        $x(format("//a[contains(@class, 'socials__link') and @title = '%s']", mediaName)).click();
+
+        return this;
+    }
+
+    public boolean isSocialMediaCorrect(String mediaName) {
+        String expectedUrl = SocialMedia.valueOf(mediaName.toUpperCase()).getSocialMediaLink();
+        Selenide.switchTo().window(1);
+        String actualUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        Selenide.closeWindow();
+
+        return actualUrl.equals(expectedUrl);
     }
 }
