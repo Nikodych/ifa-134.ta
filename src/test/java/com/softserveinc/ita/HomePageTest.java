@@ -1,13 +1,11 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -78,17 +76,16 @@ public class HomePageTest extends TestRunner {
                 .selectMobileAppLink(playMarketLink)
                 .getTitleFromGooglePlayApp();
 
-        switchTo().window(0);
-//        assertThat(rozetkaPlayMarketTitle)
-//                .as("Test failed: Required app should be: " + appTitle)
-//                .contains(appTitle);
+        assertThat(rozetkaPlayMarketTitle)
+                .as("Test failed: Required app should be: " + appTitle)
+                .contains(appTitle);
 
         var rozetkaAppStoreTitle = homePage
-                .selectMobileAppLink(appStoreLink);
-                //.getTitleFromAppStore();
+                .selectMobileAppLink(appStoreLink)
+                .getTitleFromAppStore();
 
-//        assertThat(rozetkaAppStoreTitle)
-//                .as("Test failed: Required app should be: " + appTitle)
-//                .contains(appTitle);
+        assertThat(rozetkaAppStoreTitle)
+                .as("Test failed: Required app should be: " + appTitle)
+                .contains(appTitle);
     }
 }

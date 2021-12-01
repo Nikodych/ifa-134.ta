@@ -1,18 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.Configuration;
-import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.By;
 
-import java.util.stream.Collectors;
-
-import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
+import static com.softserveinc.ita.utils.WindowTabUtil.*;
 import static java.lang.String.format;
 import static java.time.Duration.*;
 
@@ -102,11 +96,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     public String getTitleFromGooglePlayApp() {
-        return $x("//*[@class='AHFaub']//ancestor::span")
-                .getAttribute("innerText");
+        return getTitleFromSecondTab($x("//*[@class='AHFaub']//ancestor::span"));
     }
 
     public String getTitleFromAppStore() {
-        return $x("//h1[@class='product-header__title app-header__title']").getText();
+        return getTitleFromSecondTab($x("//h1[@class='product-header__title app-header__title']"));
     }
 }
