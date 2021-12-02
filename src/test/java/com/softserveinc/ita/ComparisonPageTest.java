@@ -1,11 +1,11 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.WebDriverRunner.url;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComparisonPageTest extends TestRunner {
@@ -22,11 +22,9 @@ public class ComparisonPageTest extends TestRunner {
 
         var searchResultPage = new SearchResultPage();
 
-        searchResultPage
+        var comparisonPage = searchResultPage
                 .addProductToCompare()
                 .openComparisonPage();
-
-        var comparisonPage = new ComparisonPage();
 
         assertThat(comparisonPage.isOnlyDifferencesButtonDisplayed())
                 .as("'Only differences' button should not be displayed if there are not enough products to compare")
@@ -38,8 +36,8 @@ public class ComparisonPageTest extends TestRunner {
                 .addProductToCompare()
                 .openComparisonPage();
 
-        var comparisonShareLink = comparisonPage.shareComparisonList();
-        var currentUrl = comparisonPage.getUrlText();
+        var comparisonShareLink = comparisonPage.getShareLink();
+        var currentUrl = url();
         assertThat(comparisonShareLink)
                 .as("Share link should match current url")
                 .isEqualTo(currentUrl);
@@ -55,7 +53,7 @@ public class ComparisonPageTest extends TestRunner {
 
         comparisonPage.showOnlyDifferencesBetweenProducts();
 
-        assertThat(comparisonPage.areOnlyDifferentCharacteristicsShowing())
+        assertThat(comparisonPage.areOnlyDifferentCharacteristicsDisplayed())
                 .as("Only different characteristics should be shown in compare")
                 .isTrue();
     }

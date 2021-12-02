@@ -7,7 +7,6 @@ import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.WebDriverRunner.url;
 import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
@@ -102,9 +101,5 @@ public abstract class BasePage<T extends BasePage<T>> {
         $("a.comparison-modal__link").click();
 
         return new ComparisonPage();
-    }
-
-    public String getUrlText() {
-        return url();
     }
 }

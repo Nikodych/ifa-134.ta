@@ -28,18 +28,14 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
         return this;
     }
 
-    public String shareComparisonList() {
+    public String getShareLink() {
         $("button use[href='#icon-link']").click();
 
         return clipboard().getText();
     }
 
     public boolean isOnlyDifferencesButtonDisplayed() {
-        if ($$("ul.products-grid li").size() <= 1) {
-            return compareOnlyDifferencesButtonElement.isDisplayed();
-        }
-
-        return true;
+        return compareOnlyDifferencesButtonElement.isDisplayed();
     }
 
     public int getProductsQuantityInCompareList() {
@@ -56,7 +52,7 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
         return this;
     }
 
-    public boolean areOnlyDifferentCharacteristicsShowing() {
+    public boolean areOnlyDifferentCharacteristicsDisplayed() {
         var productsQuantityInCompare = getProductsQuantityInCompareList();
         var productsCharacteristics = $$("div.comparison-grid dd")
                 .stream()
