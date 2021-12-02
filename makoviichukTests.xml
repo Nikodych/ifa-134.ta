@@ -1,0 +1,38 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name = "Makoviichuk Tests">
+
+    <test name = "BasketModalTest">
+        <classes>
+            <class name = "com.softserveinc.ita.BasketModalTest">
+                <methods>
+                    <include name="verifyAddingProductToCartTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name = "HomePageTest">
+        <classes>
+            <class name = "com.softserveinc.ita.HomePageTest">
+                <methods>
+                    <include name="verifyCategoryTransitionTest" />
+                    <include name="verifyCategoryTransitionThroughDropdownTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name = "SideMenuTest">
+        <classes>
+            <class name = "com.softserveinc.ita.SideMenuTest">
+                <methods>
+                    <include name="verifyCityChangingTest" />
+                </methods>
+            </class>
+
+        </classes>
+    </test>
+
+</suite>
