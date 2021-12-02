@@ -1,5 +1,9 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
+import com.softserveinc.ita.models.BrowserTabHelper;
+import com.softserveinc.ita.models.SocialMedia;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
@@ -61,13 +65,15 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaSocialMedia")
     public void verifySocialMediaLinks(String socialMediaName) {
-        var isSocialMediaCorrect = homePage
-                .openSocialMediaPage(socialMediaName)
-                .isSocialMediaCorrect(socialMediaName);
+        homePage.openSocialMediaPage(socialMediaName);
+        var expectedUrl = SocialMedia.valueOf(socialMediaName.toUpperCase()).getSocialMediaLink();
+        BrowserTabHelper.switchToTab(1);
+        var actualUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        BrowserTabHelper.closeTab();
 
-        assertThat(isSocialMediaCorrect)
+        assertThat(expectedUrl)
                 .as("Social media link shoul correspond " + socialMediaName)
-                .isTrue();
+                .contains(actualUrl);
 
     }
     

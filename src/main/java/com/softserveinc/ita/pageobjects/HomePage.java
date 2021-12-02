@@ -44,9 +44,9 @@ public class HomePage extends BasePage<HomePage> {
     }
 
     public boolean isSocialMediaCorrect(String mediaName) {
-        String expectedUrl = SocialMedia.valueOf(mediaName.toUpperCase()).getSocialMediaLink();
+        var expectedUrl = SocialMedia.valueOf(mediaName.toUpperCase()).getSocialMediaLink();
         Selenide.switchTo().window(1);
-        String actualUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
+        var actualUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
         Selenide.closeWindow();
 
         return actualUrl.equals(expectedUrl);
