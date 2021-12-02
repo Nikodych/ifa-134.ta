@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
@@ -50,14 +51,17 @@ public class SearchTest extends TestRunner {
 
         var lastViewedItemFromMainPage = homePage
                 .clickOnMainPageLogo()
-                .homePageLastViewedProductTitle(expectedItem);
+                .selectFirstItemFromLastProduct();
 
-        assertThat(lastViewedItemFromMainPage)
+        assertThat(lastViewedItemFromMainPage
+                .stream()
+                .map(SelenideElement::text)
+                .filter(text -> text.contains(expectedItem)))
                 .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
 
         var lastViewedItemTitle = homePage
-                .clickOnLastViewedItem(expectedItem)
+                .openLastViewedItemByTitle(expectedItem)
                 .getProductTitle();
 
         assertThat(lastViewedItemTitle)
