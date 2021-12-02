@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import static java.util.stream.Collectors.toList;
 
 public class SearchResultPage extends BasePage<SearchResultPage> {
 
+    @Step("SearchResultPage: get goods list by '{productName}'")
     public List<String> getGoodsListBy(String productName) {
         return $$x("//*[@class='goods-tile__title']")
                 .shouldBe(sizeGreaterThan(0), ofSeconds(8))

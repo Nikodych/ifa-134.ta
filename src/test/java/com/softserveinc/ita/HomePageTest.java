@@ -2,14 +2,17 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
+import com.softserveinc.ita.utils.runners.TestListener;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Listeners({TestListener.class})
 public class HomePageTest extends TestRunner {
 
     private final HomePage homePage = new HomePage();
