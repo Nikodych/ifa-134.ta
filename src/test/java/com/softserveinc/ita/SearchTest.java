@@ -1,7 +1,6 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestListener;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Listeners;
@@ -17,7 +16,7 @@ public class SearchTest extends TestRunner {
         var homePage = new HomePage();
         var requiredItem = "Xiaomi Redmi Note 10";
 
-        var searchResultPage =  homePage
+        var searchResultPage = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
                 .performSearch();

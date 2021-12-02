@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 
 import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Selenide.$$x;
 import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;

@@ -4,7 +4,6 @@ import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestListener;
 import com.softserveinc.ita.utils.runners.TestRunner;
-import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
