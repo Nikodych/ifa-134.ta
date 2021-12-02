@@ -3,16 +3,6 @@
 
 <suite name = "All Tests">
 
-    <test name = "BasketModalTest">
-        <classes>
-            <class name = "com.softserveinc.ita.BasketModalTest">
-                <methods>
-                    <include name="verifyAddingProductToCartTest" />
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <test name = "CheckoutPageTest">
         <classes>
             <class name = "com.softserveinc.ita.CheckoutPageTest">
@@ -33,18 +23,6 @@
         </classes>
     </test>
 
-    <test name = "HomePageTest">
-        <classes>
-            <class name = "com.softserveinc.ita.HomePageTest">
-                <methods>
-                    <include name="verifyCategoryTransitionTest" />
-                    <include name="verifyCategoryTransitionThroughDropdownTest" />
-                    <include name="verifyLanguageSwitchingTest" />
-                </methods>
-            </class>
-        </classes>
-    </test>
-
     <test name = "SearchTest">
         <classes>
             <class name = "com.softserveinc.ita.SearchTest">
@@ -55,11 +33,33 @@
         </classes>
     </test>
 
+    <test name = "BasketModalTest">
+        <classes>
+            <class name = "com.softserveinc.ita.BasketModalTest">
+                <methods>
+                    <include name="verifyAddingProductToCartTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
     <test name = "SideMenuTest">
         <classes>
             <class name = "com.softserveinc.ita.SideMenuTest">
                 <methods>
                     <include name="verifyCityChangingTest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name = "HomePageTest">
+        <classes>
+            <class name = "com.softserveinc.ita.HomePageTest">
+                <methods>
+                    <include name="verifyCategoryTransitionTest" />
+                    <include name="verifyCategoryTransitionThroughDropdownTest" />
+                    <include name="verifyLanguageSwitchingTest" />
                 </methods>
             </class>
         </classes>

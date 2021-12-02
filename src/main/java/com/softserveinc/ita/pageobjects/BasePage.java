@@ -86,8 +86,7 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     public T closeAdvertisingBannerIfDisplayed() {
-        var banner = $("#rz-banner").should(exist);
-        if (banner.isDisplayed()) {
+        if ($("#rz-banner").is(exist)) {
             $("span .exponea-close-cross").click();
         }
 
