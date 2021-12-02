@@ -19,4 +19,15 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
                 .filter(text -> text.contains(productName))
                 .collect(toList());
     }
+
+    public ProductPage selectFirstItemFromProductPage() {
+        $$x("//div[@class='goods-tile__inner']")
+                .shouldHave(sizeNotEqual(0), ofSeconds(8))
+                .stream()
+                .findFirst()
+                .get()
+                .click();
+
+        return new ProductPage();
+    }
 }

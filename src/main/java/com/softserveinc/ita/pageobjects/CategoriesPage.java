@@ -26,13 +26,13 @@ public class CategoriesPage extends BasePage<CategoriesPage> {
         return this;
     }
 
-    public ProductPage selectRandomSubCategory() {
+    public SearchResultPage selectRandomSubCategory() {
         var list = $$x("//*[@Class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
                 .shouldBe(sizeNotEqual(0), ofSeconds(10));
         list
                 .get(getRandomNumber(list.size()))
                 .click();
 
-        return new ProductPage();
+        return new SearchResultPage();
     }
 }

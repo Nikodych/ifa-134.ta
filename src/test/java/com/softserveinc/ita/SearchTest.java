@@ -2,6 +2,7 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
@@ -52,15 +53,15 @@ public class SearchTest extends TestRunner {
                 .homePageLastViewedProductTitle(expectedItem);
 
         assertThat(lastViewedItemFromMainPage)
-                .as("Test failed: last viewed item must be: " + expectedItem)
+                .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
 
         var lastViewedItemTitle = homePage
-                .clickOnLastViewedItem()
+                .clickOnLastViewedItem(expectedItem)
                 .getProductTitle();
 
         assertThat(lastViewedItemTitle)
-                .as("Test failed: last viewed item must be: " + expectedItem)
+                .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
     }
 }
