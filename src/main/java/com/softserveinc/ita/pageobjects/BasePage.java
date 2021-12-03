@@ -1,14 +1,14 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
-import com.codeborne.selenide.SelenideElement;
-
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static com.softserveinc.ita.utils.WindowTabUtil.*;
 import static java.lang.String.format;
-import static java.time.Duration.*;
+import static java.time.Duration.ofSeconds;
 
 public abstract class BasePage<T extends BasePage<T>> {
 
@@ -59,10 +59,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new BasketModal();
     }
 
-    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
+    public T switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return this;
+        return (T) this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -101,5 +101,15 @@ public abstract class BasePage<T extends BasePage<T>> {
 
     public String getTitleFromAppStore() {
         return getTitleFromSecondTab($x("//h1[@class='product-header__title app-header__title']"));
+    }
+
+    public ComparisonPage openComparisonPage() {
+        $("rz-comparison button")
+                .shouldBe(visible)
+                .hover()
+                .click();
+        $("a.comparison-modal__link").click();
+
+        return new ComparisonPage();
     }
 }

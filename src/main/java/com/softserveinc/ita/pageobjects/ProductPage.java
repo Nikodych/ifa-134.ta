@@ -33,16 +33,5 @@ public class ProductPage extends BasePage<ProductPage> {
     public String getProductCategory() {
         return $x("//ul[@class='breadcrumbs ng-star-inserted']").getText();
     }
-
-    public ProductPage selectFirstItemFromProductPage() {
-        $$x("//div[@class='goods-tile__inner']")
-                .shouldHave(sizeNotEqual(0), ofSeconds(8))
-                .stream()
-                .findFirst()
-                .get()
-                .click();
-
-        return new ProductPage();
-    }
 }
 

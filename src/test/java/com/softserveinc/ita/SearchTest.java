@@ -1,7 +1,9 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
@@ -47,20 +49,20 @@ public class SearchTest extends TestRunner {
                 .selectFirstItemFromProductPage()
                 .getProductTitle();
 
-        var lastViewedItemFromMainPage = homePage
+        var listOfLastViewedProductsTitles = homePage
                 .clickOnMainPageLogo()
-                .homePageLastViewedProductTitle(expectedItem);
+                .getTitlesFromListOfLastViewedProducts();
 
-        assertThat(lastViewedItemFromMainPage)
-                .as("Test failed: last viewed item must be: " + expectedItem)
+        assertThat(listOfLastViewedProductsTitles)
+                .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
 
-        var lastViewedItemTitle = homePage
-                .clickOnLastViewedItem()
+        var lastViewedProductTitle = homePage
+                .openLastViewedItemByTitle(expectedItem)
                 .getProductTitle();
 
-        assertThat(lastViewedItemTitle)
-                .as("Test failed: last viewed item must be: " + expectedItem)
+        assertThat(lastViewedProductTitle)
+                .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
     }
 }

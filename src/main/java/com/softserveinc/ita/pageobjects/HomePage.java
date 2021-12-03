@@ -1,11 +1,13 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
@@ -40,22 +42,20 @@ public class HomePage extends BasePage<HomePage> {
         return new ProductPage();
     }
 
-    public String homePageLastViewedProductTitle(String expectedItem) {
-        return listOfLastViewedItems
-                .shouldBe(sizeNotEqual(0), ofSeconds(8))
-                .stream()
-                .map(SelenideElement::text)
-                .filter(text -> text.contains(expectedItem))
-                .collect(Collectors.toList())
-                .stream()
-                .findFirst()
-                .toString();
-    }
+   public List<String> getTitlesFromListOfLastViewedProducts() {
 
-    public ProductPage clickOnLastViewedItem() {
+       return listOfLastViewedItems
+               .shouldBe(sizeNotEqual(0), ofSeconds(8))
+               .stream()
+               .map(SelenideElement::text)
+               .collect(toList());
+   }
+
+    public ProductPage openLastViewedItemByTitle(String expectedItem) {
         listOfLastViewedItems
+                .shouldHave(itemWithText(expectedItem))
                 .stream()
-                .findFirst()
+                .findAny()
                 .get()
                 .click();
 
