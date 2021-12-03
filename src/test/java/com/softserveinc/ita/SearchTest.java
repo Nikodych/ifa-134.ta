@@ -49,22 +49,19 @@ public class SearchTest extends TestRunner {
                 .selectFirstItemFromProductPage()
                 .getProductTitle();
 
-        var lastViewedItemFromMainPage = homePage
+        var listOfLastViewedProductsTitles = homePage
                 .clickOnMainPageLogo()
-                .selectFirstItemFromLastProduct();
+                .getTitlesFromListOfLastViewedProducts();
 
-        assertThat(lastViewedItemFromMainPage
-                .stream()
-                .map(SelenideElement::text)
-                .filter(text -> text.contains(expectedItem)))
+        assertThat(listOfLastViewedProductsTitles)
                 .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
 
-        var lastViewedItemTitle = homePage
+        var lastViewedProductTitle = homePage
                 .openLastViewedItemByTitle(expectedItem)
                 .getProductTitle();
 
-        assertThat(lastViewedItemTitle)
+        assertThat(lastViewedProductTitle)
                 .as("Test failed: last viewed item should be: " + expectedItem)
                 .contains(expectedItem);
     }

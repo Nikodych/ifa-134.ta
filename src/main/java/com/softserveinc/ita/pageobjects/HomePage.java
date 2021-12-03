@@ -42,10 +42,14 @@ public class HomePage extends BasePage<HomePage> {
         return new ProductPage();
     }
 
-    public ElementsCollection selectFirstItemFromLastProduct() {
-        return listOfLastViewedItems
-                .shouldBe(sizeNotEqual(0), ofSeconds(8));
-    }
+   public List<String> getTitlesFromListOfLastViewedProducts() {
+
+       return listOfLastViewedItems
+               .shouldBe(sizeNotEqual(0), ofSeconds(8))
+               .stream()
+               .map(SelenideElement::text)
+               .collect(toList());
+   }
 
     public ProductPage openLastViewedItemByTitle(String expectedItem) {
         listOfLastViewedItems
