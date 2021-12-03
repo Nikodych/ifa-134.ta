@@ -1,8 +1,5 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
-import com.softserveinc.ita.models.BrowserTabHelper;
 import com.softserveinc.ita.models.SocialMedia;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
@@ -10,6 +7,7 @@ import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.softserveinc.ita.models.BrowserTabHelper.*;
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,14 +65,14 @@ public class HomePageTest extends TestRunner {
     public void verifySocialMediaLinks(String socialMediaName) {
         homePage.openSocialMediaPage(socialMediaName);
         var expectedUrl = SocialMedia.valueOf(socialMediaName.toUpperCase()).getSocialMediaLink();
-        BrowserTabHelper.switchToTab(1);
-        var actualUrl = WebDriverRunner.getWebDriver().getCurrentUrl();
-        BrowserTabHelper.closeTab();
+        switchToTab(1);
+        var actualUrl = getCurrentUrl();
+
 
         assertThat(expectedUrl)
-                .as("Social media link shoul correspond " + socialMediaName)
+                .as("Social media link should correspond " + socialMediaName)
                 .contains(actualUrl);
-
+        closeTab();
     }
     
     @Test
