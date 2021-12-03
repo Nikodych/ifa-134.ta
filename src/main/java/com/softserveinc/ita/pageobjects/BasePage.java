@@ -4,17 +4,21 @@ import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Selenide.*;
-import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
-import static java.time.Duration.ofSeconds;
 
-//TODO: move methods not related to this page to other page objects
 public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
+
+    public T clickOnMainPageLogo() {
+        $x("//a[@class='header__logo']").click();
+
+        return (T) this;
+    }
 
     @Step("BasePage: open side menu")
     public MenuModal openSideMenu() {
@@ -62,10 +66,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     @Step("BasePage: switch language to {language}")
-    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
+    public T switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return this;
+        return (T) this;
     }
 
     @Step("BasePage: verify that language was switched to {language}")
@@ -76,25 +80,6 @@ public abstract class BasePage<T extends BasePage<T>> {
         return searchButtonText.equals(verificationWord);
     }
 
-    @Step("BasePage: open '{categoryName}' category")
-    public T selectRequiredCategory(String categoryName) {
-        $x("//a[@class ='menu-categories__link' and contains(text(),'" + categoryName + "')]").click();
-
-        return (T) this;
-    }
-
-    @Step("BasePage: select random sub category")
-    public ProductPage selectRandomSubCategory() {
-        var list = $$x("//*[@Class='tile-cats__heading tile-cats__heading_type_center ng-star-inserted']")
-                .shouldBe(sizeNotEqual(0), ofSeconds(10));
-        list
-                .get(getRandomNumber(list.size()))
-                .click();
-
-        return new ProductPage();
-    }
-
-    @Step("BasePage: close advertising banner if it's displayed")
     public T closeAdvertisingBannerIfDisplayed() {
         var banner = $("#rz-banner").should(exist);
         if (banner.isDisplayed()) {
@@ -102,5 +87,15 @@ public abstract class BasePage<T extends BasePage<T>> {
         }
 
         return (T) this;
+    }
+
+    public ComparisonPage openComparisonPage() {
+        $("rz-comparison button")
+                .shouldBe(visible)
+                .hover()
+                .click();
+        $("a.comparison-modal__link").click();
+
+        return new ComparisonPage();
     }
 }
