@@ -1,16 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
 
-import com.codeborne.selenide.SelenideElement;
-
-import java.util.stream.Collectors;
-
-import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
-import static java.time.Duration.*;
 
 public abstract class BasePage<T extends BasePage<T>> {
 
@@ -61,10 +57,10 @@ public abstract class BasePage<T extends BasePage<T>> {
         return new BasketModal();
     }
 
-    public BasePage<T> switchLanguageTo(LanguageSwitcher language) {
+    public T switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
-        return this;
+        return (T) this;
     }
 
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
@@ -81,5 +77,15 @@ public abstract class BasePage<T extends BasePage<T>> {
         }
 
         return (T) this;
+    }
+
+    public ComparisonPage openComparisonPage() {
+        $("rz-comparison button")
+                .shouldBe(visible)
+                .hover()
+                .click();
+        $("a.comparison-modal__link").click();
+
+        return new ComparisonPage();
     }
 }
