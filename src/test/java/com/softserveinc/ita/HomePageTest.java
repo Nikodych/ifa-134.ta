@@ -74,7 +74,7 @@ public class HomePageTest extends TestRunner {
 
         closeTab();
     }
-    
+
     @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;

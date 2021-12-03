@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
                 .collect(toList());
     }
 
+    @Step("SearchResultPage: Selected first item from product page")
     public ProductPage selectFirstItemFromProductPage() {
         $$x("//div[@class='goods-tile__inner']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(8))
@@ -34,6 +36,7 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
         return new ProductPage();
     }
 
+    @Step("SearchResultPage: Added product to compare")
     public SearchResultPage addProductToCompare() {
         $("button.compare-button:not([class*=state_active])")
                 .shouldBe(visible)

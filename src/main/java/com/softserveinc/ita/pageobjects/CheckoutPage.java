@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.CustomerOrderData;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -33,6 +34,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return cityFieldElement.getValue();
     }
 
+    @Step("CheckoutPage: Set customer data in fields")
     public CheckoutPage setCustomerData(CustomerOrderData customerOrderData) {
         surnameFieldElement.setValue(customerOrderData.getSurname());
         nameFieldElement.setValue(customerOrderData.getName());
@@ -49,6 +51,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return this;
     }
 
+    @Step("CheckoutPage: Edited order")
     public BasketModal editOrder() {
         $("a.checkout-product__edit-button")
                 .shouldBe(visible)
