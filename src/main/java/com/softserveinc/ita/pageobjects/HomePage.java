@@ -1,11 +1,23 @@
 package com.softserveinc.ita.pageobjects;
 
-import static com.codeborne.selenide.Selenide.$x;
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.codeborne.selenide.CollectionCondition.*;
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
+import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
+import static java.util.stream.Collectors.*;
 
 public class HomePage extends BasePage<HomePage> {
 
     private final String GOODS_SECTION_TEMPLATE = "//h2[contains(text(), '%s')]";
+    private final ElementsCollection listOfLastViewedItems = $$x("//a[@class='tile__title']");
 
     public CategoriesPage openCategory(String categoryName) {
         $x(format("//a[@class='menu-categories__link' and contains(text(), '%s')]", categoryName)).click();
@@ -30,9 +42,31 @@ public class HomePage extends BasePage<HomePage> {
         return new ProductPage();
     }
 
+
     public HomePage openSocialMediaPage(String mediaName) {
         $x(format("//a[contains(@class, 'socials__link') and @title = '%s']", mediaName)).click();
 
         return this;
+    }
+  
+   public List<String> getTitlesFromListOfLastViewedProducts() {
+
+       return listOfLastViewedItems
+               .shouldBe(sizeNotEqual(0), ofSeconds(8))
+               .stream()
+               .map(SelenideElement::text)
+               .collect(toList());
+   }
+
+    public ProductPage openLastViewedItemByTitle(String expectedItem) {
+        listOfLastViewedItems
+                .shouldHave(itemWithText(expectedItem))
+                .stream()
+                .findAny()
+                .get()
+                .click();
+
+        return new ProductPage();
+
     }
 }

@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.FilterModal;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
@@ -14,15 +15,17 @@ public class FilterModalTest extends TestRunner {
     @DataProvider
     public Object[][] priceSortingFunctionality() {
         return new Object[][]{
-                {"Ноутбуки", "2 999", "8 999", "2998", "9000"}};
+                {"Ноутбуки", "2 999", "8 999", "2 998", "9 000"}};
     }
 
     @Test(dataProvider = "priceSortingFunctionality")
     public void verifyPriceSortingFunctionality(String categoryName, String positiveMinPrice, String positiveMaxPrice,
                                                 String negativeMinPrice, String negativeMaxPrice) {
         var homePage = new HomePage();
-        homePage
-                .closeAdvertisingBannerIfDisplayed()
+        homePage.closeAdvertisingBannerIfDisplayed();
+
+        var categoriesPage = new CategoriesPage();
+        categoriesPage
                 .selectRequiredCategory(categoryName)
                 .selectRandomSubCategory();
 
