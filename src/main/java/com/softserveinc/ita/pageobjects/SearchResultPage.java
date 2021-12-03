@@ -15,7 +15,6 @@ import static java.util.stream.Collectors.toList;
 
 public class SearchResultPage extends BasePage<SearchResultPage> {
 
-    @Step("SearchResultPage: get goods list by '{productName}'")
     public List<String> getGoodsListBy(String productName) {
         return $$x("//*[@class='goods-tile__title']")
                 .shouldBe(sizeGreaterThan(0), ofSeconds(8))
@@ -25,6 +24,7 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
                 .collect(toList());
     }
 
+    @Step("SearchResultPage: Selected first item from product page")
     public ProductPage selectFirstItemFromProductPage() {
         $$x("//div[@class='goods-tile__inner']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(8))
@@ -36,6 +36,7 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
         return new ProductPage();
     }
 
+    @Step("SearchResultPage: Added product to compare")
     public SearchResultPage addProductToCompare() {
         $("button.compare-button:not([class*=state_active])")
                 .shouldBe(visible)

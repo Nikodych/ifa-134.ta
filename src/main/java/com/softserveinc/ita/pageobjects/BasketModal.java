@@ -11,14 +11,14 @@ public class BasketModal extends BasePage<BasketModal> {
         return $x("//a[@class = 'cart-product__title']").getText();
     }
 
-    @Step("BasketModal: open checkout page")
+    @Step("BasketModal: Opened checkout page")
     public CheckoutPage goToCheckout() {
         $("a.cart-receipt__submit").click();
 
         return new CheckoutPage();
     }
 
-    @Step("BasketModal: add one more product")
+    @Step("BasketModal: Added one more product")
     public BasketModal addOneMoreProduct() {
         $("button.cart-counter__button:nth-of-type(2)").click();
 

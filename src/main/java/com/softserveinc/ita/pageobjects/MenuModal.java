@@ -10,14 +10,13 @@ public class MenuModal extends BasePage<MenuModal> {
 
     private final SelenideElement cityButton = $x("//button[contains(@class, 'city-toggle')]");
 
-    @Step("MenuModal: open city modal window")
+    @Step("MenuModal: Opened city modal window")
     public CityModal openCityModal() {
         cityButton.click();
 
         return new CityModal();
     }
 
-    @Step("MenuModal: get city name")
     public String getCityName() {
         return cityButton
                 .shouldBe(visible)

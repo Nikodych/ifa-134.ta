@@ -20,14 +20,13 @@ public class HomePage extends BasePage<HomePage> {
     private final String GOODS_SECTION_TEMPLATE = "//h2[contains(text(), '%s')]";
     private final ElementsCollection listOfLastViewedItems = $$x("//a[@class='tile__title']");
 
-    @Step("HomePage: open '{categoryName}' category")
+    @Step("HomePage: Opened '{categoryName}' category")
     public CategoriesPage openCategory(String categoryName) {
         $x(format("//a[@class='menu-categories__link' and contains(text(), '%s')]", categoryName)).click();
 
         return new CategoriesPage();
     }
 
-    @Step("HomePage: get last product's title of section '{sectionName}' ")
     public String getLastProductTitleOfSection(String sectionName) {
         return $x(format(GOODS_SECTION_TEMPLATE, sectionName))
                 .$$x("./following-sibling::ul//a[@class = 'tile__title']")
@@ -35,7 +34,7 @@ public class HomePage extends BasePage<HomePage> {
                 .getText();
     }
 
-    @Step("HomePage: open last product of section '{sectionName}'")
+    @Step("HomePage: Opened last product of section '{sectionName}'")
     public ProductPage openLastProductOfSection(String sectionName) {
         var lastProductOfSection = getLastProductTitleOfSection(sectionName);
 
@@ -55,6 +54,7 @@ public class HomePage extends BasePage<HomePage> {
                 .collect(toList());
     }
 
+    @Step("HomePage: Opened last viewed item '{expectedItem}' by title")
     public ProductPage openLastViewedItemByTitle(String expectedItem) {
         listOfLastViewedItems
                 .shouldHave(itemWithText(expectedItem))

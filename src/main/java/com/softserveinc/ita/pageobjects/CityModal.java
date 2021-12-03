@@ -7,14 +7,14 @@ import static java.lang.String.format;
 
 public class CityModal {
 
-    @Step("CityModal: change with popular city '{title}'")
+    @Step("CityModal: Changed with popular city '{title}'")
     public CityModal changeWithPopularCity(String title) {
         $x(format("//a[contains(@class, 'header-location__popular-link') and contains(text() , '%s')]", title)).click();
 
         return this;
     }
 
-    @Step("CityModal: click submit button")
+    @Step("CityModal: Clicked submit button")
     public HomePage submit() {
         $x("//button[contains(@class, 'button button_size_medium')]").click();
 

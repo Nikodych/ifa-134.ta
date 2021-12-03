@@ -2,14 +2,11 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.utils.runners.TestListener;
 import com.softserveinc.ita.utils.runners.TestRunner;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Listeners({TestListener.class})
 public class SearchTest extends TestRunner {
     private final HomePage homePage = new HomePage();
 

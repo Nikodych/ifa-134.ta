@@ -18,27 +18,23 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     private final SelenideElement cityFieldElement = $("div.js-city input");
     private final String CITY_DROPDOWN_SELECTOR_TEMPLATE = "//li[contains(@Class,'autocomplete__item')]/b[normalize-space()=contains(text(),'%s')]";
 
-    @Step("CheckoutPage: get value of surname field")
     public String getSurnameFieldText() {
         return surnameFieldElement.getValue();
     }
 
-    @Step("CheckoutPage: get value of name field")
     public String getNameFieldText() {
         return nameFieldElement.getValue();
     }
 
-    @Step("CheckoutPage: get value of phone field")
     public String getPhoneFieldText() {
         return phoneFieldElement.getValue();
     }
 
-    @Step("CheckoutPage: get value of city field")
     public String getCityFieldText() {
         return cityFieldElement.getValue();
     }
 
-    @Step("CheckoutPage: set customer data in fields")
+    @Step("CheckoutPage: Set customer data in fields")
     public CheckoutPage setCustomerData(CustomerOrderData customerOrderData) {
         surnameFieldElement.setValue(customerOrderData.getSurname());
         nameFieldElement.setValue(customerOrderData.getName());
@@ -55,7 +51,7 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return this;
     }
 
-    @Step("CheckoutPage: edit order")
+    @Step("CheckoutPage: Edited order")
     public BasketModal editOrder() {
         $("a.checkout-product__edit-button")
                 .shouldBe(visible)
@@ -64,7 +60,6 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return new BasketModal();
     }
 
-    @Step("CheckoutPage: get product's price")
     public int getProductPrice() {
         var productPrice = $("span.checkout-product__price_color_red")
                 .getText()
@@ -73,7 +68,6 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return parseInt(productPrice);
     }
 
-    @Step("CheckoutPage: get product's total price")
     public int getProductTotalPrice() {
         var productTotalPrice = $(".js-product-amount dd")
                 .getText()
@@ -82,7 +76,6 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
         return parseInt(productTotalPrice);
     }
 
-    @Step("CheckoutPage: get product's quantity")
     public int getProductQuantity() {
         var productQuantity = $(".js-product-quantity dd").getText();
 

@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.visible;
@@ -11,6 +12,7 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
 
     private final SelenideElement compareOnlyDifferencesButtonElement = $("button.comparison-settings__toggle");
 
+    @Step("ComparisonPage: Clicked on 'Add another product to compare' button")
     public SearchResultPage addAnotherProductToCompare() {
         $("a.comparison-settings__button")
                 .shouldBe(visible)
@@ -19,6 +21,7 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
         return new SearchResultPage();
     }
 
+    @Step("ComparisonPage: Removed product from compare")
     public ComparisonPage removeProductFromCompare() {
         $("button.context-menu__toggle").click();
         $("rz-trash-icon button")
@@ -45,6 +48,7 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
                 .size();
     }
 
+    @Step("ComparisonPage: Showed only differences between products")
     public ComparisonPage showOnlyDifferencesBetweenProducts() {
         compareOnlyDifferencesButtonElement.click();
         $("button.comparison-settings__toggle--toggled").should(appear);

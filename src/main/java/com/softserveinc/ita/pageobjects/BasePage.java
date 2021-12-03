@@ -14,27 +14,28 @@ public abstract class BasePage<T extends BasePage<T>> {
 
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
+    @Step("BasePage: Clicked on main page logo")
     public T clickOnMainPageLogo() {
         $x("//a[@class='header__logo']").click();
 
         return (T) this;
     }
 
-    @Step("BasePage: open side menu")
+    @Step("BasePage: Opened side menu")
     public MenuModal openSideMenu() {
         $x("//button[@class = 'header__button']").click();
 
         return new MenuModal();
     }
 
-    @Step("BasePage: open catalog")
+    @Step("BasePage: Opened catalog")
     public CatalogModal openCatalog() {
         $x("//button[contains(@id, 'fat-menu')]").click();
 
         return new CatalogModal();
     }
 
-    @Step("BasePage: set text '{inputText}' in search bar")
+    @Step("BasePage: Set text '{inputText}' in search bar")
     public T setTextInSearchBar(String inputText) {
         var search = $x("//input[@name = 'search']");
         search.click();
@@ -44,35 +45,34 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    @Step("BasePage: perform search")
+    @Step("BasePage: Performed search")
     public SearchResultPage performSearch() {
         searchButtonElement.click();
 
         return new SearchResultPage();
     }
 
-    @Step("BasePage: open user modal window")
+    @Step("BasePage: Opened user modal window")
     public UserModal openUserModalWindow() {
         $x("//rz-user[@class='header-actions__component']").click();
 
         return new UserModal();
     }
 
-    @Step("BasePage: open basket")
+    @Step("BasePage: Opened basket")
     public BasketModal openBasket() {
         $x("//rz-cart[@class = 'header-actions__component']").click();
 
         return new BasketModal();
     }
 
-    @Step("BasePage: switch language to {language}")
+    @Step("BasePage: Switched language to {language}")
     public T switchLanguageTo(LanguageSwitcher language) {
         $x(format("//a[contains(@class, 'lang__link') and contains(text(), '%s')]", language.name())).click();
 
         return (T) this;
     }
 
-    @Step("BasePage: verify that language was switched to {language}")
     public boolean isLanguageSwitchedTo(LanguageSwitcher language) {
         var verificationWord = language.getVerificationWord();
         var searchButtonText = searchButtonElement.getText();
@@ -80,6 +80,7 @@ public abstract class BasePage<T extends BasePage<T>> {
         return searchButtonText.equals(verificationWord);
     }
 
+    @Step("BasePage: Closed advertising banner if displayed")
     public T closeAdvertisingBannerIfDisplayed() {
         var banner = $("#rz-banner").should(exist);
         if (banner.isDisplayed()) {
@@ -89,6 +90,7 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
+    @Step("BasePage: Opened comparison page")
     public ComparisonPage openComparisonPage() {
         $("rz-comparison button")
                 .shouldBe(visible)

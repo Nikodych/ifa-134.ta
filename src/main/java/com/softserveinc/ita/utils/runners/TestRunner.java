@@ -1,10 +1,12 @@
 package com.softserveinc.ita.utils.runners;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 
 import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.open;
 
+@Listeners({TestListener.class})
 public abstract class TestRunner {
 
     @BeforeMethod

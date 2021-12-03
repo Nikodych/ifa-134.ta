@@ -7,7 +7,7 @@ import static java.lang.String.format;
 
 public class CatalogModal extends BasePage<CatalogModal> {
 
-    @Step("CatalogModal: open dropdown category '{title}'")
+    @Step("CatalogModal: Opened dropdown category '{title}'")
     public CategoriesPage openDropdownCategory(String title) {
         $x(format("//a[@class='menu-categories__link js-menu-categories__link' and contains(text(), '%s')]", title)).click();
 
