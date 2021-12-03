@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -45,7 +44,14 @@ public class HomePage extends BasePage<HomePage> {
         return new ProductPage();
     }
 
-    public List<String> getTitlesFromListOfLastViewedProducts() {
+    @Step("HomePage: Opened '{mediaName}' social media page")
+    public HomePage openSocialMediaPage(String mediaName) {
+        $x(format("//a[contains(@class, 'socials__link') and @title = '%s']", mediaName)).click();
+
+        return this;
+    }
+  
+   public List<String> getTitlesFromListOfLastViewedProducts() {
 
         return listOfLastViewedItems
                 .shouldBe(sizeNotEqual(0), ofSeconds(8))
