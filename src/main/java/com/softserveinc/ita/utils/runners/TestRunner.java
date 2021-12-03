@@ -2,7 +2,7 @@ package com.softserveinc.ita.utils.runners;
 
 import org.testng.annotations.BeforeMethod;
 
-import static com.codeborne.selenide.Configuration.*;
+import static com.codeborne.selenide.Configuration.timeout;
 import static com.codeborne.selenide.Selenide.open;
 
 public abstract class TestRunner {
