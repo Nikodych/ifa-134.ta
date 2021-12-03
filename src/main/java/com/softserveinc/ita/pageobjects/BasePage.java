@@ -15,10 +15,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     private final SelenideElement searchButtonElement = $x("//button[contains(@class, 'search-form__submit')]");
 
     @Step("BasePage: Clicked on main page logo")
-    public T clickOnMainPageLogo() {
+    public HomePage clickOnMainPageLogo() {
         $x("//a[@class='header__logo']").click();
 
-        return (T) this;
+        return new HomePage();
     }
 
     @Step("BasePage: Opened side menu")
