@@ -72,6 +72,7 @@ public class HomePageTest extends TestRunner {
         assertThat(expectedUrl)
                 .as("Social media link should correspond " + socialMediaName)
                 .contains(actualUrl);
+
         closeTab();
     }
     
