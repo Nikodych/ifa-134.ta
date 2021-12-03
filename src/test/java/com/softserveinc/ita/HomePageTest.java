@@ -68,7 +68,6 @@ public class HomePageTest extends TestRunner {
         switchToTab(1);
         var actualUrl = getCurrentUrl();
 
-
         assertThat(expectedUrl)
                 .as("Social media link should correspond " + socialMediaName)
                 .contains(actualUrl);
