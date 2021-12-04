@@ -1,9 +1,7 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 

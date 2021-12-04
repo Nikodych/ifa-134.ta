@@ -6,7 +6,6 @@ import com.softserveinc.ita.models.LanguageSwitcher;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
-import static com.softserveinc.ita.utils.WindowTabUtil.*;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
@@ -87,20 +86,12 @@ public abstract class BasePage<T extends BasePage<T>> {
         return (T) this;
     }
 
-    public T selectMobileAppLink(String appLink) {
+    public HeaderMenuModal selectMobileAppLink(String appLink) {
         $x("//ul[@class='side-stores__buttons']//img[contains(@alt, '" + appLink + "')]")
                 .shouldBe((visible), ofSeconds(8))
                 .click();
 
-        return (T) this;
-    }
-
-    public String getTitleFromGooglePlayApp() {
-        return getTitleFromSecondTab($x("//*[@class='AHFaub']//ancestor::span"));
-    }
-
-    public String getTitleFromAppStore() {
-        return getTitleFromSecondTab($x("//h1[@class='product-header__title app-header__title']"));
+        return new HeaderMenuModal();
     }
 
     public ComparisonPage openComparisonPage() {

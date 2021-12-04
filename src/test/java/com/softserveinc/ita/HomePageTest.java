@@ -62,19 +62,17 @@ public class HomePageTest extends TestRunner {
                 .isTrue();
     }
 
-    @DataProvider
-    public Object[][] mobileAppLinks() {
-        return new Object[][]{
-                {"Google Play", "AppStore", "ROZETKA"}};
-    }
+    @Test
+    public void verifyOpeningMobileAppLinksTest() {
+        var playMarketLink = "Google Play";
+        var appStoreLink = "AppStore";
+        var appTitle = "ROZETKA";
 
-    @Test(dataProvider = "mobileAppLinks")
-    public void verifyOpeningMobileAppLinksTest(String playMarketLink, String appStoreLink, String appTitle) {
         var rozetkaPlayMarketTitle = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .clickOnHeaderMenuButton()
                 .selectMobileAppLink(playMarketLink)
-                .getTitleFromGooglePlayApp();
+                .getAndroidAppTitle();
 
         assertThat(rozetkaPlayMarketTitle)
                 .as("Test failed: Required app should be: " + appTitle)
@@ -82,7 +80,7 @@ public class HomePageTest extends TestRunner {
 
         var rozetkaAppStoreTitle = homePage
                 .selectMobileAppLink(appStoreLink)
-                .getTitleFromAppStore();
+                .getIosAppTitle();
 
         assertThat(rozetkaAppStoreTitle)
                 .as("Test failed: Required app should be: " + appTitle)
