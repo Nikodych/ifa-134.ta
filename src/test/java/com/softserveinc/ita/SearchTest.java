@@ -1,7 +1,10 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.ProductModel;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
@@ -14,13 +17,13 @@ public class SearchTest extends TestRunner {
     public void verifySearchResultsTest() {
 
         var requiredItem = "Xiaomi Redmi Note 10";
-        var searchResultPage = homePage
+        var productModel = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
                 .performSearch();
 
-        var firstItem = searchResultPage
-                .getGoodsListBy(requiredItem)
+        var firstItem = productModel
+                .getGoodsListByTitle(requiredItem)
                 .stream()
                 .findFirst()
                 .toString();
@@ -29,7 +32,7 @@ public class SearchTest extends TestRunner {
                 .as("Test failed: The first item should contain: " + requiredItem)
                 .contains(requiredItem);
 
-        var lastItem = searchResultPage.getGoodsListBy(requiredItem);
+        var lastItem = productModel.getGoodsListByTitle(requiredItem);
         assertThat(lastItem.get(lastItem.size() - 1))
                 .as("Test failed: The last item should contain: " + requiredItem)
                 .contains(requiredItem);

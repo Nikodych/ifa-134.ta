@@ -1,21 +1,10 @@
 package com.softserveinc.ita.pageobjects;
 
-
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.time.Duration.ofSeconds;
 
-//TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
-
-    public String getPriceFromFirstItem() {
-        return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
-                .shouldBe(visible, ofSeconds(12))
-                .getText()
-                .trim();
-    }
 
     @Step("ProductPage: Added to cart")
     public BasketModal addToCart() {

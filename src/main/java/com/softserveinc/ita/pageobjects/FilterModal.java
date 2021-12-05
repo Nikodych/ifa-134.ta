@@ -30,27 +30,27 @@ public class FilterModal extends BasePage<FilterModal> {
     }
 
     @Step("FilterModal: Clicked on price button")
-    public ProductPage clickOnPriceButton() {
+    public ProductModel clickOnPriceButton() {
         $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
 
-        return new ProductPage();
+        return new ProductModel();
     }
 
     @Step("FilterModal: Selected from cheap to expensive")
-    public FilterModal selectFromCheapToExpensive() {
+    public ProductModel selectFromCheapToExpensive() {
         selectFromPriceModalMenuSelector
                 .should(appear)
                 .selectOption(1);
 
-        return this;
+        return new ProductModel();
     }
 
     @Step("FilterModal: Selected from expensive to cheap")
-    public FilterModal selectFromExpensiveToCheap() {
+    public ProductModel selectFromExpensiveToCheap() {
         selectFromPriceModalMenuSelector
                 .should(appear)
                 .selectOption(2);
 
-        return this;
+        return new ProductModel();
     }
 }

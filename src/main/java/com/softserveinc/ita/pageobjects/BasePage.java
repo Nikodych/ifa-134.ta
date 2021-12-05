@@ -46,10 +46,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     @Step("BasePage: Performed search")
-    public SearchResultPage performSearch() {
+    public ProductModel performSearch() {
         searchButtonElement.click();
 
-        return new SearchResultPage();
+        return new ProductModel();
     }
 
     @Step("BasePage: Opened user modal window")

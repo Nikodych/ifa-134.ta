@@ -3,11 +3,13 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.FilterModal;
 import com.softserveinc.ita.pageobjects.HomePage;
+import com.softserveinc.ita.pageobjects.ProductModel;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.filter;
 
 public class FilterModalTest extends TestRunner {
 
@@ -29,13 +31,13 @@ public class FilterModalTest extends TestRunner {
                 .selectRandomSubCategory();
 
         var filterModal = new FilterModal();
-        var productPage = filterModal
+        var productModel = filterModal
                 .setMinimalPrice(positiveMinPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(positiveMaxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton();
 
         filterModal.selectFromCheapToExpensive();
-        var firstItemPriceFromCheapToExpensive = productPage.getPriceFromFirstItem();
+        var firstItemPriceFromCheapToExpensive = productModel.getCurrentPriceFromFirstItem();
         assertThat(firstItemPriceFromCheapToExpensive)
                 .as("Test failed: Minimal price should be " + positiveMinPrice)
                 .isGreaterThanOrEqualTo(positiveMinPrice);
@@ -45,7 +47,7 @@ public class FilterModalTest extends TestRunner {
                 .isNotEqualTo(negativeMinPrice);
 
         filterModal.selectFromExpensiveToCheap();
-        var firstItemPriceFromExpensiveToCheap = productPage.getPriceFromFirstItem();
+        var firstItemPriceFromExpensiveToCheap = productModel.getCurrentPriceFromFirstItem();
         assertThat(firstItemPriceFromExpensiveToCheap)
                 .as("Test failed: Maximal price should be " + positiveMaxPrice)
                 .isLessThanOrEqualTo(positiveMaxPrice);
