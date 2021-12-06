@@ -12,7 +12,7 @@ import static java.time.Duration.ofSeconds;
 //TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
 
-    private final String productTabTemplate = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
+    private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
 
     public String getPriceFromFirstItem() {
         return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
@@ -39,7 +39,7 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     public ProductPage switchProductTabTo(String productTab) {
-        $x(format(productTabTemplate, productTab)).click();
+        $x(format(PRODUCT_TAB_SELECTOR_TEMPLATE, productTab)).click();
 
         return this;
     }
