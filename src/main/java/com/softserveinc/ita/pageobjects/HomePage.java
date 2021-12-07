@@ -50,6 +50,12 @@ public class HomePage extends BasePage<HomePage> {
 
         return this;
     }
+
+    public CategoriesPage openDiscountCategory() {
+        $x("//a[@class='menu-categories__link menu-categories__item_type_bordered']").click();
+
+        return new CategoriesPage();
+    }
   
    public List<String> getTitlesFromListOfLastViewedProducts() {
 

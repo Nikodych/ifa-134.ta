@@ -19,7 +19,7 @@ public class CategoriesPage extends BasePage<CategoriesPage> {
 
     @Step("CategoriesPage: Opened product")
     public ProductPage openProduct() {
-        $x("(//div[@class='goods-tile__inner'])[1]").click();
+        $x("(//a[@class='goods-tile__picture ng-star-inserted'])[1]").click();
 
         return new ProductPage();
     }
