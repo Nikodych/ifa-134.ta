@@ -50,9 +50,9 @@ public class HomePage extends BasePage<HomePage> {
 
         return this;
     }
-  
-   public List<String> getTitlesFromListOfLastViewedProducts() {
 
+    @Step("HomePage: Get titles list of last viewed products")
+    public List<String> getTitlesFromListOfLastViewedProducts() {
         return listOfLastViewedItems
                 .shouldBe(sizeNotEqual(0), ofSeconds(8))
                 .stream()

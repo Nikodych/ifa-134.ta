@@ -7,9 +7,9 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.time.Duration.ofSeconds;
 
-//TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
 
+    @Step("ProductPage: Received the price of the first product")
     public String getPriceFromFirstItem() {
         return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
                 .shouldBe(visible, ofSeconds(12))
