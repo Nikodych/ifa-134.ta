@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.utils.runners.NumberUtil.parseIntPrice;
+import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
