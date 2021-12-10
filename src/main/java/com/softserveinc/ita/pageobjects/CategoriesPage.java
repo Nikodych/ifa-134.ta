@@ -1,12 +1,13 @@
 package com.softserveinc.ita.pageobjects;
 
-import io.qameta.allure.Step;
-
-import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
+
 import static java.time.Duration.ofSeconds;
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
+import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
+
+import io.qameta.allure.Step;
 
 public class CategoriesPage extends BasePage<CategoriesPage> {
 
