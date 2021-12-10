@@ -38,13 +38,14 @@ public class ProductPage extends BasePage<ProductPage> {
         return $x("//ul[@class='breadcrumbs ng-star-inserted']").getText();
     }
 
+    @Step("ProductPage: Switched product tab to '{productTab}'")
     public ProductPage switchProductTabTo(String productTab) {
         $x(format(PRODUCT_TAB_SELECTOR_TEMPLATE, productTab)).click();
 
         return this;
     }
 
-    public String getActiveTabText() {
+    private String getActiveTabText() {
         return $("a.tabs__link--active")
                 .getText()
                 .replaceAll("\\d", "");

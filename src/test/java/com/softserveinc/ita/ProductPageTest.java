@@ -22,7 +22,7 @@ public class ProductPageTest extends TestRunner {
                 .openProduct()
                 .switchProductTabTo(testProductTabName);
 
-        ProductPage productPage = new ProductPage();
+        var productPage = new ProductPage();
 
         assertThat(productPage.isCorrectTabDisplayed())
                 .as("Correct product tab should be displayed")
