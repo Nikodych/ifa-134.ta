@@ -1,4 +1,4 @@
-package com.softserveinc.ita.models;
+package com.softserveinc.ita.utils.runners;
 
 import static java.lang.Integer.parseInt;
 
