@@ -7,7 +7,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.Integer.parseInt;
+import static com.softserveinc.ita.utils.runners.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
@@ -61,24 +61,14 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     }
 
     public int getProductPrice() {
-        var productPrice = $("span.checkout-product__price_color_red")
-                .getText()
-                .replaceAll(" ₴", "");
-
-        return parseInt(productPrice);
+        return parseIntPrice($("span.checkout-product__price_color_red").getText());
     }
 
     public int getProductTotalPrice() {
-        var productTotalPrice = $(".js-product-amount dd")
-                .getText()
-                .replaceAll(" ₴", "");
-
-        return parseInt(productTotalPrice);
+        return parseIntPrice($(".js-product-amount dd").getText());
     }
 
     public int getProductQuantity() {
-        var productQuantity = $(".js-product-quantity dd").getText();
-
-        return parseInt(productQuantity);
+        return parseIntPrice($(".js-product-quantity dd").getText());
     }
 }
