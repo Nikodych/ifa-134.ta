@@ -45,12 +45,6 @@ public class ProductPage extends BasePage<ProductPage> {
         return this;
     }
 
-    private String getActiveTabText() {
-        return $("a.tabs__link--active")
-                .getText()
-                .replaceAll("\\d", "");
-    }
-
     public boolean isCorrectTabDisplayed() {
         var activeTabText = getActiveTabText();
         var productTabHeadingText = $("*.product-tabs__heading").getText();
@@ -63,6 +57,12 @@ public class ProductPage extends BasePage<ProductPage> {
             default:
                 return productTabHeadingText.contains(activeTabText);
         }
+    }
+
+    private String getActiveTabText() {
+        return $("a.tabs__link--active")
+                .getText()
+                .replaceAll("\\d", "");
     }
 }
 
