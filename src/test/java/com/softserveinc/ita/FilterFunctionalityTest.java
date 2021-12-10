@@ -31,7 +31,7 @@ public class FilterFunctionalityTest extends TestRunner {
                 .setMaximalPrice(maxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton()
                 .filterAvailableItems()
-                .getFirstFilteredItem(first);
+                .selectFirstItemFromProductPage();
 
         assertThat(productPage.getProductTitle())
                 .as("Incorrect brand selected")
@@ -41,9 +41,5 @@ public class FilterFunctionalityTest extends TestRunner {
                 .as("Select another price range")
                 .isGreaterThanOrEqualTo(minPrice)
                 .isLessThanOrEqualTo(maxPrice);
-
-        assertThat(productPage.getItemStatus())
-                .as("Item is unavailable for order")
-                .contains("Є в наявності");
     }
 }
