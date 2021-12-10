@@ -15,8 +15,6 @@ import static java.util.stream.Collectors.toList;
 
 public class SearchResultPage extends BasePage<SearchResultPage> {
 
-
-    @Step("SearchResultPage: Got list with filtered goods by 'productName'")
     public List<String> getGoodsListBy(String productName) {
         return $$x("//*[@class='goods-tile__title']")
                 .shouldBe(sizeGreaterThan(0), ofSeconds(8))
