@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
+import static java.lang.Integer.parseInt;
 import static java.lang.String.format;
 
 public class CheckoutPage extends BasePage<CheckoutPage> {
@@ -69,6 +70,8 @@ public class CheckoutPage extends BasePage<CheckoutPage> {
     }
 
     public int getProductQuantity() {
-        return parseIntPrice($(".js-product-quantity dd").getText());
+        var productQuantity = $(".js-product-quantity dd").getText();
+
+        return parseInt(productQuantity);
     }
 }
