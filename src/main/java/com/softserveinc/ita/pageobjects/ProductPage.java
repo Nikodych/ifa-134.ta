@@ -1,16 +1,17 @@
 package com.softserveinc.ita.pageobjects;
 
-
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Selenide.*;
+import static java.time.Duration.ofSeconds;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
-import static java.time.Duration.ofSeconds;
 
 public class ProductPage extends BasePage<ProductPage> {
 
+    private final String productSelector = "(//div[@class = 'goods-tile__inner'])";
+    private final String productPriceSelector = "//p[contains(@Class, 'product-prices__big')]";
     private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
 
     public String getPriceFromFirstItem() {
@@ -63,5 +64,20 @@ public class ProductPage extends BasePage<ProductPage> {
                 .getText()
                 .replaceAll("\\d", "");
     }
-}
 
+    public String getProductPrice() {
+        return $x(productPriceSelector)
+                .getText()
+                .replaceAll("₴", " ")
+                .trim();
+    }
+
+    public ProductPage openProductByNumber(int productNumber) {
+        $$x(productSelector)
+                .shouldBe(sizeGreaterThan(0), ofSeconds(10))
+                .get(productNumber)
+                .click();
+
+        return this;
+    }
+}

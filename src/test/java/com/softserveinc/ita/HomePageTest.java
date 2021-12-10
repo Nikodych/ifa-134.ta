@@ -14,13 +14,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
 
-    private final HomePage homePage = new HomePage();
+    private HomePage homePage = new HomePage();
 
     @DataProvider
     public Object[][] rozetkaCategoryData() {
         return new Object[][]{
                 {"Товари для геймерів"},
-                {"Побутова техніка"}
+                {"Побутова техніка"},
         };
     }
 
@@ -39,7 +39,7 @@ public class HomePageTest extends TestRunner {
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
-    public void verifyCategoryTransitionThroughDropdownTest(String title) {
+    public void verifyCategoryTransitionThroughDropdownTest(String title, int orderNumber, int productNumber) {
         homePage
                 .openCatalog()
                 .openDropdownCategory(title)
