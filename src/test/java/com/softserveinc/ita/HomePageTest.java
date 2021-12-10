@@ -85,9 +85,8 @@ public class HomePageTest extends TestRunner {
         var currentPrice = productPage.getProductPrice();
 
         assertThat(currentPrice)
-                .as("price with discount should be lower than old price")
+                .as("Price with discount should be lower than old price")
                 .isLessThan(preDiscountPrice);
-
     }
 
     @Test

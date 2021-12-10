@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.Integer.parseInt;
+import static com.softserveinc.ita.models.NumberUtil.parseIntPrice;
 import static java.time.Duration.ofSeconds;
 
 //TODO: move methods not related to this page to other page objects
@@ -28,11 +28,11 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     public int getProductPrice() {
-        return parseInt($x("//p[contains(@class, 'product-prices__big')]").getText().replaceAll("\\s|₴", ""));
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
     }
 
     public int getProductPriceBeforeDiscount() {
-        return parseInt($x("//p[contains(@class, 'product-prices__small')]").getText().replaceAll("\\s|₴", ""));
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__small')]").getText());
     }
 
     public String getProductTitle() {
