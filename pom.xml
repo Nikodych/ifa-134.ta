@@ -18,11 +18,15 @@
         <org.projectlombok.version>1.18.22</org.projectlombok.version>
         <selenide.version>6.0.3</selenide.version>
         <assertj.version>3.21.0</assertj.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <suiteXml>allTests.xml</suiteXml>
         <allure.version>2.17.0</allure.version>
         <allure.maven>2.10.0</allure.maven>
         <aspectj.version>1.9.7</aspectj.version>
         <maven.surfire.version>3.0.0-M5</maven.surfire.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+
     </properties>
 
     <dependencies>
@@ -116,6 +120,9 @@
                         -Xmx1024m -Xms1024m
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suiteXml}</suiteXmlFile>
+                    </suiteXmlFiles>
                 </configuration>
                 <dependencies>
                     <dependency>
