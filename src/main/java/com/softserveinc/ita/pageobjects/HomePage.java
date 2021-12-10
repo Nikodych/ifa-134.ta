@@ -56,9 +56,8 @@ public class HomePage extends BasePage<HomePage> {
 
         return new CategoriesPage();
     }
-  
-   public List<String> getTitlesFromListOfLastViewedProducts() {
 
+    public List<String> getTitlesFromListOfLastViewedProducts() {
         return listOfLastViewedItems
                 .shouldBe(sizeNotEqual(0), ofSeconds(8))
                 .stream()
