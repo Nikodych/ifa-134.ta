@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 
 public class ComparisonPage extends BasePage<ComparisonPage> {
@@ -69,6 +70,9 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
             var characteristicOfSecondProduct = productsCharacteristics.get(i + 1);
 
             if (characteristicOfFirstProduct.equals(characteristicOfSecondProduct)) {
+                // scroll to same characteristics (for screenshot)
+                $x(format("(//div[@Class='comparison-grid']//dd)[%d]", i)).scrollTo();
+
                 return false;
             }
         }

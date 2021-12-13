@@ -46,7 +46,9 @@ public class ProductPage extends BasePage<ProductPage> {
 
     public boolean isCorrectTabDisplayed() {
         var activeTabText = getActiveTabText();
-        var productTabHeadingText = $("*.product-tabs__heading").getText();
+        var productTabHeadingText = $("main *.product-tabs__heading")
+                .shouldBe(visible)
+                .getText();
 
         switch (activeTabText) {
             case "Купують разом":
