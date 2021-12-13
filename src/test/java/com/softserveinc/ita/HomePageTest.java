@@ -76,6 +76,20 @@ public class HomePageTest extends TestRunner {
     }
 
     @Test
+    public void verifyDiscountPrice() {
+        var productPage = homePage
+                .openDiscountCategory()
+                .openProduct();
+
+        var preDiscountPrice = productPage.getProductPriceBeforeDiscount();
+        var currentPrice = productPage.getProductPrice();
+
+        assertThat(currentPrice)
+                .as("Price with discount should be lower than old price")
+                .isLessThan(preDiscountPrice);
+    }
+
+    @Test
     public void verifyLanguageSwitchingTest() {
         var languageToSwitch = homePage.isLanguageSwitchedTo(UA) ? RU : UA;
         homePage.switchLanguageTo(languageToSwitch);
