@@ -2,10 +2,13 @@ package com.softserveinc.ita.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NonNull;
+
+import static com.softserveinc.ita.models.IUiTextEnum.fromValue;
 
 @AllArgsConstructor
 @Getter
-public enum SocialMedia {
+public enum SocialMedia implements IUiTextEnum{
 
     FACEBOOK("https://www.facebook.com/rozetka.ua"),
     TWITTER("https://twitter.com/rozetka_ua"),
@@ -15,4 +18,8 @@ public enum SocialMedia {
     TELEGRAM("https://t.me/rrozetka");
 
     private final String socialMediaLink;
+
+    public static String getSocialMediaBy(@NonNull String name) {
+        return fromValue(name, SocialMedia.class).getSocialMediaLink();
+    }
 }
