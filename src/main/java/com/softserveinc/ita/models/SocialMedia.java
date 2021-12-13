@@ -19,7 +19,7 @@ public enum SocialMedia implements IUiTextEnum{
 
     private final String socialMediaLink;
 
-    public static String getSocialMediaBy(@NonNull String name) {
+    public static String getSocialMediaLinkBy(@NonNull String name) {
         return fromValue(name, SocialMedia.class).getSocialMediaLink();
     }
 }
