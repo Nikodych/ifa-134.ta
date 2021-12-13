@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
 
 public abstract class BasePage<T extends BasePage<T>> {
 
@@ -82,12 +83,27 @@ public abstract class BasePage<T extends BasePage<T>> {
 
     @Step("BasePage: Closed advertising banner if displayed")
     public T closeAdvertisingBannerIfDisplayed() {
-        var banner = $("#rz-banner").should(exist);
-        if (banner.isDisplayed()) {
+        if ($("#rz-banner").is(exist)) {
             $("span .exponea-close-cross").click();
         }
 
         return (T) this;
+    }
+
+    @Step("BasePage: Clicked on header menu")
+    public T clickOnHeaderMenuButton() {
+        $x("//button[@class='header__button']").click();
+
+        return (T) this;
+    }
+
+    @Step("BasePage: Clicked on one of displayed mobile app link")
+    public HeaderMenuModal selectMobileAppLink(String appLink) {
+        $x("//ul[@class='side-stores__buttons']//img[contains(@alt, '" + appLink + "')]")
+                .shouldBe((visible), ofSeconds(8))
+                .click();
+
+        return new HeaderMenuModal();
     }
 
     @Step("BasePage: Opened comparison page")

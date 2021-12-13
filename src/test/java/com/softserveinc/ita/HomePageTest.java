@@ -85,4 +85,29 @@ public class HomePageTest extends TestRunner {
                 .as("Language should be switched to '" + languageToSwitch + "'")
                 .isTrue();
     }
+
+    @Test
+    public void verifyOpeningMobileAppLinksTest() {
+        var playMarketLink = "Google Play";
+        var appStoreLink = "AppStore";
+        var appTitle = "ROZETKA";
+
+        var rozetkaPlayMarketTitle = homePage
+                .closeAdvertisingBannerIfDisplayed()
+                .clickOnHeaderMenuButton()
+                .selectMobileAppLink(playMarketLink)
+                .getAndroidAppTitle();
+
+        assertThat(rozetkaPlayMarketTitle)
+                .as("Test failed: Required app should be: " + appTitle)
+                .contains(appTitle);
+
+        var rozetkaAppStoreTitle = homePage
+                .selectMobileAppLink(appStoreLink)
+                .getIosAppTitle();
+
+        assertThat(rozetkaAppStoreTitle)
+                .as("Test failed: Required app should be: " + appTitle)
+                .contains(appTitle);
+    }
 }
