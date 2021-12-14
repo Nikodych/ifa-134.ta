@@ -14,7 +14,7 @@ public class ComparisonPageTest extends TestRunner {
 
     @Test
     public void verifyComparisonPageFunctionalityTest() {
-        var testCategoryName = "Ноутбуки та комп’ютери";
+        var testCategoryName = "Смартфони, ТВ і електроніка";
 
         homePage
                 .openCategory(testCategoryName)
