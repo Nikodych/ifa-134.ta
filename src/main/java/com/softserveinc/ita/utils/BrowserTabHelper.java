@@ -1,4 +1,4 @@
-package com.softserveinc.ita.models;
+package com.softserveinc.ita.utils;
 
 import io.qameta.allure.Step;
 import lombok.experimental.UtilityClass;

@@ -6,7 +6,7 @@ import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.models.BrowserTabHelper.*;
+import static com.softserveinc.ita.utils.BrowserTabHelper.*;
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
 import static com.softserveinc.ita.models.SocialMedia.getSocialMediaLinkBy;

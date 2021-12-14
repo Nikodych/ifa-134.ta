@@ -5,7 +5,7 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.models.BrowserTabHelper.getCurrentUrl;
+import static com.softserveinc.ita.utils.BrowserTabHelper.getCurrentUrl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComparisonPageTest extends TestRunner {
