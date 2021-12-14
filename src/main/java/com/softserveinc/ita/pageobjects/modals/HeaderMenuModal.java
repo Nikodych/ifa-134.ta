@@ -1,7 +1,8 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.modals;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.utils.BrowserTabHelper.*;
+import static com.softserveinc.ita.models.BrowserTabHelper.closeSecondAndSwitchToFirstWindow;
+import static com.softserveinc.ita.models.BrowserTabHelper.switchToSecondWindow;
 
 public class HeaderMenuModal {
 

@@ -1,6 +1,8 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.modals;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.pageobjects.BasePage;
+import com.softserveinc.ita.pageobjects.ProductPage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.appear;

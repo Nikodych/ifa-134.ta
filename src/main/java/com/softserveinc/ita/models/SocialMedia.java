@@ -8,7 +8,7 @@ import static com.softserveinc.ita.models.IUiTextEnum.fromValue;
 
 @AllArgsConstructor
 @Getter
-public enum SocialMedia implements IUiTextEnum{
+public enum SocialMedia implements IUiTextEnum {
 
     FACEBOOK("https://www.facebook.com/rozetka.ua"),
     TWITTER("https://twitter.com/rozetka_ua"),
