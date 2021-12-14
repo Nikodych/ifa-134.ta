@@ -3,8 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
@@ -28,6 +27,8 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
         $("rz-trash-icon button")
                 .should(appear)
                 .click();
+        // need to wait because of rozetka's bug after deleting product
+        sleep(400);
 
         return this;
     }
