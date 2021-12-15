@@ -37,7 +37,7 @@ public class ProductPageTest extends TestRunner {
                 .openProduct();
 
         var srcBeforeNavigation = productPage.getImgSource();
-        productPage.switchPhoto(2);
+        productPage.switchPhotoTo(2);
         var srcAfterNavigation = productPage.getImgSource();
 
         assertThat(srcBeforeNavigation)

@@ -77,7 +77,8 @@ public class ProductPage extends BasePage<ProductPage> {
                 .replaceAll("\\d", "");
     }
 
-    public ProductPage switchPhoto(int index) {
+    @Step("ProductPage: Switched photo to '{index}'")
+    public ProductPage switchPhotoTo(int index) {
         $x(format("//li[@class = 'gallery-thumbnails__item ng-star-inserted'][%s]", index)).hover();
 
         return this;
