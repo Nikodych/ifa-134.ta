@@ -58,4 +58,26 @@ public class ProductPageTest extends TestRunner {
                 .as("Price with discount should be lower than old price")
                 .isLessThan(preDiscountPrice);
     }
+
+    @Test
+    public void verifyKitPrice() {
+        var kitIndex = 2;
+        var productPage =  homePage.
+                openCategory("Ноутбуки та комп’ютери")
+                .openSubCategory()
+                .openProduct()
+                .swithKitTo(kitIndex);
+
+        var mainProductPrice = productPage.getMainKitProductPrice(kitIndex);
+        var additionalProductPrice = productPage.getAdditionalKitProductPrice(kitIndex);
+
+        int expectedPrice = mainProductPrice + additionalProductPrice;
+        var actualPrice = productPage.getKitPrice(kitIndex);
+
+        assertThat(expectedPrice)
+                .as("Sum of prices should correspond final price")
+                .isEqualTo(actualPrice);
+
+    }
+
 }

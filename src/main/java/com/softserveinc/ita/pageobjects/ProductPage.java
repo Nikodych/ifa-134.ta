@@ -1,6 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
-
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.modals.BasketModal;
 import io.qameta.allure.Step;
 
@@ -86,6 +86,33 @@ public class ProductPage extends BasePage<ProductPage> {
 
     public String getImgSource() {
         return $x("//img[@class = 'picture-container__picture']").getAttribute("src");
+    }
+
+    @Step("ProductPage: Switched kit to '{index}'")
+    public ProductPage swithKitTo(int index) {
+        $x(format("(//section[@class='kits product-kits ng-star-inserted']//button[contains(@class,'slider-dots__button')])[%s]", index)).click();
+
+        return this;
+    }
+
+    public int getMainKitProductPrice(int index) {
+        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price']", index)).shouldBe(visible).getText());
+    }
+
+    public int getAdditionalKitProductPrice(int index) {
+        String kitProductPriceSelector = format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price kits-tile__price_color_red ng-star-inserted']", index);
+
+        if ($x(kitProductPriceSelector).exists()) {
+            return parseIntPrice($x(kitProductPriceSelector).getText());
+        } else return parseIntPrice($x(format("(//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price'])[2]", index)).getText());
+    }
+
+    public int getKitPrice(int index) {
+        String kitSelector = format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast']", index);
+
+        if ($x(kitSelector).exists()) {
+            return parseIntPrice($x(kitSelector).getText());
+        } else return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast kits-price__coast--red']", index)).getText());
     }
 }
 
