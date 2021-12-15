@@ -76,5 +76,15 @@ public class ProductPage extends BasePage<ProductPage> {
                 .getText()
                 .replaceAll("\\d", "");
     }
+
+    public ProductPage switchPhoto(int index) {
+        $x(format("//li[@class = 'gallery-thumbnails__item ng-star-inserted'][%s]", index)).hover();
+
+        return this;
+    }
+
+    public String getImgSource() {
+        return $x("//img[@class = 'picture-container__picture']").getAttribute("src");
+    }
 }
 

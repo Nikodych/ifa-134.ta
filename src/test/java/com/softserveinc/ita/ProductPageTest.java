@@ -28,4 +28,20 @@ public class ProductPageTest extends TestRunner {
                 .as("Correct product tab should be displayed")
                 .isTrue();
     }
+
+    @Test
+    public void verifyProductPhotoChanging() {
+        var productPage = homePage
+                .openCategory("Ноутбуки та комп’ютери")
+                .openSubCategory()
+                .openProduct();
+
+        var srcBeforeNavigation = productPage.getImgSource();
+        productPage.switchPhoto(2);
+        var srcAfterNavigation = productPage.getImgSource();
+
+        assertThat(srcBeforeNavigation)
+                .as("Image should change")
+                .doesNotContain(srcAfterNavigation);
+    }
 }
