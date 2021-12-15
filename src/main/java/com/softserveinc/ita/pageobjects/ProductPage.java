@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 
+import com.softserveinc.ita.pageobjects.modals.BasketModal;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;

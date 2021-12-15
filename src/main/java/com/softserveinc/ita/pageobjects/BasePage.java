@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
+import com.softserveinc.ita.pageobjects.modals.*;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exist;

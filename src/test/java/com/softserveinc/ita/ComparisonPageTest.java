@@ -5,7 +5,7 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.WebDriverRunner.url;
+import static com.softserveinc.ita.utils.BrowserTabHelper.getCurrentUrl;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ComparisonPageTest extends TestRunner {
@@ -14,7 +14,7 @@ public class ComparisonPageTest extends TestRunner {
 
     @Test
     public void verifyComparisonPageFunctionalityTest() {
-        var testCategoryName = "Ноутбуки та комп’ютери";
+        var testCategoryName = "Смартфони, ТВ і електроніка";
 
         homePage
                 .openCategory(testCategoryName)
@@ -37,7 +37,7 @@ public class ComparisonPageTest extends TestRunner {
                 .openComparisonPage();
 
         var comparisonShareLink = comparisonPage.getShareLink();
-        var currentUrl = url();
+        var currentUrl = getCurrentUrl();
         assertThat(comparisonShareLink)
                 .as("Share link should match current url")
                 .isEqualTo(currentUrl);

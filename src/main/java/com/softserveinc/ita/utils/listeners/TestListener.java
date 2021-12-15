@@ -1,4 +1,4 @@
-package com.softserveinc.ita.utils.runners;
+package com.softserveinc.ita.utils.listeners;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.TakesScreenshot;
