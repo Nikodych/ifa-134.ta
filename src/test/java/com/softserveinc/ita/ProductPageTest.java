@@ -44,4 +44,18 @@ public class ProductPageTest extends TestRunner {
                 .as("Image should change")
                 .doesNotContain(srcAfterNavigation);
     }
+  
+    @Test
+    public void verifyDiscountPrice() {
+        var productPage = homePage
+                .openDiscountCategory()
+                .openProduct();
+
+        var preDiscountPrice = productPage.getProductPriceBeforeDiscount();
+        var currentPrice = productPage.getProductPrice();
+
+        assertThat(currentPrice)
+                .as("Price with discount should be lower than old price")
+                .isLessThan(preDiscountPrice);
+    }
 }
