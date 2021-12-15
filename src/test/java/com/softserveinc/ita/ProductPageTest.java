@@ -68,10 +68,7 @@ public class ProductPageTest extends TestRunner {
                 .openProduct()
                 .swithKitTo(kitIndex);
 
-        var mainProductPrice = productPage.getMainKitProductPrice(kitIndex);
-        var additionalProductPrice = productPage.getAdditionalKitProductPrice(kitIndex);
-
-        int expectedPrice = mainProductPrice + additionalProductPrice;
+        var expectedPrice = productPage.getMainKitProductPrice(kitIndex) + productPage.getAdditionalKitProductPrice(kitIndex);
         var actualPrice = productPage.getKitPrice(kitIndex);
 
         assertThat(expectedPrice)

@@ -100,19 +100,11 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     public int getAdditionalKitProductPrice(int index) {
-        String kitProductPriceSelector = format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price kits-tile__price_color_red ng-star-inserted']", index);
-
-        if ($x(kitProductPriceSelector).exists()) {
-            return parseIntPrice($x(kitProductPriceSelector).getText());
-        } else return parseIntPrice($x(format("(//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price'])[2]", index)).getText());
+        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price kits-tile__price_color_red ng-star-inserted']", index)).getText());
     }
 
     public int getKitPrice(int index) {
-        String kitSelector = format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast']", index);
-
-        if ($x(kitSelector).exists()) {
-            return parseIntPrice($x(kitSelector).getText());
-        } else return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast kits-price__coast--red']", index)).getText());
+        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast']", index)).getText());
     }
 }
 
