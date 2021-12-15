@@ -30,6 +30,22 @@ public class ProductPageTest extends TestRunner {
     }
 
     @Test
+    public void verifyProductPhotoChanging() {
+        var productPage = homePage
+                .openCategory("Ноутбуки та комп’ютери")
+                .openSubCategory()
+                .openProduct();
+
+        var srcBeforeNavigation = productPage.getImgSource();
+        productPage.switchPhotoTo(2);
+        var srcAfterNavigation = productPage.getImgSource();
+
+        assertThat(srcBeforeNavigation)
+                .as("Image should change")
+                .doesNotContain(srcAfterNavigation);
+    }
+  
+    @Test
     public void verifyDiscountPrice() {
         var productPage = homePage
                 .openDiscountCategory()
