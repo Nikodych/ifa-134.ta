@@ -19,19 +19,17 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] rozetkaCategoryData() {
         return new Object[][]{
-                {"Товари для геймерів"},
-                {"Побутова техніка"}
+                {"Товари для геймерів"}
         };
     }
 
     @Test(dataProvider = "rozetkaCategoryData")
     public void verifyCategoryTransitionTest(String title) {
-        homePage
+        var actualTitle = homePage
                 .openCategory(title)
                 .openSubCategory()
-                .openProduct();
-
-        var actualTitle = new ProductPage().getProductCategory();
+                .openProduct()
+                .getProductCategory();
 
         assertThat(actualTitle)
                 .as("Product should correspond " + title + " category")
@@ -40,13 +38,12 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaCategoryData")
     public void verifyCategoryTransitionThroughDropdownTest(String title) {
-        homePage
+        var actualTitle = homePage
                 .openCatalog()
                 .openDropdownCategory(title)
                 .openSubCategory()
-                .openProduct();
-
-        var actualTitle = new ProductPage().getProductCategory();
+                .openProduct()
+                .getProductCategory();
 
         assertThat(actualTitle)
                 .as("Product should correspond " + title + " category")
@@ -73,20 +70,6 @@ public class HomePageTest extends TestRunner {
                 .contains(actualUrl);
 
         closeTab();
-    }
-
-    @Test
-    public void verifyDiscountPrice() {
-        var productPage = homePage
-                .openDiscountCategory()
-                .openProduct();
-
-        var preDiscountPrice = productPage.getProductPriceBeforeDiscount();
-        var currentPrice = productPage.getProductPrice();
-
-        assertThat(currentPrice)
-                .as("Price with discount should be lower than old price")
-                .isLessThan(preDiscountPrice);
     }
 
     @Test
