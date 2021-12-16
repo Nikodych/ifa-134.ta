@@ -1,10 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.models.ProductModel;
 import io.qameta.allure.Step;
-
-import java.util.logging.Filter;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;

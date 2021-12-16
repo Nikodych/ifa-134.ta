@@ -1,7 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.softserveinc.ita.models.repos.ProductRepo;
-import com.softserveinc.ita.models.repos.ProductRepo.*;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -77,6 +76,4 @@ public class ProductPage extends BasePage<ProductPage> {
     public int getProductPriceBeforeDiscount() {
         return ProductRepo.getPriceBeforeDiscount();
     }
-
 }
-
