@@ -112,8 +112,8 @@ public class HomePageTest extends TestRunner {
 
     @DataProvider
     public Object[][] vacancyPageData() {
-        return new Object[][]  {
-        {"Вакансії", "dospecwork@gmail.com", "QA engineers"}};
+        return new Object[][]{
+                {"Вакансії", "dospecwork@gmail.com", "QA engineers"}};
     }
 
     @Test(dataProvider = "vacancyPageData")
@@ -131,12 +131,12 @@ public class HomePageTest extends TestRunner {
 
         var currentEmail = vacancyPage.getAttributeFromEmailField();
         assertThat(currentEmail)
-                .as("Test failed: Current email should be: "+expectedEmail)
+                .as("Test failed: Current email should be: " + expectedEmail)
                 .isEqualTo(expectedEmail);
 
         var currentCategory = vacancyPage.getTextFromCategoryModal();
         assertThat(currentCategory)
-                .as("Test failed: Current category should be :"+expectedCategory)
+                .as("Test failed: Current category should be :" + expectedCategory)
                 .isEqualTo(expectedCategory);
     }
 }
