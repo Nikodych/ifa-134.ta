@@ -7,4 +7,5 @@ public class ProductModel {
 
     private String name;
     private int price;
+    private int priceBeforeDiscount;
 }

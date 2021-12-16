@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.models.ProductModel;
+import com.softserveinc.ita.models.repos.ProductRepo;
+import com.softserveinc.ita.models.repos.ProductRepo.*;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -8,8 +9,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
-
+import static com.softserveinc.ita.models.repos.ProductRepo.*;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
@@ -24,13 +24,6 @@ public class ProductPage extends BasePage<ProductPage> {
                 .trim();
     }
 
-    public ProductModel getProductInfo() {
-        return ProductModel.builder()
-                .name(getProductTitle())
-                .price(getProductPrice())
-                .build();
-    }
-
     @Step("ProductPage: Added to cart")
     public BasketModal addToCart() {
         $x("//button[contains(@class,'buy-button button button_with_icon')]")
@@ -38,18 +31,6 @@ public class ProductPage extends BasePage<ProductPage> {
                 .click();
 
         return new BasketModal();
-    }
-
-    public int getProductPrice() {
-        return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
-    }
-
-    public int getProductPriceBeforeDiscount() {
-        return parseIntPrice($x("//p[contains(@class, 'product-prices__small')]").getText());
-    }
-
-    public String getProductTitle() {
-        return $x("//h1[@class='product__title']").getText();
     }
 
     public String getProductCategory() {
@@ -84,5 +65,18 @@ public class ProductPage extends BasePage<ProductPage> {
                 .getText()
                 .replaceAll("\\d", "");
     }
+
+    public String getProductTitle() {
+        return getTitle();
+    }
+
+    public int getProductPrice() {
+        return getPrice();
+    }
+
+    public int getProductPriceBeforeDiscount() {
+        return ProductRepo.getPriceBeforeDiscount();
+    }
+
 }
 
