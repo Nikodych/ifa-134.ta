@@ -2,7 +2,10 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
+import com.softserveinc.ita.models.ProductModel;
 import io.qameta.allure.Step;
+
+import javax.naming.directory.SearchResult;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;
@@ -47,10 +50,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     @Step("BasePage: Performed search")
-    public ProductModel performSearch() {
+    public SearchResultPage performSearch() {
         searchButtonElement.click();
 
-        return new ProductModel();
+        return new SearchResultPage();
     }
 
     @Step("BasePage: Opened user modal window")

@@ -1,7 +1,10 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.models.ProductModel;
 import io.qameta.allure.Step;
+
+import java.util.logging.Filter;
 
 import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;
@@ -30,27 +33,27 @@ public class FilterModal extends BasePage<FilterModal> {
     }
 
     @Step("FilterModal: Clicked on price button")
-    public ProductModel clickOnPriceButton() {
+    public ProductPage clickOnPriceButton() {
         $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
 
-        return new ProductModel();
+        return new ProductPage();
     }
 
     @Step("FilterModal: Selected from cheap to expensive")
-    public ProductModel selectFromCheapToExpensive() {
+    public FilterModal selectFromCheapToExpensive() {
         selectFromPriceModalMenuSelector
                 .should(appear)
                 .selectOption(1);
 
-        return new ProductModel();
+        return this;
     }
 
     @Step("FilterModal: Selected from expensive to cheap")
-    public ProductModel selectFromExpensiveToCheap() {
+    public FilterModal selectFromExpensiveToCheap() {
         selectFromPriceModalMenuSelector
                 .should(appear)
                 .selectOption(2);
 
-        return new ProductModel();
+        return this;
     }
 }

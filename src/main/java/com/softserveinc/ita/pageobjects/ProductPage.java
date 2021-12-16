@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.models.ProductModel;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -12,16 +13,22 @@ import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-//TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
 
     private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
 
-    public String getPriceFromFirstItem() {
-        return $x("//ul[@class='catalog-grid ng-star-inserted']/li[1]//span[@class='goods-tile__price-value']")
+    public String getCurrentPriceFromFirstItem() {
+        return $x("//li[1]//span[@class='goods-tile__price-value']")
                 .shouldBe(visible, ofSeconds(12))
                 .getText()
                 .trim();
+    }
+
+    public ProductModel getProductInfo() {
+        return ProductModel.builder()
+                .name(getProductTitle())
+                .price(getProductPrice())
+                .build();
     }
 
     @Step("ProductPage: Added to cart")
