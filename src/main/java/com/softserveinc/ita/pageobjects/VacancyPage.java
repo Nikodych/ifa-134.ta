@@ -49,8 +49,8 @@ public class VacancyPage extends BasePage<VacancyPage> {
         return emailFieldSelector.getAttribute("value").trim();
     }
 
-    public String getTextFromCategoryModal() {
-        return $x("//*[@id='categories']/option[25]")
+    public String getTextFromCategoryModal(String categoryId) {
+        return $x("//*[@id='categories']/option["+categoryId+"]")
                 .getText()
                 .trim();
     }

@@ -113,11 +113,11 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] vacancyPageData() {
         return new Object[][]{
-                {"Вакансії", "dospecwork@gmail.com", "QA engineers"}};
+                {"Вакансії", "dospecwork@gmail.com", "25", "QA engineers"}};
     }
 
     @Test(dataProvider = "vacancyPageData")
-    public void verifyVacancyPageFunctionality(String expectedPage, String expectedEmail, String expectedCategory) {
+    public void verifyVacancyPageFunctionality(String expectedPage, String expectedEmail, String categoryId, String expectedCategory) {
         homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .openSidebarPage(expectedPage);
@@ -134,7 +134,7 @@ public class HomePageTest extends TestRunner {
                 .as("Test failed: Current email should be: " + expectedEmail)
                 .isEqualTo(expectedEmail);
 
-        var currentCategory = vacancyPage.getTextFromCategoryModal();
+        var currentCategory = vacancyPage.getTextFromCategoryModal(categoryId);
         assertThat(currentCategory)
                 .as("Test failed: Current category should be :" + expectedCategory)
                 .isEqualTo(expectedCategory);
