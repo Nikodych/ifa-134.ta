@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.models.SocialMedia;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 import static com.softserveinc.ita.models.BrowserTabHelper.*;
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
+import static com.softserveinc.ita.models.SocialMedia.getSocialMediaLinkBy;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HomePageTest extends TestRunner {
@@ -64,7 +64,7 @@ public class HomePageTest extends TestRunner {
     @Test(dataProvider = "rozetkaSocialMedia")
     public void verifySocialMediaLinks(String socialMediaName) {
         homePage.openSocialMediaPage(socialMediaName);
-        var expectedUrl = SocialMedia.valueOf(socialMediaName.toUpperCase()).getSocialMediaLink();
+        var expectedUrl = getSocialMediaLinkBy(socialMediaName);
         switchToTab(1);
         var actualUrl = getCurrentUrl();
 
@@ -73,6 +73,20 @@ public class HomePageTest extends TestRunner {
                 .contains(actualUrl);
 
         closeTab();
+    }
+
+    @Test
+    public void verifyDiscountPrice() {
+        var productPage = homePage
+                .openDiscountCategory()
+                .openProduct();
+
+        var preDiscountPrice = productPage.getProductPriceBeforeDiscount();
+        var currentPrice = productPage.getProductPrice();
+
+        assertThat(currentPrice)
+                .as("Price with discount should be lower than old price")
+                .isLessThan(preDiscountPrice);
     }
 
     @Test

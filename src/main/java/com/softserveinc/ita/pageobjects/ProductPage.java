@@ -6,9 +6,13 @@ import static com.codeborne.selenide.Selenide.$x;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
+
+import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
+
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
+//TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
 
     private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
@@ -29,6 +33,14 @@ public class ProductPage extends BasePage<ProductPage> {
         return new BasketModal();
     }
 
+    public int getProductPrice() {
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
+    }
+
+    public int getProductPriceBeforeDiscount() {
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__small')]").getText());
+    }
+
     public String getProductTitle() {
         return $x("//h1[@class='product__title']").getText();
     }
@@ -46,7 +58,9 @@ public class ProductPage extends BasePage<ProductPage> {
 
     public boolean isCorrectTabDisplayed() {
         var activeTabText = getActiveTabText();
-        var productTabHeadingText = $("*.product-tabs__heading").getText();
+        var productTabHeadingText = $("main *.product-tabs__heading")
+                .shouldBe(visible)
+                .getText();
 
         switch (activeTabText) {
             case "Купують разом":
