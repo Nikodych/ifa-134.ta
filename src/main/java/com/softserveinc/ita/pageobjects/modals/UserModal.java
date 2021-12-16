@@ -1,7 +1,18 @@
 package com.softserveinc.ita.pageobjects.modals;
 
-import com.softserveinc.ita.pageobjects.BasePage;
+import lombok.Builder;
+import lombok.Getter;
 
-public class UserModal extends BasePage<UserModal> {
+@Builder
+@Getter
+public class UserModal {
+
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String email;
+    private String categoryValue;
+    private String departamentValue;
+
 
 }

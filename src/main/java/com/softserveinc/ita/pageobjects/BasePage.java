@@ -55,10 +55,10 @@ public abstract class BasePage<T extends BasePage<T>> {
     }
 
     @Step("BasePage: Opened user modal window")
-    public UserModal openUserModalWindow() {
+    public T openUserModalWindow() {
         $x("//rz-user[@class='header-actions__component']").click();
 
-        return new UserModal();
+        return (T) this;
     }
 
     @Step("BasePage: Opened basket")

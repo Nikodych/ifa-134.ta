@@ -76,4 +76,11 @@ public class HomePage extends BasePage<HomePage> {
 
         return new ProductPage();
     }
+
+    @Step("HomePage: Opened sidebar page '{expectedPage}' by name")
+    public HomePage openSidebarPage(String expectedPage) {
+        $x("//li[@class='main-links__item ng-star-inserted']/a[contains(text(),'"+expectedPage+"')]").click();
+
+        return this;
+    }
 }
