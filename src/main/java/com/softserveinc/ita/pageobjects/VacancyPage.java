@@ -1,13 +1,11 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.pageobjects.modals.User;
+import com.softserveinc.ita.models.User;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.repos.VacancyUserRepo.*;
 import static com.softserveinc.ita.utils.ElementsUtil.*;
 import static com.softserveinc.ita.utils.RandomUtil.*;
 import static java.lang.String.format;

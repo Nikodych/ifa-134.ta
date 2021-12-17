@@ -1,6 +1,6 @@
 package com.softserveinc.ita.repos;
 
-import com.softserveinc.ita.pageobjects.modals.User;
+import com.softserveinc.ita.models.User;
 
 public class VacancyUserRepo {
     public static User getVacancyUser() {

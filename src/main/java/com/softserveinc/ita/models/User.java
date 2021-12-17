@@ -1,4 +1,4 @@
-package com.softserveinc.ita.pageobjects.modals;
+package com.softserveinc.ita.models;
 
 import lombok.Builder;
 import lombok.Getter;
