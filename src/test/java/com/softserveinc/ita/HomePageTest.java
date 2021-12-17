@@ -1,12 +1,12 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.pageobjects.VacancyPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import static com.softserveinc.ita.repos.VacancyUserRepo.getVacancyUser;
 import static com.softserveinc.ita.utils.BrowserTabHelper.*;
 import static com.softserveinc.ita.models.LanguageSwitcher.RU;
 import static com.softserveinc.ita.models.LanguageSwitcher.UA;
@@ -113,7 +113,8 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] vacancyPageData() {
         return new Object[][]{
-                {"Вакансії", "dospecwork@gmail.com", "25", "QA engineers"}};
+                {"Вакансії", "dospecwork@gmail.com", "25", "QA engineers"}
+        };
     }
 
     @Test(dataProvider = "vacancyPageData")
@@ -123,18 +124,19 @@ public class HomePageTest extends TestRunner {
                 .openSidebarPage(expectedPage);
 
         var vacancyPage = new VacancyPage();
+        var user = getVacancyUser();
         vacancyPage
                 .selectRandomCategory()
                 .clickOnSendDataButton()
-                .fillVacancyPageFields()
-                .selectCategoryAndDepartament();
+                .fillVacancyPageFields(user)
+                .selectCategoryAndDepartament(user);
 
         var currentEmail = vacancyPage.getAttributeFromEmailField();
         assertThat(currentEmail)
                 .as("Test failed: Current email should be: " + expectedEmail)
                 .isEqualTo(expectedEmail);
 
-        var currentCategory = vacancyPage.getTextFromCategoryModal(categoryId);
+        var currentCategory = vacancyPage.getTextFromCategoryModal();
         assertThat(currentCategory)
                 .as("Test failed: Current category should be :" + expectedCategory)
                 .isEqualTo(expectedCategory);

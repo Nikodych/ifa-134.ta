@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Builder
 @Getter
-public class UserModal {
+public class User {
 
     private String firstName;
     private String lastName;
@@ -13,6 +13,4 @@ public class UserModal {
     private String email;
     private String categoryValue;
     private String departamentValue;
-
-
 }

@@ -7,18 +7,14 @@ import org.openqa.selenium.support.ui.Select;
 @UtilityClass
 public class ElementsUtil {
 
-    public SelenideElement setText(SelenideElement elementSelector, String text) {
-        var input = elementSelector;
-        input.click();
-        input.sendKeys(text);
-
-        return input;
+    public void setText(SelenideElement webElement, String text) {
+        webElement.click();
+        webElement.sendKeys(text);
     }
 
-    public void selectModalMenu(SelenideElement selector , String text) {
-        var selectForm = selector;
-        var value = new Select(selectForm);
+    public void selectOptionFromMenu(SelenideElement webElement , String text) {
+        var value = new Select(webElement);
         value.selectByValue(text);
-        selectForm.click();
+        webElement.click();
     }
 }
