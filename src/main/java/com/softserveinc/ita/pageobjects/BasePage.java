@@ -2,10 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
-import com.softserveinc.ita.models.ProductModel;
 import io.qameta.allure.Step;
-
-import javax.naming.directory.SearchResult;
 
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Condition.visible;

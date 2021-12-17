@@ -1,11 +1,11 @@
-package com.softserveinc.ita.models.repos;
+package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.models.ProductModel;
+import com.softserveinc.ita.models.Product;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 
-public class ProductRepo {
+public class ProductModel {
 
     public static int getPrice() {
         return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
@@ -19,8 +19,8 @@ public class ProductRepo {
         return $x("//h1[@class='product__title']").getText();
     }
 
-    public ProductModel getProductInfo() {
-        return ProductModel.builder()
+    public Product getProductInfo() {
+        return Product.builder()
                 .name(getTitle())
                 .price(getPrice())
                 .priceBeforeDiscount(getPriceBeforeDiscount())
