@@ -113,12 +113,12 @@ public class HomePageTest extends TestRunner {
     @DataProvider
     public Object[][] vacancyPageData() {
         return new Object[][]{
-                {"Вакансії", "dospecwork@gmail.com", "25", "QA engineers"}
+                {"Вакансії", "dospecwork@gmail.com", "QA engineers"}
         };
     }
 
     @Test(dataProvider = "vacancyPageData")
-    public void verifyVacancyPageFunctionality(String expectedPage, String expectedEmail, String categoryId, String expectedCategory) {
+    public void verifyVacancyPageFunctionality(String expectedPage, String expectedEmail, String expectedCategory) {
         homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .openSidebarPage(expectedPage);
