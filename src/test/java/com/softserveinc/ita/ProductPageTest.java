@@ -62,19 +62,20 @@ public class ProductPageTest extends TestRunner {
     @Test
     public void verifyKitPrice() {
         var kitIndex = 2;
-        var productPage =  homePage.
-                openCategory("Ноутбуки та комп’ютери")
+        var productPage = homePage
+                .openCategory("Ноутбуки та комп’ютери")
                 .openSubCategory()
                 .openProduct()
-                .swithKitTo(kitIndex);
+                .switсhKitTo(kitIndex);
 
-        var expectedPrice = productPage.getMainKitProductPrice(kitIndex) + productPage.getAdditionalKitProductPrice(kitIndex);
+        var mainKitProductPrice = productPage.getMainKitProductPrice(kitIndex);
+        var additionalKitProductPrice = productPage.getAdditionalKitProductPrice(kitIndex);
+
+        var expectedPrice = mainKitProductPrice + additionalKitProductPrice;
         var actualPrice = productPage.getKitPrice(kitIndex);
 
         assertThat(expectedPrice)
                 .as("Sum of prices should correspond final price")
                 .isEqualTo(actualPrice);
-
     }
-
 }

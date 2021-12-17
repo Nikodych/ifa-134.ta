@@ -89,22 +89,34 @@ public class ProductPage extends BasePage<ProductPage> {
     }
 
     @Step("ProductPage: Switched kit to '{index}'")
-    public ProductPage swithKitTo(int index) {
+    public ProductPage switсhKitTo(int index) {
         $x(format("(//section[@class='kits product-kits ng-star-inserted']//button[contains(@class,'slider-dots__button')])[%s]", index)).click();
 
         return this;
     }
 
     public int getMainKitProductPrice(int index) {
-        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price']", index)).shouldBe(visible).getText());
+        var mainKitProductPrice = $x(format("//li[@Class = 'simple-slider__item ng-star-inserted'][%s]//p[@Class = 'kits-tile__price']", index))
+                .shouldBe(visible)
+                .getText();
+
+        return parseIntPrice(mainKitProductPrice);
     }
 
     public int getAdditionalKitProductPrice(int index) {
-        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price kits-tile__price_color_red ng-star-inserted']", index)).getText());
+        var additionalKitProductPrice = $x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//p[@class = 'kits-tile__price kits-tile__price_color_red ng-star-inserted']", index))
+                .shouldBe(visible)
+                .getText();
+
+        return parseIntPrice(additionalKitProductPrice);
     }
 
     public int getKitPrice(int index) {
-        return parseIntPrice($x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast']", index)).getText());
+        var kitPrice = $x(format("//li[@class = 'simple-slider__item ng-star-inserted'][%s]//div[@class = 'kits-price__coast']", index))
+                .shouldBe(visible)
+                .getText();
+
+        return parseIntPrice(kitPrice);
     }
 }
 
