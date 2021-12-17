@@ -1,7 +1,6 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.HomePage;
-import com.softserveinc.ita.pageobjects.ProductPage;
 import com.softserveinc.ita.utils.runners.TestRunner;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -60,8 +59,9 @@ public class HomePageTest extends TestRunner {
 
     @Test(dataProvider = "rozetkaSocialMedia")
     public void verifySocialMediaLinks(String socialMediaName) {
-        homePage.openSocialMediaPage(socialMediaName);
         var expectedUrl = getSocialMediaLinkBy(socialMediaName);
+
+        homePage.openSocialMediaPage(socialMediaName);
         switchToTab(1);
         var actualUrl = getCurrentUrl();
 

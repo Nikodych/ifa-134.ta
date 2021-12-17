@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
@@ -53,6 +54,7 @@ public class HomePage extends BasePage<HomePage> {
 
     public CategoriesPage openDiscountCategory() {
         $x("//a[@class='menu-categories__link menu-categories__item_type_bordered']").click();
+        $x("(//span[@class = 'categories-filter__link-title'])[last()]").scrollIntoView(true);
 
         return new CategoriesPage();
     }
