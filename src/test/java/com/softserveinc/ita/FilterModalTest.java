@@ -4,6 +4,7 @@ import com.softserveinc.ita.pageobjects.CategoriesPage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.modals.FilterModal;
 import com.softserveinc.ita.utils.runners.TestRunner;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -36,22 +37,26 @@ public class FilterModalTest extends TestRunner {
 
         filterModal.selectFromCheapToExpensive();
         var firstItemPriceFromCheapToExpensive = productPage.getPriceFromFirstItem();
-        assertThat(firstItemPriceFromCheapToExpensive)
-                .as("Test failed: Minimal price should be " + positiveMinPrice)
-                .isGreaterThanOrEqualTo(positiveMinPrice);
-
-        assertThat(firstItemPriceFromCheapToExpensive)
-                .as("Test failed: Minimal price should be greater or equal " + positiveMinPrice)
-                .isNotEqualTo(negativeMinPrice);
 
         filterModal.selectFromExpensiveToCheap();
         var firstItemPriceFromExpensiveToCheap = productPage.getPriceFromFirstItem();
-        assertThat(firstItemPriceFromExpensiveToCheap)
+        
+        var soft = new SoftAssertions();
+        soft.assertThat(firstItemPriceFromCheapToExpensive)
+                .as("Test failed: Minimal price should be " + positiveMinPrice)
+                .isGreaterThanOrEqualTo(positiveMinPrice);
+
+        soft.assertThat(firstItemPriceFromCheapToExpensive)
+                .as("Test failed: Minimal price should be greater or equal " + positiveMinPrice)
+                .isNotEqualTo(negativeMinPrice);
+
+        soft.assertThat(firstItemPriceFromExpensiveToCheap)
                 .as("Test failed: Maximal price should be " + positiveMaxPrice)
                 .isLessThanOrEqualTo(positiveMaxPrice);
 
-        assertThat(firstItemPriceFromExpensiveToCheap)
+        soft.assertThat(firstItemPriceFromExpensiveToCheap)
                 .as("Test failed: Maximal price should be less or equal " + positiveMinPrice)
                 .isNotEqualTo(negativeMaxPrice);
+        soft.assertAll();
     }
 }
