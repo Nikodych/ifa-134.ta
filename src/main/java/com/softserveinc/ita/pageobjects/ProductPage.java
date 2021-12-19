@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.modals.BasketModal;
 import io.qameta.allure.Step;
 
@@ -11,7 +10,6 @@ import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-//TODO: move methods not related to this page to other page objects
 public class ProductPage extends BasePage<ProductPage> {
 
     private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";

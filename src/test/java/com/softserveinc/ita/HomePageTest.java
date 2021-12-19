@@ -4,6 +4,7 @@ import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.VacancyPage;
 
 import com.softserveinc.ita.utils.runners.TestRunner;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -98,19 +99,20 @@ public class HomePageTest extends TestRunner {
                 .selectMobileAppLink(playMarketLink)
                 .getAndroidAppTitle();
 
-        assertThat(rozetkaPlayMarketTitle)
-                .as("Test failed: Required app should be: " + appTitle)
-                .contains(appTitle);
-
         var rozetkaAppStoreTitle = homePage
                 .selectMobileAppLink(appStoreLink)
                 .getIosAppTitle();
 
-        assertThat(rozetkaAppStoreTitle)
-                .as("Test failed: Required app should be: " + appTitle)
+        var soft = new SoftAssertions();
+        soft.assertThat(rozetkaPlayMarketTitle)
+                .as("Test failed: Required app title for PlayMarket should be: " + appTitle)
                 .contains(appTitle);
-    }
 
+        soft.assertThat(rozetkaAppStoreTitle)
+                .as("Test failed: Required app title for AppStore should be: " + appTitle)
+                .contains(appTitle);
+        soft.assertAll();
+    }
 
     @DataProvider
     public Object[][] vacancyPageData() {
@@ -134,13 +136,16 @@ public class HomePageTest extends TestRunner {
                 .selectCategoryAndDepartament(user);
 
         var currentEmail = vacancyPage.getAttributeFromEmailField();
-        assertThat(currentEmail)
-                .as("Test failed: Current email should be: " + expectedEmail)
+        var currentCategory = vacancyPage.getTextFromCategoryModal();
+
+        var soft = new SoftAssertions();
+        soft.assertThat(currentEmail)
+                .as("Test failed: Wrong data in email field. Actual email is: " + expectedEmail)
                 .isEqualTo(expectedEmail);
 
-        var currentCategory = vacancyPage.getTextFromCategoryModal();
-        assertThat(currentCategory)
+        soft.assertThat(currentCategory)
                 .as("Test failed: Current category should be :" + expectedCategory)
                 .isEqualTo(expectedCategory);
+        soft.assertAll();
     }
 }

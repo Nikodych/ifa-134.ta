@@ -2,18 +2,19 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.User;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.ElementsUtil.*;
 import static com.softserveinc.ita.utils.RandomUtil.*;
-import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
 public class VacancyPage extends BasePage<VacancyPage> {
     private final SelenideElement emailFieldSelector = $x("//input[@id='email']");
 
+    @Step("VacancyPage: Selected random subcategory")
     public VacancyPage selectRandomCategory() {
         var categoriesList = $$x("//*[@class='list-item ng-star-inserted']")
                 .shouldBe(sizeNotEqual(0), ofSeconds(10));
@@ -23,7 +24,7 @@ public class VacancyPage extends BasePage<VacancyPage> {
 
         return this;
     }
-
+    @Step("VacancyPage: clicked on button")
     public VacancyPage clickOnSendDataButton() {
         $x("//button[@class='button button--green button--medium want-work__submit ng-star-inserted']").click();
 
