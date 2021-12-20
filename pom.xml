@@ -23,6 +23,7 @@
         <suiteXml>allTests.xml</suiteXml>
         <allure.version>2.17.0</allure.version>
         <allure.maven>2.10.0</allure.maven>
+        <allure.selenide.version>2.17.0</allure.selenide.version>
         <aspectj.version>1.9.7</aspectj.version>
         <maven.surfire.version>3.0.0-M5</maven.surfire.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
@@ -97,6 +98,20 @@
             <artifactId>allure-testng</artifactId>
             <version>${allure.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>${allure.selenide.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-selenide</artifactId>
+            <version>2.17.0</version>
+            <scope>compile</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -116,13 +131,22 @@
                 <version>${maven.surfire.version}</version>
                 <configuration>
                     <testFailureIgnore>false</testFailureIgnore>
+
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <allure.link.issue.pattern>https://example.org/browse/{}</allure.link.issue.pattern>
+                        <allure.link.tms.pattern>https://example.org/browse/{}</allure.link.tms.pattern>
+                    </systemPropertyVariables>
+
                     <argLine>
                         -Xmx1024m -Xms1024m
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
+
                     <suiteXmlFiles>
                         <suiteXmlFile>${suiteXml}</suiteXmlFile>
                     </suiteXmlFiles>
+
                 </configuration>
                 <dependencies>
                     <dependency>

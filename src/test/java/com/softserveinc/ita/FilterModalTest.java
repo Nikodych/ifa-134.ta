@@ -8,8 +8,6 @@ import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class FilterModalTest extends TestRunner {
 
     @DataProvider
@@ -40,7 +38,7 @@ public class FilterModalTest extends TestRunner {
 
         filterModal.selectFromExpensiveToCheap();
         var firstItemPriceFromExpensiveToCheap = productPage.getPriceFromFirstItem();
-        
+
         var soft = new SoftAssertions();
         soft.assertThat(firstItemPriceFromCheapToExpensive)
                 .as("Test failed: Minimal price should be " + positiveMinPrice)
