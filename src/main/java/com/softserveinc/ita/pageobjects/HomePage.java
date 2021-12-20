@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
@@ -53,11 +54,12 @@ public class HomePage extends BasePage<HomePage> {
 
     public CategoriesPage openDiscountCategory() {
         $x("//a[@class='menu-categories__link menu-categories__item_type_bordered']").click();
+        $x("(//span[@class = 'categories-filter__link-title'])[last()]").scrollIntoView(true);
 
         return new CategoriesPage();
     }
 
-   public List<String> getTitlesFromListOfLastViewedProducts() {
+    public List<String> getTitlesFromListOfLastViewedProducts() {
         return listOfLastViewedItems
                 .shouldBe(sizeNotEqual(0), ofSeconds(8))
                 .stream()
@@ -75,5 +77,12 @@ public class HomePage extends BasePage<HomePage> {
                 .click();
 
         return new ProductPage();
+    }
+
+    @Step("HomePage: Opened sidebar page '{expectedPage}' by name")
+    public HomePage openSidebarPage(String expectedPage) {
+        $x(format("//li[@class='main-links__item ng-star-inserted']/a[contains(text(),'%s')]", expectedPage)).click();
+
+        return this;
     }
 }

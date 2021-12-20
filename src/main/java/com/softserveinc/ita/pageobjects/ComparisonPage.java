@@ -28,6 +28,7 @@ public class ComparisonPage extends BasePage<ComparisonPage> {
         $("rz-trash-icon button")
                 .should(appear)
                 .click();
+        $("rz-trash-icon").shouldNotBe(visible);
 
         return this;
     }

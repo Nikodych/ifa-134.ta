@@ -1,4 +1,4 @@
-package com.softserveinc.ita.models;
+package com.softserveinc.ita.utils;
 
 import lombok.experimental.UtilityClass;
 

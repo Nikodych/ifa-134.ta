@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.models.LanguageSwitcher;
+import com.softserveinc.ita.pageobjects.modals.*;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.exist;
@@ -51,13 +52,6 @@ public abstract class BasePage<T extends BasePage<T>> {
         searchButtonElement.click();
 
         return new SearchResultPage();
-    }
-
-    @Step("BasePage: Opened user modal window")
-    public UserModal openUserModalWindow() {
-        $x("//rz-user[@class='header-actions__component']").click();
-
-        return new UserModal();
     }
 
     @Step("BasePage: Opened basket")
