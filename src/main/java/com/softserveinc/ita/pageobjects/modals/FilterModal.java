@@ -3,6 +3,7 @@ package com.softserveinc.ita.pageobjects.modals;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.BasePage;
 import com.softserveinc.ita.pageobjects.ProductPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.appear;
@@ -32,10 +33,10 @@ public class FilterModal extends BasePage<FilterModal> {
     }
 
     @Step("FilterModal: Clicked on price button")
-    public ProductPage clickOnPriceButton() {
+    public SearchResultPage clickOnPriceButton() {
         $x("//button[@class='button button_color_gray button_size_small slider-filter__button']").click();
 
-        return new ProductPage();
+        return new SearchResultPage();
     }
 
     @Step("FilterModal: Selected from cheap to expensive")

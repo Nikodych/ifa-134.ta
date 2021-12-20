@@ -16,13 +16,6 @@ public class ProductPage extends BasePage<ProductPage> {
 
     private final String PRODUCT_TAB_SELECTOR_TEMPLATE = "//li[contains(@Class,'tabs__item')]/a[contains(text(),'%s')]";
 
-    public String getCurrentPriceFromFirstItem() {
-        return $x("//li[1]//span[@class='goods-tile__price-value']")
-                .shouldBe(visible, ofSeconds(12))
-                .getText()
-                .trim();
-    }
-
     @Step("ProductPage: Added to cart")
     public BasketModal addToCart() {
         $x("//button[contains(@class,'buy-button button button_with_icon')]")

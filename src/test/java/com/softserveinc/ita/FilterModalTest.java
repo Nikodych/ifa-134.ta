@@ -29,13 +29,13 @@ public class FilterModalTest extends TestRunner {
                 .selectRandomSubCategory();
 
         var filterModal = new FilterModal();
-        var productModel = filterModal
+        var searchResultPage = filterModal
                 .setMinimalPrice(positiveMinPrice.replaceAll("\\s", ""))
                 .setMaximalPrice(positiveMaxPrice.replaceAll("\\s", ""))
                 .clickOnPriceButton();
 
         filterModal.selectFromCheapToExpensive();
-        var firstItemPriceFromCheapToExpensive = productModel.getCurrentPriceFromFirstItem();
+        var firstItemPriceFromCheapToExpensive = searchResultPage.getCurrentPriceFromFirstItem();
         assertThat(firstItemPriceFromCheapToExpensive)
                 .as("Test failed: Minimal price should be " + positiveMinPrice)
                 .isGreaterThanOrEqualTo(positiveMinPrice);
@@ -45,7 +45,7 @@ public class FilterModalTest extends TestRunner {
                 .isNotEqualTo(negativeMinPrice);
 
         filterModal.selectFromExpensiveToCheap();
-        var firstItemPriceFromExpensiveToCheap = productModel.getCurrentPriceFromFirstItem();
+        var firstItemPriceFromExpensiveToCheap = searchResultPage.getCurrentPriceFromFirstItem();
         assertThat(firstItemPriceFromExpensiveToCheap)
                 .as("Test failed: Maximal price should be " + positiveMaxPrice)
                 .isLessThanOrEqualTo(positiveMaxPrice);
