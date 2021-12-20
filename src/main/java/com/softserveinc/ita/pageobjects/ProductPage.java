@@ -1,12 +1,13 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.models.Product;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 
-import static com.softserveinc.ita.pageobjects.ProductModel.*;
+import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
@@ -63,15 +64,23 @@ public class ProductPage extends BasePage<ProductPage> {
                 .replaceAll("\\d", "");
     }
 
-    public String getProductTitle() {
-        return getTitle();
+    public static String getProductTitle() {
+        return $x("//h1[@class='product__title']").getText();
     }
 
-    public int getProductPrice() {
-        return getPrice();
+    public static int getProductPrice() {
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
     }
 
-    public int getProductPriceBeforeDiscount() {
-        return getPriceBeforeDiscount();
+    public static int getProductPriceBeforeDiscount() {
+        return parseIntPrice($x("//p[contains(@class, 'product-prices__small')]").getText());
+    }
+
+    public Product getProductInfo() {
+        return Product.builder()
+                .name(getProductTitle())
+                .price(getProductPrice())
+                .priceBeforeDiscount(getProductPriceBeforeDiscount())
+                .build();
     }
 }
