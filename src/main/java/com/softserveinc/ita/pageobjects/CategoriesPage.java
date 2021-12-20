@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.models.RandomUtil.getRandomNumber;
+import static com.softserveinc.ita.utils.RandomUtil.getRandomNumber;
 import static java.time.Duration.ofSeconds;
 
 public class CategoriesPage extends BasePage<CategoriesPage> {

@@ -1,5 +1,6 @@
 package com.softserveinc.ita.utils.runners;
 
+import com.softserveinc.ita.utils.listeners.TestListener;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 
