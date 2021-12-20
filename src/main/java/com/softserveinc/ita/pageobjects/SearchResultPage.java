@@ -8,14 +8,13 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.*;
 import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 
 public class SearchResultPage extends BasePage<SearchResultPage> {
 
-    public List<String> getGoodsListBy(String productName) {
+    public List<String> getGoodsListByTitle(String productName) {
         return $$x("//*[@class='goods-tile__title']")
                 .shouldBe(sizeGreaterThan(0), ofSeconds(8))
                 .stream()
@@ -43,5 +42,12 @@ public class SearchResultPage extends BasePage<SearchResultPage> {
                 .click();
 
         return this;
+    }
+
+    public String getCurrentPriceFromFirstItem() {
+        return $x("//li[1]//span[@class='goods-tile__price-value']")
+                .shouldBe(visible, ofSeconds(12))
+                .getText()
+                .trim();
     }
 }

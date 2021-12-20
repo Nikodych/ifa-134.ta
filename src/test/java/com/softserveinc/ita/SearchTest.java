@@ -14,13 +14,13 @@ public class SearchTest extends TestRunner {
     public void verifySearchResultsTest() {
 
         var requiredItem = "Xiaomi Redmi Note 10";
-        var searchResultPage = homePage
+        var productModel = homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .setTextInSearchBar(requiredItem)
                 .performSearch();
 
-        var firstItem = searchResultPage
-                .getGoodsListBy(requiredItem)
+        var firstItem = productModel
+                .getGoodsListByTitle(requiredItem)
                 .stream()
                 .findFirst()
                 .toString();
@@ -29,7 +29,7 @@ public class SearchTest extends TestRunner {
                 .as("Test failed: The first item should contain: " + requiredItem)
                 .contains(requiredItem);
 
-        var lastItem = searchResultPage.getGoodsListBy(requiredItem);
+        var lastItem = productModel.getGoodsListByTitle(requiredItem);
         assertThat(lastItem.get(lastItem.size() - 1))
                 .as("Test failed: The last item should contain: " + requiredItem)
                 .contains(requiredItem);
