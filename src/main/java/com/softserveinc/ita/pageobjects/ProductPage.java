@@ -64,15 +64,15 @@ public class ProductPage extends BasePage<ProductPage> {
                 .replaceAll("\\d", "");
     }
 
-    public static String getProductTitle() {
+    public String getProductTitle() {
         return $x("//h1[@class='product__title']").getText();
     }
 
-    public static int getProductPrice() {
+    public int getProductPrice() {
         return parseIntPrice($x("//p[contains(@class, 'product-prices__big')]").getText());
     }
 
-    public static int getProductPriceBeforeDiscount() {
+    public int getProductPriceBeforeDiscount() {
         return parseIntPrice($x("//p[contains(@class, 'product-prices__small')]").getText());
     }
 
