@@ -25,29 +25,29 @@ public class ContactPageTest extends TestRunner {
         var contactPage = new ContactPage();
         var actualCity = contactPage
                 .fillCitySearchField(expectedCity)
-                .getListOfCities();
+                .getActualCity(expectedCity);
 
-        var actualAddresses = contactPage
+        var actualAddress = contactPage
                 .selectRequiredCity(expectedCity)
                 .selectShopFromSidebar(expectedOption)
-                .getListOfAddresses();
+                .getAddressList(expectedAddress);
 
         var actualPointOfDeliveryAddress = contactPage
                 .clickOnExpectedCityTag(expectedCity)
                 .getPointOfDeliveryAddressesList(expectedAddress);
 
         var soft = new SoftAssertions();
-        soft.assertThat(actualCity.toString().trim())
+        soft.assertThat(actualCity)
                 .as("Test failed: expected city should be: " + expectedCity)
                 .contains(expectedCity);
 
-        soft.assertThat(actualAddresses)
-                .as("Test failed: page should contain : " + expectedAddress + "address")
-                .contains(expectedAddress);
+        soft.assertThat(actualAddress)
+                .as("Test failed: page should contain : " + expectedAddress + " address")
+                .containsAnyOf(expectedAddress);
 
-        soft.assertThat(actualPointOfDeliveryAddress)
+        soft.assertThat(actualPointOfDeliveryAddress.toString().trim())
                 .as("Test failed: actual point of delivery should be: " + expectedAddress)
-                .contains(expectedAddress);
+                .containsAnyOf(expectedAddress);
         soft.assertAll();
     }
 }
