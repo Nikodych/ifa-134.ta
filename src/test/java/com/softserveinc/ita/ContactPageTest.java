@@ -12,7 +12,7 @@ public class ContactPageTest extends TestRunner {
     @DataProvider
     public Object[][] contactPageData() {
         return new Object[][]{
-                {"Контакти", "Івано-Франківськ", 1, "вул. Січових Стрільців, 68 А"}};
+                {"Контакти", "Івано-Франківськ", 1, "вул. Січових Стрільців, 68"}};
     }
 
     @Test(dataProvider = "contactPageData")
