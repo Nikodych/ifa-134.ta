@@ -12,42 +12,48 @@ public class ContactPageTest extends TestRunner {
     @DataProvider
     public Object[][] contactPageData() {
         return new Object[][]{
-                {"Контакти", "Івано-Франківськ", 1, "вул. Січових Стрільців, 68"}};
+                {"Контакти", "Івано-Франківськ", 1, "Галицька, 94", "test",
+                        "Город не найден. Проверьте написание или введите ближайший к вам!"}};
     }
 
     @Test(dataProvider = "contactPageData")
-    public void verifyContactPageFunctionality(String expectedPage, String expectedCity, int expectedOption, String expectedAddress) {
+    public void verifyContactPageFunctionality(String expectedPage, String expectedCity, int expectedOption,
+                                               String expectedAddress, String wrongData, String errorMessage) {
         var homePage = new HomePage();
         homePage
                 .closeAdvertisingBannerIfDisplayed()
                 .openSidebarPage(expectedPage);
 
         var contactPage = new ContactPage();
+        var wrongCity = contactPage
+                .fillCitySearchField(wrongData)
+                .getErrorMessage();
+
         var actualCity = contactPage
                 .fillCitySearchField(expectedCity)
                 .getActualCity(expectedCity);
 
-        var actualAddress = contactPage
+        contactPage
                 .selectRequiredCity(expectedCity)
-                .selectShopFromSidebar(expectedOption)
-                .getAddressList(expectedAddress);
+                .selectShopFromSidebar(expectedOption);
 
         var actualPointOfDeliveryAddress = contactPage
+                .clickOnShowMoreTagsButton()
                 .clickOnExpectedCityTag(expectedCity)
                 .getPointOfDeliveryAddressesList(expectedAddress);
 
         var soft = new SoftAssertions();
+        soft.assertThat(wrongCity)
+                .as("Test failed: the error message should appear when you enter wrong data")
+                .contains(errorMessage);
+
         soft.assertThat(actualCity)
                 .as("Test failed: expected city should be: " + expectedCity)
                 .contains(expectedCity);
 
-        soft.assertThat(actualAddress)
-                .as("Test failed: page should contain : " + expectedAddress + " address")
-                .containsAnyOf(expectedAddress);
-
-        soft.assertThat(actualPointOfDeliveryAddress.toString().trim())
+        soft.assertThat(actualPointOfDeliveryAddress)
                 .as("Test failed: actual point of delivery should be: " + expectedAddress)
-                .containsAnyOf(expectedAddress);
+                .contains(expectedAddress);
         soft.assertAll();
     }
 }

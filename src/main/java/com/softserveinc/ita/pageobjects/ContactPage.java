@@ -9,7 +9,7 @@ import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.time.Duration.*;
+import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.*;
 
 public class ContactPage extends BasePage<ContactPage> {
@@ -18,29 +18,32 @@ public class ContactPage extends BasePage<ContactPage> {
     private final ElementsCollection listOfCitiesSelector = $$x("//ul[@class='autocomplete__list dialog']/li");
 
     public ContactPage fillCitySearchField(String expectedCity) {
-        searchSelector.shouldBe(visible).click();
+        searchSelector
+                .shouldBe(visible)
+                .click();
         searchSelector.clear();
         searchSelector.setValue(expectedCity);
 
         return this;
     }
 
+    public String getErrorMessage() {
+        return $x("//div[@class='autocomplete']//p")
+                .getText()
+                .trim();
+    }
+
     public String getActualCity(String expectedCity) {
         return listOfCitiesSelector
-                .shouldBe(sizeNotEqual(0))
-                .stream()
-                .map(SelenideElement::text)
-                .filter(text->text.contains(expectedCity))
-                .collect(toList())
-                .stream()
-                .findFirst()
-                .toString()
+                .shouldBe(sizeNotEqual(0), ofSeconds(12))
+                .find(text(expectedCity))
+                .getText()
                 .trim();
     }
 
     public ContactPage selectRequiredCity(String expectedCity) {
         listOfCitiesSelector
-                .shouldBe(sizeNotEqual(0),ofSeconds(12))
+                .shouldBe(sizeNotEqual(0), ofSeconds(12))
                 .filterBy(text(expectedCity))
                 .get(0)
                 .click();
@@ -50,38 +53,42 @@ public class ContactPage extends BasePage<ContactPage> {
 
     public ContactPage selectShopFromSidebar(int requiredValue) {
         $x("//select[@id='contactsDeliveryType']")
-                .shouldBe(visible)
+                .shouldBe(visible, ofSeconds(12))
                 .selectOption(requiredValue);
 
         return this;
     }
 
-    public String getAddressList(String expectedAddress) {
-        return $$x("//span[@class='contacts-map__toggle-address']")
-                .shouldHave(sizeNotEqual(0))
-                .shouldHave(itemWithText(expectedAddress))
+    public List<String> getAddressList() {
+        return $$x("//*[@class='contacts-map__toggle-address']")
+                .shouldHave(sizeNotEqual(0), ofSeconds(12))
                 .stream()
                 .map(SelenideElement::text)
-                .collect(toList())
-                .stream()
-                .findFirst()
-                .toString()
-                .trim();
+                .collect(toList());
     }
 
-    public ContactPage clickOnExpectedCityTag(String expectedCity) {
-        var list = $$x("//*[@class='tags__item ng-star-inserted']");
-        list.find(text(expectedCity)).click();
+    public ContactPage clickOnShowMoreTagsButton() {
+        $x("//button[@class='button tags__link tags__toggle ng-star-inserted']")
+                .shouldBe(visible)
+                .click();
 
         return this;
     }
 
-    public List<String> getPointOfDeliveryAddressesList(String expectedAddress) {
+    public ContactPage clickOnExpectedCityTag(String expectedCity) {
+        var list = $$x("//*[@class='tags__item ng-star-inserted']").shouldHave(sizeNotEqual(0), ofSeconds(12));
+        list
+                .find(text(expectedCity))
+                .click();
+
+        return this;
+    }
+
+    public String getPointOfDeliveryAddressesList(String expectedAddress) {
         return $$x("//div[@class='shop__body']//p[@class='shop__address shop__address--bold']")
-                .shouldHave(sizeNotEqual(0))
-                .stream()
-                .map(SelenideElement::text)
-                .filter(text -> text.contains(expectedAddress))
-                .collect(toList());
+                .shouldHave(sizeNotEqual(0), ofSeconds(12))
+                .find(text(expectedAddress))
+                .getText()
+                .trim();
     }
 }
