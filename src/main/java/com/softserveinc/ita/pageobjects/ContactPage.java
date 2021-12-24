@@ -45,11 +45,11 @@ public class ContactPage extends BasePage<ContactPage> {
 
     @Step("ContactPage: select required city {expectedCity} by name")
     public ContactPage selectRequiredCity(String expectedCity) {
-            suggestCitiesListSelector
-                    .shouldBe(sizeNotEqual(0), ofSeconds(12))
-                    .filterBy(text(expectedCity))
-                    .get(0)
-                    .click();
+        suggestCitiesListSelector
+                .shouldBe(sizeNotEqual(0), ofSeconds(12))
+                .filterBy(text(expectedCity))
+                .get(0)
+                .click();
 
         return this;
     }
@@ -90,11 +90,12 @@ public class ContactPage extends BasePage<ContactPage> {
         return this;
     }
 
-    public String getPointOfDeliveryAddressesList(String expectedAddress) {
+    public List<String> getPointOfDeliveryAddressesList(String expectedAddress) {
         return $$x("//div[@class='shop__body']//p[@class='shop__address shop__address--bold']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(12))
-                .find(text(expectedAddress))
-                .getText()
-                .trim();
+                .stream()
+                .map(SelenideElement::getText)
+                .filter(text -> text.contains(expectedAddress))
+                .collect(toList());
     }
 }

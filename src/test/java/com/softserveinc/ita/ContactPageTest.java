@@ -53,7 +53,7 @@ public class ContactPageTest extends TestRunner {
 
         soft.assertThat(actualPointOfDeliveryAddress)
                 .as("Test failed: actual point of delivery should be: " + expectedAddress)
-                .contains(expectedAddress);
+                .anyMatch(address->address.contains(expectedAddress));
         soft.assertAll();
     }
 }
