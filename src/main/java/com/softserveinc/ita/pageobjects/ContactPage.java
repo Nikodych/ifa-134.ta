@@ -15,16 +15,16 @@ import static java.util.stream.Collectors.*;
 
 public class ContactPage extends BasePage<ContactPage> {
 
-    private final SelenideElement citySearchFieldSelector = $x("//div[@Class='autocomplete']/input[@name='search']");
-    private final ElementsCollection suggestCitiesListSelector = $$x("//ul[@class='autocomplete__list dialog']/li");
+    private final SelenideElement citySearchField = $x("//div[@Class='autocomplete']/input[@name='search']");
+    private final ElementsCollection suggestCitiesList = $$x("//ul[@class='autocomplete__list dialog']/li");
 
-    @Step("ContactPage: fill city search field {expectedCity} by name")
+    @Step("ContactPage: filled city search field with {expectedCity}")
     public ContactPage fillCitySearchField(String expectedCity) {
-        citySearchFieldSelector
+        citySearchField
                 .shouldBe(visible)
                 .click();
-        citySearchFieldSelector.clear();
-        citySearchFieldSelector.setValue(expectedCity);
+        citySearchField.clear();
+        citySearchField.setValue(expectedCity);
 
         return this;
     }
@@ -35,17 +35,17 @@ public class ContactPage extends BasePage<ContactPage> {
                 .trim();
     }
 
-    public List<String> getActualCity() {
-        return suggestCitiesListSelector
+    public List<String> getSuggestedCitiesList() {
+        return suggestCitiesList
                 .shouldBe(sizeNotEqual(0), ofSeconds(12))
                 .stream()
                 .map(SelenideElement::getText)
                 .collect(toList());
     }
 
-    @Step("ContactPage: select required city {expectedCity} by name")
+    @Step("ContactPage: selected required city: {expectedCity}")
     public ContactPage selectRequiredCity(String expectedCity) {
-        suggestCitiesListSelector
+        suggestCitiesList
                 .shouldBe(sizeNotEqual(0), ofSeconds(12))
                 .filterBy(text(expectedCity))
                 .get(0)
@@ -54,7 +54,7 @@ public class ContactPage extends BasePage<ContactPage> {
         return this;
     }
 
-    @Step("ContactPage: select shop category from sidebar {requiredCategory} by category")
+    @Step("ContactPage: selected {requiredCategory} shop category from sidebar")
     public ContactPage selectShopFromSidebar(int requiredCategory) {
         $x("//select[@id='contactsDeliveryType']")
                 .shouldBe(visible, ofSeconds(12))
@@ -71,7 +71,7 @@ public class ContactPage extends BasePage<ContactPage> {
                 .collect(toList());
     }
 
-    @Step("ContactPage: click on 'Показати ще' button")
+    @Step("ContactPage: click on 'Show more")
     public ContactPage showMoreTags() {
         $x("//button[@class='button tags__link tags__toggle ng-star-inserted']")
                 .shouldBe(visible)
@@ -80,7 +80,7 @@ public class ContactPage extends BasePage<ContactPage> {
         return this;
     }
 
-    @Step("ContactPage: click on expected city tag {expectedCity} by name")
+    @Step("ContactPage: clicked on {expectedCity} city tag")
     public ContactPage clickOnExpectedCityTag(String expectedCity) {
         $$x("//*[@class='tags__item ng-star-inserted']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(12))
