@@ -12,7 +12,7 @@ public class ContactPageTest extends TestRunner {
     @DataProvider
     public Object[][] contactPageData() {
         return new Object[][]{
-                {"Контакти", "Івано-Франківськ", 1, "Галицька, 94", "test",
+                {"Контакти", "Івано", 1, "Галицька, 94", "test",
                         "Город не найден. Проверьте написание или введите ближайший к вам!"}};
     }
 
@@ -29,27 +29,27 @@ public class ContactPageTest extends TestRunner {
                 .fillCitySearchField(wrongData)
                 .getErrorMessage();
 
+        var soft = new SoftAssertions();
+        soft.assertThat(wrongCity)
+                .as("Test failed: the error message should appear when you enter wrong data")
+                .contains(errorMessage);
+
         var actualCity = contactPage
                 .fillCitySearchField(expectedCity)
-                .getActualCity(expectedCity);
+                .getActualCity();
+
+        soft.assertThat(actualCity)
+                .as("Test failed: expected city should be: " + expectedCity)
+                .anyMatch(city->city.contains(expectedCity));
 
         contactPage
                 .selectRequiredCity(expectedCity)
                 .selectShopFromSidebar(expectedOption);
 
         var actualPointOfDeliveryAddress = contactPage
-                .clickOnShowMoreTagsButton()
+                .showMoreTags()
                 .clickOnExpectedCityTag(expectedCity)
                 .getPointOfDeliveryAddressesList(expectedAddress);
-
-        var soft = new SoftAssertions();
-        soft.assertThat(wrongCity)
-                .as("Test failed: the error message should appear when you enter wrong data")
-                .contains(errorMessage);
-
-        soft.assertThat(actualCity)
-                .as("Test failed: expected city should be: " + expectedCity)
-                .contains(expectedCity);
 
         soft.assertThat(actualPointOfDeliveryAddress)
                 .as("Test failed: actual point of delivery should be: " + expectedAddress)

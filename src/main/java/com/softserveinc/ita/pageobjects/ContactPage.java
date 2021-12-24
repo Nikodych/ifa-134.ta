@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 
 import java.util.List;
 
@@ -14,15 +15,16 @@ import static java.util.stream.Collectors.*;
 
 public class ContactPage extends BasePage<ContactPage> {
 
-    private final SelenideElement searchSelector = $x("//div[@Class='autocomplete']/input[@name='search']");
-    private final ElementsCollection listOfCitiesSelector = $$x("//ul[@class='autocomplete__list dialog']/li");
+    private final SelenideElement citySearchFieldSelector = $x("//div[@Class='autocomplete']/input[@name='search']");
+    private final ElementsCollection suggestCitiesListSelector = $$x("//ul[@class='autocomplete__list dialog']/li");
 
+    @Step("ContactPage: fill city search field {expectedCity} by name")
     public ContactPage fillCitySearchField(String expectedCity) {
-        searchSelector
+        citySearchFieldSelector
                 .shouldBe(visible)
                 .click();
-        searchSelector.clear();
-        searchSelector.setValue(expectedCity);
+        citySearchFieldSelector.clear();
+        citySearchFieldSelector.setValue(expectedCity);
 
         return this;
     }
@@ -33,28 +35,30 @@ public class ContactPage extends BasePage<ContactPage> {
                 .trim();
     }
 
-    public String getActualCity(String expectedCity) {
-        return listOfCitiesSelector
+    public List<String> getActualCity() {
+        return suggestCitiesListSelector
                 .shouldBe(sizeNotEqual(0), ofSeconds(12))
-                .find(text(expectedCity))
-                .getText()
-                .trim();
+                .stream()
+                .map(SelenideElement::getText)
+                .collect(toList());
     }
 
+    @Step("ContactPage: select required city {expectedCity} by name")
     public ContactPage selectRequiredCity(String expectedCity) {
-        listOfCitiesSelector
-                .shouldBe(sizeNotEqual(0), ofSeconds(12))
-                .filterBy(text(expectedCity))
-                .get(0)
-                .click();
+            suggestCitiesListSelector
+                    .shouldBe(sizeNotEqual(0), ofSeconds(12))
+                    .filterBy(text(expectedCity))
+                    .get(0)
+                    .click();
 
         return this;
     }
 
-    public ContactPage selectShopFromSidebar(int requiredValue) {
+    @Step("ContactPage: select shop category from sidebar {requiredCategory} by category")
+    public ContactPage selectShopFromSidebar(int requiredCategory) {
         $x("//select[@id='contactsDeliveryType']")
                 .shouldBe(visible, ofSeconds(12))
-                .selectOption(requiredValue);
+                .selectOption(requiredCategory);
 
         return this;
     }
@@ -67,7 +71,8 @@ public class ContactPage extends BasePage<ContactPage> {
                 .collect(toList());
     }
 
-    public ContactPage clickOnShowMoreTagsButton() {
+    @Step("ContactPage: click on 'Показати ще' button")
+    public ContactPage showMoreTags() {
         $x("//button[@class='button tags__link tags__toggle ng-star-inserted']")
                 .shouldBe(visible)
                 .click();
@@ -75,9 +80,10 @@ public class ContactPage extends BasePage<ContactPage> {
         return this;
     }
 
+    @Step("ContactPage: click on expected city tag {expectedCity} by name")
     public ContactPage clickOnExpectedCityTag(String expectedCity) {
-        var list = $$x("//*[@class='tags__item ng-star-inserted']").shouldHave(sizeNotEqual(0), ofSeconds(12));
-        list
+        $$x("//*[@class='tags__item ng-star-inserted']")
+                .shouldHave(sizeNotEqual(0), ofSeconds(12))
                 .find(text(expectedCity))
                 .click();
 
