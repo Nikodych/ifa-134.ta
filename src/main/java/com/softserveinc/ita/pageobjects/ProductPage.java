@@ -10,7 +10,6 @@ import static com.codeborne.selenide.Selenide.$;
 
 import static com.softserveinc.ita.utils.NumberUtil.parseIntPrice;
 import static java.lang.String.format;
-import static java.time.Duration.ofSeconds;
 
 public class ProductPage extends BasePage<ProductPage> {
 
